@@ -1,0 +1,26 @@
+:root {
+  /* Renkler */
+  --color-bg:           rgba(219, 238, 255, 0.70);
+  --color-primary:      #003C75;
+  --color-heading:      #79ACDC;
+  --color-heading-sub:  rgba(121, 172, 220, 0.95);
+  --color-text:         #4a5568;
+  --color-text-light:   #718096;
+
+  /* Tipografi — spec */
+  --fw-hero:    800;   /* H1: bold */
+  --fw-h2:      600;   /* H2: semi-bold */
+  --fw-h3:      500;   /* H3: medium */
+
+  /* Başlık renkleri — spec */
+  --color-heading:      #79ACDC;                    /* H1 bold */
+  --color-heading-sub:  rgba(121, 172, 220, 0.95);  /* H2/H3 %95 */
+
+  /* Border radius */
+  --radius-btn: 9999px;
+  --radius-card: 30px;
+
+  /* Gölgeler */
+  --shadow-card: 0 12px 40px rgba(11, 49, 84, 0.08);
+  --shadow-btn:  0 10px 28px rgba(0, 60, 117, 0.18);
+}
