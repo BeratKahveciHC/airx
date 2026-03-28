@@ -1,8 +1,43 @@
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0  },
+}
+
+function CountUp({ target, prefix = '', suffix = '', duration = 1600, delay = 0 }) {
+  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStarted(true) },
+      { threshold: 0.5 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!started) return
+    const timer = setTimeout(() => {
+      const start = performance.now()
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1)
+        const eased = 1 - Math.pow(2, -10 * progress)
+        setCount(Math.round(eased * target))
+        if (progress < 1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }, delay)
+    return () => clearTimeout(timer)
+  }, [started, target, duration, delay])
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>
 }
 
 
@@ -42,10 +77,10 @@ export default function Hero() {
 
 
       {/* ── Üst metin alanı ── */}
-      <div style={{
+      <div className="hero-text-container" style={{
         position: 'relative', zIndex: 2,
         textAlign: 'center',
-        padding: '64px 24px 48px',
+        padding: '108px 24px 48px',
         maxWidth: 860, margin: '0 auto', width: '100%',
       }}>
 
@@ -110,20 +145,23 @@ export default function Hero() {
 
         {/* Sosyal kanıt istatistikler */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, delay: 0.28 }}
+          className="hero-stats-bar"
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
         >
           {[
-            { value: '150+', label: 'Kurum' },
-            { value: '15K+', label: 'Kullanıcı' },
-            { value: '14',   label: 'Modül' },
-            { value: '%99',  label: 'Uptime' },
+            { target: 150, prefix: '',  suffix: '+',  label: 'Kurum',     delay: 0   },
+            { target: 15,  prefix: '',  suffix: 'K+', label: 'Kullanıcı', delay: 120 },
+            { target: 14,  prefix: '',  suffix: '',   label: 'Modül',     delay: 240 },
+            { target: 99,  prefix: '%', suffix: '',   label: 'Uptime',    delay: 360 },
           ].map((stat, i) => (
             <div key={stat.label} style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{
                 padding: '10px 28px', textAlign: 'center',
                 borderRight: i < 3 ? '1px solid rgba(0,60,117,0.10)' : 'none',
               }}>
-                <div style={{ fontSize: 22, fontWeight: 800, color: '#003C75', lineHeight: 1 }}>{stat.value}</div>
+                <div style={{ fontSize: 22, fontWeight: 800, color: '#003C75', lineHeight: 1 }}>
+                  <CountUp target={stat.target} prefix={stat.prefix} suffix={stat.suffix} delay={stat.delay} />
+                </div>
                 <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 3, fontWeight: 500 }}>{stat.label}</div>
               </div>
             </div>
@@ -180,7 +218,7 @@ export default function Hero() {
           <div style={{ display: 'flex', minHeight: 480 }}>
 
             {/* Sidebar */}
-            <div style={{
+            <div className="hero-browser-sidebar" style={{
               width: 210, flexShrink: 0,
               borderRight: '1px solid #eef4fb',
               background: '#f8fafd',
@@ -240,7 +278,7 @@ export default function Hero() {
               </div>
 
               {/* Stat kartları */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 20 }}>
+              <div className="hero-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 20 }}>
                 {[
                   { label: 'Toplam Personel', value: '1.284', trend: '+2.5%', up: true  },
                   { label: 'Devam Oranı',     value: '%97.3', trend: '+1.1%', up: true  },
@@ -262,10 +300,10 @@ export default function Hero() {
               </div>
 
               {/* Alt grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 12 }}>
+              <div className="hero-bottom-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 12 }}>
 
                 {/* Bar chart */}
-                <div style={{
+                <div className="hero-chart" style={{
                   background: '#f8fafc', border: '1px solid #e8f0f9',
                   borderRadius: 12, padding: '16px 18px',
                 }}>
@@ -345,7 +383,7 @@ export default function Hero() {
           <a href="#demo" style={{
             textDecoration: 'none',
             display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 12,
-            background: '#003C75',
+            background: 'linear-gradient(145deg, #002040 0%, #002e5c 60%, #003570 100%)',
             borderRadius: 20, padding: '24px 24px 20px',
             position: 'relative', overflow: 'hidden', isolation: 'isolate',
             boxShadow: '0 8px 32px rgba(0,60,117,0.28)',
@@ -353,21 +391,13 @@ export default function Hero() {
           }}
           onMouseEnter={e => {
             e.currentTarget.style.transform = 'translateY(-3px)'
-            e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,60,117,0.38)'
+            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,60,117,0.16)'
           }}
           onMouseLeave={e => {
             e.currentTarget.style.transform = 'translateY(0)'
-            e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,60,117,0.28)'
+            e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,60,117,0.08)'
           }}
           >
-            {/* Liquid glass ::before efekti inline */}
-            <div style={{
-              position: 'absolute', inset: 0, borderRadius: 'inherit', padding: '1.4px',
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%)',
-              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-              WebkitMaskComposite: 'xor', maskComposite: 'exclude',
-              pointerEvents: 'none',
-            }} />
             <div style={{
               width: 44, height: 44, borderRadius: 12,
               background: 'rgba(255,255,255,0.15)',
@@ -477,8 +507,29 @@ export default function Hero() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        /* ── Tablet & küçük laptop (≤ 1024px) ── */
+        @media (max-width: 1024px) {
+          .hero-browser-sidebar { display: none !important; }
+          .hero-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .hero-bottom-grid { grid-template-columns: 1fr !important; }
+          .hero-chart { display: none !important; }
+          .cta-strip { grid-template-columns: 1fr 1fr !important; }
+        }
+        /* ── Mobil (≤ 640px) ── */
+        @media (max-width: 640px) {
+          .hero-text-container { padding: 88px 16px 32px !important; }
+          .hero-stats-bar { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 0 !important; }
+          .hero-stats-bar > div { border-right: none !important; }
+          .hero-stats-bar > div > div { padding: 10px 12px !important; border-right: none !important; border-bottom: 1px solid rgba(0,60,117,0.08) !important; }
+          .hero-stats-bar > div:nth-child(1) > div,
+          .hero-stats-bar > div:nth-child(3) > div { border-right: 1px solid rgba(0,60,117,0.08) !important; }
+          .hero-stats-bar > div:nth-child(3) > div,
+          .hero-stats-bar > div:nth-child(4) > div { border-bottom: none !important; }
           .cta-strip { grid-template-columns: 1fr !important; }
+        }
+        /* ── Çok küçük ekranlar (≤ 400px) ── */
+        @media (max-width: 400px) {
+          .hero-text-container { padding: 80px 12px 24px !important; }
         }
       `}</style>
     </section>
