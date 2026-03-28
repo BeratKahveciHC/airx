@@ -1,12 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
-const fadeUp = {
-  hidden:  { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0  },
-}
-
-function CountUp({ target, prefix = '', suffix = '', duration = 1600, delay = 0 }) {
+function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
   const [count, setCount] = useState(0)
   const [started, setStarted] = useState(false)
   const ref = useRef(null)
@@ -16,7 +11,7 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1600, delay = 0 
     if (!el) return
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setStarted(true) },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     )
     obs.observe(el)
     return () => obs.disconnect()
@@ -40,498 +35,380 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1600, delay = 0 
   return <span ref={ref}>{prefix}{count}{suffix}</span>
 }
 
+const STATS = [
+  { target: 150, suffix: '+',  label: 'Aktif Kurum'     },
+  { target: 15,  suffix: 'K+', label: 'Kullanıcı'       },
+  { target: 14,  suffix: '',   label: 'Modül'            },
+  { target: 99,  prefix: '%',  label: 'Uptime'          },
+]
+
 
 export default function Hero() {
   return (
-    <section id="urun" style={{
-      background: '#e8f3fc',
-      minHeight: '100svh',
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-
-      {/* ── Izgara desen ── */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
-        backgroundImage: `
-          linear-gradient(rgba(0,60,117,0.07) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,60,117,0.07) 1px, transparent 1px)
-        `,
-        backgroundSize: '52px 52px',
-        maskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 75%)',
-        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 30%, transparent 75%)',
-      }} />
-
-      {/* ── Gradient overlay (ızgaranın üstünde) ── */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
-        background: `
-          radial-gradient(ellipse 70% 55% at 50% 0%, rgba(232,243,252,1) 0%, rgba(232,243,252,0) 100%),
-          radial-gradient(ellipse 50% 60% at 0% 40%, rgba(121,172,220,0.35) 0%, transparent 60%),
-          radial-gradient(ellipse 50% 60% at 100% 40%, rgba(121,172,220,0.35) 0%, transparent 60%),
-          radial-gradient(ellipse 80% 40% at 50% 110%, rgba(0,60,117,0.12) 0%, transparent 60%)
-        `,
-      }} />
-
-
-      {/* ── Üst metin alanı ── */}
-      <div className="hero-text-container" style={{
-        position: 'relative', zIndex: 2,
-        textAlign: 'center',
-        padding: '108px 24px 48px',
-        maxWidth: 860, margin: '0 auto', width: '100%',
+    <>
+      {/* ── Ana Hero ── */}
+      <section id="urun" style={{
+        background: 'linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%)',
       }}>
-
-        {/* H1 */}
-        <motion.h1 variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, delay: 0.08 }}
-          style={{
-            fontSize: 'clamp(36px, 5.8vw, 68px)',
-            fontWeight: 800, lineHeight: 1.08,
-            letterSpacing: '-0.03em',
-            margin: '0 auto 20px',
-          }}
-        >
-          <span style={{ color: '#79ACDC' }}>Tüm İK Süreçleriniz</span>
-          <br />
-          <span style={{ color: '#003C75', position: 'relative', display: 'inline-block' }}>
-            Tek Ekranda.
-            <svg viewBox="0 0 300 12" style={{
-              position: 'absolute', bottom: -6, left: 0, width: '100%', overflow: 'visible',
-            }}>
-              <path d="M2 8 Q75 2 150 8 Q225 14 298 8" stroke="#79ACDC" strokeWidth="3"
-                fill="none" strokeLinecap="round" opacity="0.5"/>
-            </svg>
-          </span>
-        </motion.h1>
-
-        {/* Açıklama */}
-        <motion.p variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, delay: 0.14 }}
-          style={{
-            fontSize: 'clamp(15px, 1.8vw, 18px)', lineHeight: 1.75,
-            color: '#64748b', maxWidth: 520, margin: '0 auto 36px', fontWeight: 400,
-          }}
-        >
-          Giriş-çıkış, izin, vardiya, görev ve personel yönetimini
-          mobil uyumlu tek platformda toplayın. Biyometrik veri gerektirmez.
-        </motion.p>
-
-        {/* CTA butonlar */}
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, delay: 0.2 }}
-          style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}
-        >
-          <a href="#demo" className="btn-glass" style={{
-            padding: '13px 28px', borderRadius: 9999,
-            fontSize: 15, fontWeight: 700, textDecoration: 'none',
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-          }}>
-            Ücretsiz Demo Talep Et
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
-            </svg>
-          </a>
-          <a href="#moduller" className="btn-outline" style={{
-            padding: '13px 24px', borderRadius: 9999,
-            fontSize: 15, fontWeight: 500, textDecoration: 'none',
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-          }}>
-            Modülleri İncele
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m9 6 6 6-6 6"/>
-            </svg>
-          </a>
-        </motion.div>
-
-        {/* Sosyal kanıt istatistikler */}
-        <motion.div variants={fadeUp} initial="hidden" animate="visible" transition={{ duration: 0.55, delay: 0.28 }}
-          className="hero-stats-bar"
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
-        >
-          {[
-            { target: 150, prefix: '',  suffix: '+',  label: 'Kurum',     delay: 0   },
-            { target: 15,  prefix: '',  suffix: 'K+', label: 'Kullanıcı', delay: 120 },
-            { target: 14,  prefix: '',  suffix: '',   label: 'Modül',     delay: 240 },
-            { target: 99,  prefix: '%', suffix: '',   label: 'Uptime',    delay: 360 },
-          ].map((stat, i) => (
-            <div key={stat.label} style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{
-                padding: '10px 28px', textAlign: 'center',
-                borderRight: i < 3 ? '1px solid rgba(0,60,117,0.10)' : 'none',
-              }}>
-                <div style={{ fontSize: 22, fontWeight: 800, color: '#003C75', lineHeight: 1 }}>
-                  <CountUp target={stat.target} prefix={stat.prefix} suffix={stat.suffix} delay={stat.delay} />
-                </div>
-                <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 3, fontWeight: 500 }}>{stat.label}</div>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
-      </div>
-
-      {/* ── Ürün mockup — ekranın geri kalanını doldurur ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 48 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, delay: 0.3 }}
-        style={{
-          position: 'relative', zIndex: 2,
-          flex: 1,
-          padding: '0 24px',
-          display: 'flex', alignItems: 'flex-end',
-        }}
-      >
         <div style={{
-          width: '100%', maxWidth: 1160, margin: '0 auto',
-          borderRadius: '20px 20px 0 0',
-          overflow: 'hidden',
-          border: '1px solid rgba(0,60,117,0.10)',
-          borderBottom: 'none',
-          boxShadow: '0 -4px 40px rgba(0,60,117,0.10), 0 0 0 1px rgba(121,172,220,0.08)',
-          background: '#fff',
-        }}>
+          maxWidth: 1200,
+          margin: '0 auto',
+          padding: '72px 40px 80px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 80,
+        }} className="hero-split">
 
-          {/* Tarayıcı bar */}
-          <div style={{
-            background: '#f8fafc',
-            borderBottom: '1px solid #e8f0f9',
-            padding: '10px 16px',
-            display: 'flex', alignItems: 'center', gap: 8,
-          }}>
-            <div style={{ display: 'flex', gap: 5 }}>
-              {['#fca5a5','#fcd34d','#86efac'].map(c => (
-                <div key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c }} />
+          {/* ── SOL: Metin ── */}
+          <div style={{ flex: '1 1 0', minWidth: 0 }}>
+
+            {/* Üst etiket */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 10,
+                marginBottom: 28,
+              }}
+            >
+              <div style={{ width: 28, height: 1, background: '#003C75', opacity: 0.4 }} />
+              <span style={{
+                fontSize: 12,
+                fontWeight: 700,
+                color: '#003C75',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                opacity: 0.75,
+              }}>
+                Türkiye'nin Mobil İK Platformu
+              </span>
+            </motion.div>
+
+            {/* Başlık */}
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              style={{
+                fontSize: 'clamp(34px, 4vw, 54px)',
+                fontWeight: 800,
+                lineHeight: 1.12,
+                letterSpacing: '-0.025em',
+                color: '#0f172a',
+                margin: '0 0 20px',
+              }}
+            >
+              İK Süreçlerinizi{' '}
+              <span style={{ color: '#003C75' }}>Dijitalleştirin,</span>
+              <br />
+              Verimliliğinizi Artırın.
+            </motion.h1>
+
+            {/* Alt metin */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.16 }}
+              style={{
+                fontSize: 17,
+                lineHeight: 1.75,
+                color: '#475569',
+                margin: '0 0 36px',
+                maxWidth: 480,
+                fontWeight: 400,
+              }}
+            >
+              PDKS, izin yönetimi, puantaj, erişim kontrolü ve daha fazlası.
+              14 entegre modül ile tüm İK operasyonunuzu tek platformda yönetin.
+              Biyometrik cihaz gerektirmez — aynı gün kurulum.
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.22 }}
+              style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 48 }}
+            >
+              <a
+                href="#demo"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '14px 28px',
+                  background: '#003C75',
+                  color: '#fff',
+                  borderRadius: 6,
+                  fontSize: 15, fontWeight: 700,
+                  textDecoration: 'none',
+                  boxShadow: '0 2px 8px rgba(0,60,117,0.22)',
+                  transition: 'background 0.15s, box-shadow 0.15s',
+                  letterSpacing: '0.01em',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = '#002e5c'
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,60,117,0.32)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = '#003C75'
+                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,60,117,0.22)'
+                }}
+              >
+                Ücretsiz Demo Talep Et
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
+                </svg>
+              </a>
+              <a
+                href="tel:+902120000000"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '14px 24px',
+                  background: '#fff',
+                  color: '#374151',
+                  border: '1px solid #d1d5db',
+                  borderRadius: 6,
+                  fontSize: 15, fontWeight: 500,
+                  textDecoration: 'none',
+                  transition: 'border-color 0.15s, background 0.15s',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = '#9ca3af'
+                  e.currentTarget.style.background = '#f9fafb'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = '#d1d5db'
+                  e.currentTarget.style.background = '#fff'
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.62 12 19.79 19.79 0 0 1 1.55 3.4 2 2 0 0 1 3.52 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.55a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                Bizi Arayın
+              </a>
+            </motion.div>
+
+            {/* İstatistikler */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.32 }}
+              style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}
+              className="hero-stats"
+            >
+              {STATS.map((s, i) => (
+                <div key={s.label}>
+                  <div style={{ fontSize: 28, fontWeight: 800, color: '#003C75', lineHeight: 1, letterSpacing: '-0.02em' }}>
+                    <CountUp target={s.target} prefix={s.prefix || ''} suffix={s.suffix || ''} delay={i * 100} />
+                  </div>
+                  <div style={{ fontSize: 13, color: '#6b7280', marginTop: 4, fontWeight: 500 }}>{s.label}</div>
+                </div>
               ))}
-            </div>
-            <div style={{
-              flex: 1, maxWidth: 260, margin: '0 auto',
-              background: '#eef4fb', borderRadius: 6, height: 22,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 11, color: '#94a3b8',
-            }}>
-              panel.airx.com.tr
-            </div>
+            </motion.div>
           </div>
 
-          {/* Panel içerik */}
-          <div style={{ display: 'flex', minHeight: 480 }}>
+          {/* ── SAĞ: Dashboard Mockup ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            style={{ flex: '1.85 1 0', minWidth: 0, position: 'relative', marginRight: '-40px' }}
+            className="hero-mockup-col"
+          >
+            {/* Bildirim kartı */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.75, duration: 0.4 }}
+              style={{
+                position: 'absolute', top: -18, right: 12, zIndex: 10,
+                background: '#fff',
+                border: '1px solid #e2e8f0',
+                borderRadius: 8,
+                padding: '10px 16px',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
+                display: 'flex', alignItems: 'center', gap: 10,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <div style={{
+                width: 30, height: 30, borderRadius: 8,
+                background: '#f0fdf4',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>İzin Onaylandı</div>
+                <div style={{ fontSize: 11, color: '#9ca3af' }}>Ahmet Yılmaz · Az önce</div>
+              </div>
+            </motion.div>
 
-            {/* Sidebar */}
-            <div className="hero-browser-sidebar" style={{
-              width: 210, flexShrink: 0,
-              borderRight: '1px solid #eef4fb',
-              background: '#f8fafd',
-              padding: '16px 0',
+            {/* Aktif personel kartı */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.9, duration: 0.4 }}
+              style={{
+                position: 'absolute', bottom: 32, left: -16, zIndex: 10,
+                background: '#003C75',
+                borderRadius: 8,
+                padding: '10px 16px',
+                boxShadow: '0 4px 20px rgba(0,60,117,0.28)',
+                display: 'flex', alignItems: 'center', gap: 12,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
+              <div>
+                <div style={{ fontSize: 11, color: 'rgba(219,238,255,0.7)', fontWeight: 500 }}>Aktif Personel</div>
+                <div style={{ fontSize: 18, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.2 }}>1.284</div>
+              </div>
+            </motion.div>
+
+            {/* Dashboard */}
+            <div style={{
+              borderRadius: 12,
+              overflow: 'hidden',
+              border: '1px solid #e2e8f0',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06)',
+              background: '#fff',
             }}>
-              <div style={{ padding: '0 14px 14px', display: 'flex', alignItems: 'center', gap: 8 }}>
+              {/* Browser chrome */}
+              <div style={{
+                background: '#f8fafc',
+                borderBottom: '1px solid #e8ecf2',
+                padding: '9px 14px',
+                display: 'flex', alignItems: 'center', gap: 8,
+              }}>
+                <div style={{ display: 'flex', gap: 5 }}>
+                  {['#fca5a5','#fcd34d','#86efac'].map(c => (
+                    <div key={c} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />
+                  ))}
+                </div>
                 <div style={{
-                  width: 26, height: 26, borderRadius: 7,
-                  background: '#003C75',
+                  flex: 1, maxWidth: 220, margin: '0 auto',
+                  background: '#e8ecf2', borderRadius: 4, height: 20,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontWeight: 800, fontSize: 11,
-                }}>A</div>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#003C75' }}>AIRX Panel</span>
+                  fontSize: 10, color: '#94a3b8', letterSpacing: '0.02em',
+                }}>
+                  panel.airx.com.tr
+                </div>
               </div>
 
-              {[
-                { icon: '▦',  label: 'Dashboard',       active: true  },
-                { icon: '👤', label: 'Personel',        active: false },
-                { icon: '✓',  label: 'PDKS',            active: false },
-                { icon: '📅', label: 'İzin Yönetimi',  active: false },
-                { icon: '📋', label: 'Görevler',        active: false },
-                { icon: '📊', label: 'Raporlar',        active: false },
-                { icon: '🏢', label: 'Lokasyonlar',     active: false },
-                { icon: '⚙',  label: 'Ayarlar',         active: false },
-              ].map(item => (
-                <div key={item.label} style={{
-                  padding: '8px 14px',
-                  display: 'flex', alignItems: 'center', gap: 9,
-                  background: item.active ? 'rgba(0,60,117,0.07)' : 'transparent',
-                  borderLeft: item.active ? '3px solid #003C75' : '3px solid transparent',
-                  fontSize: 13,
-                  color: item.active ? '#003C75' : '#94a3b8',
-                  fontWeight: item.active ? 600 : 400,
-                }}>
-                  <span style={{ fontSize: 13, width: 16, textAlign: 'center' }}>{item.icon}</span>
-                  {item.label}
-                </div>
-              ))}
-            </div>
-
-            {/* Ana içerik */}
-            <div style={{ flex: 1, padding: '20px 24px', background: '#fff', overflowX: 'auto' }}>
-
-              {/* Başlık */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                <div>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: '#0f172a' }}>Genel Bakış</div>
-                  <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>27 Mart 2026, Cuma</div>
-                </div>
+              <div style={{ display: 'flex', height: 340 }}>
+                {/* Sidebar */}
                 <div style={{
-                  background: '#003C75', color: '#fff',
-                  borderRadius: 8, padding: '7px 14px',
-                  fontSize: 12, fontWeight: 600,
+                  width: 172, flexShrink: 0,
+                  background: '#f8fafd',
+                  borderRight: '1px solid #eaf0f9',
+                  padding: '14px 0',
+                  display: 'flex', flexDirection: 'column',
                 }}>
-                  + Personel Ekle
+                  <div style={{ padding: '0 12px 14px', display: 'flex', alignItems: 'center', gap: 7 }}>
+                    <div style={{
+                      width: 22, height: 22, borderRadius: 6,
+                      background: '#003C75',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: '#fff', fontWeight: 800, fontSize: 10,
+                    }}>A</div>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#003C75' }}>AIRX Panel</span>
+                  </div>
+                  {[
+                    { label: 'Dashboard',      active: true },
+                    { label: 'Personel',       active: false },
+                    { label: 'PDKS',           active: false },
+                    { label: 'İzin Yönetimi', active: false },
+                    { label: 'Puantaj',        active: false },
+                    { label: 'Raporlar',       active: false },
+                  ].map(item => (
+                    <div key={item.label} style={{
+                      padding: '7px 12px',
+                      display: 'flex', alignItems: 'center', gap: 8,
+                      background: item.active ? 'rgba(0,60,117,0.07)' : 'transparent',
+                      borderLeft: item.active ? '2px solid #003C75' : '2px solid transparent',
+                    }}>
+                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: item.active ? '#003C75' : '#d1d5db', flexShrink: 0 }} />
+                      <span style={{ fontSize: 12, color: item.active ? '#003C75' : '#6b7280', fontWeight: item.active ? 600 : 400 }}>
+                        {item.label}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              </div>
 
-              {/* Stat kartları */}
-              <div className="hero-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 20 }}>
-                {[
-                  { label: 'Toplam Personel', value: '1.284', trend: '+2.5%', up: true  },
-                  { label: 'Devam Oranı',     value: '%97.3', trend: '+1.1%', up: true  },
-                  { label: 'Bekleyen Onay',   value: '18',    trend: '3 Yeni', up: false },
-                  { label: 'Aktif Görev',     value: '143',   trend: '+6.2%', up: true  },
-                ].map(stat => (
-                  <div key={stat.label} style={{
-                    background: '#f8fafc',
-                    border: '1px solid #e8f0f9',
-                    borderRadius: 12, padding: '14px 16px',
-                  }}>
-                    <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 6 }}>{stat.label}</div>
-                    <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>{stat.value}</div>
-                    <div style={{ fontSize: 11, color: stat.up ? '#22c55e' : '#f59e0b', marginTop: 4, fontWeight: 500 }}>
-                      {stat.up ? '↑' : '●'} {stat.trend}
+                {/* Ana içerik */}
+                <div style={{ flex: 1, padding: '16px 18px', background: '#fff', overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>Genel Bakış</div>
+                      <div style={{ fontSize: 10, color: '#9ca3af', marginTop: 1 }}>29 Mart 2026, Pazar</div>
+                    </div>
+                    <div style={{
+                      background: '#003C75', color: '#fff',
+                      borderRadius: 5, padding: '5px 11px',
+                      fontSize: 11, fontWeight: 600,
+                    }}>+ Ekle</div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 8, marginBottom: 14 }}>
+                    {[
+                      { label: 'Toplam Personel', value: '1.284', up: true,  trend: '+2.5%' },
+                      { label: 'Devam Oranı',     value: '%97.3', up: true,  trend: '+1.1%' },
+                      { label: 'Bekleyen Onay',   value: '18',    up: false, trend: '3 Yeni' },
+                      { label: 'Aktif Görev',     value: '143',   up: true,  trend: '+6.2%' },
+                    ].map(s => (
+                      <div key={s.label} style={{
+                        background: '#f8fafc', border: '1px solid #e8f0f9',
+                        borderRadius: 8, padding: '10px 10px',
+                      }}>
+                        <div style={{ fontSize: 9, color: '#9ca3af', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
+                        <div style={{ fontSize: 17, fontWeight: 800, color: '#111827', lineHeight: 1 }}>{s.value}</div>
+                        <div style={{ fontSize: 9, color: s.up ? '#16a34a' : '#d97706', marginTop: 3, fontWeight: 600 }}>{s.up ? '↑' : '●'} {s.trend}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ background: '#f8fafc', border: '1px solid #e8f0f9', borderRadius: 8, padding: '12px 14px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+                      <div style={{ fontSize: 11, fontWeight: 600, color: '#111827' }}>Haftalık Devam</div>
+                      <div style={{ fontSize: 10, color: '#9ca3af' }}>Bu Hafta</div>
+                    </div>
+                    <div style={{ display: 'flex', gap: 4, alignItems: 'flex-end', height: 68 }}>
+                      {[{h:72,l:'Pzt'},{h:88,l:'Sal'},{h:65,l:'Çar'},{h:92,l:'Per'},{h:78,l:'Cum'},{h:45,l:'Cmt'},{h:20,l:'Paz'}]
+                        .map((d, i) => (
+                          <div key={d.l} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
+                            <div style={{
+                              width: '100%', borderRadius: '3px 3px 0 0', height: `${d.h}%`,
+                              background: i === 4 ? '#003C75' : '#dbeafe',
+                            }} />
+                            <div style={{ fontSize: 8, color: '#9ca3af' }}>{d.l}</div>
+                          </div>
+                        ))}
                     </div>
                   </div>
-                ))}
-              </div>
-
-              {/* Alt grid */}
-              <div className="hero-bottom-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 12 }}>
-
-                {/* Bar chart */}
-                <div className="hero-chart" style={{
-                  background: '#f8fafc', border: '1px solid #e8f0f9',
-                  borderRadius: 12, padding: '16px 18px',
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14 }}>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#0f172a' }}>Haftalık Devam</div>
-                    <div style={{ fontSize: 11, color: '#94a3b8' }}>Bu Hafta ▾</div>
-                  </div>
-                  <div style={{ display: 'flex', gap: 5, alignItems: 'flex-end', height: 80 }}>
-                    {[
-                      { h: 72, label: 'Pzt' },
-                      { h: 88, label: 'Sal' },
-                      { h: 65, label: 'Çar' },
-                      { h: 92, label: 'Per' },
-                      { h: 78, label: 'Cum' },
-                      { h: 45, label: 'Cmt' },
-                      { h: 20, label: 'Paz' },
-                    ].map((d, i) => (
-                      <div key={d.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                        <div style={{
-                          width: '100%', borderRadius: '4px 4px 0 0',
-                          height: `${d.h}%`,
-                          background: i === 4
-                            ? 'linear-gradient(180deg, #79ACDC, #003C75)'
-                            : 'rgba(121,172,220,0.25)',
-                        }} />
-                        <div style={{ fontSize: 10, color: '#94a3b8' }}>{d.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Bekleyen işlemler */}
-                <div style={{
-                  background: '#f8fafc', border: '1px solid #e8f0f9',
-                  borderRadius: 12, padding: '16px 18px',
-                }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: '#0f172a', marginBottom: 14 }}>Bekleyen İşlemler</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {[
-                      { label: 'İzin Talepleri',   count: 12, color: '#003C75', bg: '#dbeeff' },
-                      { label: 'Vardiya Değişimi', count: 4,  color: '#0284c7', bg: '#e0f2fe' },
-                      { label: 'Evrak Onayı',      count: 2,  color: '#7c3aed', bg: '#ede9fe' },
-                    ].map(row => (
-                      <div key={row.label} style={{
-                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                        background: row.bg, borderRadius: 8, padding: '8px 12px',
-                      }}>
-                        <span style={{ fontSize: 12, color: row.color, fontWeight: 500 }}>{row.label}</span>
-                        <span style={{
-                          background: row.color, color: '#fff',
-                          borderRadius: 9999, width: 22, height: 22,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontSize: 11, fontWeight: 700,
-                        }}>{row.count}</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </motion.div>
+      </section>
 
-      {/* ── 3 CTA bandı ── */}
-      <div style={{
-        background: 'transparent',
-        padding: '40px 24px 56px',
-        position: 'relative', zIndex: 2,
-      }}>
-        <div style={{
-          maxWidth: 1000, margin: '0 auto',
-          display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16,
-        }} className="cta-strip">
-
-          {/* Demo İste — ana CTA */}
-          <a href="#demo" style={{
-            textDecoration: 'none',
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 12,
-            background: 'linear-gradient(145deg, #002040 0%, #002e5c 60%, #003570 100%)',
-            borderRadius: 20, padding: '24px 24px 20px',
-            position: 'relative', overflow: 'hidden', isolation: 'isolate',
-            boxShadow: '0 8px 32px rgba(0,60,117,0.28)',
-            transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = 'translateY(-3px)'
-            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,60,117,0.16)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = 'translateY(0)'
-            e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,60,117,0.08)'
-          }}
-          >
-            <div style={{
-              width: 44, height: 44, borderRadius: 12,
-              background: 'rgba(255,255,255,0.15)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.889L15 14"/><rect x="3" y="6" width="12" height="12" rx="2"/>
-              </svg>
-            </div>
-            <div>
-              <div style={{ fontSize: 17, fontWeight: 700, color: '#fff', marginBottom: 4 }}>Demo İste</div>
-              <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.75)', lineHeight: 1.5 }}>Ürünü Canlı Görün, Soruları Birlikte Yanıtlayalım</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#79ACDC', fontSize: 13, fontWeight: 600, marginTop: 4 }}>
-              Hemen Başla
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
-              </svg>
-            </div>
-          </a>
-
-          {/* İletişime Geçin */}
-          <a href="/iletisim" style={{
-            textDecoration: 'none',
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 12,
-            background: '#fff',
-            border: '1.5px solid rgba(0,60,117,0.12)',
-            borderRadius: 20, padding: '24px 24px 20px',
-            boxShadow: '0 4px 20px rgba(0,60,117,0.07)',
-            transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = 'translateY(-3px)'
-            e.currentTarget.style.boxShadow = '0 12px 36px rgba(0,60,117,0.14)'
-            e.currentTarget.style.borderColor = 'rgba(0,60,117,0.25)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = 'translateY(0)'
-            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,60,117,0.07)'
-            e.currentTarget.style.borderColor = 'rgba(0,60,117,0.12)'
-          }}
-          >
-            <div style={{
-              width: 44, height: 44, borderRadius: 12,
-              background: 'rgba(0,60,117,0.07)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
-            </div>
-            <div>
-              <div style={{ fontSize: 17, fontWeight: 700, color: '#003C75', marginBottom: 4 }}>İletişime Geçin</div>
-              <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5 }}>Uzman Ekibimiz Size Özel Çözüm Sunar</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#003C75', fontSize: 13, fontWeight: 600, marginTop: 4 }}>
-              Bize Ulaşın
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
-              </svg>
-            </div>
-          </a>
-
-          {/* Modüllerimiz */}
-          <a href="#moduller" style={{
-            textDecoration: 'none',
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 12,
-            background: '#fff',
-            border: '1.5px solid rgba(0,60,117,0.12)',
-            borderRadius: 20, padding: '24px 24px 20px',
-            boxShadow: '0 4px 20px rgba(0,60,117,0.07)',
-            transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = 'translateY(-3px)'
-            e.currentTarget.style.boxShadow = '0 12px 36px rgba(0,60,117,0.14)'
-            e.currentTarget.style.borderColor = 'rgba(0,60,117,0.25)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = 'translateY(0)'
-            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,60,117,0.07)'
-            e.currentTarget.style.borderColor = 'rgba(0,60,117,0.12)'
-          }}
-          >
-            <div style={{
-              width: 44, height: 44, borderRadius: 12,
-              background: 'rgba(0,60,117,0.07)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-              </svg>
-            </div>
-            <div>
-              <div style={{ fontSize: 17, fontWeight: 700, color: '#003C75', marginBottom: 4 }}>Modüllerimiz</div>
-              <div style={{ fontSize: 13, color: '#64748b', lineHeight: 1.5 }}>14 Farklı Modülle Tam Kapsamlı İK Yönetimi</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#003C75', fontSize: 13, fontWeight: 600, marginTop: 4 }}>
-              Tümünü Keşfet
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
-              </svg>
-            </div>
-          </a>
-
-        </div>
-      </div>
 
       <style>{`
-        /* ── Tablet & küçük laptop (≤ 1024px) ── */
-        @media (max-width: 1024px) {
-          .hero-browser-sidebar { display: none !important; }
-          .hero-stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .hero-bottom-grid { grid-template-columns: 1fr !important; }
-          .hero-chart { display: none !important; }
-          .cta-strip { grid-template-columns: 1fr 1fr !important; }
+        @media (max-width: 960px) {
+          .hero-split { flex-direction: column !important; gap: 48px !important; padding: 48px 24px 56px !important; }
+          .hero-mockup-col { width: 100% !important; }
         }
-        /* ── Mobil (≤ 640px) ── */
         @media (max-width: 640px) {
-          .hero-text-container { padding: 88px 16px 32px !important; }
-          .hero-stats-bar { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 0 !important; }
-          .hero-stats-bar > div { border-right: none !important; }
-          .hero-stats-bar > div > div { padding: 10px 12px !important; border-right: none !important; border-bottom: 1px solid rgba(0,60,117,0.08) !important; }
-          .hero-stats-bar > div:nth-child(1) > div,
-          .hero-stats-bar > div:nth-child(3) > div { border-right: 1px solid rgba(0,60,117,0.08) !important; }
-          .hero-stats-bar > div:nth-child(3) > div,
-          .hero-stats-bar > div:nth-child(4) > div { border-bottom: none !important; }
-          .cta-strip { grid-template-columns: 1fr !important; }
+          .hero-split { padding: 36px 16px 44px !important; }
+          .hero-stats { gap: 20px !important; }
         }
-        /* ── Çok küçük ekranlar (≤ 400px) ── */
-        @media (max-width: 400px) {
-          .hero-text-container { padding: 80px 12px 24px !important; }
+        @media (max-width: 480px) {
+          .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
         }
       `}</style>
-    </section>
+    </>
   )
 }

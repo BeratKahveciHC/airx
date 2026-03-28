@@ -116,7 +116,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section id="nasil-calisir" style={{ padding: '96px 24px', background: '#fff' }}>
+    <section id="nasil-calisir" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>
 
         {/* ── Başlık ── */}

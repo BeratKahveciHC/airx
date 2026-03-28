@@ -95,7 +95,7 @@ export default function Modules() {
   return (
     <section id="moduller" style={{
       padding: '100px 24px',
-      background: 'linear-gradient(180deg, #eaf3ff 0%, #f0f7ff 100%)',
+      background: 'linear-gradient(180deg, #f4f8fd 0%, #edf4ff 50%, #f4f8fd 100%)',
       position: 'relative',
       overflow: 'hidden',
     }}>

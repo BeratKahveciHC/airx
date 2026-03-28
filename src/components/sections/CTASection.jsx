@@ -33,6 +33,14 @@ export default function CTASection() {
       background: 'linear-gradient(140deg, #001428 0%, #002a55 35%, #003C75 65%, #00509e 100%)',
     }}>
 
+      {/* ── Top divider glow ── */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 1,
+        background: 'linear-gradient(90deg, transparent 0%, rgba(121,172,220,0.5) 25%, rgba(121,172,220,0.5) 75%, transparent 100%)',
+        boxShadow: '0 0 18px 2px rgba(121,172,220,0.18)',
+        pointerEvents: 'none', zIndex: 2,
+      }} />
+
       {/* ── Grid desen ── */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,

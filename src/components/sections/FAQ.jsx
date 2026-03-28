@@ -144,6 +144,14 @@ export default function FAQ() {
       position: 'relative',
     }}>
 
+      {/* ── Top fade bridge (dark → light transition) ── */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 80,
+        background: 'linear-gradient(180deg, #001e45 0%, rgba(0,30,69,0) 100%)',
+        pointerEvents: 'none', zIndex: 2,
+        opacity: 0.35,
+      }} />
+
       {/* Subtle dot pattern */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,

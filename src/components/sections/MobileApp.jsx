@@ -11,20 +11,27 @@ function PhoneMockup() {
   return (
     <div style={{ position: 'relative', flexShrink: 0 }}>
 
-      {/* Arka glow */}
+      {/* Ambient glow — arkası */}
       <div style={{
         position: 'absolute',
-        left: '50%', top: '50%',
+        left: '50%', top: '55%',
         transform: 'translate(-50%, -50%)',
-        width: 340, height: 420,
-        borderRadius: '50%',
-        background: 'radial-gradient(ellipse, rgba(0,60,117,0.18) 0%, transparent 70%)',
-        pointerEvents: 'none',
-        zIndex: 0,
-        filter: 'blur(24px)',
+        width: 400, height: 500,
+        background: 'radial-gradient(ellipse, rgba(0,60,117,0.28) 0%, rgba(121,172,220,0.1) 45%, transparent 70%)',
+        filter: 'blur(48px)',
+        pointerEvents: 'none', zIndex: 0,
+      }} />
+      <div style={{
+        position: 'absolute',
+        left: '35%', top: '22%',
+        transform: 'translate(-50%, -50%)',
+        width: 180, height: 180,
+        background: 'radial-gradient(circle, rgba(121,172,220,0.2) 0%, transparent 70%)',
+        filter: 'blur(28px)',
+        pointerEvents: 'none', zIndex: 0,
       }} />
 
-      {/* Yüzen bildirim kartı */}
+      {/* Yüzen bildirim kartı — sağ üst */}
       <motion.div
         initial={{ opacity: 0, x: 24, y: -8 }}
         whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -32,30 +39,33 @@ function PhoneMockup() {
         transition={{ delay: 0.9, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'absolute',
-          top: 72, right: -88,
+          top: 80, right: -104,
           zIndex: 20,
-          background: '#fff',
-          borderRadius: 18,
+          background: 'rgba(255,255,255,0.97)',
+          borderRadius: 16,
           padding: '10px 14px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.13), 0 1px 0 rgba(255,255,255,0.8) inset',
+          boxShadow: '0 16px 48px rgba(0,0,0,0.14), 0 1px 0 rgba(255,255,255,0.9) inset',
           display: 'flex', alignItems: 'center', gap: 10,
-          width: 168,
-          border: '1px solid rgba(0,60,117,0.06)',
+          width: 172,
+          border: '1px solid rgba(0,60,117,0.05)',
         }}
       >
         <div style={{
-          width: 34, height: 34, borderRadius: 10, flexShrink: 0,
-          background: 'rgba(34,197,94,0.10)',
+          width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+          background: 'linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 16,
-        }}>✅</div>
+        }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </div>
         <div>
           <div style={{ fontSize: 11, fontWeight: 700, color: '#0f172a', lineHeight: 1.3 }}>İzin Onaylandı</div>
           <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2 }}>Az önce</div>
         </div>
       </motion.div>
 
-      {/* Yüzen badge — alt sol */}
+      {/* Yüzen stat kartı — sol alt */}
       <motion.div
         initial={{ opacity: 0, x: -24, y: 8 }}
         whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -63,84 +73,96 @@ function PhoneMockup() {
         transition={{ delay: 1.1, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'absolute',
-          bottom: 110, left: -80,
+          bottom: 128, left: -100,
           zIndex: 20,
-          background: '#003C75',
-          borderRadius: 14,
-          padding: '10px 14px',
-          boxShadow: '0 8px 24px rgba(0,60,117,0.35)',
-          display: 'flex', alignItems: 'center', gap: 8,
-          width: 148,
+          background: 'linear-gradient(135deg, #002e5c 0%, #004d99 100%)',
+          borderRadius: 16,
+          padding: '12px 16px',
+          boxShadow: '0 16px 40px rgba(0,60,117,0.5), 0 1px 0 rgba(255,255,255,0.08) inset',
+          display: 'flex', alignItems: 'center', gap: 10,
+          width: 158,
+          border: '1px solid rgba(121,172,220,0.18)',
         }}
       >
         <div style={{
-          width: 28, height: 28, borderRadius: 8, flexShrink: 0,
-          background: 'rgba(255,255,255,0.15)',
+          width: 32, height: 32, borderRadius: 9, flexShrink: 0,
+          background: 'rgba(255,255,255,0.1)',
+          border: '1px solid rgba(255,255,255,0.1)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 13,
-        }}>👥</div>
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(219,238,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
         <div>
-          <div style={{ fontSize: 10, color: 'rgba(219,238,255,0.7)', fontWeight: 500 }}>Aktif Personel</div>
-          <div style={{ fontSize: 13, fontWeight: 800, color: '#fff' }}>1.284</div>
+          <div style={{ fontSize: 10, color: 'rgba(219,238,255,0.6)', fontWeight: 500, marginBottom: 2 }}>Aktif Personel</div>
+          <div style={{ fontSize: 17, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>1.284</div>
         </div>
       </motion.div>
 
       {/* Telefon gövdesi */}
-      <div style={{
-        width: 264,
-        height: 540,
-        borderRadius: 54,
-        background: '#0d1117',
-        border: '7px solid #1a2540',
-        position: 'relative',
-        zIndex: 1,
-        boxShadow: `
-          0 0 0 1px rgba(255,255,255,0.06),
-          inset 0 0 0 1px rgba(255,255,255,0.04),
-          0 40px 80px rgba(0,0,0,0.45),
-          0 8px 32px rgba(0,60,117,0.25)
-        `,
-        transform: 'perspective(1100px) rotateY(-10deg) rotateX(3deg)',
-      }}>
+      <div style={{ perspective: '1200px' }}>
+      <motion.div
+        initial={{ rotateY: -8, rotateX: 2 }}
+        whileInView={{ rotateY: [-8, 180, 352], rotateX: [2, -1, 2] }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.85, ease: [0.4, 0, 0.15, 1] }}
+        style={{
+          width: 268,
+          height: 548,
+          borderRadius: 52,
+          background: 'linear-gradient(160deg, #1c2438 0%, #0d1117 100%)',
+          border: '7.5px solid #1a2540',
+          position: 'relative',
+          zIndex: 1,
+          boxShadow: `
+            0 0 0 1px rgba(255,255,255,0.07),
+            inset 0 0 0 1px rgba(255,255,255,0.04),
+            0 48px 96px rgba(0,0,0,0.55),
+            0 8px 32px rgba(0,60,117,0.3),
+            0 0 0 0.5px rgba(121,172,220,0.12)
+          `,
+        }}>
 
         {/* Sol — ses butonları */}
-        <div style={{ position: 'absolute', left: -9, top: 90,  width: 3.5, height: 28, background: '#1a2540', borderRadius: '2px 0 0 2px' }} />
-        <div style={{ position: 'absolute', left: -9, top: 130, width: 3.5, height: 28, background: '#1a2540', borderRadius: '2px 0 0 2px' }} />
-        <div style={{ position: 'absolute', left: -9, top: 170, width: 3.5, height: 28, background: '#1a2540', borderRadius: '2px 0 0 2px' }} />
+        <div style={{ position: 'absolute', left: -10, top: 92,  width: 3.5, height: 26, background: '#1e2940', borderRadius: '2px 0 0 2px' }} />
+        <div style={{ position: 'absolute', left: -10, top: 128, width: 3.5, height: 26, background: '#1e2940', borderRadius: '2px 0 0 2px' }} />
+        <div style={{ position: 'absolute', left: -10, top: 164, width: 3.5, height: 26, background: '#1e2940', borderRadius: '2px 0 0 2px' }} />
 
         {/* Sağ — güç butonu */}
-        <div style={{ position: 'absolute', right: -9, top: 115, width: 3.5, height: 52, background: '#1a2540', borderRadius: '0 2px 2px 0' }} />
+        <div style={{ position: 'absolute', right: -10, top: 118, width: 3.5, height: 50, background: '#1e2940', borderRadius: '0 2px 2px 0' }} />
 
         {/* Ekran */}
         <div style={{
           position: 'absolute', inset: 2,
-          borderRadius: 48,
+          borderRadius: 46,
           overflow: 'hidden',
           display: 'flex', flexDirection: 'column',
-          background: '#f0f4f8',
+          background: '#0f172a',
         }}>
 
           {/* Status bar */}
           <div style={{
-            height: 46,
-            background: '#003C75',
+            height: 48,
+            background: 'linear-gradient(180deg, #001428 0%, #001e40 100%)',
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'space-between',
-            padding: '0 22px 9px',
+            padding: '0 22px 10px',
             flexShrink: 0,
             position: 'relative',
           }}>
-            <span style={{ color: 'rgba(255,255,255,0.95)', fontSize: 11, fontWeight: 700 }}>09:41</span>
+            <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: 11, fontWeight: 700, letterSpacing: '0.02em' }}>09:41</span>
 
             {/* Dynamic Island */}
             <div style={{
               position: 'absolute',
               top: 8, left: '50%',
               transform: 'translateX(-50%)',
-              width: 96, height: 26,
+              width: 90, height: 26,
               borderRadius: 13,
-              background: '#0d1117',
+              background: '#000',
               zIndex: 5,
             }} />
 
@@ -149,67 +171,75 @@ function PhoneMockup() {
                 {[4, 6, 8, 10].map((h, i) => (
                   <div key={i} style={{
                     width: 2.5, height: h, borderRadius: 1,
-                    background: i < 3 ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)',
+                    background: i < 3 ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.22)',
                   }} />
                 ))}
               </div>
-              <div style={{ width: 18, height: 9, borderRadius: 2, border: '1.5px solid rgba(255,255,255,0.55)', position: 'relative' }}>
-                <div style={{ position: 'absolute', left: 1.5, top: 1.5, width: '65%', bottom: 1.5, background: 'rgba(255,255,255,0.8)', borderRadius: 0.5 }} />
+              <div style={{ width: 18, height: 9, borderRadius: 2, border: '1.5px solid rgba(255,255,255,0.4)', position: 'relative' }}>
+                <div style={{ position: 'absolute', left: 1.5, top: 1.5, width: '65%', bottom: 1.5, background: 'rgba(255,255,255,0.7)', borderRadius: 0.5 }} />
               </div>
             </div>
           </div>
 
           {/* App header */}
           <div style={{
-            background: '#003C75',
-            padding: '8px 18px 16px',
+            background: 'linear-gradient(180deg, #001e40 0%, #001530 100%)',
+            padding: '10px 18px 18px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexShrink: 0,
           }}>
             <div>
-              <div style={{ fontSize: 11, color: 'rgba(219,238,255,0.65)', fontWeight: 500 }}>Merhaba,</div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: '#fff' }}>Ahmet Yılmaz</div>
+              <div style={{ fontSize: 11, color: 'rgba(121,172,220,0.6)', fontWeight: 500, letterSpacing: '0.03em' }}>Hoş geldin</div>
+              <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em' }}>Ahmet Yılmaz</div>
             </div>
             <div style={{
               width: 36, height: 36, borderRadius: '50%',
-              background: 'rgba(121,172,220,0.2)',
-              border: '2px solid rgba(121,172,220,0.35)',
+              background: 'linear-gradient(135deg, #003C75 0%, #1a6aaa 100%)',
+              border: '2px solid rgba(121,172,220,0.25)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#79ACDC', fontSize: 14, fontWeight: 800,
+              color: '#fff', fontSize: 13, fontWeight: 800,
             }}>A</div>
           </div>
 
           {/* Content */}
-          <div style={{ flex: 1, padding: '12px 12px 0', display: 'flex', flexDirection: 'column', gap: 9, overflow: 'hidden' }}>
+          <div style={{ flex: 1, background: '#0f172a', padding: '11px 11px 0', display: 'flex', flexDirection: 'column', gap: 8, overflow: 'hidden' }}>
 
             {/* Giriş kartı */}
             <div style={{
-              background: '#fff',
-              borderRadius: 18,
-              padding: '14px 14px 12px',
-              boxShadow: '0 2px 12px rgba(0,60,117,0.08)',
+              background: 'linear-gradient(135deg, rgba(0,60,117,0.65) 0%, rgba(0,35,80,0.65) 100%)',
+              borderRadius: 16,
+              padding: '12px 14px',
+              border: '1px solid rgba(121,172,220,0.16)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
             }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 9 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#15803d' }}>Çevrimiçi</span>
+                  <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px rgba(34,197,94,0.7)' }} />
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#4ade80' }}>Çevrimiçi</span>
                 </div>
                 <span style={{
-                  fontSize: 11, fontWeight: 700, color: '#003C75',
-                  background: 'rgba(0,60,117,0.07)',
+                  fontSize: 11, fontWeight: 700, color: '#79ACDC',
+                  background: 'rgba(121,172,220,0.12)',
                   padding: '3px 8px', borderRadius: 6,
+                  border: '1px solid rgba(121,172,220,0.18)',
                 }}>08:30</span>
               </div>
-              <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 11 }}>📍 Merkez Ofis · İstanbul</div>
+              <div style={{ fontSize: 11, color: 'rgba(219,238,255,0.45)', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 5 }}>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(219,238,255,0.45)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+                Merkez Ofis · İstanbul
+              </div>
               <button style={{
                 width: '100%',
-                background: 'linear-gradient(135deg, #003C75 0%, #1a6aaa 100%)',
+                background: 'linear-gradient(135deg, #003C75 0%, #005cb5 100%)',
                 color: '#fff', border: 'none',
-                borderRadius: 11, padding: '10px 0',
-                fontSize: 13, fontWeight: 700, cursor: 'pointer',
-                boxShadow: '0 4px 14px rgba(0,60,117,0.32)',
+                borderRadius: 10, padding: '9px 0',
+                fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                boxShadow: '0 4px 16px rgba(0,60,117,0.55)',
+                letterSpacing: '0.02em',
               }}>
                 Giriş Yap
               </button>
@@ -217,22 +247,24 @@ function PhoneMockup() {
 
             {/* Hızlı işlemler */}
             <div>
-              <div style={{ fontSize: 10, fontWeight: 600, color: '#94a3b8', marginBottom: 7, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+              <div style={{ fontSize: 9.5, fontWeight: 700, color: 'rgba(121,172,220,0.4)', marginBottom: 7, textTransform: 'uppercase', letterSpacing: '0.09em' }}>
                 Hızlı İşlemler
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
                 {[
-                  { label: 'İzin',     bg: 'rgba(14,165,233,0.09)',  color: '#0369a1',
-                    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0369a1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg> },
-                  { label: 'Görev',    bg: 'rgba(34,197,94,0.09)',   color: '#15803d',
-                    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> },
-                  { label: 'Vardiya',  bg: 'rgba(168,85,247,0.09)',  color: '#7c3aed',
-                    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg> },
-                  { label: 'Raporlar', bg: 'rgba(0,60,117,0.07)',    color: '#003C75',
-                    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg> },
+                  { label: 'İzin', bg: 'rgba(14,165,233,0.1)', border: 'rgba(14,165,233,0.18)', color: '#38bdf8',
+                    svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg> },
+                  { label: 'Görevler', bg: 'rgba(34,197,94,0.1)', border: 'rgba(34,197,94,0.18)', color: '#4ade80',
+                    svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> },
+                  { label: 'Vardiya', bg: 'rgba(168,85,247,0.1)', border: 'rgba(168,85,247,0.18)', color: '#c084fc',
+                    svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c084fc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg> },
+                  { label: 'Raporlar', bg: 'rgba(251,191,36,0.1)', border: 'rgba(251,191,36,0.18)', color: '#fbbf24',
+                    svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg> },
                 ].map(a => (
                   <div key={a.label} style={{
-                    background: a.bg, borderRadius: 12,
+                    background: a.bg,
+                    border: `1px solid ${a.border}`,
+                    borderRadius: 12,
                     padding: '10px 8px',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5,
                   }}>
@@ -244,7 +276,36 @@ function PhoneMockup() {
             </div>
 
           </div>
+
+          {/* Bottom nav */}
+          <div style={{
+            height: 52,
+            background: '#0a1120',
+            borderTop: '1px solid rgba(121,172,220,0.08)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            paddingBottom: 4,
+            flexShrink: 0,
+          }}>
+            {[
+              { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>, active: true },
+              { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, active: false },
+              { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>, active: false },
+              { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>, active: false },
+            ].map((item, i) => (
+              <div key={i} style={{
+                color: item.active ? '#79ACDC' : 'rgba(255,255,255,0.22)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
+              }}>
+                {item.svg}
+                {item.active && <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#79ACDC' }} />}
+              </div>
+            ))}
+          </div>
+
         </div>
+      </motion.div>
       </div>
     </div>
   )
@@ -252,7 +313,7 @@ function PhoneMockup() {
 
 export default function MobileApp() {
   return (
-    <section id="mobil" style={{ padding: '96px 24px', background: 'transparent', overflow: 'hidden' }}>
+    <section id="mobil" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #f4f8fd 0%, #ffffff 100%)', overflow: 'hidden' }}>
       <div style={{
         maxWidth: 1160,
         margin: '0 auto',

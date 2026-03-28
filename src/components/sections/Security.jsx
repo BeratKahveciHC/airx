@@ -85,7 +85,7 @@ const TRUST_STATS = [
 
 export default function Security() {
   return (
-    <section id="guvenlik" style={{ padding: '96px 24px', background: 'rgba(0,20,60,0.025)' }}>
+    <section id="guvenlik" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #ffffff 0%, #f0f5fc 100%)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>
 
         {/* ── Başlık ── */}
