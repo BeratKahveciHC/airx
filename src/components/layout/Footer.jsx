@@ -44,18 +44,35 @@ const ArrowIcon = () => (
 )
 
 const MODULES = [
-  'PDKS', 'Özlük Dosyası', 'İzin Yönetimi', 'Puantaj',
-  'Erişim Kontrolü', 'Ziyaretçi Yönetimi', 'Yemekhane',
+  { label: 'PDKS',               href: '/moduller/pdks' },
+  { label: 'Özlük Dosyası',      href: '/moduller/ozluk-dosyasi' },
+  { label: 'İzin Yönetimi',      href: '/moduller/izin-yonetimi' },
+  { label: 'Puantaj',            href: '/moduller/puantaj' },
+  { label: 'Erişim Kontrolü',    href: '/moduller/erisim-kontrolu' },
+  { label: 'Ziyaretçi Yönetimi', href: '/moduller/ziyaretci-yonetimi' },
+  { label: 'Yemekhane',          href: '/moduller/yemekhane' },
 ]
 
-const COMPANY_LINKS = ['Hakkımızda', 'Blog', 'Kariyer', 'İletişim', 'Basın']
-const SUPPORT_LINKS = ['Yardım Merkezi', 'Demo Talep Et', 'Gizlilik Politikası', 'Kullanım Koşulları', 'KVKK Metni']
+const COMPANY_LINKS = [
+  { label: 'Hakkımızda',  href: '/hakkimizda' },
+  { label: 'Blog',        href: '/blog' },
+  { label: 'Kariyer',     href: '#' },
+  { label: 'İletişim',    href: '/iletisim' },
+  { label: 'Neden AirX',  href: '/neden-airx' },
+]
+const SUPPORT_LINKS = [
+  { label: 'Demo Talep Et',        href: '#demo' },
+  { label: 'Fiyatlar',             href: '/fiyatlar' },
+  { label: 'Gizlilik Politikası',  href: '#' },
+  { label: 'Kullanım Koşulları',   href: '#' },
+  { label: 'KVKK Metni',           href: '#' },
+]
 
-function FooterLink({ label }) {
+function FooterLink({ label, href }) {
   const [hovered, setHovered] = useState(false)
   return (
     <a
-      href="#"
+      href={href || '#'}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -243,7 +260,7 @@ export default function Footer() {
               }}>
                 Modüller
               </div>
-              {MODULES.map(l => <FooterLink key={l} label={l} />)}
+              {MODULES.map(l => <FooterLink key={l.label} label={l.label} href={l.href} />)}
             </div>
 
             {/* Col 3 - Şirket */}
@@ -257,7 +274,7 @@ export default function Footer() {
               }}>
                 Şirket
               </div>
-              {COMPANY_LINKS.map(l => <FooterLink key={l} label={l} />)}
+              {COMPANY_LINKS.map(l => <FooterLink key={l.label} label={l.label} href={l.href} />)}
             </div>
 
             {/* Col 4 - Destek */}
@@ -271,7 +288,7 @@ export default function Footer() {
               }}>
                 Destek
               </div>
-              {SUPPORT_LINKS.map(l => <FooterLink key={l} label={l} />)}
+              {SUPPORT_LINKS.map(l => <FooterLink key={l.label} label={l.label} href={l.href} />)}
             </div>
           </div>
 
