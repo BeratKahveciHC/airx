@@ -119,8 +119,9 @@ export default function CTASection() {
           </p>
 
           {/* Butonlar */}
-          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 28 }}>
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 28 }} className="cta-actions">
             <motion.button
+              onClick={() => { window.location.href = '/iletisim#demo-form' }}
               whileHover={{ y: -3, boxShadow: '0 14px 40px rgba(0,0,0,0.25)' }}
               whileTap={{ scale: 0.97 }}
               style={{
@@ -143,6 +144,7 @@ export default function CTASection() {
             </motion.button>
 
             <motion.button
+              onClick={() => { window.location.href = '/iletisim' }}
               whileHover={{ y: -3, background: 'rgba(255,255,255,0.16)' }}
               whileTap={{ scale: 0.97 }}
               style={{
@@ -164,7 +166,7 @@ export default function CTASection() {
           </div>
 
           {/* Küçük garantiler */}
-          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }} className="cta-promises">
             {PROMISES.map(p => (
               <div key={p} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{
@@ -274,7 +276,17 @@ export default function CTASection() {
         }
         @media (max-width: 640px) {
           .cta-split { padding: 0 !important; }
-          .cta-split > div:first-child > div { flex-direction: column !important; }
+          .cta-actions {
+            flex-direction: column !important;
+          }
+          .cta-actions > * {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .cta-promises {
+            flex-direction: column !important;
+            gap: 12px !important;
+          }
         }
       `}</style>
     </section>

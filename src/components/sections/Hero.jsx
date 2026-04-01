@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import logo from '../../assets/logo.png'
 
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
   const [count, setCount] = useState(0)
@@ -60,7 +61,7 @@ export default function Hero() {
         }} className="hero-split">
 
           {/* ── SOL: Metin ── */}
-          <div style={{ flex: '1 1 0', minWidth: 0 }}>
+          <div style={{ flex: '1 1 0', minWidth: 0 }} className="hero-content-col">
 
             {/* Üst etiket */}
             <motion.div
@@ -130,9 +131,10 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.22 }}
               style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 48 }}
+              className="hero-actions"
             >
               <a
-                href="#demo"
+                href="/iletisim#demo-form"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '14px 28px',
@@ -160,7 +162,7 @@ export default function Hero() {
                 </svg>
               </a>
               <a
-                href="tel:+902120000000"
+                href="/iletisim"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '14px 24px',
@@ -220,6 +222,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.75, duration: 0.4 }}
+              className="hero-alert-card"
               style={{
                 position: 'absolute', top: -18, right: 12, zIndex: 10,
                 background: '#fff',
@@ -251,6 +254,7 @@ export default function Hero() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.9, duration: 0.4 }}
+              className="hero-active-card"
               style={{
                 position: 'absolute', bottom: 32, left: -16, zIndex: 10,
                 background: '#003C75',
@@ -275,120 +279,144 @@ export default function Hero() {
               border: '1px solid #e2e8f0',
               boxShadow: '0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06)',
               background: '#fff',
-            }}>
+            }} className="hero-dashboard-shell">
+
               {/* Browser chrome */}
-              <div style={{
-                background: '#f8fafc',
-                borderBottom: '1px solid #e8ecf2',
-                padding: '9px 14px',
-                display: 'flex', alignItems: 'center', gap: 8,
-              }}>
-                <div style={{ display: 'flex', gap: 5 }}>
-                  {['#fca5a5','#fcd34d','#86efac'].map(c => (
-                    <div key={c} style={{ width: 9, height: 9, borderRadius: '50%', background: c }} />
+              <div style={{ background: '#f8fafc', borderBottom: '1px solid #e8ecf2', padding: '7px 12px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{ display: 'flex', gap: 4 }}>
+                  {['#ff6058','#ffbd2e','#28c840'].map(c => (
+                    <div key={c} style={{ width: 8, height: 8, borderRadius: '50%', background: c }} />
                   ))}
                 </div>
-                <div style={{
-                  flex: 1, maxWidth: 220, margin: '0 auto',
-                  background: '#e8ecf2', borderRadius: 4, height: 20,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 10, color: '#94a3b8', letterSpacing: '0.02em',
-                }}>
-                  panel.airx.com.tr
+                <div style={{ flex: 1, maxWidth: 200, margin: '0 auto', background: '#e8ecf2', borderRadius: 4, height: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+                  <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                  <span style={{ fontSize: 9, color: '#94a3b8' }}>panel.airx.com.tr</span>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', height: 340 }}>
-                {/* Sidebar */}
-                <div style={{
-                  width: 172, flexShrink: 0,
-                  background: '#f8fafd',
-                  borderRight: '1px solid #eaf0f9',
-                  padding: '14px 0',
-                  display: 'flex', flexDirection: 'column',
-                }}>
-                  <div style={{ padding: '0 12px 14px', display: 'flex', alignItems: 'center', gap: 7 }}>
-                    <div style={{
-                      width: 22, height: 22, borderRadius: 6,
-                      background: '#003C75',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#fff', fontWeight: 800, fontSize: 10,
-                    }}>A</div>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#003C75' }}>AIRX Panel</span>
-                  </div>
+              {/* App top navbar */}
+              <div style={{ background: '#fff', borderBottom: '1px solid #e8f0f9', padding: '0 14px', height: 38, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <img src={logo} alt="AirX" style={{ height: 15, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                <div style={{ display: 'flex', gap: 1, flex: 1 }}>
                   {[
-                    { label: 'Dashboard',      active: true },
-                    { label: 'Personel',       active: false },
-                    { label: 'PDKS',           active: false },
-                    { label: 'İzin Yönetimi', active: false },
-                    { label: 'Puantaj',        active: false },
-                    { label: 'Raporlar',       active: false },
+                    { label: 'Anasayfa', active: true, chevron: false },
+                    { label: 'Tanımlamalar', active: false, chevron: true },
+                    { label: 'Personel', active: false, chevron: true },
+                    { label: 'Modüller', active: false, chevron: true },
+                    { label: 'Raporlar', active: false, chevron: true },
                   ].map(item => (
-                    <div key={item.label} style={{
-                      padding: '7px 12px',
-                      display: 'flex', alignItems: 'center', gap: 8,
-                      background: item.active ? 'rgba(0,60,117,0.07)' : 'transparent',
-                      borderLeft: item.active ? '2px solid #003C75' : '2px solid transparent',
-                    }}>
-                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: item.active ? '#003C75' : '#d1d5db', flexShrink: 0 }} />
-                      <span style={{ fontSize: 12, color: item.active ? '#003C75' : '#6b7280', fontWeight: item.active ? 600 : 400 }}>
-                        {item.label}
-                      </span>
+                    <div key={item.label} style={{ padding: '4px 6px', borderRadius: 4, background: item.active ? 'rgba(0,60,117,0.07)' : 'transparent', display: 'flex', alignItems: 'center', gap: 2, whiteSpace: 'nowrap' }}>
+                      <span style={{ fontSize: 9, fontWeight: item.active ? 700 : 500, color: item.active ? '#003C75' : '#64748b' }}>{item.label}</span>
+                      {item.chevron && (
+                        <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 3, flexShrink: 0 }}>
+                  <span style={{ fontSize: 10 }}>🇹🇷</span>
+                  <span style={{ fontSize: 9, color: '#64748b' }}>Türkçe</span>
+                  <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                </div>
+              </div>
+
+              {/* Ana içerik */}
+              <div style={{ background: '#f5f8fc', padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+
+                {/* 2×3 Stat kartları */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }} className="hero-dashboard-stats">
+                  {[
+                    { value: 48, label: 'Aktif Personeller', sub: 'Puantaja Dahil Değil: 2', color: '#3b82f6',
+                      icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+                    { value: 31, label: 'Gelenler', color: '#22c55e',
+                      icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> },
+                    { value: 5, label: 'Mesaidekiler', color: '#8b5cf6',
+                      icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> },
+                    { value: 8, label: 'Gelmeyenler', color: '#ef4444',
+                      icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> },
+                    { value: 3, label: 'Geç Gelenler', color: '#f59e0b',
+                      icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+                    { value: 2, label: 'İzinliler', color: '#0ea5e9',
+                      icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 21 4s-2 0-3.5 1.5L14 9l-8.2-1.8L4 9l7 3-2 3.5L6 17l-1 3 3-1 1.5-3 3.5-2 3 7z"/></svg> },
+                  ].map(s => (
+                    <div key={s.label} style={{ background: '#fff', borderRadius: 7, border: '1px solid #e8f0f9', padding: '9px 10px', boxShadow: '0 1px 3px rgba(0,30,80,0.04)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                        <div style={{ width: 24, height: 24, borderRadius: 6, background: s.color + '15', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {s.icon}
+                        </div>
+                        <span style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.03em', lineHeight: 1 }}>{s.value}</span>
+                      </div>
+                      <div style={{ fontSize: 8, fontWeight: 600, color: '#475569' }}>{s.label}</div>
+                      {s.sub && <div style={{ fontSize: 7, color: '#94a3b8', marginTop: 1 }}>{s.sub}</div>}
                     </div>
                   ))}
                 </div>
 
-                {/* Ana içerik */}
-                <div style={{ flex: 1, padding: '16px 18px', background: '#fff', overflow: 'hidden' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                    <div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: '#111827' }}>Genel Bakış</div>
-                      <div style={{ fontSize: 10, color: '#9ca3af', marginTop: 1 }}>29 Mart 2026, Pazar</div>
+                {/* Alt tablolar */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }} className="hero-dashboard-tables">
+                  {/* Onay Bekleyen İzin Talepleri */}
+                  <div style={{ background: '#fff', borderRadius: 7, border: '1px solid #e8f0f9', overflow: 'hidden' }}>
+                    <div style={{ padding: '6px 10px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#1e293b' }}>Onay Bekleyen İzin Talepleri</span>
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </div>
-                    <div style={{
-                      background: '#003C75', color: '#fff',
-                      borderRadius: 5, padding: '5px 11px',
-                      fontSize: 11, fontWeight: 600,
-                    }}>+ Ekle</div>
-                  </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 8, marginBottom: 14 }}>
-                    {[
-                      { label: 'Toplam Personel', value: '1.284', up: true,  trend: '+2.5%' },
-                      { label: 'Devam Oranı',     value: '%97.3', up: true,  trend: '+1.1%' },
-                      { label: 'Bekleyen Onay',   value: '18',    up: false, trend: '3 Yeni' },
-                      { label: 'Aktif Görev',     value: '143',   up: true,  trend: '+6.2%' },
-                    ].map(s => (
-                      <div key={s.label} style={{
-                        background: '#f8fafc', border: '1px solid #e8f0f9',
-                        borderRadius: 8, padding: '10px 10px',
-                      }}>
-                        <div style={{ fontSize: 9, color: '#9ca3af', marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
-                        <div style={{ fontSize: 17, fontWeight: 800, color: '#111827', lineHeight: 1 }}>{s.value}</div>
-                        <div style={{ fontSize: 9, color: s.up ? '#16a34a' : '#d97706', marginTop: 3, fontWeight: 600 }}>{s.up ? '↑' : '●'} {s.trend}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div style={{ background: '#f8fafc', border: '1px solid #e8f0f9', borderRadius: 8, padding: '12px 14px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-                      <div style={{ fontSize: 11, fontWeight: 600, color: '#111827' }}>Haftalık Devam</div>
-                      <div style={{ fontSize: 10, color: '#9ca3af' }}>Bu Hafta</div>
-                    </div>
-                    <div style={{ display: 'flex', gap: 4, alignItems: 'flex-end', height: 68 }}>
-                      {[{h:72,l:'Pzt'},{h:88,l:'Sal'},{h:65,l:'Çar'},{h:92,l:'Per'},{h:78,l:'Cum'},{h:45,l:'Cmt'},{h:20,l:'Paz'}]
-                        .map((d, i) => (
-                          <div key={d.l} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-                            <div style={{
-                              width: '100%', borderRadius: '3px 3px 0 0', height: `${d.h}%`,
-                              background: i === 4 ? '#003C75' : '#dbeafe',
-                            }} />
-                            <div style={{ fontSize: 8, color: '#9ca3af' }}>{d.l}</div>
-                          </div>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 8 }}>
+                      <thead>
+                        <tr style={{ background: '#f8fafc' }}>
+                          {['Ad Soyad', 'İzin Tipi', 'Departman'].map(h => (
+                            <th key={h} style={{ padding: '4px 8px', fontWeight: 600, color: '#475569', textAlign: 'left' }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { name: 'Ahmet Kaya',    tip: 'Yıllık İzin',   dept: 'Yazılım Ekibi' },
+                          { name: 'Zeynep Arslan', tip: 'Ücretsiz İzin', dept: 'Pazarlama' },
+                          { name: 'Mustafa Demir', tip: 'Yıllık İzin',   dept: 'Satış' },
+                          { name: 'Elif Yıldız',   tip: 'Yıllık İzin',   dept: 'İkitelli Merkez' },
+                        ].map((r, i) => (
+                          <tr key={i} style={{ borderTop: '1px solid #f8fafc' }}>
+                            <td style={{ padding: '4px 8px', color: '#1e7bbf', fontWeight: 500 }}>{r.name}</td>
+                            <td style={{ padding: '4px 8px', color: '#1e7bbf' }}>{r.tip}</td>
+                            <td style={{ padding: '4px 8px', color: '#64748b' }}>{r.dept}</td>
+                          </tr>
                         ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Gelmeyenler */}
+                  <div style={{ background: '#fff', borderRadius: 7, border: '1px solid #e8f0f9', overflow: 'hidden' }}>
+                    <div style={{ padding: '6px 10px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#1e293b' }}>Gelmeyenler</span>
+                      <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </div>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 8 }}>
+                      <thead>
+                        <tr style={{ background: '#f8fafc' }}>
+                          {['Ad Soyad', 'Departman'].map(h => (
+                            <th key={h} style={{ padding: '4px 8px', fontWeight: 600, color: '#475569', textAlign: 'left' }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          { name: 'Serkan Çelik',  dept: 'Yazılım Ekibi' },
+                          { name: 'Fatma Öztürk',  dept: 'Yazılım Ekibi' },
+                          { name: 'Burak Koç',     dept: 'Pazarlama' },
+                          { name: 'Elif Şahin',    dept: 'Satış' },
+                          { name: 'Hasan Çelik',   dept: 'İdari İşler' },
+                        ].map((r, i) => (
+                          <tr key={i} style={{ borderTop: '1px solid #f8fafc' }}>
+                            <td style={{ padding: '4px 8px', color: '#334155', fontWeight: 500 }}>{r.name}</td>
+                            <td style={{ padding: '4px 8px', color: '#64748b' }}>{r.dept}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
+
               </div>
             </div>
           </motion.div>
@@ -399,11 +427,17 @@ export default function Hero() {
       <style>{`
         @media (max-width: 960px) {
           .hero-split { flex-direction: column !important; gap: 48px !important; padding: 48px 24px 56px !important; }
-          .hero-mockup-col { width: 100% !important; }
+          .hero-mockup-col { width: 100% !important; max-width: 720px !important; margin-right: 0 !important; }
         }
         @media (max-width: 640px) {
           .hero-split { padding: 36px 16px 44px !important; }
           .hero-stats { gap: 20px !important; }
+          .hero-content-col { text-align: center !important; }
+          .hero-content-col p { margin-left: auto !important; margin-right: auto !important; }
+          .hero-actions { justify-content: center !important; }
+          .hero-alert-card, .hero-active-card { display: none !important; }
+          .hero-dashboard-stats { grid-template-columns: repeat(2, 1fr) !important; }
+          .hero-dashboard-tables { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 480px) {
           .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 16px !important; }

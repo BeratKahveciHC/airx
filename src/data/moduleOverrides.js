@@ -1,4 +1,55 @@
 export const MODULE_OVERRIDES = {
+  pdks: {
+    name: 'PDKS',
+    tagline: 'PDKS - Personel Devam Kontrol Sistemi',
+    description:
+      'Airx PDKS, entegre mobil yazılım, web yönetim paneli ve üstün teknolojiye sahip donanımlardan oluşur. Hem personel giriş-çıkışlarını hem de belli lokasyonda geçirilen süreleri takip edebilirsiniz. Üstelik personelinizin sadece mobil uygulamamızı yüklemesi yeterlidir.',
+    hero_stats: [
+      { value: '5', label: 'Giriş-Çıkış Yöntemi' },
+      { value: 'Mobil', label: 'Uygulama Desteği' },
+      { value: 'Anlık', label: 'Süre Takibi' },
+    ],
+    features: [
+      {
+        title: 'PDKS Giriş-Çıkış Yönetimi',
+        desc: 'Personel giriş-çıkışlarını mobil uygulama, web paneli ve entegre donanımlar ile merkezi olarak yönetebilirsiniz.',
+        icon: 'phone',
+      },
+      {
+        title: 'Lokasyon Bazlı Süre Takibi',
+        desc: 'Personelin belli lokasyonlarda geçirdiği süreleri takip edebilir, örneğin cafeterya gibi alanlar için geçirilen süre raporları oluşturabilirsiniz.',
+        icon: 'qr',
+      },
+      {
+        title: '5 Farklı Giriş Yöntemi',
+        desc: 'Beacon, NFC, WiFi, QR kod ve remote olmak üzere 5 farklı giriş-çıkış yöntemiyle saha ihtiyacına uygun kullanım senaryoları kurabilirsiniz.',
+        icon: 'calculator',
+      },
+    ],
+    how_it_works: [
+      {
+        step: '01',
+        title: 'Mobil Uygulamayı Kurun',
+        desc: 'Personelin sadece mobil uygulamayı yüklemesi yeterlidir; ek biyometrik cihaza gerek kalmadan kullanım başlar.',
+      },
+      {
+        step: '02',
+        title: 'Giriş Yöntemlerini Tanımlayın',
+        desc: 'Beacon, NFC, WiFi, QR kod veya remote seçeneklerinden size uygun olanları aktif edin.',
+      },
+      {
+        step: '03',
+        title: 'Takip ve Raporlama Yapın',
+        desc: 'Giriş-çıkış hareketlerini ve belirli lokasyonlarda geçirilen süreleri panel üzerinden izleyip raporlayın.',
+      },
+    ],
+    benefits: [
+      'Personel giriş-çıkışlarını tek sistemden takip edin',
+      'Lokasyon bazlı geçirilen süreleri ölçün',
+      '5 farklı giriş yöntemi ile saha ihtiyacına uyum sağlayın',
+      'Sadece mobil uygulama ile hızlı kurulum yapın',
+    ],
+  },
   'erisim-kontrolu': {
     name: 'Erişim Kontrolü',
     tagline: 'Yetkili Giriş Kontrolü',
@@ -9,19 +60,23 @@ export const MODULE_OVERRIDES = {
       { value: '30 sn', label: 'Kod Güncelleme' },
       { value: 'Anlık', label: 'Raporlama' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Yetkili Kişi Girişi',
         desc: 'Sadece yetkili kişilerin giriş yapabilecekleri mekanları ve turnikeleri kontrol altında tutabilirsiniz. Böylece erişim alanları net ve güvenli şekilde yönetilir.',
         icon: 'zone',
-      },{
+      },
+      {
         title: 'QR Cihazı ile Yetkilendirme',
         desc: 'QR cihazımız sayesinde mobil uygulama üzerinden giriş-çıkış yetkilendirmesi yapabilirsiniz. Süreç hem hızlı hem de merkezi olarak yönetilebilir.',
         icon: 'mobile',
-      },{
+      },
+      {
         title: '30 Saniyede Bir Güncellenen QR Kod',
         desc: 'Mobil uygulamadaki QR kodlar 30 saniyede bir güncellenir. Bu yapı, erişim güvenliğini artırır ve yetkisiz kullanım riskini azaltır.',
         icon: 'time',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -56,19 +111,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Önceden', label: 'Süre Uyarısı' },
       { value: 'Kolay', label: 'Belge Yükleme' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Son Geçerlilik Tarihi Takibi',
         desc: 'Geçerlilik süresi olan tüm evrakları sistem üzerinde takip edebilir, kritik belgelerin son tarihlerini kontrol altında tutabilirsiniz.',
         icon: 'deadline',
-      },{
+      },
+      {
         title: 'Sağlık Kontrol Belgeleri',
         desc: 'Personelinize ait sağlık kontrol belgelerini sisteme yükleyebilir, süresi yaklaşan belgeler için önceden bilgi sahibi olabilirsiniz.',
         icon: 'archive',
-      },{
+      },
+      {
         title: 'Yetki Belgeleri',
         desc: 'Görev ve sorumluluklara bağlı yetki belgelerini düzenli biçimde arşivleyebilir, süresi dolmak üzere olan belgeleri anlık takip edebilirsiniz.',
         icon: 'types',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -103,19 +162,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Tekil', label: 'Görev Atama' },
       { value: 'Konum', label: 'Doğrulama' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Periyodik ve Tek Seferlik Görevler',
         desc: 'Periyodik ya da tek seferlik görevler oluşturabilir, bu görevleri ilgili kişilere atayabilirsiniz. Böylece tüm görev süreçleri tek panelden yönetilir.',
         icon: 'auto',
-      },{
+      },
+      {
         title: 'Kişi Bazlı Atama',
         desc: 'Görevleri belirli kişilere atayabilir, hangi görevin kim tarafından ne zaman yapılacağını net biçimde planlayabilirsiniz.',
         icon: 'assign',
-      },{
+      },
+      {
         title: 'Lokasyon Doğrulaması',
-        desc: 'Bir görevin “yapıldı” olarak işaretlenebilmesi için görevlinin ilgili konumda olması sağlanabilir. Böylece görevlerin doğru yerde yapıldığı doğrulanır.',
+        desc: 'Bir görevin "yapıldı" olarak işaretlenebilmesi için görevlinin ilgili konumda olması sağlanabilir. Böylece görevlerin doğru yerde yapıldığı doğrulanır.',
         icon: 'status',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -150,19 +213,23 @@ export const MODULE_OVERRIDES = {
       { value: 'KVKK', label: 'Uyumlu Saklama' },
       { value: 'Mobil + Web', label: 'Erişim' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Güncel ve Eksiksiz Özlük Dosyası',
         desc: 'İşe girişten çalışma sürecinin tamamına kadar tüm özlük belgelerini güncel ve eksiksiz şekilde dijital ortamda tutabilirsiniz.',
         icon: 'card',
-      },{
+      },
+      {
         title: 'Resmi Belgelerin Tek Yerde Saklanması',
         desc: 'İş sözleşmesi, işe alım ve izin evrakları, finansal belgeler, görevlendirme ve mesai formları gibi tüm resmi belge ve kayıtları tek sistemde saklayabilirsiniz.',
         icon: 'upload',
-      },{
+      },
+      {
         title: 'Biyometrik İmza ile Doğrulama',
         desc: 'Çalışana ait belgeler online sistemde biyometrik imza ile doğrulanmış olarak saklanabilir ve güvenilir kayıt altyapısı oluşturulur.',
         icon: 'lock',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -197,19 +264,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Telefon No', label: 'Kolay Kayıt' },
       { value: 'Kapı + Turnike', label: 'Geçiş Yetkisi' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Kimlik ve Kart Sürecine Son',
         desc: 'Ziyaretçi girişlerinde kimlik alma ve fiziksel kart verme süreçlerini ortadan kaldırarak daha hızlı ve modern bir deneyim sunabilirsiniz.',
         icon: 'register',
-      },{
+      },
+      {
         title: 'Telefon Numarası ile Kayıt',
         desc: 'Ziyaretçinizden yalnızca telefon numarası alarak kayıt sürecini başlatabilirsiniz. Böylece giriş akışı çok daha pratik hale gelir.',
         icon: 'notify',
-      },{
+      },
+      {
         title: 'SMS ile QR Gönderimi',
         desc: 'Ziyaretçiye SMS ile iletilen QR kod sayesinde yetkilendirilen alanlar için güvenli geçiş izni tanımlanabilir.',
         icon: 'badge',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -224,7 +295,7 @@ export const MODULE_OVERRIDES = {
       {
         step: '03',
         title: 'Geçişi Yönetin',
-        desc: 'Ziyaretçi, yetkilendirilen alanlardan QR ile giriş yapabilir; siz de tüm geçiş akışını dijital olarak yönetirsiniz.',
+        desc: 'Ziyaretçi, yetkilendirilen alanlardan QR ile giriş yapabilir; siz de tüm geçiş akışlarını dijital olarak yönetirsiniz.',
       },
     ],
     benefits: [
@@ -244,19 +315,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Duyuru', label: 'Personel Bildirimi' },
       { value: 'Katılım', label: 'Teyit Takibi' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Eğitim Planlama',
         desc: 'Kurum içindeki eğitimleri planlayabilir, hangi eğitimin ne zaman yapılacağını sistem üzerinden organize edebilirsiniz.',
         icon: 'calendar',
-      },{
+      },
+      {
         title: 'İlgili Personele Duyuru',
         desc: 'Planlanan eğitimleri ilgili personele iletebilir, katılması gereken kişileri net biçimde belirleyebilirsiniz.',
         icon: 'attendance',
-      },{
+      },
+      {
         title: 'Katılım Takibi',
         desc: 'Eğitim sonrasında personelin katılım durumunu kayıt altına alabilir ve tamamlanan eğitimleri teyit edebilirsiniz.',
         icon: 'certificate',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -291,19 +366,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Statik + Dinamik', label: 'Veri Kaynağı' },
       { value: 'İçgörü', label: 'Analiz Sonucu' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Tüm Verileri Görselleştirin',
         desc: 'Şirketinizdeki farklı veri kaynaklarını görselleştirerek çalışanların ve organizasyonun mevcut durumunu daha net değerlendirebilirsiniz.',
         icon: 'dashboard',
-      },{
+      },
+      {
         title: 'Statik ve Dinamik Verileri Birleştirin',
         desc: 'Size sunduğumuz statik verilerin yanı sıra anketler, mola verileri, giriş-çıkış verileri gibi dinamik verileri birlikte kullanabilirsiniz.',
         icon: 'custom',
-      },{
+      },
+      {
         title: 'İlişkisel Dashboardlar Oluşturun',
         desc: 'Birbirinden bağımsız görünen verileri ilişkilendirerek anlamlı içgörüler sunan dashboardlar oluşturabilirsiniz.',
         icon: 'compare',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -338,19 +417,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Alarm', label: 'Çakışma Takibi' },
       { value: 'Kademeli', label: 'Yetkilendirme' },
     ],
-    features: [{
+    features: [
+      {
         title: 'İzin Talepleri ve Planlaması',
         desc: 'Kağıt formlardan kurtularak personel izin taleplerini ve izin planlamasını dijital olarak yönetebilirsiniz.',
         icon: 'approve',
-      },{
+      },
+      {
         title: 'Farklı İzin Tipleri',
         desc: 'Kullanıcı ihtiyaçlarına göre tanımlanmış izin tipleri ile ücretli, ücretsiz ve onay gerektiren tüm izin seçeneklerini sisteme uyarlayabilirsiniz.',
         icon: 'types',
-      },{
+      },
+      {
         title: 'Farklı Onay Mekanizmaları',
         desc: 'Her izin tipi için farklı onay mekanizmaları tanımlayabilir, çalışan izin takiplerini kurum yapınıza uygun hale getirebilirsiniz.',
         icon: 'balance',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -375,7 +458,7 @@ export const MODULE_OVERRIDES = {
       'Kademeli onay ve bildirim süreçleriyle kontrolü artırın',
     ],
   },
-  'yemekhane': {
+  yemekhane: {
     name: 'Yemekhane',
     tagline: 'Personel Yemek Hakkı Kontrolü',
     description:
@@ -385,19 +468,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Turnike', label: 'Geçiş Takibi' },
       { value: 'Anlık', label: 'Yemekhane Kontrolü' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Aylık Yemek Hakkı Tanımı',
         desc: 'Personelinize aylık bazda yemek hakkı tanımlayabilir, kişi bazlı kullanım limitlerini sistem üzerinden yönetebilirsiniz.',
         icon: 'card',
-      },{
+      },
+      {
         title: 'Yemekhane Turnike Takibi',
         desc: 'Personelin yemekhane turnikelerinden geçişlerini tanımlanan hak doğrultusunda takip edebilir, giriş hareketlerini kayıt altına alabilirsiniz.',
         icon: 'menu',
-      },{
+      },
+      {
         title: 'Hak Doğrultusunda Geçiş Kontrolü',
         desc: 'Tanımlı yemek hakkı olmayan ya da hakkını doldurmuş personelin geçişlerini kontrol altında tutabilir, kullanım kurallarını dijital olarak yönetebilirsiniz.',
         icon: 'order',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -432,19 +519,23 @@ export const MODULE_OVERRIDES = {
       { value: 'İhtar', label: 'Takip' },
       { value: 'Analiz', label: 'Kullanım' },
     ],
-    features: [{
+    features: [
+      {
         title: 'İhtar Kayıtları',
         desc: 'Verilen ihtarları sistem üzerinde düzenli şekilde kaydedebilir ve personel bazında geçmiş kayıtları takip edebilirsiniz.',
         icon: 'archive',
-      },{
+      },
+      {
         title: 'Savunma Kayıtları',
         desc: 'Alınan savunmaları dijital ortamda saklayabilir, ilgili personel kayıtlarıyla birlikte yönetebilirsiniz.',
         icon: 'esign',
-      },{
+      },
+      {
         title: 'Dijital Ortamda Güvenli Saklama',
         desc: 'İhtar ve savunma belgelerini fiziksel takibe ihtiyaç duymadan dijital ortamda düzenli biçimde saklayabilirsiniz.',
         icon: 'lock',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -469,7 +560,7 @@ export const MODULE_OVERRIDES = {
       'Merkezi kayıt yapısıyla süreç görünürlüğünü artırın',
     ],
   },
-  'puantaj': {
+  puantaj: {
     name: 'Puantaj',
     tagline: 'Puantaj Takip Yazılımı PDKS',
     description:
@@ -479,19 +570,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Vardiya', label: 'Esnek Takip' },
       { value: 'Mola', label: 'Kontrol Yönetimi' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Giriş-Çıkış ve Puantaj Takibi',
         desc: 'Çalışanların giriş-çıkış kontrollerini yaparak geç kalma, mesai ve erken çıkma gibi durumları puantaj sistemine yansıtabilirsiniz.',
         icon: 'auto',
-      },{
+      },
+      {
         title: 'Mobil Uygulama ile Veri Toplama',
         desc: 'AirX, personelden en az temas ile ve yüksek teknoloji kullanarak mobil uygulama üzerinden veri alımı sağlar. Böylece puantaj süreci daha otonom ilerler.',
         icon: 'overtime',
-      },{
+      },
+      {
         title: 'Dijital Vardiya Yönetimi',
         desc: 'Standart mesai saatleri dışında her personel için esnek çalışma saatleri tanımlayabilir, sabit ve değişken vardiyalarda sorunsuz puantaj takibi yapabilirsiniz.',
         icon: 'integration',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -501,7 +596,7 @@ export const MODULE_OVERRIDES = {
       {
         step: '02',
         title: 'Verileri Mobil Uygulama ile Toplayın',
-        desc: 'Personel hareketleri mobil uygulama üzerinden sisteme aktarılsın; giriş-çıkış ve mola kayıtları otomatik izlenmeye başlasın.',
+        desc: 'Personel hareketleri mobil uygulama üzerinden sisteme aktırılsın; giriş-çıkış ve mola kayıtları otomatik izlenmeye başlasın.',
       },
       {
         step: '03',
@@ -516,7 +611,7 @@ export const MODULE_OVERRIDES = {
       'Alan bazlı süre verileriyle performans değerlendirmesi yapın',
     ],
   },
-  'anket': {
+  anket: {
     name: 'Anket',
     tagline: 'Personelinize Anketler Yaparak İç Görüler Oluşturun',
     description:
@@ -526,19 +621,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Analiz', label: 'Sonuç Görünürlüğü' },
       { value: 'İçgörü', label: 'Veri Kullanımı' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Soruları Ankete Dönüştürün',
         desc: 'Personelinize sormak istediğiniz soruları kolayca ankete dönüştürebilir ve düzenli geri bildirim akışı oluşturabilirsiniz.',
         icon: 'create',
-      },{
+      },
+      {
         title: 'Sonuçları Analiz Edin',
         desc: 'Anketlerden çıkan sonuçları inceleyerek personel eğilimleri, beklentiler ve kurum içi durum hakkında daha net görünürlük elde edebilirsiniz.',
         icon: 'analytics',
-      },{
+      },
+      {
         title: 'İçgörü Oluşturun',
         desc: 'Toplanan yanıtları kullanarak kurumunuz için anlamlı içgörüler oluşturabilir, karar süreçlerini veriyle destekleyebilirsiniz.',
         icon: 'segment',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',
@@ -573,19 +672,23 @@ export const MODULE_OVERRIDES = {
       { value: 'Otomatik', label: 'Süreç Takibi' },
       { value: 'İşe Giriş + Çıkış', label: 'Hak Yönetimi' },
     ],
-    features: [{
+    features: [
+      {
         title: 'Görev Bazında Yan Hak Tanımı',
         desc: 'Her görev için hangi yan hakların verilmesi gerektiğini tanımlayabilir, pozisyona bağlı standart hak setleri oluşturabilirsiniz.',
         icon: 'define',
-      },{
+      },
+      {
         title: 'İşe Başlayan Personel için Görünürlük',
         desc: 'Yeni işe başlayan personelin görevine göre hangi yan hakların verilmesi gerektiğini sistem üzerinden görebilir, eksiksiz ilerleyebilirsiniz.',
         icon: 'assign',
-      },{
+      },
+      {
         title: 'Verilen Hakları İşaretleme',
         desc: 'Personele teslim edilen yan hakları işaretleyerek süreç takibini düzenli hale getirebilir, hangi hakların verildiğini kolayca kontrol edebilirsiniz.',
         icon: 'cost',
-      },],
+      },
+    ],
     how_it_works: [
       {
         step: '01',

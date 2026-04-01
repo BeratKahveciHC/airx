@@ -170,6 +170,7 @@ export default function Footer() {
           <motion.button
             whileHover={{ y: -2, boxShadow: '0 10px 32px rgba(121,172,220,0.25)' }}
             whileTap={{ scale: 0.97 }}
+            className="footer-cta-action"
             style={{
               display: 'flex', alignItems: 'center', gap: 8,
               background: '#fff',
@@ -301,7 +302,7 @@ export default function Footer() {
             alignItems: 'center',
             flexWrap: 'wrap',
             gap: 12,
-          }}>
+          }} className="footer-bottom">
             <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>
               © 2025 AirX Yazılım A.Ş. Tüm hakları saklıdır.
             </span>
@@ -322,9 +323,14 @@ export default function Footer() {
         @media (max-width: 900px) {
           .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
           .footer-cta { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+          .footer-bottom { flex-direction: column !important; align-items: flex-start !important; }
         }
         @media (max-width: 480px) {
           .footer-grid { grid-template-columns: 1fr !important; }
+          .footer-cta-action {
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
     </footer>

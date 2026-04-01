@@ -102,7 +102,7 @@ export default function WhyAirX() {
           gridTemplateColumns: 'repeat(3, 1fr)',
           gridTemplateRows: 'auto auto auto',
           gap: 14,
-        }}>
+        }} className="why-grid">
 
           {/* Kart 1 — BÜYÜK KOYU (2 col) — Biyometrik Veri Yok */}
           <motion.div
@@ -119,6 +119,7 @@ export default function WhyAirX() {
               position: 'relative', overflow: 'hidden',
               minHeight: 210,
             }}
+            className="why-card why-card-wide"
           >
             {/* Dekoratif daireler */}
             <div style={{ position: 'absolute', right: -40, top: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(121,172,220,0.08)', pointerEvents: 'none' }} />
@@ -336,6 +337,7 @@ export default function WhyAirX() {
               display: 'flex', alignItems: 'center', gap: 48,
               position: 'relative', overflow: 'hidden',
             }}
+            className="why-card why-card-full"
           >
             {/* Watermark "14" */}
             <div style={{
@@ -345,7 +347,7 @@ export default function WhyAirX() {
               color: 'rgba(0,60,117,0.05)',
               lineHeight: 1, pointerEvents: 'none',
               userSelect: 'none',
-            }}>14</div>
+            }} className="why-card-watermark">14</div>
 
             <div style={{ flexShrink: 0 }}>
               <div style={{
@@ -386,26 +388,21 @@ export default function WhyAirX() {
 
       <style>{`
         @media (max-width: 768px) {
-          #neden [style*="grid-column: span 2"],
-          #neden [style*="span 2"],
-          #neden [style*="span 3"] {
+          .why-grid { grid-template-columns: 1fr !important; }
+          .why-card-wide,
+          .why-card-full {
             grid-column: span 1 !important;
-          }
-          #neden > div > div:last-child {
             flex-direction: column !important;
+            align-items: flex-start !important;
             gap: 20px !important;
+            padding: 28px 24px !important;
           }
-          #neden [style*="repeat(3, 1fr)"] {
-            grid-template-columns: 1fr !important;
-          }
+          .why-card-watermark { display: none !important; }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
-          #neden [style*="repeat(3, 1fr)"] {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          #neden [style*="span 3"] {
-            grid-column: span 2 !important;
-          }
+          .why-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .why-card-wide,
+          .why-card-full { grid-column: span 2 !important; }
         }
       `}</style>
     </section>

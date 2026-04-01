@@ -137,6 +137,7 @@ export default function Security() {
               position: 'relative',
               overflow: 'hidden',
             }}
+            className="security-card-primary"
           >
             {/* Dekoratif daireler */}
             <div style={{ position: 'absolute', right: -50, top: -50, width: 200, height: 200, borderRadius: '50%', background: 'rgba(121,172,220,0.08)', pointerEvents: 'none' }} />
@@ -191,7 +192,7 @@ export default function Security() {
               borderTop: '1px solid rgba(255,255,255,0.10)',
               paddingTop: 20,
               gap: 0,
-            }}>
+            }} className="security-trust-stats">
               {TRUST_STATS.map((s, i) => (
                 <div key={s.label} style={{
                   flex: 1, textAlign: 'center',
@@ -314,6 +315,23 @@ export default function Security() {
         @media (max-width: 560px) {
           .security-grid {
             grid-template-columns: 1fr !important;
+          }
+          .security-card-primary {
+            padding: 28px 22px !important;
+          }
+          .security-trust-stats {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+          }
+          .security-trust-stats > div {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+            padding: 0 0 12px !important;
+          }
+          .security-trust-stats > div:last-child {
+            border-bottom: none !important;
+            padding-bottom: 0 !important;
           }
         }
       `}</style>

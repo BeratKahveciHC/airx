@@ -108,7 +108,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
               paddingBottom: 22,
               margin: 0,
               paddingRight: 48,
-            }}>
+            }} className="faq-answer">
               {item.a}
             </p>
           </motion.div>
@@ -247,7 +247,9 @@ export default function FAQ() {
                 Özel durumunuzu ekibimizle görüşün, size en uygun çözümü birlikte bulalım.
               </p>
 
-              <button style={{
+              <button
+                onClick={() => { window.location.href = '/iletisim#demo-form' }}
+                style={{
                 display: 'flex', alignItems: 'center', gap: 8,
                 background: '#fff',
                 color: '#003C75',
@@ -258,7 +260,7 @@ export default function FAQ() {
                 padding: '12px 22px',
                 cursor: 'pointer',
                 fontFamily: 'inherit',
-              }}>
+              }} className="faq-help-button">
                 Demo Talep Et
                 <ArrowIcon />
               </button>
@@ -318,6 +320,13 @@ export default function FAQ() {
             position: static !important;
             flex: none !important;
             width: 100% !important;
+          }
+          .faq-answer {
+            padding-right: 0 !important;
+          }
+          .faq-help-button {
+            width: 100% !important;
+            justify-content: center !important;
           }
         }
       `}</style>
