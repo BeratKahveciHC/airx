@@ -160,58 +160,14 @@ function PhoneMockup() {
           <div style={{ position: 'absolute', left: -10, top: 164, width: 3.5, height: 26, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
           <div style={{ position: 'absolute', right: -10, top: 118, width: 3.5, height: 50, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
 
-          <div
-            style={{
-              position: 'absolute',
-              inset: 2,
-              borderRadius: 46,
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
-              background: '#f8fbff',
-            }}
-          >
-            <div
-              style={{
-                height: 48,
-                background: 'linear-gradient(180deg, #b8d3ec 0%, #9fc0e0 100%)',
-                display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'space-between',
-                padding: '0 22px 10px',
-                flexShrink: 0,
-                position: 'relative',
-              }}
-            >
-              <span style={{ color: '#002850', fontSize: 11, fontWeight: 700, letterSpacing: '0.02em' }}>09:41</span>
-
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 8,
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: 90,
-                  height: 26,
-                  borderRadius: 13,
-                  background: '#003C75',
-                  zIndex: 5,
-                }}
-              />
-
-              <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+          <div style={{ position: 'absolute', inset: 2, borderRadius: 46, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
+            {/* status bar */}
+            <div style={{ height: 48, background: 'linear-gradient(180deg, #b8d3ec 0%, #9fc0e0 100%)', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '0 22px 10px', flexShrink: 0, position: 'relative' }}>
+              <span style={{ color: '#002850', fontSize: 11, fontWeight: 700 }}>09:41</span>
+              <div style={{ position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)', width: 90, height: 26, borderRadius: 13, background: '#003C75', zIndex: 5 }} />
+              <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
                 <div style={{ display: 'flex', gap: 1.5, alignItems: 'flex-end' }}>
-                  {[4, 6, 8, 10].map((h, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        width: 2.5,
-                        height: h,
-                        borderRadius: 1,
-                        background: i < 3 ? '#334155' : 'rgba(51,65,85,0.25)',
-                      }}
-                    />
-                  ))}
+                  {[4,6,8,10].map((h,i) => <div key={i} style={{ width: 2.5, height: h, borderRadius: 1, background: i < 3 ? '#334155' : 'rgba(51,65,85,0.25)' }} />)}
                 </div>
                 <div style={{ width: 18, height: 9, borderRadius: 2, border: '1.5px solid rgba(51,65,85,0.35)', position: 'relative' }}>
                   <div style={{ position: 'absolute', left: 1.5, top: 1.5, width: '65%', bottom: 1.5, background: 'rgba(51,65,85,0.65)', borderRadius: 0.5 }} />
@@ -219,178 +175,97 @@ function PhoneMockup() {
               </div>
             </div>
 
-            <div
-              style={{
-                background: 'linear-gradient(180deg, #daeaf8 0%, #c5dcf2 100%)',
-                padding: '10px 18px 18px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexShrink: 0,
-              }}
-            >
-              <div>
-                <div style={{ fontSize: 11, color: '#5b7da3', fontWeight: 500, letterSpacing: '0.03em' }}>Hos geldin</div>
-                <div style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em' }}>Ahmet Yilmaz</div>
-              </div>
-              <div
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #79ACDC 0%, #4e86bb 100%)',
-                  border: '2px solid rgba(121,172,220,0.18)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: 13,
-                  fontWeight: 800,
-                }}
-              >
-                A
+            {/* header */}
+            <div style={{ background: '#fff', padding: '12px 16px 10px', borderBottom: '1px solid #e8f0f9', flexShrink: 0 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div>
+                  <div style={{ fontSize: 11, color: '#64748b' }}>Günaydın,</div>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em' }}>Berat Kaan SEVEN</div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: 10, color: '#64748b' }}>Toplam Çalışılan Süre</div>
+                  <div style={{ fontSize: 16, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>03s 12dk</div>
+                </div>
               </div>
             </div>
 
-            <div style={{ flex: 1, background: '#f8fbff', padding: '11px 11px 0', display: 'flex', flexDirection: 'column', gap: 8, overflow: 'hidden' }}>
-              <div
-                style={{
-                  background: 'linear-gradient(135deg, #ffffff 0%, #edf5fd 100%)',
-                  borderRadius: 16,
-                  padding: '12px 14px',
-                  border: '1px solid rgba(121,172,220,0.22)',
-                  boxShadow: '0 8px 20px rgba(0,60,117,0.08)',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 9 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 6px rgba(34,197,94,0.45)' }} />
-                    <span style={{ fontSize: 11, fontWeight: 700, color: '#16a34a' }}>Cevrimici</span>
+            {/* durum */}
+            <div style={{ background: '#fff', margin: '10px 10px 0', borderRadius: 12, border: '1px solid #e2e8f0', padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
+              <div>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#334155', marginBottom: 5 }}>Mevcut Durum</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
+                  <span style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Çalışıyor</span>
+                </div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: 10, color: '#64748b', marginBottom: 5 }}>Son Hareket: <strong style={{ color: '#0f172a' }}>08.02</strong></div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5, justifyContent: 'flex-end' }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="5" y="5" width="3" height="3" fill="#003C75" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="#003C75" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="#003C75" stroke="none"/></svg>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#003C75' }}>QR ile Giriş</span>
+                </div>
+              </div>
+            </div>
+
+            {/* butonlar */}
+            <div style={{ display: 'flex', gap: 8, padding: '10px 10px 0', flexShrink: 0 }}>
+              <div style={{ flex: 1, height: 46, background: '#22c55e', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: '#fff', boxShadow: '0 3px 12px rgba(34,197,94,0.35)' }}>Giriş Yap</div>
+              <div style={{ flex: 1, height: 46, background: '#ef4444', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 800, color: '#fff', boxShadow: '0 3px 12px rgba(239,68,68,0.35)' }}>Çıkış Yap</div>
+            </div>
+            <div style={{ margin: '8px 10px 0', height: 42, background: '#f59e0b', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, fontSize: 13, fontWeight: 800, color: '#fff', boxShadow: '0 3px 12px rgba(245,158,11,0.35)', flexShrink: 0 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Mola Başlat
+            </div>
+
+            {/* vardiya */}
+            <div style={{ background: '#fff', margin: '10px 10px 0', borderRadius: 12, border: '1px solid #e2e8f0', padding: '10px 12px', flexShrink: 0 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#0f172a' }}>Bugünkü Vardiya</span>
+                <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 20, padding: '2px 8px', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <div style={{ width: 10, height: 10, borderRadius: 5, background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 5, height: 5, borderRadius: 3, background: '#fff' }} /></div>
+                  <span style={{ fontSize: 9, fontWeight: 700, color: '#c2410c' }}>Ekstra</span>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <div style={{ flex: 1, background: '#f8fafc', borderRadius: 8, padding: '7px 10px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 9, color: '#64748b', marginBottom: 2 }}>Başlangıç</div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>08:00</div>
+                </div>
+                <div style={{ flex: 1, background: '#f8fafc', borderRadius: 8, padding: '7px 10px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 9, color: '#64748b', marginBottom: 2 }}>Bitiş</div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: '#0f172a' }}>19:00</div>
+                </div>
+              </div>
+            </div>
+
+            {/* görevlerim */}
+            <div style={{ margin: '10px 10px 0', background: '#fff', borderRadius: 12, border: '1px solid #e2e8f0', padding: '10px 12px', flex: 1, overflow: 'hidden' }}>
+              <div style={{ fontSize: 12, fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>Görevlerim</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {[
+                  { label: 'Reyonlar düzenlenicek', color: '#ef4444' },
+                  { label: 'Market Arabaları Sıraya Dizilecek', color: '#22c55e' },
+                  { label: 'Z Raporu Oluşturulacak', color: '#22c55e' },
+                  { label: 'Aylık Tahsilat Raporu Hazırlanacak', color: '#ef4444' },
+                  { label: 'Sunumlar hazırlanacak', color: '#eab308' },
+                ].map((g, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: g.color, flexShrink: 0 }} />
+                    <span style={{ fontSize: 11, color: '#334155' }}>{g.label}</span>
                   </div>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: '#79ACDC',
-                      background: 'rgba(121,172,220,0.12)',
-                      padding: '3px 8px',
-                      borderRadius: 6,
-                      border: '1px solid rgba(121,172,220,0.18)',
-                    }}
-                  >
-                    08:30
-                  </span>
-                </div>
-                <div style={{ fontSize: 11, color: '#64748b', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  Merkez Ofis · Istanbul
-                </div>
-                <button
-                  style={{
-                    width: '100%',
-                    background: 'linear-gradient(135deg, #003C75 0%, #005cb5 100%)',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 10,
-                    padding: '9px 0',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 16px rgba(0,60,117,0.25)',
-                    letterSpacing: '0.02em',
-                  }}
-                >
-                  Giris Yap
-                </button>
-              </div>
-
-              <div>
-                <div style={{ fontSize: 9.5, fontWeight: 700, color: 'rgba(121,172,220,0.7)', marginBottom: 7, textTransform: 'uppercase', letterSpacing: '0.09em' }}>
-                  Hizli Islemler
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
-                  {[
-                    {
-                      label: 'Izin',
-                      bg: 'rgba(14,165,233,0.1)',
-                      border: 'rgba(14,165,233,0.18)',
-                      color: '#38bdf8',
-                      svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /><path d="m9 16 2 2 4-4" /></svg>,
-                    },
-                    {
-                      label: 'Gorevler',
-                      bg: 'rgba(34,197,94,0.1)',
-                      border: 'rgba(34,197,94,0.18)',
-                      color: '#4ade80',
-                      svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>,
-                    },
-                    {
-                      label: 'Vardiya',
-                      bg: 'rgba(168,85,247,0.1)',
-                      border: 'rgba(168,85,247,0.18)',
-                      color: '#c084fc',
-                      svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c084fc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg>,
-                    },
-                    {
-                      label: 'Raporlar',
-                      bg: 'rgba(251,191,36,0.1)',
-                      border: 'rgba(251,191,36,0.18)',
-                      color: '#fbbf24',
-                      svg: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /><line x1="2" y1="20" x2="22" y2="20" /></svg>,
-                    },
-                  ].map(action => (
-                    <div
-                      key={action.label}
-                      style={{
-                        background: action.bg,
-                        border: `1px solid ${action.border}`,
-                        borderRadius: 12,
-                        padding: '10px 8px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: 5,
-                      }}
-                    >
-                      {action.svg}
-                      <span style={{ fontSize: 10, color: action.color, fontWeight: 700 }}>{action.label}</span>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
 
-            <div
-              style={{
-                height: 52,
-                background: '#c8ddf0',
-                borderTop: '1px solid rgba(0,60,117,0.18)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-around',
-                paddingBottom: 4,
-                flexShrink: 0,
-              }}
-            >
+            {/* bottom nav */}
+            <div style={{ height: 52, background: '#c8ddf0', borderTop: '1px solid rgba(0,60,117,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'space-around', paddingBottom: 4, flexShrink: 0 }}>
               {[
-                { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>, active: true },
-                { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>, active: false },
-                { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>, active: false },
-                { svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>, active: false },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  style={{
-                    color: item.active ? '#003C75' : 'rgba(0,60,117,0.35)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: 3,
-                  }}
-                >
+                { label: 'Anasayfa', active: true, svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+                { label: 'Talepler', active: false, svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
+                { label: 'Gelen Kutusu', active: false, svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+                { label: 'Profil', active: false, svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+              ].map((item) => (
+                <div key={item.label} style={{ color: item.active ? '#003C75' : 'rgba(0,60,117,0.35)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
                   {item.svg}
                   {item.active && <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#003C75' }} />}
                 </div>

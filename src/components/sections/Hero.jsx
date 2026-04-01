@@ -57,7 +57,7 @@ export default function Hero() {
           padding: '72px 40px 80px',
           display: 'flex',
           alignItems: 'center',
-          gap: 80,
+          gap: 120,
         }} className="hero-split">
 
           {/* ── SOL: Metin ── */}
@@ -217,58 +217,143 @@ export default function Hero() {
             style={{ flex: '1.85 1 0', minWidth: 0, position: 'relative', marginRight: '-40px' }}
             className="hero-mockup-col"
           >
-            {/* Bildirim kartı */}
+            {/* ── Telefon Mockup (sol alt köşe, absolute) ── */}
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75, duration: 0.4 }}
-              className="hero-alert-card"
+              transition={{ duration: 0.65, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="hero-phone-mockup"
               style={{
-                position: 'absolute', top: -18, right: 12, zIndex: 10,
-                background: '#fff',
-                border: '1px solid #e2e8f0',
-                borderRadius: 8,
-                padding: '10px 16px',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.10)',
-                display: 'flex', alignItems: 'center', gap: 10,
-                whiteSpace: 'nowrap',
+                position: 'absolute',
+                bottom: -24,
+                left: -72,
+                zIndex: 10,
               }}
             >
               <div style={{
-                width: 30, height: 30, borderRadius: 8,
-                background: '#f0fdf4',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: 160,
+                height: 340,
+                borderRadius: 32,
+                background: 'linear-gradient(160deg, #e8f2fc 0%, #c2d9f0 100%)',
+                border: '5px solid #8fb8dc',
+                boxShadow: '0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 1px rgba(255,255,255,0.4), 0 32px 64px rgba(0,30,80,0.30), 0 8px 20px rgba(0,60,117,0.18)',
+                position: 'relative',
+                overflow: 'hidden',
               }}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-              </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#111827' }}>İzin Onaylandı</div>
-                <div style={{ fontSize: 11, color: '#9ca3af' }}>Ahmet Yılmaz · Az önce</div>
-              </div>
-            </motion.div>
+                {/* yan butonlar */}
+                <div style={{ position: 'absolute', left: -6, top: 54, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                <div style={{ position: 'absolute', left: -6, top: 76, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                <div style={{ position: 'absolute', right: -6, top: 68, width: 3, height: 28, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
 
-            {/* Aktif personel kartı */}
-            <motion.div
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.9, duration: 0.4 }}
-              className="hero-active-card"
-              style={{
-                position: 'absolute', bottom: 32, left: -16, zIndex: 10,
-                background: '#003C75',
-                borderRadius: 8,
-                padding: '10px 16px',
-                boxShadow: '0 4px 20px rgba(0,60,117,0.28)',
-                display: 'flex', alignItems: 'center', gap: 12,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e' }} />
-              <div>
-                <div style={{ fontSize: 11, color: 'rgba(219,238,255,0.7)', fontWeight: 500 }}>Aktif Personel</div>
-                <div style={{ fontSize: 18, fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.2 }}>1.284</div>
+                <div style={{ borderRadius: 27, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc', height: '100%' }}>
+                  {/* status bar */}
+                  <div style={{ height: 24, background: '#b8d3ec', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
+                    <span style={{ fontSize: 7.5, fontWeight: 700, color: '#002850' }}>09:41</span>
+                    <div style={{ width: 40, height: 11, borderRadius: 6, background: '#003C75' }} />
+                    <div style={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
+                      {[3,5,7,9].map((h,i) => <div key={i} style={{ width: 1.5, height: h, borderRadius: 1, background: i < 3 ? '#002850' : 'rgba(0,40,80,0.3)' }} />)}
+                    </div>
+                  </div>
+
+                  {/* header */}
+                  <div style={{ background: '#fff', padding: '8px 10px 6px', borderBottom: '1px solid #e8f0f9' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 6 }}>
+                      <div>
+                        <div style={{ fontSize: 7, color: '#64748b' }}>Günaydın,</div>
+                        <div style={{ fontSize: 9, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.01em', lineHeight: 1.2 }}>Berat Kaan SEVEN</div>
+                      </div>
+                      <div style={{ textAlign: 'right' }}>
+                        <div style={{ fontSize: 6.5, color: '#64748b' }}>Toplam Çalışılan Süre</div>
+                        <div style={{ fontSize: 11, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>03s 12dk</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* durum */}
+                  <div style={{ background: '#fff', margin: '6px 6px 0', borderRadius: 8, border: '1px solid #e2e8f0', padding: '6px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ fontSize: 6.5, fontWeight: 700, color: '#334155', marginBottom: 3 }}>Mevcut Durum</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e' }} />
+                        <span style={{ fontSize: 8, fontWeight: 700, color: '#0f172a' }}>Çalışıyor</span>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: 6, color: '#64748b', marginBottom: 3 }}>Son Hareket: <strong style={{ color: '#0f172a' }}>08.02</strong></div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'flex-end' }}>
+                        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="5" y="5" width="3" height="3" fill="#003C75" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="#003C75" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="#003C75" stroke="none"/></svg>
+                        <span style={{ fontSize: 7, fontWeight: 700, color: '#003C75' }}>QR ile Giriş</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* butonlar */}
+                  <div style={{ display: 'flex', gap: 5, padding: '6px 6px 0' }}>
+                    <div style={{ flex: 1, height: 30, background: '#22c55e', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8.5, fontWeight: 800, color: '#fff', boxShadow: '0 2px 8px rgba(34,197,94,0.35)' }}>Giriş Yap</div>
+                    <div style={{ flex: 1, height: 30, background: '#ef4444', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8.5, fontWeight: 800, color: '#fff', boxShadow: '0 2px 8px rgba(239,68,68,0.35)' }}>Çıkış Yap</div>
+                  </div>
+                  <div style={{ margin: '5px 6px 0', height: 28, background: '#f59e0b', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, fontSize: 8, fontWeight: 800, color: '#fff', boxShadow: '0 2px 8px rgba(245,158,11,0.35)' }}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Mola Başlat
+                  </div>
+
+                  {/* vardiya */}
+                  <div style={{ background: '#fff', margin: '6px 6px 0', borderRadius: 8, border: '1px solid #e2e8f0', padding: '6px 8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
+                      <span style={{ fontSize: 7.5, fontWeight: 800, color: '#0f172a' }}>Bugünkü Vardiya</span>
+                      <div style={{ background: '#fff7ed', border: '1px solid #fed7aa', borderRadius: 20, padding: '1px 6px', display: 'flex', alignItems: 'center', gap: 3 }}>
+                        <div style={{ width: 8, height: 8, borderRadius: 4, background: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <div style={{ width: 4, height: 4, borderRadius: 2, background: '#fff' }} />
+                        </div>
+                        <span style={{ fontSize: 6, fontWeight: 700, color: '#c2410c' }}>Ekstra</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: 5 }}>
+                      <div style={{ flex: 1, background: '#f8fafc', borderRadius: 6, padding: '4px 6px', textAlign: 'center' }}>
+                        <div style={{ fontSize: 6, color: '#64748b', marginBottom: 1 }}>Başlangıç</div>
+                        <div style={{ fontSize: 9, fontWeight: 800, color: '#0f172a' }}>08:00</div>
+                      </div>
+                      <div style={{ flex: 1, background: '#f8fafc', borderRadius: 6, padding: '4px 6px', textAlign: 'center' }}>
+                        <div style={{ fontSize: 6, color: '#64748b', marginBottom: 1 }}>Bitiş</div>
+                        <div style={{ fontSize: 9, fontWeight: 800, color: '#0f172a' }}>19:00</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* görevlerim */}
+                  <div style={{ margin: '6px 6px 6px', background: '#fff', borderRadius: 8, border: '1px solid #e2e8f0', padding: '6px 8px' }}>
+                    <div style={{ fontSize: 7.5, fontWeight: 800, color: '#0f172a', marginBottom: 5 }}>Görevlerim</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      {[
+                        { label: 'Reyonlar düzenlenicek', color: '#ef4444' },
+                        { label: 'Market Arabaları Sıraya Dizilecek', color: '#22c55e' },
+                        { label: 'Z Raporu Oluşturulacak', color: '#22c55e' },
+                        { label: 'Aylık Tahsilat Raporu Hazırlanacak', color: '#ef4444' },
+                        { label: 'Sunumlar hazırlanacak', color: '#eab308' },
+                      ].map((g, i) => (
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                          <div style={{ width: 6, height: 6, borderRadius: '50%', background: g.color, flexShrink: 0 }} />
+                          <span style={{ fontSize: 6.5, color: '#334155', lineHeight: 1.3 }}>{g.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* bottom nav */}
+                  <div style={{ background: '#fff', borderTop: '1px solid #e8f0f9', display: 'flex', justifyContent: 'space-around', padding: '5px 0 7px' }}>
+                    {[
+                      { label: 'Anasayfa', active: true, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+                      { label: 'Talepler', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
+                      { label: 'Gelen Kutusu', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+                      { label: 'Profil', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+                    ].map(item => (
+                      <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, color: item.active ? '#003C75' : 'rgba(0,60,117,0.3)' }}>
+                        {item.icon}
+                        <span style={{ fontSize: 5.5, fontWeight: item.active ? 700 : 500 }}>{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
 
@@ -428,6 +513,7 @@ export default function Hero() {
         @media (max-width: 960px) {
           .hero-split { flex-direction: column !important; gap: 48px !important; padding: 48px 24px 56px !important; }
           .hero-mockup-col { width: 100% !important; max-width: 720px !important; margin-right: 0 !important; }
+          .hero-phone-mockup { display: none !important; }
         }
         @media (max-width: 640px) {
           .hero-split { padding: 36px 16px 44px !important; }

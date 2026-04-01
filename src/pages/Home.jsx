@@ -1,4 +1,5 @@
 import Hero from '../components/sections/Hero'
+import References from '../components/sections/References'
 import Modules from '../components/sections/Modules'
 import WhyAirX from '../components/sections/WhyAirX'
 import HowItWorks from '../components/sections/HowItWorks'
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <References />
       <Modules />
       <WhyAirX />
       <HowItWorks />
