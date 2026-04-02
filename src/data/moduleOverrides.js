@@ -3,7 +3,7 @@ export const MODULE_OVERRIDES = {
     name: 'PDKS',
     tagline: 'PDKS - Personel Devam Kontrol Sistemi',
     description:
-      'Airx PDKS, entegre mobil yazılım, web yönetim paneli ve üstün teknolojiye sahip donanımlardan oluşur. Hem personel giriş-çıkışlarını hem de belli lokasyonda geçirilen süreleri takip edebilirsiniz. Üstelik personelinizin sadece mobil uygulamamızı yüklemesi yeterlidir.',
+      'AiRX PDKS, entegre mobil yazılım, web yönetim paneli ve üstün teknolojiye sahip donanımlardan oluşur. Hem personel giriş-çıkışlarını hem de belli lokasyonda geçirilen süreleri takip edebilirsiniz. Üstelik personelinizin sadece mobil uygulamamızı yüklemesi yeterlidir.',
     hero_stats: [
       { value: '5', label: 'Giriş-Çıkış Yöntemi' },
       { value: 'Mobil', label: 'Uygulama Desteği' },
@@ -207,7 +207,7 @@ export const MODULE_OVERRIDES = {
     name: 'Özlük Dosyası',
     tagline: 'Dijital Özlük Dosyası Modülü',
     description:
-      'AirX ile özlük dosyalarını dijital ortamda güncel ve eksiksiz olarak güvenle saklayın. İş sözleşmesi, işe alım ve izin evrakları, finansal belgeler, çalışma süresince alınan evraklar, görevlendirme ve mesai formları gibi tüm resmi belge ve kayıtları online sistemde saklayabilirsiniz.',
+      'AiRX ile özlük dosyalarını dijital ortamda güncel ve eksiksiz olarak güvenle saklayın. İş sözleşmesi, işe alım ve izin evrakları, finansal belgeler, çalışma süresince alınan evraklar, görevlendirme ve mesai formları gibi tüm resmi belge ve kayıtları online sistemde saklayabilirsiniz.',
     hero_stats: [
       { value: 'Dijital', label: 'Özlük Dosyası' },
       { value: 'KVKK', label: 'Uyumlu Saklama' },
@@ -411,7 +411,7 @@ export const MODULE_OVERRIDES = {
     name: 'İzin Yönetimi',
     tagline: 'Onay Mekanizmalı İzin Takibi',
     description:
-      'AirX ile personel izinlerini onay mekanizmaları ile yönetin. İzin talepleri ve planlaması sırasında kağıt formlardan kurtulun, izin çakışmalarını engelleyin ve onay mekanizmalarını çalıştırın.',
+      'AiRX ile personel izinlerini onay mekanizmaları ile yönetin. İzin talepleri ve planlaması sırasında kağıt formlardan kurtulun, izin çakışmalarını engelleyin ve onay mekanizmalarını çalıştırın.',
     hero_stats: [
       { value: 'Onay', label: 'Mekanizma' },
       { value: 'Alarm', label: 'Çakışma Takibi' },
@@ -564,7 +564,7 @@ export const MODULE_OVERRIDES = {
     name: 'Puantaj',
     tagline: 'Puantaj Takip Yazılımı PDKS',
     description:
-      'AirX puantaj sistemiyle çalışanların giriş-çıkış kontrollerini yaparak geç kalma, mesai, erken çıkma gibi durumlarını raporlayabilirsiniz. İzin, mesai ve esnek vardiyalarını takip edebilir; mobil uygulama üzerinden minimum temasla veri toplayarak süreci büyük ölçüde otonom hale getirebilirsiniz.',
+      'AiRX puantaj sistemiyle çalışanların giriş-çıkış kontrollerini yaparak geç kalma, mesai, erken çıkma gibi durumlarını raporlayabilirsiniz. İzin, mesai ve esnek vardiyalarını takip edebilir; mobil uygulama üzerinden minimum temasla veri toplayarak süreci büyük ölçüde otonom hale getirebilirsiniz.',
     hero_stats: [
       { value: 'PDKS', label: 'Puantaj Altyapısı' },
       { value: 'Vardiya', label: 'Esnek Takip' },
@@ -578,7 +578,7 @@ export const MODULE_OVERRIDES = {
       },
       {
         title: 'Mobil Uygulama ile Veri Toplama',
-        desc: 'AirX, personelden en az temas ile ve yüksek teknoloji kullanarak mobil uygulama üzerinden veri alımı sağlar. Böylece puantaj süreci daha otonom ilerler.',
+        desc: 'AiRX, personelden en az temas ile ve yüksek teknoloji kullanarak mobil uygulama üzerinden veri alımı sağlar. Böylece puantaj süreci daha otonom ilerler.',
         icon: 'overtime',
       },
       {

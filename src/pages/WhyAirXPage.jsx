@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 /* ── CountUp ── */
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
@@ -100,75 +101,38 @@ const GlobeIcon = ({ size = 32, color = '#fff' }) => (
   </svg>
 )
 
-/* ── Karşılaştırma Verileri ── */
-const COMPARE_ROWS = [
-  { feature: 'Biyometrik veri gerektirmez', airx: true, others: false, note: 'KVKK tam uyum' },
-  { feature: 'Türkçe yerel destek ekibi', airx: true, others: false, note: 'Türkiye\'de yerleşik' },
-  { feature: 'Donanım satın almadan kurulum', airx: true, others: false, note: '1 günde hazır' },
-  { feature: '14 modül tek platformda', airx: true, others: false, note: 'Tümü dahil' },
-  { feature: 'Mobil QR kod ile yoklama', airx: true, others: false, note: 'iOS & Android' },
-  { feature: 'Gerçek zamanlı analitik', airx: true, others: true, note: '' },
-  { feature: 'Özelleştirilebilir iş akışları', airx: true, others: false, note: '' },
-  { feature: 'Yemekhane & fiziksel erişim entegrasyonu', airx: true, others: false, note: '' },
-  { feature: 'SaaS — ekstra lisans maliyeti yok', airx: true, others: false, note: '' },
-]
-
-/* ── Öne Çıkan Özellik Kartları ── */
-const PILLARS = [
-  {
-    icon: <ShieldIcon />,
-    label: 'Gizlilik Önce',
-    title: 'Biyometrik Veri Yok, Tam KVKK Uyumu',
-    body: 'Parmak izi, yüz taraması veya retina verisi sisteme hiç girmez. Mobil QR kod her şeyi halleder; çalışanlarınızın mahremiyeti korunur.',
-    accent: '#003C75',
-  },
-  {
-    icon: <ZapIcon />,
-    label: 'Hızlı Başlangıç',
-    title: '24 Saat İçinde Canlıda',
-    body: 'Ekstra donanım sipariş etmenize gerek yok. Sisteminizi bir iş günü içinde kurun, aynı gün kullanmaya başlayın. Diğer çözümler haftalarca sürer.',
-    accent: '#1d4ed8',
-  },
-  {
-    icon: <LayersIcon />,
-    label: 'Her Şey Dahil',
-    title: '14 Modül, Tek Abonelik',
-    body: 'PDKS\'ten yemekhanesine, izin yönetiminden iş zekasına — ayrı lisanslar için ayrı bütçe harcamadan tüm İK süreçlerinizi tek platformda yönetin.',
-    accent: '#7c3aed',
-  },
-  {
-    icon: <HeadphonesIcon />,
-    label: 'Gerçek Destek',
-    title: 'Türkçe, Yerli, Hızlı',
-    body: 'Yabancı destek portallarında kaybolmak yok. Türkçe konuşan, Türkiye\'de yerleşik destek ekibimiz anında yanınızda.',
-    accent: '#0d9488',
-  },
-  {
-    icon: <TrendingUpIcon />,
-    label: 'Büyüyen Yapı',
-    title: '10\'dan 10.000\'e Kadar',
-    body: 'Küçük işletmeden büyük kuruma aynı platform, aynı deneyim. Ekibiniz büyüdükçe AirX de büyür — yeniden kurulum gerekmez.',
-    accent: '#dc2626',
-  },
-  {
-    icon: <GlobeIcon />,
-    label: 'Yerel Uzmanlık',
-    title: 'Türkiye\'ye Özgün Tasarım',
-    body: 'SGK, KVKK, yerel mevzuat — hepsi baştan düşünülmüş. Yabancı yazılımları yerele uyarlamakla zaman kaybetmezsiniz.',
-    accent: '#ea7c1f',
-  },
-]
-
-const STATS = [
-  { target: 150, suffix: '+', label: 'Aktif Kurum', sub: 'Türkiye genelinde' },
-  { target: 15, suffix: 'K+', label: 'Kullanıcı', sub: 'Aktif çalışan' },
-  { target: 14, suffix: '', label: 'Modül', sub: 'Tek platformda' },
-  { target: 99, prefix: '%', label: 'Uptime', sub: 'SLA garantisi' },
-]
-
 /* ── Sayfa ── */
-export default function WhyAirXPage() {
+export default function WhyAiRXPage() {
+  const { t } = useTranslation()
   const [hoveredRow, setHoveredRow] = useState(null)
+
+  const COMPARE_ROWS = [
+    { feature: t('whyPage.row1Feature'), airx: true, others: false, note: t('whyPage.row1Note') },
+    { feature: t('whyPage.row2Feature'), airx: true, others: false, note: t('whyPage.row2Note') },
+    { feature: t('whyPage.row3Feature'), airx: true, others: false, note: t('whyPage.row3Note') },
+    { feature: t('whyPage.row4Feature'), airx: true, others: false, note: t('whyPage.row4Note') },
+    { feature: t('whyPage.row5Feature'), airx: true, others: false, note: t('whyPage.row5Note') },
+    { feature: t('whyPage.row6Feature'), airx: true, others: true, note: t('whyPage.row6Note') },
+    { feature: t('whyPage.row7Feature'), airx: true, others: false, note: t('whyPage.row7Note') },
+    { feature: t('whyPage.row8Feature'), airx: true, others: false, note: t('whyPage.row8Note') },
+    { feature: t('whyPage.row9Feature'), airx: true, others: false, note: t('whyPage.row9Note') },
+  ]
+
+  const PILLARS = [
+    { icon: <ShieldIcon />, label: t('whyPage.pillar1Label'), title: t('whyPage.pillar1Title'), body: t('whyPage.pillar1Body'), accent: '#003C75' },
+    { icon: <ZapIcon />, label: t('whyPage.pillar2Label'), title: t('whyPage.pillar2Title'), body: t('whyPage.pillar2Body'), accent: '#1d4ed8' },
+    { icon: <LayersIcon />, label: t('whyPage.pillar3Label'), title: t('whyPage.pillar3Title'), body: t('whyPage.pillar3Body'), accent: '#7c3aed' },
+    { icon: <HeadphonesIcon />, label: t('whyPage.pillar4Label'), title: t('whyPage.pillar4Title'), body: t('whyPage.pillar4Body'), accent: '#0d9488' },
+    { icon: <TrendingUpIcon />, label: t('whyPage.pillar5Label'), title: t('whyPage.pillar5Title'), body: t('whyPage.pillar5Body'), accent: '#dc2626' },
+    { icon: <GlobeIcon />, label: t('whyPage.pillar6Label'), title: t('whyPage.pillar6Title'), body: t('whyPage.pillar6Body'), accent: '#ea7c1f' },
+  ]
+
+  const STATS = [
+    { target: 150, suffix: '+', label: t('whyPage.statsLabel1'), sub: t('whyPage.statsSub1') },
+    { target: 15, suffix: 'K+', label: t('whyPage.statsLabel2'), sub: t('whyPage.statsSub2') },
+    { target: 14, suffix: '', label: t('whyPage.statsLabel3'), sub: t('whyPage.statsSub3') },
+    { target: 99, prefix: '%', label: t('whyPage.statsLabel4'), sub: t('whyPage.statsSub4') },
+  ]
 
   return (
     <div style={{ background: '#fff' }}>
@@ -212,27 +176,11 @@ export default function WhyAirXPage() {
           pointerEvents: 'none', zIndex: 0,
         }} />
 
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px', width: '100%', position: 'relative', zIndex: 1 }}>
+        <div className="why-page-hero-shell" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px', width: '100%', position: 'relative', zIndex: 1 }}>
           <div className="why-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
 
             {/* SOL — metin */}
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  fontFamily: "'Instrument Serif', Georgia, serif",
-                  fontStyle: 'italic',
-                  fontSize: 'clamp(20px, 2.5vw, 28px)',
-                  color: '#79ACDC',
-                  marginBottom: 20,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                Neden AirX?
-              </motion.div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 32 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -246,7 +194,7 @@ export default function WhyAirXPage() {
                   letterSpacing: '-0.04em',
                 }}
               >
-                Diğerleri
+                {t('whyPage.heroLine1')}
               </motion.h1>
 
               <motion.h1
@@ -262,7 +210,7 @@ export default function WhyAirXPage() {
                   letterSpacing: '-0.04em',
                 }}
               >
-                vaad eder.
+                {t('whyPage.heroLine2')}
               </motion.h1>
 
               <motion.h1
@@ -281,7 +229,7 @@ export default function WhyAirXPage() {
                   letterSpacing: '-0.04em',
                 }}
               >
-                AirX teslim eder.
+                {t('whyPage.heroLine3')}
               </motion.h1>
 
               <motion.p
@@ -296,8 +244,7 @@ export default function WhyAirXPage() {
                   margin: '0 0 44px',
                 }}
               >
-                Biyometrik veri riski, donanım maliyeti ve yabancı destek kuyruğu olmadan
-                İK yönetimi. Tam olarak böyle olmalı.
+                {t('whyPage.heroSubtitle')}
               </motion.p>
 
               <motion.div
@@ -307,7 +254,7 @@ export default function WhyAirXPage() {
                 style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}
               >
                 <Link
-                  to="/iletisim"
+                  to="/iletisim#demo-form"
                   style={{
                     display: 'inline-flex', alignItems: 'center', gap: 8,
                     padding: '15px 32px', borderRadius: 10,
@@ -319,7 +266,7 @@ export default function WhyAirXPage() {
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 36px rgba(255,255,255,0.12)' }}
                   onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '' }}
                 >
-                  Demo Talep Et <ArrowRightIcon />
+                  {t('whyPage.heroDemoBtn')} <ArrowRightIcon />
                 </Link>
                 <Link
                   to="/fiyatlar"
@@ -336,23 +283,52 @@ export default function WhyAirXPage() {
                   onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(121,172,220,0.4)'; e.currentTarget.style.color = '#fff' }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'rgba(255,255,255,0.65)' }}
                 >
-                  Fiyatları İncele
+                  {t('whyPage.heroPricingBtn')}
                 </Link>
               </motion.div>
             </div>
 
             {/* SAĞ — stat kartları */}
             <motion.div
+              className="why-page-hero-stats"
               initial={{ opacity: 0, x: 32 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}
             >
               {[
-                { value: '150+', label: 'Aktif Kurum', sub: 'Türkiye genelinde', icon: '🏢' },
-                { value: '15K+', label: 'Kullanıcı', sub: 'Platforma bağlı', icon: '👥' },
-                { value: '14', label: 'Modül', sub: 'Tek abonelikte', icon: '⚡' },
-                { value: '%99.9', label: 'Uptime', sub: 'SLA garantili', icon: '🛡' },
+                {
+                  value: t('whyPage.heroStat1Value'), label: t('whyPage.heroStat1Label'), sub: t('whyPage.heroStat1Sub'),
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#79ACDC" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="2" width="18" height="20" rx="1"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>
+                    </svg>
+                  ),
+                },
+                {
+                  value: t('whyPage.heroStat2Value'), label: t('whyPage.heroStat2Label'), sub: t('whyPage.heroStat2Sub'),
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#79ACDC" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                  ),
+                },
+                {
+                  value: t('whyPage.heroStat3Value'), label: t('whyPage.heroStat3Label'), sub: t('whyPage.heroStat3Sub'),
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#79ACDC" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="3" width="6" height="6" rx="1"/><rect x="16" y="3" width="6" height="6" rx="1"/><rect x="2" y="15" width="6" height="6" rx="1"/><rect x="16" y="15" width="6" height="6" rx="1"/><path d="M9 6h6"/><path d="M9 18h6"/><path d="M12 9v6"/>
+                    </svg>
+                  ),
+                },
+                {
+                  value: t('whyPage.heroStat4Value'), label: t('whyPage.heroStat4Label'), sub: t('whyPage.heroStat4Sub'),
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#79ACDC" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+                    </svg>
+                  ),
+                },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -373,7 +349,12 @@ export default function WhyAirXPage() {
                     y: -3,
                   }}
                 >
-                  <div style={{ fontSize: 22, marginBottom: 12 }}>{stat.icon}</div>
+                  <div style={{
+                    width: 40, height: 40, borderRadius: 10, marginBottom: 16,
+                    background: 'rgba(121,172,220,0.1)',
+                    border: '1px solid rgba(121,172,220,0.18)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>{stat.icon}</div>
                   <div style={{
                     fontSize: 'clamp(28px, 3.5vw, 40px)',
                     fontWeight: 900, color: '#fff',
@@ -395,7 +376,7 @@ export default function WhyAirXPage() {
         <div style={{ position: 'absolute', bottom: -1, left: 0, right: 0, height: 64, background: '#fff', clipPath: 'ellipse(60% 100% at 50% 100%)' }} />
 
         <style>{`
-          @media (max-width: 860px) {
+          @media (max-width: 1024px) {
             .why-hero-grid {
               grid-template-columns: 1fr !important;
               gap: 48px !important;
@@ -452,99 +433,97 @@ export default function WhyAirXPage() {
             viewport={{ once: true }}
             style={{ textAlign: 'center', marginBottom: 56 }}
           >
-            <div style={{
-              fontFamily: "'Instrument Serif', Georgia, serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(18px, 2.5vw, 26px)',
-              color: '#79ACDC', marginBottom: 12,
-            }}>Tarafsız bir karşılaştırma</div>
             <h2 style={{ fontSize: 'clamp(26px, 4vw, 42px)', fontWeight: 800, color: '#003C75', margin: '0 0 16px', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-              AirX vs. Diğer Çözümler
+              {t('whyPage.compareTitle')}
             </h2>
             <p style={{ fontSize: 16, color: '#64748b', maxWidth: 480, margin: '0 auto', lineHeight: 1.65 }}>
-              Rakiplerimizi küçümsemiyoruz — sadece farkı gösteriyoruz.
+              {t('whyPage.compareSubtitle')}
             </p>
           </motion.div>
 
-          {/* Tablo başlığı */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{
-              display: 'grid', gridTemplateColumns: '1fr 140px 140px',
-              gap: 0, marginBottom: 4,
-            }}
-          >
-            <div style={{ padding: '12px 20px' }} />
-            <div style={{
-              padding: '14px 20px', textAlign: 'center',
-              background: '#003C75', borderRadius: '14px 14px 0 0',
-              fontSize: 13, fontWeight: 800, color: '#fff', letterSpacing: '0.04em',
-            }}>
-              AirX
+          <div className="why-compare-scroll" style={{ overflowX: 'auto', overflowY: 'hidden' }}>
+            {/* Tablo başlığı */}
+            <motion.div
+              className="why-compare-head"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{
+                display: 'grid', gridTemplateColumns: '1fr 140px 140px',
+                gap: 0, marginBottom: 4,
+              }}
+            >
+              <div style={{ padding: '12px 20px' }} />
+              <div style={{
+                padding: '14px 20px', textAlign: 'center',
+                background: '#003C75', borderRadius: '14px 14px 0 0',
+                fontSize: 13, fontWeight: 800, color: '#fff', letterSpacing: '0.04em',
+              }}>
+                {t('whyPage.compareColAirx')}
+              </div>
+              <div style={{
+                padding: '14px 20px', textAlign: 'center',
+                background: '#f8fafc',
+                borderRadius: '14px 14px 0 0',
+                fontSize: 13, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.04em',
+              }}>
+                {t('whyPage.compareColOthers')}
+              </div>
+            </motion.div>
+
+            {/* Tablo satırları */}
+            <div className="why-compare-table" style={{ borderRadius: '0 0 18px 18px', overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,60,117,0.08)' }}>
+              {COMPARE_ROWS.map((row, i) => (
+                <motion.div
+                  className="why-compare-row"
+                  key={row.feature}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: i * 0.04 }}
+                  onMouseEnter={() => setHoveredRow(i)}
+                  onMouseLeave={() => setHoveredRow(null)}
+                  style={{
+                    display: 'grid', gridTemplateColumns: '1fr 140px 140px',
+                    gap: 0,
+                    background: hoveredRow === i ? '#f0f7ff' : (i % 2 === 0 ? '#fff' : '#fafcff'),
+                    transition: 'background 0.15s',
+                    borderBottom: i < COMPARE_ROWS.length - 1 ? '1px solid rgba(0,60,117,0.06)' : 'none',
+                  }}
+                >
+                  {/* Özellik adı */}
+                  <div className="why-compare-feature" style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: '#1e293b', lineHeight: 1.4 }}>{row.feature}</span>
+                    {row.note && (
+                      <span style={{
+                        fontSize: 11, fontWeight: 600, color: '#003C75',
+                        background: 'rgba(0,60,117,0.07)',
+                        padding: '2px 8px', borderRadius: 100, whiteSpace: 'nowrap', flexShrink: 0,
+                      }}>{row.note}</span>
+                    )}
+                  </div>
+
+                  {/* AiRX sütunu */}
+                  <div className="why-compare-value" style={{
+                    padding: '18px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: row.airx ? 'rgba(0,60,117,0.03)' : 'transparent',
+                  }}>
+                    {row.airx
+                      ? <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(34,197,94,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon /></div>
+                      : <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(239,68,68,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><XIcon /></div>
+                    }
+                  </div>
+
+                  {/* Diğerleri sütunu */}
+                  <div className="why-compare-value" style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {row.others
+                      ? <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(34,197,94,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon /></div>
+                      : <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(239,68,68,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><XIcon /></div>
+                    }
+                  </div>
+                </motion.div>
+              ))}
             </div>
-            <div style={{
-              padding: '14px 20px', textAlign: 'center',
-              background: '#f8fafc',
-              borderRadius: '14px 14px 0 0',
-              fontSize: 13, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.04em',
-            }}>
-              Diğerleri
-            </div>
-          </motion.div>
-
-          {/* Tablo satırları */}
-          <div style={{ borderRadius: '0 0 18px 18px', overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,60,117,0.08)' }}>
-            {COMPARE_ROWS.map((row, i) => (
-              <motion.div
-                key={row.feature}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: i * 0.04 }}
-                onMouseEnter={() => setHoveredRow(i)}
-                onMouseLeave={() => setHoveredRow(null)}
-                style={{
-                  display: 'grid', gridTemplateColumns: '1fr 140px 140px',
-                  gap: 0,
-                  background: hoveredRow === i ? '#f0f7ff' : (i % 2 === 0 ? '#fff' : '#fafcff'),
-                  transition: 'background 0.15s',
-                  borderBottom: i < COMPARE_ROWS.length - 1 ? '1px solid rgba(0,60,117,0.06)' : 'none',
-                }}
-              >
-                {/* Özellik adı */}
-                <div style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{ fontSize: 14, fontWeight: 600, color: '#1e293b', lineHeight: 1.4 }}>{row.feature}</span>
-                  {row.note && (
-                    <span style={{
-                      fontSize: 11, fontWeight: 600, color: '#003C75',
-                      background: 'rgba(0,60,117,0.07)',
-                      padding: '2px 8px', borderRadius: 100, whiteSpace: 'nowrap', flexShrink: 0,
-                    }}>{row.note}</span>
-                  )}
-                </div>
-
-                {/* AirX sütunu */}
-                <div style={{
-                  padding: '18px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  background: row.airx ? 'rgba(0,60,117,0.03)' : 'transparent',
-                }}>
-                  {row.airx
-                    ? <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(34,197,94,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon /></div>
-                    : <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(239,68,68,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><XIcon /></div>
-                  }
-                </div>
-
-                {/* Diğerleri sütunu */}
-                <div style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {row.others
-                    ? <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(34,197,94,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon /></div>
-                    : <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(239,68,68,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><XIcon /></div>
-                  }
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
@@ -561,14 +540,14 @@ export default function WhyAirXPage() {
             style={{ textAlign: 'center', marginBottom: 56 }}
           >
             <h2 style={{ fontSize: 'clamp(26px, 4vw, 42px)', fontWeight: 800, color: '#003C75', margin: '0 0 16px', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-              Her Detayda Fark
+              {t('whyPage.pillarsTitle')}
             </h2>
             <p style={{ fontSize: 16, color: '#64748b', maxWidth: 440, margin: '0 auto', lineHeight: 1.65 }}>
-              Küçük detaylar büyük fark yaratır. AirX bunu her özellikte gösterir.
+              {t('whyPage.pillarsSubtitle')}
             </p>
           </motion.div>
 
-          <div className="why-pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+          <div className="why-pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {PILLARS.map((pillar, i) => (
               <motion.div
                 key={pillar.title}
@@ -577,43 +556,47 @@ export default function WhyAirXPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.07 }}
                 style={{
-                  borderRadius: 20, overflow: 'hidden',
-                  border: '1px solid rgba(0,60,117,0.08)',
+                  borderRadius: 24,
+                  border: `1px solid ${pillar.accent}22`,
                   background: '#fff',
-                  boxShadow: '0 4px 24px rgba(0,60,117,0.05)',
-                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  boxShadow: `0 4px 32px ${pillar.accent}10`,
+                  position: 'relative', overflow: 'hidden',
                   cursor: 'default',
+                  padding: '32px 30px 36px',
                 }}
-                whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,60,117,0.12)' }}
+                whileHover={{ y: -5, boxShadow: `0 16px 48px ${pillar.accent}20` }}
               >
-                {/* Renkli üst bar */}
-                <div style={{ height: 4, background: pillar.accent }} />
-                <div style={{ padding: '28px 28px 32px' }}>
-                  {/* İkon */}
+                {/* Köşe glow */}
+                <div style={{ position: 'absolute', top: -40, right: -40, width: 140, height: 140, borderRadius: '50%', background: `radial-gradient(circle, ${pillar.accent}10 0%, transparent 70%)`, pointerEvents: 'none' }} />
+                {/* Sol accent çizgisi */}
+                <div style={{ position: 'absolute', top: 24, bottom: 24, left: 0, width: 3, borderRadius: '0 3px 3px 0', background: pillar.accent }} />
+
+                {/* Label + İkon */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
+                  <span style={{
+                    fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+                    color: pillar.accent,
+                    background: `${pillar.accent}12`,
+                    border: `1px solid ${pillar.accent}25`,
+                    padding: '3px 10px', borderRadius: 100,
+                  }}>{pillar.label}</span>
                   <div style={{
-                    width: 60, height: 60, borderRadius: 16,
-                    background: pillar.accent,
+                    width: 44, height: 44, borderRadius: 13, flexShrink: 0,
+                    background: `${pillar.accent}15`,
+                    border: `1px solid ${pillar.accent}25`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    marginBottom: 20,
-                    boxShadow: `0 6px 20px ${pillar.accent}30`,
+                    boxShadow: `0 4px 14px ${pillar.accent}20`,
                   }}>
                     {pillar.icon}
                   </div>
-
-                  {/* Etiket */}
-                  <div style={{
-                    fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
-                    textTransform: 'uppercase', color: pillar.accent,
-                    marginBottom: 8,
-                  }}>{pillar.label}</div>
-
-                  <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', margin: '0 0 12px', lineHeight: 1.3 }}>
-                    {pillar.title}
-                  </h3>
-                  <p style={{ fontSize: 14, color: '#64748b', lineHeight: 1.7, margin: 0 }}>
-                    {pillar.body}
-                  </p>
                 </div>
+
+                <h3 style={{ fontSize: 17, fontWeight: 800, color: '#0f172a', margin: '0 0 10px', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
+                  {pillar.title}
+                </h3>
+                <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.72, margin: 0 }}>
+                  {pillar.body}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -638,33 +621,31 @@ export default function WhyAirXPage() {
             transition={{ duration: 0.55 }}
           >
             <div style={{
-              fontFamily: "'Instrument Serif', Georgia, serif",
-              fontStyle: 'italic',
               fontSize: 'clamp(28px, 5vw, 56px)',
               color: '#fff',
               lineHeight: 1.25,
               marginBottom: 32,
               letterSpacing: '-0.01em',
             }}>
-              "İK yazılımı seçmek<br />
+              "{t('whyPage.quoteText')}<br />
               <span style={{
                 background: 'linear-gradient(90deg, #79ACDC, #b8d9f5)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>stratejik bir karardır."</span>
+              }}>{t('whyPage.quoteHighlight')}"</span>
             </div>
 
             <p style={{
               fontSize: 16, color: 'rgba(219,238,255,0.65)',
               lineHeight: 1.7, marginBottom: 44, maxWidth: 560, margin: '0 auto 44px',
             }}>
-              Yanlış seçim; biyometrik veri riskleri, yıllarca süren implementasyonlar ve Türkçe bilmeyen destek ekipleri demektir. AirX bu sorunları baştan çözerek tasarlanmıştır.
+              {t('whyPage.quoteBody')}
             </p>
 
             <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link
-                to="/iletisim"
+                to="/iletisim#demo-form"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '14px 32px', borderRadius: 10,
@@ -676,7 +657,7 @@ export default function WhyAirXPage() {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)' }}
                 onMouseLeave={e => { e.currentTarget.style.transform = '' }}
               >
-                Ücretsiz Demo İste <ArrowRightIcon />
+                {t('whyPage.quoteDemoBtn')} <ArrowRightIcon />
               </Link>
               <Link
                 to="/moduller/pdks"
@@ -693,7 +674,7 @@ export default function WhyAirXPage() {
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.16)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.10)' }}
               >
-                Modülleri Keşfet
+                {t('whyPage.quoteModulesBtn')}
               </Link>
             </div>
           </motion.div>
@@ -704,7 +685,33 @@ export default function WhyAirXPage() {
           RESPONSIVE STİLLER
       ══════════════════════════════════════════ */}
       <style>{`
+        @media (max-width: 1024px) {
+          .why-page-hero-shell {
+            padding: 0 24px !important;
+          }
+          .why-page-hero-stats {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .why-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .why-stats-grid > div:nth-child(2n) {
+            border-right: none !important;
+          }
+          .why-stats-grid > div:nth-child(-n + 2) {
+            border-bottom: 1px solid #e8f0f9 !important;
+          }
+          .why-pillars-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
         @media (max-width: 640px) {
+          .why-page-hero-shell {
+            padding: 0 16px !important;
+          }
+          .why-page-hero-stats {
+            grid-template-columns: 1fr !important;
+          }
           .why-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
@@ -712,15 +719,44 @@ export default function WhyAirXPage() {
             border-right: none !important;
             border-bottom: 1px solid #e8f0f9 !important;
           }
-        }
-        @media (max-width: 860px) {
-          .why-pillars-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
+          .why-compare-scroll {
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            padding-bottom: 6px !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+          .why-compare-head,
+          .why-compare-table,
+          .why-compare-row {
+            min-width: 520px !important;
+          }
+          .why-compare-head {
+            margin-bottom: 0 !important;
+          }
+          .why-compare-table {
+            border-radius: 0 0 18px 18px !important;
+            overflow: hidden !important;
+            box-shadow: 0 8px 28px rgba(0,60,117,0.08) !important;
+          }
+          .why-compare-row {
+            grid-template-columns: minmax(240px, 1fr) 140px 140px !important;
+          }
+          .why-compare-feature {
+            padding: 16px !important;
+            gap: 10px !important;
+          }
+          .why-compare-value {
+            padding: 16px 14px !important;
           }
         }
         @media (max-width: 520px) {
           .why-pillars-grid {
             grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .why-hero-grid {
+            gap: 32px !important;
           }
         }
       `}</style>

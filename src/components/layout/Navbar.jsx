@@ -1,124 +1,133 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import logo from '../../assets/logo.png'
 
-const NAV_LINKS = [
-  { label: 'Neden AirX', href: '/neden-airx' },
-  { label: 'Fiyatlar', href: '/fiyatlar' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Hakkımızda', href: '/hakkimizda' },
-  { label: 'İletişim', href: '/iletisim' },
+const MOBILE_NAV_BREAKPOINT = 1180
+
+const NAV_LINKS_CONFIG = [
+  { labelKey: 'nav.why', href: '/neden-airx' },
+  { labelKey: 'nav.pricing', href: '/fiyatlar' },
+  { labelKey: 'nav.blog', href: '/blog' },
+  { labelKey: 'nav.about', href: '/hakkimizda' },
+  { labelKey: 'nav.contact', href: '/iletisim' },
 ]
 
 const MODULE_DROPDOWN = [
   {
-    label: 'PDKS',
+    labelKey: 'nav.mod_pdks_label',
+    descKey: 'nav.mod_pdks_desc',
     href: '/moduller/pdks',
     icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z',
     accent: '#38bdf8',
-    desc: 'Giriş-çıkış takibi',
   },
   {
-    label: 'Özlük Dosyası',
+    labelKey: 'nav.mod_ozluk_label',
+    descKey: 'nav.mod_ozluk_desc',
     href: '/moduller/ozluk-dosyasi',
     icon: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
     accent: '#a78bfa',
-    desc: 'Dijital personel arşivi',
   },
   {
-    label: 'İzin Yönetimi',
+    labelKey: 'nav.mod_izin_label',
+    descKey: 'nav.mod_izin_desc',
     href: '/moduller/izin-yonetimi',
     icon: 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm7 9 2 2 4-4',
     accent: '#34d399',
-    desc: 'Onay akışlı izin takibi',
   },
   {
-    label: 'Puantaj',
+    labelKey: 'nav.mod_puantaj_label',
+    descKey: 'nav.mod_puantaj_desc',
     href: '/moduller/puantaj',
     icon: 'M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18',
     accent: '#fbbf24',
-    desc: 'Otomatik puantaj cetveli',
   },
   {
-    label: 'Erişim Kontrolü',
+    labelKey: 'nav.mod_erisim_label',
+    descKey: 'nav.mod_erisim_desc',
     href: '/moduller/erisim-kontrolu',
     icon: 'M21 2l-9.6 9.6m0 0 3 3L22 7l-3-3M7.5 21a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11z',
     accent: '#f87171',
-    desc: 'Bölge bazlı yetkilendirme',
   },
   {
-    label: 'Ziyaretçi Yönetimi',
+    labelKey: 'nav.mod_ziyaretci_label',
+    descKey: 'nav.mod_ziyaretci_desc',
     href: '/moduller/ziyaretci-yonetimi',
     icon: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm9 4 2 2 4-4',
     accent: '#22d3ee',
-    desc: 'QR ile ziyaretçi kaydı',
   },
   {
-    label: 'Yemekhane',
+    labelKey: 'nav.mod_yemekhane_label',
+    descKey: 'nav.mod_yemekhane_desc',
     href: '/moduller/yemekhane',
     icon: 'M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7',
     accent: '#fb923c',
-    desc: 'Yemek hakkı kontrolü',
   },
   {
-    label: 'Anket',
+    labelKey: 'nav.mod_anket_label',
+    descKey: 'nav.mod_anket_desc',
     href: '/moduller/anket',
     icon: 'M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11',
     accent: '#a3e635',
-    desc: 'Personel geri bildirimi',
   },
   {
-    label: 'Süreli Evraklar',
+    labelKey: 'nav.mod_sureli_label',
+    descKey: 'nav.mod_sureli_desc',
     href: '/moduller/sureli-evraklar',
     icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M9 15a3 3 0 1 0 6 0M12 12v3',
     accent: '#f472b6',
-    desc: 'Son kullanma tarihi takibi',
   },
   {
-    label: 'Eğitim Planlama',
+    labelKey: 'nav.mod_egitim_label',
+    descKey: 'nav.mod_egitim_desc',
     href: '/moduller/egitim-planlama',
     icon: 'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
     accent: '#60a5fa',
-    desc: 'Eğitim katılım takibi',
   },
   {
-    label: 'Hukuki Evraklar',
+    labelKey: 'nav.mod_hukuki_label',
+    descKey: 'nav.mod_hukuki_desc',
     href: '/moduller/hukuki-evraklar',
     icon: 'm16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Zm-14 0 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1ZM7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2',
     accent: '#818cf8',
-    desc: 'İhtar ve savunma yönetimi',
   },
   {
-    label: 'Yan Haklar',
+    labelKey: 'nav.mod_yanHaklar_label',
+    descKey: 'nav.mod_yanHaklar_desc',
     href: '/moduller/yan-haklar',
     icon: 'M20 12V22H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z',
     accent: '#2dd4bf',
-    desc: 'Görev bazlı yan hak takibi',
   },
   {
-    label: 'Periyodik Görev',
+    labelKey: 'nav.mod_periyodik_label',
+    descKey: 'nav.mod_periyodik_desc',
     href: '/moduller/periyodik-gorev',
     icon: 'M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M3 21v-5h5',
     accent: '#c084fc',
-    desc: 'Lokasyon doğrulamalı görev',
   },
   {
-    label: 'İş Zekası',
+    labelKey: 'nav.mod_isZekasi_label',
+    descKey: 'nav.mod_isZekasi_desc',
     href: '/moduller/is-zekasi',
     icon: 'M18 20V10M12 20V4M6 20v-6',
     accent: '#79ACDC',
-    desc: 'Veri görselleştirme',
   },
 ]
 
 const SECTION_IDS = ['urun', 'moduller', 'guvenlik', 'fiyatlar']
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeId, setActiveId] = useState('')
   const [scrolled, setScrolled] = useState(false)
   const [modulesOpen, setModulesOpen] = useState(false)
   const [mobileModulesOpen, setMobileModulesOpen] = useState(false)
+
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang)
+    localStorage.setItem('language', lang)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4)
@@ -154,7 +163,7 @@ export default function Navbar() {
     if (!menuOpen) return
 
     const close = () => {
-      if (window.innerWidth > 860) {
+      if (window.innerWidth > MOBILE_NAV_BREAKPOINT) {
         setMenuOpen(false)
       }
     }
@@ -185,18 +194,21 @@ export default function Navbar() {
         }}
       >
         <div
+          className="nav-shell"
           style={{
-            maxWidth: 1200,
+            maxWidth: 1320,
             margin: '0 auto',
-            padding: '0 40px',
+            padding: '0 24px',
             height: 68,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: 40,
+            gap: 24,
+            position: 'relative',
           }}
         >
           <a
+            className="navbar-brand"
             href="/"
             style={{
               textDecoration: 'none',
@@ -205,16 +217,15 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            <img src={logo} alt="AirX" style={{ height: 32, width: 'auto', objectFit: 'contain' }} />
+            <img className="navbar-logo" src={logo} alt="AiRX" style={{ height: 32, width: 'auto', objectFit: 'contain' }} />
           </a>
 
           <nav
-            className="nav-desktop"
+            className="nav-desktop nav-desktop-center"
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: 0,
-              flex: 1,
             }}
           >
             <div
@@ -230,7 +241,7 @@ export default function Navbar() {
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  padding: '8px 16px',
+                  padding: '8px 14px',
                   borderRadius: 6,
                   display: 'flex',
                   alignItems: 'center',
@@ -239,7 +250,7 @@ export default function Navbar() {
                   transition: 'color 0.15s',
                 }}
               >
-                Modüller
+                {t('nav.modules')}
                 <svg
                   width="12"
                   height="12"
@@ -259,20 +270,20 @@ export default function Navbar() {
               </button>
             </div>
 
-            {NAV_LINKS.map(link => {
+            {NAV_LINKS_CONFIG.map(link => {
               const id = link.href.replace('#', '')
               const isActive = activeId === id
 
               return (
                 <a
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
                   style={{
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: 500,
                     color: isActive ? '#003C75' : '#374151',
                     textDecoration: 'none',
-                    padding: '8px 16px',
+                    padding: '8px 14px',
                     borderRadius: 6,
                     transition: 'color 0.15s',
                     whiteSpace: 'nowrap',
@@ -285,14 +296,14 @@ export default function Navbar() {
                     event.currentTarget.style.color = isActive ? '#003C75' : '#374151'
                   }}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                   {isActive && (
                     <span
                       style={{
                         position: 'absolute',
                         bottom: 0,
-                        left: 16,
-                        right: 16,
+                        left: 14,
+                        right: 14,
                         height: 2,
                         background: '#003C75',
                         borderRadius: 2,
@@ -305,18 +316,85 @@ export default function Navbar() {
           </nav>
 
           <div
-            className="nav-desktop"
+            className="nav-desktop nav-desktop-actions"
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 10,
+              gap: 8,
               flexShrink: 0,
+              marginLeft: 'auto',
             }}
           >
+            {/* Language Switcher */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                padding: '4px 4px',
+                backgroundColor: '#f3f4f6',
+                borderRadius: 6,
+              }}
+            >
+              <button
+                onClick={() => handleLanguageChange('tr')}
+                title="Türkçe"
+                style={{
+                  padding: '4px 6px',
+                  borderRadius: 4,
+                  border: 'none',
+                  background: i18n.language === 'tr' ? '#fff' : 'transparent',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s',
+                  boxShadow: i18n.language === 'tr' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
+                  opacity: i18n.language === 'tr' ? 1 : 0.45,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {/* Türk Bayrağı */}
+                <svg viewBox="0 0 300 200" width="26" height="17" style={{ display: 'block', borderRadius: 2 }}>
+                  <rect width="300" height="200" fill="#E30A17"/>
+                  <circle cx="110" cy="100" r="75" fill="white"/>
+                  <circle cx="140" cy="100" r="59" fill="#E30A17"/>
+                  <polygon fill="white" points="190,70 197.1,90.3 218.5,90.7 201.4,103.7 207.6,124.3 190,112 172.4,124.3 178.6,103.7 161.5,90.7 182.9,90.3"/>
+                </svg>
+              </button>
+              <button
+                onClick={() => handleLanguageChange('en')}
+                title="English"
+                style={{
+                  padding: '4px 6px',
+                  borderRadius: 4,
+                  border: 'none',
+                  background: i18n.language === 'en' ? '#fff' : 'transparent',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s',
+                  boxShadow: i18n.language === 'en' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
+                  opacity: i18n.language === 'en' ? 1 : 0.45,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {/* UK Bayrağı */}
+                <svg viewBox="0 0 60 30" width="26" height="13" style={{ display: 'block', borderRadius: 2 }}>
+                  <rect width="60" height="30" fill="#012169"/>
+                  <line x1="0" y1="0" x2="60" y2="30" stroke="white" strokeWidth="6"/>
+                  <line x1="60" y1="0" x2="0" y2="30" stroke="white" strokeWidth="6"/>
+                  <line x1="0" y1="0" x2="60" y2="30" stroke="#C8102E" strokeWidth="2"/>
+                  <line x1="60" y1="0" x2="0" y2="30" stroke="#C8102E" strokeWidth="2"/>
+                  <line x1="30" y1="0" x2="30" y2="30" stroke="white" strokeWidth="10"/>
+                  <line x1="0" y1="15" x2="60" y2="15" stroke="white" strokeWidth="10"/>
+                  <line x1="30" y1="0" x2="30" y2="30" stroke="#C8102E" strokeWidth="6"/>
+                  <line x1="0" y1="15" x2="60" y2="15" stroke="#C8102E" strokeWidth="6"/>
+                </svg>
+              </button>
+            </div>
+
             <a
               href="https://panel.airx.com.tr/login"
               style={{
-                padding: '8px 18px',
+                padding: '8px 14px',
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 500,
@@ -335,15 +413,15 @@ export default function Navbar() {
                 event.currentTarget.style.background = '#fff'
               }}
             >
-              Giriş Yap
+              {t('nav.signIn')}
             </a>
             <a
-              href="#demo"
+              href="/iletisim#demo-form"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 7,
-                padding: '8px 20px',
+                padding: '8px 16px',
                 borderRadius: 6,
                 fontSize: 14,
                 fontWeight: 600,
@@ -360,7 +438,7 @@ export default function Navbar() {
                 event.currentTarget.style.background = '#003C75'
               }}
             >
-              Demo Talep Et
+              {t('nav.requestDemo')}
               <svg
                 width="12"
                 height="12"
@@ -377,29 +455,98 @@ export default function Navbar() {
             </a>
           </div>
 
-          <button
-            onClick={() => setMenuOpen(open => !open)}
+          {/* Mobile: flags + hamburger grouped */}
+          <div
             className="nav-hamburger"
-            aria-label="Menü"
-            style={{
-              display: 'none',
-              width: 38,
-              height: 38,
-              borderRadius: 6,
-              background: 'transparent',
-              border: '1px solid #e2e8f0',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              color: '#374151',
-            }}
+            style={{ display: 'none', alignItems: 'center', gap: 6 }}
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
+            {/* Flag switcher */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                padding: '3px 3px',
+                backgroundColor: '#f3f4f6',
+                borderRadius: 6,
+              }}
+            >
+              <button
+                onClick={() => handleLanguageChange('tr')}
+                title="Türkçe"
+                style={{
+                  padding: '3px 5px',
+                  borderRadius: 4,
+                  border: 'none',
+                  background: i18n.language === 'tr' ? '#fff' : 'transparent',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s',
+                  boxShadow: i18n.language === 'tr' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
+                  opacity: i18n.language === 'tr' ? 1 : 0.45,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <svg viewBox="0 0 300 200" width="24" height="16" style={{ display: 'block', borderRadius: 2 }}>
+                  <rect width="300" height="200" fill="#E30A17"/>
+                  <circle cx="110" cy="100" r="75" fill="white"/>
+                  <circle cx="140" cy="100" r="59" fill="#E30A17"/>
+                  <polygon fill="white" points="190,70 197.1,90.3 218.5,90.7 201.4,103.7 207.6,124.3 190,112 172.4,124.3 178.6,103.7 161.5,90.7 182.9,90.3"/>
+                </svg>
+              </button>
+              <button
+                onClick={() => handleLanguageChange('en')}
+                title="English"
+                style={{
+                  padding: '3px 5px',
+                  borderRadius: 4,
+                  border: 'none',
+                  background: i18n.language === 'en' ? '#fff' : 'transparent',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s',
+                  boxShadow: i18n.language === 'en' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
+                  opacity: i18n.language === 'en' ? 1 : 0.45,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <svg viewBox="0 0 60 30" width="24" height="12" style={{ display: 'block', borderRadius: 2 }}>
+                  <rect width="60" height="30" fill="#012169"/>
+                  <line x1="0" y1="0" x2="60" y2="30" stroke="white" strokeWidth="6"/>
+                  <line x1="60" y1="0" x2="0" y2="30" stroke="white" strokeWidth="6"/>
+                  <line x1="0" y1="0" x2="60" y2="30" stroke="#C8102E" strokeWidth="2"/>
+                  <line x1="60" y1="0" x2="0" y2="30" stroke="#C8102E" strokeWidth="2"/>
+                  <line x1="30" y1="0" x2="30" y2="30" stroke="white" strokeWidth="10"/>
+                  <line x1="0" y1="15" x2="60" y2="15" stroke="white" strokeWidth="10"/>
+                  <line x1="30" y1="0" x2="30" y2="30" stroke="#C8102E" strokeWidth="6"/>
+                  <line x1="0" y1="15" x2="60" y2="15" stroke="#C8102E" strokeWidth="6"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(open => !open)}
+              aria-label="Menü"
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: 6,
+                background: 'transparent',
+                border: '1px solid #e2e8f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: '#374151',
+              }}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
               strokeWidth="2.2"
               strokeLinecap="round"
             >
@@ -415,7 +562,8 @@ export default function Navbar() {
                 </>
               )}
             </svg>
-          </button>
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>
@@ -459,10 +607,10 @@ export default function Navbar() {
                         marginBottom: 4,
                       }}
                     >
-                      Tüm Modüller
+                      {t('nav.dropdownHeader')}
                     </div>
                     <div style={{ fontSize: 20, fontWeight: 700, color: '#0f172a' }}>
-                      AirX ile her İK sürecini dijitalleştirin
+                      {t('nav.dropdownTitle')}
                     </div>
                   </div>
                 </div>
@@ -476,7 +624,7 @@ export default function Navbar() {
                 >
                   {MODULE_DROPDOWN.map(module => (
                     <a
-                      key={module.label}
+                      key={module.labelKey}
                       href={module.href}
                       style={{
                         display: 'flex',
@@ -537,10 +685,10 @@ export default function Navbar() {
                             lineHeight: 1.3,
                           }}
                         >
-                          {module.label}
+                          {t(module.labelKey)}
                         </div>
                         <div style={{ fontSize: 11.5, color: '#64748b', lineHeight: 1.4 }}>
-                          {module.desc}
+                          {t(module.descKey)}
                         </div>
                       </div>
                     </a>
@@ -558,7 +706,7 @@ export default function Navbar() {
                   }}
                 >
                   <span style={{ fontSize: 12.5, color: '#94a3b8' }}>
-                    14 modül · Tek entegre platform
+                    {t('nav.dropdownFooter')}
                   </span>
                   <a
                     href="/fiyatlar"
@@ -570,10 +718,10 @@ export default function Navbar() {
                       event.currentTarget.style.textDecoration = 'none'
                     }}
                   >
-                    Fiyatları incele →
+                    {t('nav.dropdownPricing')} →
                   </a>
                   <a
-                    href="/iletisim"
+                    href="/iletisim#demo-form"
                     style={{ fontSize: 12.5, fontWeight: 600, color: '#003C75', textDecoration: 'none' }}
                     onMouseEnter={event => {
                       event.currentTarget.style.textDecoration = 'underline'
@@ -582,7 +730,7 @@ export default function Navbar() {
                       event.currentTarget.style.textDecoration = 'none'
                     }}
                   >
-                    Demo talep et →
+                    {t('nav.dropdownDemo')} →
                   </a>
                 </div>
               </div>
@@ -628,7 +776,7 @@ export default function Navbar() {
                       textAlign: 'left',
                     }}
                   >
-                    <span>Modüller</span>
+                    <span>{t('nav.modules')}</span>
                     <svg
                       width="16"
                       height="16"
@@ -659,6 +807,7 @@ export default function Navbar() {
                         style={{ overflow: 'hidden' }}
                       >
                         <div
+                          className="nav-mobile-modules-grid"
                           style={{
                             display: 'grid',
                             gridTemplateColumns: '1fr 1fr',
@@ -668,7 +817,7 @@ export default function Navbar() {
                         >
                           {MODULE_DROPDOWN.map(module => (
                             <a
-                              key={module.label}
+                              key={module.labelKey}
                               href={module.href}
                               onClick={() => {
                                 setMobileModulesOpen(false)
@@ -724,7 +873,7 @@ export default function Navbar() {
                                     marginBottom: 2,
                                   }}
                                 >
-                                  {module.label}
+                                  {t(module.labelKey)}
                                 </div>
                                 <div
                                   style={{
@@ -733,7 +882,7 @@ export default function Navbar() {
                                     lineHeight: 1.45,
                                   }}
                                 >
-                                  {module.desc}
+                                  {t(module.descKey)}
                                 </div>
                               </div>
                             </a>
@@ -744,26 +893,27 @@ export default function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                {NAV_LINKS.map((link, index) => (
+                {NAV_LINKS_CONFIG.map((link, index) => (
                   <a
-                    key={link.label}
+                    key={link.labelKey}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     style={{
                       display: 'block',
                       padding: '12px 0',
-                      borderBottom: index < NAV_LINKS.length - 1 ? '1px solid #f1f5f9' : 'none',
+                      borderBottom: index < NAV_LINKS_CONFIG.length - 1 ? '1px solid #f1f5f9' : 'none',
                       fontSize: 15,
                       fontWeight: 500,
                       color: '#374151',
                       textDecoration: 'none',
                     }}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </a>
                 ))}
 
                 <div
+                  className="nav-mobile-actions"
                   style={{
                     marginTop: 16,
                     display: 'grid',
@@ -784,10 +934,10 @@ export default function Navbar() {
                       border: '1px solid #d1d5db',
                     }}
                   >
-                    Giriş Yap
+                    {t('nav.signIn')}
                   </a>
                   <a
-                    href="#demo"
+                    href="/iletisim#demo-form"
                     onClick={() => setMenuOpen(false)}
                     style={{
                       padding: '11px',
@@ -800,7 +950,7 @@ export default function Navbar() {
                       background: '#003C75',
                     }}
                   >
-                    Demo Talep Et
+                    {t('nav.requestDemo')}
                   </a>
                 </div>
               </div>
@@ -812,13 +962,34 @@ export default function Navbar() {
       <div style={{ height: 68 }} />
 
       <style>{`
-        @media (max-width: 860px) {
+        @media (min-width: ${MOBILE_NAV_BREAKPOINT + 1}px) {
+          .navbar-logo { height: 38px !important; }
+          .navbar-brand { margin-left: 75px !important; }
+          .nav-desktop-center {
+            position: absolute !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            justify-content: center !important;
+            gap: 2px !important;
+          }
+        }
+        @media (min-width: ${MOBILE_NAV_BREAKPOINT + 1}px) and (max-width: 1180px) {
+          .nav-shell { padding: 0 18px !important; gap: 18px !important; }
+        }
+        @media (max-width: ${MOBILE_NAV_BREAKPOINT}px) {
           .nav-desktop { display: none !important; }
           .nav-hamburger { display: flex !important; }
         }
 
+        @media (max-width: 640px) {
+          .nav-mobile-modules-grid,
+          .nav-mobile-actions {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
         @media (max-width: 480px) {
-          header > div { padding: 0 20px !important; }
+          header > div { padding: 0 16px !important; }
         }
       `}</style>
     </>

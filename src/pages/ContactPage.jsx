@@ -1,70 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-
-/* ── Data ── */
-const CHANNELS = [
-  {
-    eyebrow: 'E-posta',
-    title: 'info@airx.com.tr',
-    text: 'Genel bilgi, teklif ve demo talepleriniz için ekibimiz en kısa sürede dönüş sağlar.',
-    href: 'mailto:info@airx.com.tr',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-      </svg>
-    ),
-  },
-  {
-    eyebrow: 'Telefon',
-    title: '+90 (216) 234 37 37',
-    text: 'Hafta içi mesai saatlerinde satış ve ürün ekibimize doğrudan ulaşabilirsiniz.',
-    href: 'tel:+902162343737',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.62 12 19.79 19.79 0 0 1 1.55 3.4 2 2 0 0 1 3.52 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.55a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-    ),
-  },
-  {
-    eyebrow: 'Merkez Ofis',
-    title: 'Vadi İstanbul Park 7B, Sarıyer',
-    text: 'Ayazağa Mah. Kemerburgaz Cad. Vadi İstanbul Park 7B Bilişim Vadisi K:2, Sarıyer / İstanbul',
-    href: '#demo-form',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
-      </svg>
-    ),
-  },
-]
-
-const STEPS = [
-  'İhtiyacınızı ve mevcut operasyon yapınızı dinliyoruz.',
-  'Size uygun modül setini ve kurulum yaklaşımını paylaşıyoruz.',
-  'Demo sonrası geçiş planını birlikte netleştiriyoruz.',
-]
-
-const FAQS = [
-  {
-    q: 'Demo ne kadar sürer?',
-    a: 'Kurum yapınıza göre değişmekle birlikte standart ürün demosu genelde 30-45 dakika içinde tamamlanır.',
-  },
-  {
-    q: 'Kurulum için ek donanım gerekir mi?',
-    a: 'Hayır. AirX donanım zorunluluğu olmadan devreye alınabilir ve mevcut süreçlerinize göre uyarlanır.',
-  },
-  {
-    q: 'Teklif süreci nasıl ilerler?',
-    a: 'İhtiyacınız olan modül, kullanıcı sayısı ve operasyon kapsamı netleştikten sonra size özel teklif hazırlanır.',
-  },
-  {
-    q: 'Hangi sektörlerle çalışıyorsunuz?',
-    a: 'Üretim, perakende, sağlık, lojistik, hizmet sektörü başta olmak üzere personel operasyonu olan her kurumla çalışıyoruz.',
-  },
-]
-
-/* ── Shared input style ── */
+import { useTranslation } from 'react-i18next'
 const inputStyle = {
   width: '100%',
   border: '1.5px solid #e2e8f0',
@@ -93,22 +30,6 @@ function ArrowIcon() {
     </svg>
   )
 }
-
-const SIZE_OPTIONS = [
-  { value: 'lt20',    label: '20 ve altı' },
-  { value: '20-100',  label: '20 – 100' },
-  { value: '100-300', label: '100 – 300' },
-  { value: '300-1000',label: '300 – 1.000' },
-  { value: 'gt1000',  label: '1.000 üzeri' },
-]
-
-const TOPIC_OPTIONS = [
-  { value: 'demo',          label: 'Ürün demosu' },
-  { value: 'teklif',        label: 'Fiyat / teklif' },
-  { value: 'kurulum',       label: 'Kurulum süreci' },
-  { value: 'entegrasyon',   label: 'Entegrasyon bilgisi' },
-  { value: 'other',         label: 'Diğer' },
-]
 
 function CustomSelect({ label, options, value, onChange, placeholder = 'Seçiniz', focusedField, fieldName, setFocusedField }) {
   const [open, setOpen] = useState(false)
@@ -228,11 +149,114 @@ function CustomSelect({ label, options, value, onChange, placeholder = 'Seçiniz
 }
 
 export default function ContactPage() {
+  const { t } = useTranslation()
   const location = useLocation()
   const [openFaq, setOpenFaq] = useState(null)
   const [focusedField, setFocusedField] = useState(null)
   const [sizeValue, setSizeValue] = useState('')
   const [topicValue, setTopicValue] = useState('demo')
+  const [formData, setFormData] = useState({ name: '', company: '', email: '', phone: '', message: '' })
+  const [submitState, setSubmitState] = useState('idle') // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleField = (field) => (e) => setFormData(prev => ({ ...prev, [field]: e.target.value }))
+
+  const handleSubmit = async () => {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setErrorMsg('Lütfen ad, e-posta ve mesaj alanlarını doldurun.')
+      setSubmitState('error')
+      setTimeout(() => setSubmitState('idle'), 3000)
+      return
+    }
+    setSubmitState('loading')
+    try {
+      const res = await fetch('/mail.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, size: sizeValue, topic: topicValue }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setSubmitState('success')
+        setFormData({ name: '', company: '', email: '', phone: '', message: '' })
+        setSizeValue('')
+        setTopicValue('demo')
+      } else {
+        setErrorMsg(json.message || 'Bir hata oluştu, lütfen tekrar deneyin.')
+        setSubmitState('error')
+        setTimeout(() => setSubmitState('idle'), 4000)
+      }
+    } catch {
+      setErrorMsg('Mesaj gönderilemedi. Lütfen info@airx.com.tr adresine doğrudan yazın.')
+      setSubmitState('error')
+      setTimeout(() => setSubmitState('idle'), 4000)
+    }
+  }
+
+  const CHANNELS = [
+    {
+      eyebrow: t('contact.channel1Eyebrow'),
+      title: t('contact.channel1Title'),
+      text: t('contact.channel1Text'),
+      href: 'mailto:info@airx.com.tr',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+        </svg>
+      ),
+    },
+    {
+      eyebrow: t('contact.channel2Eyebrow'),
+      title: t('contact.channel2Title'),
+      text: t('contact.channel2Text'),
+      href: 'tel:+902162343737',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.62 12 19.79 19.79 0 0 1 1.55 3.4 2 2 0 0 1 3.52 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.55a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      ),
+    },
+    {
+      eyebrow: t('contact.channel3Eyebrow'),
+      title: t('contact.channel3Title'),
+      text: t('contact.channel3Text'),
+      href: '#demo-form',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
+        </svg>
+      ),
+    },
+  ]
+
+  const STEPS = [
+    t('contact.step1'),
+    t('contact.step2'),
+    t('contact.step3'),
+  ]
+
+  const FAQS = [
+    { q: t('contact.faq1q'), a: t('contact.faq1a') },
+    { q: t('contact.faq2q'), a: t('contact.faq2a') },
+    { q: t('contact.faq3q'), a: t('contact.faq3a') },
+    { q: t('contact.faq4q'), a: t('contact.faq4a') },
+  ]
+
+  const SIZE_OPTIONS = [
+    { value: 'lt20',     label: t('contact.size1') },
+    { value: '20-100',   label: t('contact.size2') },
+    { value: '100-300',  label: t('contact.size3') },
+    { value: '300-1000', label: t('contact.size4') },
+    { value: 'gt1000',   label: t('contact.size5') },
+  ]
+
+  const TOPIC_OPTIONS = [
+    { value: 'demo',        label: t('contact.topic1') },
+    { value: 'teklif',      label: t('contact.topic2') },
+    { value: 'kurulum',     label: t('contact.topic3') },
+    { value: 'entegrasyon', label: t('contact.topic4') },
+    { value: 'other',       label: t('contact.topic5') },
+  ]
 
   useEffect(() => {
     if (!location.hash) {
@@ -270,26 +294,20 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
-                <div style={{ width: 28, height: 1, background: '#79ACDC', opacity: 0.55 }} />
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#79ACDC', letterSpacing: '0.18em', textTransform: 'uppercase' }}>İletişim</span>
-              </div>
               <h1 style={{ fontSize: 'clamp(38px, 5vw, 68px)', fontWeight: 800, lineHeight: 1.04, letterSpacing: '-0.03em', color: '#ffffff', margin: '0 0 22px', maxWidth: 680 }}>
-                AirX ekibiyle{' '}
-                <span style={{ color: '#79ACDC' }}>doğrudan</span>{' '}
-                bağlantı kurun.
+                {t('contact.heroTitle1')}{' '}
+                <span style={{ color: '#79ACDC' }}>{t('contact.heroTitle2')}</span>{' '}
+                {t('contact.heroTitle3')}
               </h1>
               <p style={{ fontSize: 18, lineHeight: 1.78, color: 'rgba(219,238,255,0.68)', margin: '0 0 40px', maxWidth: 560 }}>
-                Demo, teklif, kurulum yaklaşımı veya ürün detayları için bize ulaşın.
-                İhtiyacınızı dinleyip size uygun akışı net ve hızlı şekilde paylaşalım.
+                {t('contact.heroSubtitle')}
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <motion.a href="#demo-form" whileHover={{ y: -3, boxShadow: '0 18px 36px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontSize: 15, fontWeight: 700 }}>
-                  Demo Talep Et
-                  <ArrowIcon />
+                  {t('contact.heroDemoBtn')}
                 </motion.a>
                 <motion.a href="tel:+902162343737" whileHover={{ y: -3, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 24px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontSize: 15, fontWeight: 600 }}>
-                  Bizi Arayın
+                  {t('contact.heroCallBtn')}
                 </motion.a>
               </div>
             </motion.div>
@@ -301,12 +319,6 @@ export default function ContactPage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.13)', borderRadius: 24, padding: '32px 28px', backdropFilter: 'blur(12px)' }}
             >
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(219,238,255,0.5)', marginBottom: 16 }}>
-                Nasıl ilerliyoruz?
-              </div>
-              <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(18px, 2.2vw, 24px)', lineHeight: 1.3, color: '#dbeeff', marginBottom: 24 }}>
-                "İlk görüşmeden demo sonrasına kadar yalın ve hızlı bir akış."
-              </div>
               <div style={{ display: 'grid', gap: 10, marginBottom: 26 }}>
                 {STEPS.map((step, i) => (
                   <motion.div
@@ -325,12 +337,12 @@ export default function ContactPage() {
               </div>
               <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 18, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <div>
-                  <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, marginBottom: 4 }}>30-45 dk</div>
-                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.56)' }}>Ortalama demo süresi</div>
+                  <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, marginBottom: 4, color: '#ffffff' }}>{t('contact.heroDemoDuration')}</div>
+                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.56)' }}>{t('contact.heroDemoDurationLabel')}</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, marginBottom: 4 }}>1 gün</div>
-                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.56)' }}>Hedef kurulum başlangıcı</div>
+                  <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, marginBottom: 4, color: '#ffffff' }}>{t('contact.heroInstallDuration')}</div>
+                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.56)' }}>{t('contact.heroInstallDurationLabel')}</div>
                 </div>
               </div>
             </motion.div>
@@ -362,9 +374,6 @@ export default function ContactPage() {
                 <div style={{ width: 48, height: 48, borderRadius: 16, background: 'linear-gradient(135deg, rgba(0,60,117,0.07), rgba(121,172,220,0.14))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#003C75', marginBottom: 18 }}>
                   {ch.icon}
                 </div>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.09em', textTransform: 'uppercase', color: '#79ACDC', marginBottom: 10 }}>
-                  {ch.eyebrow}
-                </div>
                 <div style={{ fontSize: 'clamp(16px, 2vw, 22px)', fontWeight: 800, color: '#003C75', lineHeight: 1.25, marginBottom: 12 }}>
                   {ch.title}
                 </div>
@@ -385,14 +394,11 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             style={{ textAlign: 'center', marginBottom: 52 }}
           >
-            <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(20px, 2.5vw, 28px)', color: '#79ACDC', marginBottom: 12 }}>
-              Demo Talebi
-            </div>
             <h2 style={{ fontSize: 'clamp(30px, 4vw, 46px)', color: '#003C75', margin: '0 0 14px', lineHeight: 1.12 }}>
-              Ekibimiz size en uygun akışı paylaşsın
+              {t('contact.formTitle')}
             </h2>
             <p style={{ fontSize: 17, color: '#64748b', lineHeight: 1.72, maxWidth: 580, margin: '0 auto' }}>
-              Modül ihtiyaçlarınızı, kullanıcı yapınızı ve kurulum beklentinizi birlikte değerlendirelim.
+              {t('contact.formSubtitle')}
             </p>
           </motion.div>
 
@@ -414,19 +420,12 @@ export default function ContactPage() {
               <div style={{ position: 'absolute', right: -60, bottom: -60, width: 200, height: 200, borderRadius: '50%', background: 'rgba(121,172,220,0.10)', pointerEvents: 'none' }} />
 
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(219,238,255,0.5)', marginBottom: 18 }}>
-                  Demo Talebi
-                </div>
-                <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(22px, 2.5vw, 30px)', lineHeight: 1.26, marginBottom: 20, color: '#fff' }}>
-                  Ekibimiz size en uygun akışı paylaşsın.
-                </div>
                 <p style={{ fontSize: 15, lineHeight: 1.82, color: 'rgba(219,238,255,0.68)', margin: '0 0 28px' }}>
-                  Formu gönderdiğinizde ürün uzmanlarımız sizinle iletişime geçer; modül
-                  ihtiyaçlarınızı, kullanıcı yapınızı ve kurulum beklentinizi birlikte değerlendirir.
+                  {t('contact.formInfoText')}
                 </p>
 
                 <div style={{ display: 'grid', gap: 10, marginBottom: 30 }}>
-                  {['Demo planlaması', 'Kurulum yaklaşımı', 'Modül eşleştirmesi', 'Özel fiyat teklifi'].map((item) => (
+                  {[t('contact.formBullet1'), t('contact.formBullet2'), t('contact.formBullet3'), t('contact.formBullet4')].map((item) => (
                     <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 14px', borderRadius: 14, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.11)' }}>
                       <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#79ACDC', flexShrink: 0 }} />
                       <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>{item}</span>
@@ -435,8 +434,8 @@ export default function ContactPage() {
                 </div>
 
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 22 }}>
-                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.5)', marginBottom: 10 }}>Bize doğrudan yazın</div>
-                  <a href="mailto:info@airx.com.tr" style={{ fontSize: 16, fontWeight: 700, color: '#fff', textDecoration: 'none' }}>info@airx.com.tr</a>
+                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.5)', marginBottom: 10 }}>{t('contact.formDirectContact')}</div>
+                  <a href="mailto:info@airx.com.tr" style={{ fontSize: 16, fontWeight: 700, color: '#fff', textDecoration: 'none' }}>info@AiRX.com.tr</a>
                 </div>
               </div>
             </motion.div>
@@ -451,27 +450,27 @@ export default function ContactPage() {
             >
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }} className="form-row">
                 <label style={{ display: 'grid', gap: 7 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Ad Soyad</span>
-                  <input type="text" placeholder="Adınızı girin" style={fieldStyle('name')} onFocus={() => setFocusedField('name')} onBlur={() => setFocusedField(null)} />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldName')}</span>
+                  <input type="text" placeholder={t('contact.fieldNamePlaceholder')} value={formData.name} onChange={handleField('name')} style={fieldStyle('name')} onFocus={() => setFocusedField('name')} onBlur={() => setFocusedField(null)} />
                 </label>
                 <label style={{ display: 'grid', gap: 7 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Şirket</span>
-                  <input type="text" placeholder="Şirket adı" style={fieldStyle('company')} onFocus={() => setFocusedField('company')} onBlur={() => setFocusedField(null)} />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldCompany')}</span>
+                  <input type="text" placeholder={t('contact.fieldCompanyPlaceholder')} value={formData.company} onChange={handleField('company')} style={fieldStyle('company')} onFocus={() => setFocusedField('company')} onBlur={() => setFocusedField(null)} />
                 </label>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }} className="form-row">
                 <label style={{ display: 'grid', gap: 7 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>E-posta</span>
-                  <input type="email" placeholder="ornek@firma.com" style={fieldStyle('email')} onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldEmail')}</span>
+                  <input type="email" placeholder={t('contact.fieldEmailPlaceholder')} value={formData.email} onChange={handleField('email')} style={fieldStyle('email')} onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)} />
                 </label>
                 <label style={{ display: 'grid', gap: 7 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Telefon</span>
-                  <input type="tel" placeholder="+90 5xx xxx xx xx" style={fieldStyle('phone')} onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)} />
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldPhone')}</span>
+                  <input type="tel" placeholder={t('contact.fieldPhonePlaceholder')} value={formData.phone} onChange={handleField('phone')} style={fieldStyle('phone')} onFocus={() => setFocusedField('phone')} onBlur={() => setFocusedField(null)} />
                 </label>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }} className="form-row">
                 <div style={{ display: 'grid', gap: 7 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Çalışan Sayısı</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldSize')}</span>
                   <CustomSelect
                     options={SIZE_OPTIONS}
                     value={sizeValue}
@@ -483,7 +482,7 @@ export default function ContactPage() {
                   />
                 </div>
                 <div style={{ display: 'grid', gap: 7 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Konu</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldTopic')}</span>
                   <CustomSelect
                     options={TOPIC_OPTIONS}
                     value={topicValue}
@@ -496,29 +495,44 @@ export default function ContactPage() {
                 </div>
               </div>
               <label style={{ display: 'grid', gap: 7, marginBottom: 24 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>Mesajınız</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#334155' }}>{t('contact.fieldMessage')}</span>
                 <textarea
                   rows="5"
-                  placeholder="Kurum yapınızı ve ihtiyaçlarınızı kısaca paylaşabilirsiniz."
+                  placeholder={t('contact.fieldMessagePlaceholder')}
+                  value={formData.message}
+                  onChange={handleField('message')}
                   style={{ ...fieldStyle('message'), resize: 'vertical', minHeight: 130 }}
                   onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
                 />
               </label>
 
+              {submitState === 'success' && (
+                <div style={{ marginBottom: 16, padding: '12px 16px', background: '#f0fdf4', border: '1px solid #86efac', borderRadius: 10, fontSize: 14, color: '#166534', fontWeight: 500 }}>
+                  ✓ Mesajınız gönderildi! En kısa sürede geri döneceğiz.
+                </div>
+              )}
+              {submitState === 'error' && (
+                <div style={{ marginBottom: 16, padding: '12px 16px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: 10, fontSize: 14, color: '#991b1b', fontWeight: 500 }}>
+                  {errorMsg}
+                </div>
+              )}
+
               <div className="form-submit-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
                 <p style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.6, margin: 0, maxWidth: 260 }}>
-                  Kişisel verileriniz KVKK kapsamında korunmaktadır.
+                  {t('contact.kvkkNote')}
                 </p>
                 <motion.button
                   type="button"
-                  whileHover={{ y: -3, boxShadow: '0 16px 34px rgba(0,60,117,0.24)' }}
-                  whileTap={{ scale: 0.98 }}
+                  onClick={handleSubmit}
+                  disabled={submitState === 'loading' || submitState === 'success'}
+                  whileHover={submitState === 'idle' ? { y: -3, boxShadow: '0 16px 34px rgba(0,60,117,0.24)' } : {}}
+                  whileTap={submitState === 'idle' ? { scale: 0.98 } : {}}
                   className="form-submit-btn"
-                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#003C75', color: '#fff', border: 'none', borderRadius: 9999, fontWeight: 700, fontSize: 15, padding: '14px 28px', cursor: 'pointer', fontFamily: 'inherit', boxShadow: '0 10px 26px rgba(0,60,117,0.18)' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: submitState === 'success' ? '#16a34a' : '#003C75', color: '#fff', border: 'none', borderRadius: 9999, fontWeight: 700, fontSize: 15, padding: '14px 28px', cursor: submitState === 'loading' ? 'wait' : 'pointer', fontFamily: 'inherit', boxShadow: '0 10px 26px rgba(0,60,117,0.18)', opacity: submitState === 'loading' ? 0.75 : 1, transition: 'background 0.2s, opacity 0.2s' }}
                 >
-                  Talep Oluştur
-                  <ArrowIcon />
+                  {submitState === 'loading' ? 'Gönderiliyor…' : submitState === 'success' ? '✓ Gönderildi' : t('contact.submitButton')}
+                  {submitState === 'idle' && <ArrowIcon />}
                 </motion.button>
               </div>
             </motion.div>
@@ -536,14 +550,11 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             style={{ textAlign: 'center', marginBottom: 44 }}
           >
-            <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(20px, 2.5vw, 28px)', color: '#79ACDC', marginBottom: 12 }}>
-              Sık Sorulanlar
-            </div>
             <h2 style={{ fontSize: 'clamp(28px, 3.8vw, 42px)', color: '#003C75', margin: '0 0 12px', lineHeight: 1.14 }}>
-              İletişim öncesi hızlı cevaplar
+              {t('contact.faqTitle')}
             </h2>
             <p style={{ fontSize: 16, color: '#64748b', lineHeight: 1.72, maxWidth: 520, margin: '0 auto' }}>
-              İlk görüşme öncesinde en çok sorulan birkaç başlığı burada topladık.
+              {t('contact.faqSubtitle')}
             </p>
           </motion.div>
 
@@ -608,22 +619,18 @@ export default function ContactPage() {
 
         <div style={{ maxWidth: 960, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
-            <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(22px, 3vw, 30px)', color: '#79ACDC', marginBottom: 16 }}>
-              Hâlâ Karar Veremiyor musunuz?
-            </div>
             <h2 style={{ fontSize: 'clamp(30px, 4.5vw, 52px)', color: '#fff', margin: '0 0 20px', lineHeight: 1.1 }}>
-              Size uygun paketi birlikte bulalım.
+              {t('contact.ctaTitle')}
             </h2>
             <p style={{ maxWidth: 560, margin: '0 auto 34px', fontSize: 17, lineHeight: 1.78, color: 'rgba(219,238,255,0.68)' }}>
-              Çalışan sayınızı ve ihtiyaçlarınızı paylaşın, satış ekibimiz en kısa sürede size dönüş yapsın.
+              {t('contact.ctaSubtitle')}
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
               <motion.a href="#demo-form" whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 34px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontWeight: 700, fontSize: 15 }}>
-                Formu Doldur
-                <ArrowIcon />
+                  {t('contact.ctaBtn1')}
               </motion.a>
               <motion.a href="tel:+902162343737" whileHover={{ y: -4, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 28px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: 15, backdropFilter: 'blur(8px)' }}>
-                Hemen Ara
+                {t('contact.ctaBtn2')}
               </motion.a>
             </div>
           </motion.div>
@@ -632,17 +639,22 @@ export default function ContactPage() {
 
       <style>{`
         /* ── Grid layouts ── */
-        @media (max-width: 960px) {
+        @media (max-width: 1024px) {
           .contact-hero-grid, .contact-form-grid { grid-template-columns: 1fr !important; }
           .contact-channels-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 640px) {
           .contact-channels-grid { grid-template-columns: 1fr !important; }
           .form-row { grid-template-columns: 1fr !important; }
+          .contact-hero-grid > div:last-child,
+          .contact-form-grid > div {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+          }
         }
 
         /* ── Hero section padding ── */
-        @media (max-width: 960px) {
+        @media (max-width: 1024px) {
           .contact-hero-section { padding: 84px 24px 56px !important; }
         }
         @media (max-width: 640px) {
@@ -650,6 +662,12 @@ export default function ContactPage() {
         }
         @media (max-width: 480px) {
           .contact-hero-section { padding: 64px 16px 40px !important; }
+          .contact-hero-grid > div:last-child,
+          .contact-form-grid > div {
+            padding-left: 18px !important;
+            padding-right: 18px !important;
+            border-radius: 22px !important;
+          }
         }
 
         /* ── Form submit row ── */

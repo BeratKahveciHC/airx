@@ -1,32 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
-const FAQS = [
-  {
-    q: 'Kurulum süreci ne kadar sürer?',
-    a: 'AirX kurulumu ortalama 1 iş günü içinde tamamlanır. Ekibimiz, organizasyon yapınızı ve personel bilgilerini sisteme aktarmanızda size destek sağlar. Herhangi bir donanım satın almanıza gerek yoktur.',
-  },
-  {
-    q: 'Biyometrik cihaz satın almam gerekiyor mu?',
-    a: 'Hayır. AirX, biyometrik cihaz gerektirmez. Personelleriniz giriş-çıkış işlemlerini akıllı telefonlarındaki uygulama üzerinden QR kod veya NFC ile gerçekleştirebilir.',
-  },
-  {
-    q: 'Kaç kullanıcı için uygundur?',
-    a: 'AirX, 10 kişilik küçük işletmelerden 10.000+ çalışana sahip büyük kurumlara kadar tüm ölçeklerde kullanılabilir. Kullanıcı sayısına göre esnek fiyatlandırma seçeneklerimiz mevcuttur.',
-  },
-  {
-    q: 'KVKK uyumluluğu nasıl sağlanıyor?',
-    a: "AirX, kişisel veri işleme süreçlerinde KVKK'ya tam uyumlu çalışır. Biyometrik veri toplanmaz, tüm veriler Türkiye'deki güvenli veri merkezlerinde saklanır ve veri işleme sözleşmesi imzalanır.",
-  },
-  {
-    q: 'Mobil uygulama hangi cihazlarda çalışır?',
-    a: 'AirX mobil uygulaması iOS (iPhone) ve Android cihazlarda çalışır. Web paneline ise herhangi bir tarayıcıdan erişilebilir.',
-  },
-  {
-    q: 'Mevcut HR sistemimizden geçiş yapabilir miyiz?',
-    a: 'Evet. Ekibimiz, mevcut sisteminizden veri aktarımı ve geçiş sürecinde size destek sağlar. Excel ve CSV formatındaki personel verileriniz kolayca sisteme aktarılabilir.',
-  },
-]
+
 
 function AccordionItem({ item, index, isOpen, onToggle }) {
   return (
@@ -131,7 +107,17 @@ const ArrowIcon = () => (
 )
 
 export default function FAQ() {
+  const { t } = useTranslation()
   const [openIndex, setOpenIndex] = useState(0)
+
+  const FAQS = [
+    { q: t('faq.q1'), a: t('faq.a1') },
+    { q: t('faq.q2'), a: t('faq.a2') },
+    { q: t('faq.q3'), a: t('faq.a3') },
+    { q: t('faq.q4'), a: t('faq.a4') },
+    { q: t('faq.q5'), a: t('faq.a5') },
+    { q: t('faq.q6'), a: t('faq.a6') },
+  ]
 
   const handleToggle = (index) => {
     setOpenIndex(prev => prev === index ? null : index)
@@ -171,16 +157,6 @@ export default function FAQ() {
           transition={{ duration: 0.5 }}
           style={{ textAlign: 'center', marginBottom: 64 }}
         >
-          <div style={{
-            fontFamily: "'Instrument Serif', Georgia, serif",
-            fontStyle: 'italic',
-            fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#79ACDC',
-            marginBottom: 14,
-            letterSpacing: '-0.01em',
-          }}>
-            Sık Sorulan Sorular
-          </div>
           <h2 style={{
             fontSize: 'clamp(28px, 4vw, 42px)',
             fontWeight: 700,
@@ -188,11 +164,11 @@ export default function FAQ() {
             margin: '0 0 14px',
             lineHeight: 1.15,
           }}>
-            Aklınızdaki Soruları{' '}
-            <span style={{ color: '#79ACDC' }}>Yanıtlayalım</span>
+            {t('faq.headerTitle')}{' '}
+            <span style={{ color: '#79ACDC' }}>{t('faq.headerHighlight')}</span>
           </h2>
           <p style={{ fontSize: 17, color: '#64748b', maxWidth: 480, margin: '0 auto', lineHeight: 1.65 }}>
-            AirX hakkında merak ettiklerinizi derledik.
+            {t('faq.headerSubtitle')}
           </p>
         </motion.div>
 
@@ -230,21 +206,11 @@ export default function FAQ() {
                 <ChatIcon />
               </div>
 
-              <div style={{
-                fontFamily: "'Instrument Serif', Georgia, serif",
-                fontStyle: 'italic',
-                fontSize: 15,
-                color: 'rgba(219,238,255,0.7)',
-                marginBottom: 8,
-                lineHeight: 1.5,
-              }}>
-                Burada bulamadınız mı?
-              </div>
               <div style={{ fontSize: 20, fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 16 }}>
-                Uzmanlarımızla Konuşun
+                {t('faq.sidebarTitle')}
               </div>
               <p style={{ fontSize: 13, color: 'rgba(219,238,255,0.6)', lineHeight: 1.65, margin: '0 0 24px' }}>
-                Özel durumunuzu ekibimizle görüşün, size en uygun çözümü birlikte bulalım.
+                {t('faq.sidebarDesc')}
               </p>
 
               <button
@@ -261,7 +227,7 @@ export default function FAQ() {
                 cursor: 'pointer',
                 fontFamily: 'inherit',
               }} className="faq-help-button">
-                Demo Talep Et
+                {t('faq.sidebarButton')}
                 <ArrowIcon />
               </button>
             </div>
@@ -275,12 +241,12 @@ export default function FAQ() {
               boxShadow: '0 2px 12px rgba(0,60,117,0.05)',
             }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: 'rgba(0,60,117,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 12 }}>
-                Ortalama
+                {t('faq.avgLabel')}
               </div>
               {[
-                { value: '1 gün', label: 'Kurulum süresi' },
-                { value: '7/24', label: 'Teknik destek' },
-                { value: '%99.9', label: 'Uptime garantisi' },
+                { value: t('faq.avg1Value'), label: t('faq.avg1Label') },
+                { value: t('faq.avg2Value'), label: t('faq.avg2Label') },
+                { value: t('faq.avg3Value'), label: t('faq.avg3Label') },
               ].map((s, i, arr) => (
                 <div key={s.label} style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',

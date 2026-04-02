@@ -1,83 +1,97 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 /* ══════════════════════════════════════════════════════
-   VERİ
-══════════════════════════════════════════════════════ */
-const POSTS = [
-  {
-    slug: 'kvkk-ve-ik-yazilimlari',
-    category: 'Mevzuat',
-    categoryColor: '#0d9488',
-    title: 'KVKK Kapsamında İK Yazılımları: Parmak İzi Neden Artık Geçmişte Kaldı?',
-    excerpt: 'Biyometrik veri toplamak KVKK açısından ciddi riskler barındırıyor. Kurumlar bu risklerden nasıl kaçınabilir, alternatif yoklama yöntemleri neler?',
-    date: '18 Mart 2025',
-    readTime: '5 dk',
-    featured: true,
-  },
-  {
-    slug: 'ik-yazilimi-secerken-dikkat',
-    category: 'Rehber',
-    categoryColor: '#7c3aed',
-    title: 'İK Yazılımı Seçerken Sormanız Gereken 7 Soru',
-    excerpt: 'Onlarca seçenek arasında doğru İK platformunu seçmek için satın alma sürecinde mutlaka sormanız gereken kritik sorular.',
-    date: '5 Mart 2025',
-    readTime: '7 dk',
-    featured: false,
-  },
-  {
-    slug: 'pdks-modern-yaklasim',
-    category: 'PDKS',
-    categoryColor: '#1d4ed8',
-    title: 'Mobil QR ile Yoklama: Donanımsız PDKS\'in Yükselişi',
-    excerpt: 'Geleneksel parmak izi ve kart okuyucuların yerini mobil uygulamalar alıyor. Bu dönüşümün arkasındaki sebepler ve avantajlar.',
-    date: '20 Şubat 2025',
-    readTime: '4 dk',
-    featured: false,
-  },
-  {
-    slug: 'ik-surecleri-otomasyonu',
-    category: 'Verimlilik',
-    categoryColor: '#dc2626',
-    title: 'İzin Onay Sürecini Otomatize Etmek: Haftalar Değil Dakikalar',
-    excerpt: 'Manuel izin formları, e-posta zincirleri ve kayıp onaylar. İK ekiplerinin en çok zaman harcadığı süreç otomasyonla nasıl dönüşüyor?',
-    date: '10 Şubat 2025',
-    readTime: '6 dk',
-    featured: false,
-  },
-  {
-    slug: 'yemekhane-entegrasyonu',
-    category: 'Modüller',
-    categoryColor: '#ea7c1f',
-    title: 'Yemekhane Yönetimi Neden Ayrı Bir Yazılım Gerektirmemeli?',
-    excerpt: 'Yemekhane hakediş takibi, menü planlama ve personel tercihlerini İK sistemine entegre etmenin kuruma sağladığı kazanımlar.',
-    date: '28 Ocak 2025',
-    readTime: '4 dk',
-    featured: false,
-  },
-  {
-    slug: 'is-zekasi-ik-kararlari',
-    category: 'Analitik',
-    categoryColor: '#003C75',
-    title: 'İş Zekası Modülüyle İK Kararlarını Veriye Dayandırmak',
-    excerpt: 'Devamsızlık trendleri, fazla mesai analizleri ve performans raporları — doğru veriyle doğru kararlar nasıl alınır?',
-    date: '15 Ocak 2025',
-    readTime: '8 dk',
-    featured: false,
-  },
-]
-
-const CATEGORIES = ['Tümü', 'Mevzuat', 'Rehber', 'PDKS', 'Verimlilik', 'Modüller', 'Analitik']
-
-/* ══════════════════════════════════════════════════════
-   SAYFA
+   PAGE
 ══════════════════════════════════════════════════════ */
 export default function BlogPage() {
+  const { t } = useTranslation()
+
+  const POSTS = [
+    {
+      slug: 'kvkk-ve-ik-yazilimlari',
+      categoryKey: 'Mevzuat',
+      category: t('blog.cat_Mevzuat'),
+      categoryColor: '#0d9488',
+      title: t('blog.posts.kvkk.title'),
+      excerpt: t('blog.posts.kvkk.excerpt'),
+      date: t('blog.posts.kvkk.date'),
+      readTime: t('blog.posts.kvkk.readTime'),
+      featured: true,
+    },
+    {
+      slug: 'ik-yazilimi-secerken-dikkat',
+      categoryKey: 'Rehber',
+      category: t('blog.cat_Rehber'),
+      categoryColor: '#7c3aed',
+      title: t('blog.posts.ik7.title'),
+      excerpt: t('blog.posts.ik7.excerpt'),
+      date: t('blog.posts.ik7.date'),
+      readTime: t('blog.posts.ik7.readTime'),
+      featured: false,
+    },
+    {
+      slug: 'pdks-modern-yaklasim',
+      categoryKey: 'PDKS',
+      category: t('blog.cat_PDKS'),
+      categoryColor: '#1d4ed8',
+      title: t('blog.posts.pdksMobil.title'),
+      excerpt: t('blog.posts.pdksMobil.excerpt'),
+      date: t('blog.posts.pdksMobil.date'),
+      readTime: t('blog.posts.pdksMobil.readTime'),
+      featured: false,
+    },
+    {
+      slug: 'ik-surecleri-otomasyonu',
+      categoryKey: 'Verimlilik',
+      category: t('blog.cat_Verimlilik'),
+      categoryColor: '#dc2626',
+      title: t('blog.posts.izin.title'),
+      excerpt: t('blog.posts.izin.excerpt'),
+      date: t('blog.posts.izin.date'),
+      readTime: t('blog.posts.izin.readTime'),
+      featured: false,
+    },
+    {
+      slug: 'yemekhane-entegrasyonu',
+      categoryKey: 'Modüller',
+      category: t('blog.cat_Moduller'),
+      categoryColor: '#ea7c1f',
+      title: t('blog.posts.yemekhane.title'),
+      excerpt: t('blog.posts.yemekhane.excerpt'),
+      date: t('blog.posts.yemekhane.date'),
+      readTime: t('blog.posts.yemekhane.readTime'),
+      featured: false,
+    },
+    {
+      slug: 'is-zekasi-ik-kararlari',
+      categoryKey: 'Analitik',
+      category: t('blog.cat_Analitik'),
+      categoryColor: '#003C75',
+      title: t('blog.posts.isZekasi.title'),
+      excerpt: t('blog.posts.isZekasi.excerpt'),
+      date: t('blog.posts.isZekasi.date'),
+      readTime: t('blog.posts.isZekasi.readTime'),
+      featured: false,
+    },
+  ]
+
+  const CATEGORIES = [
+    { key: 'Tümü',    label: t('blog.catAll') },
+    { key: 'Mevzuat', label: t('blog.cat_Mevzuat') },
+    { key: 'Rehber',  label: t('blog.cat_Rehber') },
+    { key: 'PDKS',    label: t('blog.cat_PDKS') },
+    { key: 'Verimlilik', label: t('blog.cat_Verimlilik') },
+    { key: 'Modüller',   label: t('blog.cat_Moduller') },
+    { key: 'Analitik',   label: t('blog.cat_Analitik') },
+  ]
+
   const [active, setActive] = useState('Tümü')
 
   const featured = POSTS.find(p => p.featured)
-  const rest = POSTS.filter(p => !p.featured && (active === 'Tümü' || p.category === active))
+  const rest = POSTS.filter(p => !p.featured && (active === 'Tümü' || p.categoryKey === active))
 
   return (
     <div style={{ background: '#fff' }}>
@@ -94,22 +108,6 @@ export default function BlogPage() {
         <div style={{ position: 'absolute', bottom: -60, left: '20%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(121,172,220,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              fontFamily: "'Instrument Serif', Georgia, serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(22px, 3vw, 34px)',
-              color: '#79ACDC',
-              marginBottom: 18,
-              letterSpacing: '-0.01em',
-            }}
-          >
-            Blog
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -121,7 +119,7 @@ export default function BlogPage() {
               letterSpacing: '-0.035em',
             }}
           >
-            İK dünyasından içgörüler
+            {t('blog.heroTitle')}
           </motion.h1>
 
           <motion.p
@@ -133,7 +131,7 @@ export default function BlogPage() {
               lineHeight: 1.7, maxWidth: 480, margin: '0 auto',
             }}
           >
-            Mevzuat güncellemeleri, sektör rehberleri ve İK yönetimine dair pratik içerikler.
+            {t('blog.heroSubtitle')}
           </motion.p>
         </div>
 
@@ -176,7 +174,7 @@ export default function BlogPage() {
                           fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase',
                           color: '#fff', background: '#003C75',
                           padding: '4px 12px', borderRadius: 100,
-                        }}>Öne Çıkan</span>
+                        }}>{t('blog.featuredBadge')}</span>
                         <span style={{
                           fontSize: 10, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase',
                           color: featured.categoryColor,
@@ -202,13 +200,13 @@ export default function BlogPage() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                         <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 500 }}>{featured.date}</span>
                         <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#e2e8f0', display: 'inline-block' }} />
-                        <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 500 }}>{featured.readTime} okuma</span>
+                        <span style={{ fontSize: 13, color: '#94a3b8', fontWeight: 500 }}>{featured.readTime} {t('blog.readSuffix')}</span>
                       </div>
                       <div style={{
                         display: 'inline-flex', alignItems: 'center', gap: 6,
                         fontSize: 13, fontWeight: 700, color: '#003C75',
                       }}>
-                        Oku
+                        {t('blog.readBtn')}
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
                         </svg>
@@ -240,17 +238,15 @@ export default function BlogPage() {
 
                     <div style={{ position: 'relative', zIndex: 1 }}>
                       <div style={{
-                        fontFamily: "'Instrument Serif', Georgia, serif",
-                        fontStyle: 'italic',
                         fontSize: 'clamp(22px, 3vw, 36px)',
                         color: 'rgba(219,238,255,0.9)',
                         lineHeight: 1.35,
                         marginBottom: 16,
                       }}>
-                        "Biyometrik veri<br />zorunluluk değil,<br />tercih meselesidir."
+                      {t('blog.blogQuote')}
                       </div>
                       <div style={{ fontSize: 12, color: 'rgba(121,172,220,0.5)', fontWeight: 600, letterSpacing: '0.05em' }}>
-                        AirX · Mevzuat Rehberi
+                        {t('blog.blogQuoteSource')}
                       </div>
                     </div>
                   </div>
@@ -270,36 +266,29 @@ export default function BlogPage() {
           {/* Başlık + filtre satırı */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap', marginBottom: 40 }}>
             <div>
-              <div style={{
-                fontFamily: "'Instrument Serif', Georgia, serif",
-                fontStyle: 'italic',
-                fontSize: 20,
-                color: '#79ACDC',
-                marginBottom: 4,
-              }}>Tüm yazılar</div>
               <div style={{ fontSize: 13, color: '#94a3b8', fontWeight: 500 }}>
-                {rest.length} yazı {active !== 'Tümü' ? `"${active}" kategorisinde` : ''}
+                {t('blog.filterCount', { count: rest.length })}{active !== 'Tümü' ? ' ' + t('blog.filterCountCat', { cat: CATEGORIES.find(c => c.key === active)?.label || active }) : ''}
               </div>
             </div>
 
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {CATEGORIES.map(cat => (
                 <button
-                  key={cat}
-                  onClick={() => setActive(cat)}
+                  key={cat.key}
+                  onClick={() => setActive(cat.key)}
                   style={{
                     fontSize: 12, fontWeight: 600,
                     padding: '6px 16px', borderRadius: 100,
-                    border: `1px solid ${active === cat ? '#003C75' : '#e2e8f0'}`,
-                    background: active === cat ? '#003C75' : '#fff',
-                    color: active === cat ? '#fff' : '#64748b',
+                    border: `1px solid ${active === cat.key ? '#003C75' : '#e2e8f0'}`,
+                    background: active === cat.key ? '#003C75' : '#fff',
+                    color: active === cat.key ? '#fff' : '#64748b',
                     cursor: 'pointer', fontFamily: 'inherit',
                     transition: 'all 0.15s',
                   }}
-                  onMouseEnter={e => { if (active !== cat) { e.currentTarget.style.borderColor = '#003C75'; e.currentTarget.style.color = '#003C75' } }}
-                  onMouseLeave={e => { if (active !== cat) { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.color = '#64748b' } }}
+                  onMouseEnter={e => { if (active !== cat.key) { e.currentTarget.style.borderColor = '#003C75'; e.currentTarget.style.color = '#003C75' } }}
+                  onMouseLeave={e => { if (active !== cat.key) { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.color = '#64748b' } }}
                 >
-                  {cat}
+                  {cat.label}
                 </button>
               ))}
             </div>
@@ -318,7 +307,7 @@ export default function BlogPage() {
                 exit={{ opacity: 0 }}
                 style={{ textAlign: 'center', padding: '80px 0', color: '#94a3b8', fontSize: 15 }}
               >
-                Bu kategoride henüz yazı yok.
+                {t('blog.emptyState')}
               </motion.div>
             ) : (
               <motion.div
@@ -373,7 +362,7 @@ export default function BlogPage() {
                           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                             <span style={{ fontSize: 12, color: '#94a3b8' }}>{rest[0].date}</span>
                             <span style={{ width: 3, height: 3, borderRadius: '50%', background: '#e2e8f0', display: 'inline-block' }} />
-                            <span style={{ fontSize: 12, color: '#94a3b8' }}>{rest[0].readTime} okuma</span>
+                            <span style={{ fontSize: 12, color: '#94a3b8' }}>{rest[0].readTime} {t('blog.readSuffix')}</span>
                           </div>
                         </div>
 
@@ -384,8 +373,6 @@ export default function BlogPage() {
                           padding: 32,
                         }}>
                           <div style={{
-                            fontFamily: "'Instrument Serif', Georgia, serif",
-                            fontStyle: 'italic',
                             fontSize: 'clamp(36px, 5vw, 72px)',
                             fontWeight: 900,
                             color: `${rest[0].categoryColor}20`,
@@ -395,7 +382,7 @@ export default function BlogPage() {
                             userSelect: 'none',
                           }}>
                             {rest[0].readTime}
-                            <div style={{ fontSize: '0.35em', color: `${rest[0].categoryColor}40`, letterSpacing: '0.1em', fontStyle: 'normal', fontWeight: 700, marginTop: 4 }}>OKUMA</div>
+                            <div style={{ fontSize: '0.35em', color: `${rest[0].categoryColor}40`, letterSpacing: '0.1em', fontStyle: 'normal', fontWeight: 700, marginTop: 4 }}>{t('blog.readLabel')}</div>
                           </div>
                         </div>
                       </div>
@@ -501,28 +488,22 @@ export default function BlogPage() {
             <div style={{ position: 'absolute', right: -60, top: -60, width: 280, height: 280, borderRadius: '50%', background: 'rgba(121,172,220,0.07)', pointerEvents: 'none' }} />
 
             <div style={{ flex: 1, minWidth: 240, position: 'relative', zIndex: 1 }}>
-              <div style={{
-                fontFamily: "'Instrument Serif', Georgia, serif",
-                fontStyle: 'italic',
-                fontSize: 'clamp(20px, 2.5vw, 28px)',
-                color: '#79ACDC', marginBottom: 10,
-              }}>Güncel kalın</div>
               <h2 style={{
                 fontSize: 'clamp(22px, 3vw, 36px)',
                 fontWeight: 800, color: '#fff',
                 margin: '0 0 10px', lineHeight: 1.15,
                 letterSpacing: '-0.025em',
-              }}>Yeni yazıları kaçırmayın</h2>
+              }}>{t('blog.newsletterTitle')}</h2>
               <p style={{ fontSize: 15, color: 'rgba(219,238,255,0.55)', lineHeight: 1.65, margin: 0 }}>
-                İK mevzuatı ve sektör içgörüleri doğrudan e-postanıza gelsin.
+                {t('blog.newsletterSubtitle')}
               </p>
             </div>
 
-            <div style={{ flex: '0 0 auto', minWidth: 300, position: 'relative', zIndex: 1 }}>
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <div className="blog-newsletter-form" style={{ flex: '0 0 auto', minWidth: 300, position: 'relative', zIndex: 1 }}>
+              <div className="blog-newsletter-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <input
                   type="email"
-                  placeholder="e-posta adresiniz"
+                  placeholder={t('blog.newsletterPlaceholder')}
                   style={{
                     flex: 1, minWidth: 200,
                     padding: '13px 18px', borderRadius: 10,
@@ -548,11 +529,11 @@ export default function BlogPage() {
                   onMouseEnter={e => { e.currentTarget.style.background = '#a0c4e8' }}
                   onMouseLeave={e => { e.currentTarget.style.background = '#79ACDC' }}
                 >
-                  Abone Ol
+                  {t('blog.newsletterBtn')}
                 </button>
               </div>
               <p style={{ fontSize: 12, color: 'rgba(219,238,255,0.3)', margin: '10px 0 0' }}>
-                İstediğiniz zaman abonelikten çıkabilirsiniz.
+                {t('blog.newsletterNote')}
               </p>
             </div>
           </motion.div>
@@ -560,7 +541,7 @@ export default function BlogPage() {
       </section>
 
       <style>{`
-        @media (max-width: 860px) {
+        @media (max-width: 1024px) {
           .featured-card { grid-template-columns: 1fr !important; }
           .wide-card { grid-template-columns: 1fr !important; }
           .wide-card > div:last-child { display: none !important; }
@@ -568,6 +549,33 @@ export default function BlogPage() {
         }
         @media (max-width: 560px) {
           .blog-grid { grid-template-columns: 1fr !important; }
+          .blog-newsletter-form {
+            min-width: 100% !important;
+            width: 100% !important;
+          }
+          .blog-newsletter-row {
+            flex-direction: column !important;
+          }
+          .blog-newsletter-row input,
+          .blog-newsletter-row button {
+            width: 100% !important;
+          }
+          .featured-card > div:first-child,
+          .wide-card > div:first-child {
+            padding: 24px 20px !important;
+          }
+          .featured-card > div:last-child {
+            min-height: 220px !important;
+            padding: 28px 20px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .featured-card > div:first-child > div:last-child,
+          .wide-card > div:first-child > div:last-child {
+            align-items: flex-start !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+          }
         }
       `}</style>
     </div>

@@ -26,7 +26,7 @@ Yemekhane modülü İK sistemiyle entegre olduğunda:
 
 **Maliyet analizi:** Kişi başı yemek maliyeti, departman bazlı harcamalar, aylık trend — tüm veriler İş Zekası modülüyle analiz edilebilir.
 
-## AirX Yemekhane Modülü
+## AiRX Yemekhane Modülü
 
 - QR kod ile yemek doğrulama
 - Günlük/haftalık menü yönetimi

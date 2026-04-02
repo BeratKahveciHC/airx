@@ -52,4 +52,4 @@ Bugün 50 kişilik ekibiniz var ama 2 yıl sonra 500 kişi olabilir. Sistem büy
 
 ---
 
-*AirX bu listedeki tüm kriterleri karşılar. Demo talep etmek için iletişim sayfasını ziyaret edebilirsiniz.*
+*AiRX bu listedeki tüm kriterleri karşılar. Demo talep etmek için iletişim sayfasını ziyaret edebilirsiniz.*

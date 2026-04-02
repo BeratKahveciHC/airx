@@ -44,7 +44,7 @@ export const MODULES_DATA = [
       },
     ],
     how_it_works: [
-      { step: '01', title: 'Sistemi Kurun', desc: 'AirX\'e kayıt olun ve şirket profilinizi oluşturun. Personel listesini Excel ile toplu yükleyin.' },
+      { step: '01', title: 'Sistemi Kurun', desc: 'AiRX\'e kayıt olun ve şirket profilinizi oluşturun. Personel listesini Excel ile toplu yükleyin.' },
       { step: '02', title: 'Personeli Davet Edin', desc: 'SMS veya e-posta ile mobil uygulamaya davet gönderin. Personel 2 dakikada kayıt olur.' },
       { step: '03', title: 'Takibe Başlayın', desc: 'Personel uygulamadan giriş-çıkış yapar, siz anlık dashboard\'dan takip edersiniz.' },
     ],
@@ -189,7 +189,7 @@ export const MODULES_DATA = [
       { title: 'Ev Sahibi Bildirimi', desc: 'Ziyaretçi geldiğinde ilgili personele anlık bildirim gönderilir. Lobi karışıklığını önleyin.', icon: 'notify' },
     ],
     how_it_works: [
-      { step: '01', title: 'Resepsiyon Kurun', desc: 'Tablet veya bilgisayara AirX ziyaretçi modülünü açın.' },
+      { step: '01', title: 'Resepsiyon Kurun', desc: 'Tablet veya bilgisayara AiRX ziyaretçi modülünü açın.' },
       { step: '02', title: 'Kayıt Yapın', desc: 'Ziyaretçi bilgilerini girin veya ön kayıt QR\'ını okutun.' },
       { step: '03', title: 'Karşılayın', desc: 'Ev sahibi bildirim alır, ziyaretçi QR rozet ile binaya girer.' },
     ],

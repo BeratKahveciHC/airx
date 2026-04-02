@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 /* ── İkon sistemi ── */
 const Ic = ({ d, d2, d3, d4, size, color, circle, poly, rect, line, line2, line3 }) => (
@@ -32,27 +33,38 @@ const GiftIcon      = (p) => <Ic {...p} poly="20 12 20 22 4 22 4 12" rect={[2,7,
 const RefreshCwIcon = (p) => <Ic {...p} d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5" d2="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/>
 const BarChartIcon  = (p) => <Ic {...p} line={[18,20,18,10]} line2={[12,20,12,4]} line3={[6,20,6,14]} d="M2 20h20"/>
 
-const MODULES = [
-  { Icon: ClockIcon,     slug: 'pdks',               name: 'PDKS',               accent: '#38bdf8', desc: 'Personel giriş-çıkışlarını mobil uygulama üzerinden takip edin. Biyometrik cihaz gerektirmez, QR kod ile saniyeler içinde işlem tamamlanır.',         features: ['Mobil Giriş-Çıkış', 'Otomatik Mesai Hesabı', 'Geç Kalma Bildirimleri', 'Gerçek Zamanlı Takip'] },
-  { Icon: UserIcon,      slug: 'ozluk-dosyasi',      name: 'Özlük Dosyası',      accent: '#a78bfa', desc: 'Personele ait tüm özlük bilgilerini dijital ortamda saklayın ve yönetin. Belge yükleme, sicil takibi ve arşivleme tek ekranda.',                         features: ['Dijital Sicil Kartı', 'Belge Yükleme & Arşiv', 'İşe Giriş-Çıkış Kaydı', 'Toplu Güncelleme'] },
-  { Icon: CalCheckIcon,  slug: 'izin-yonetimi',      name: 'İzin Yönetimi',      accent: '#34d399', desc: 'Personel izin taleplerini dijital onay akışıyla yönetin. Yıllık izin bakiyeleri otomatik hesaplanır, kağıt form süreçleri tarihe karışır.',              features: ['Online Talep & Onay', 'Otomatik Bakiye Hesabı', 'Takvim Görünümü', 'Çoklu İzin Tipi'] },
-  { Icon: TableIcon,     slug: 'puantaj',             name: 'Puantaj',             accent: '#fbbf24', desc: 'Çalışma sürelerini ve devam durumlarını aylık puantaj cetveli olarak otomatik oluşturun. Bordro hesaplamalarına hazır çıktı alın.',                       features: ['Otomatik Puantaj Cetveli', 'Mesai & Fazla Mesai', 'Bordro Entegrasyonu', 'Excel Export'] },
-  { Icon: KeyIcon,       slug: 'erisim-kontrolu',    name: 'Erişim Kontrolü',    accent: '#f87171', desc: 'Bina ve bölüm girişlerini dijital olarak yönetin. Hangi personelin hangi alana erişebildiğini tanımlayın, anlık kayıt tutun.',                            features: ['Bölge Bazlı Yetkilendirme', 'Anlık Giriş Kaydı', 'Erişim Raporu', 'Mobil Doğrulama'] },
-  { Icon: UserCheckIcon, slug: 'ziyaretci-yonetimi', name: 'Ziyaretçi Yönetimi', accent: '#22d3ee', desc: 'Kurumunuza gelen ziyaretçileri kayıt altına alın. Ziyaret nedeni, refakatçi ve süre bilgilerini dijital ortamda takip edin.',                            features: ['Dijital Ziyaretçi Kaydı', 'QR Rozet Oluşturma', 'Ziyaretçi Geçmişi', 'Anlık Bildirim'] },
-  { Icon: UtensilsIcon,  slug: 'yemekhane',           name: 'Yemekhane',           accent: '#fb923c', desc: 'Personel yemek kullanımını ve menü tercihlerini dijital olarak takip edin. Yemekhane maliyetlerini analiz edin, israfı önleyin.',                          features: ['Dijital Yemek Kartı', 'Günlük Menü Yönetimi', 'Kullanım Raporları', 'Maliyet Analizi'] },
-  { Icon: ClipboardIcon, slug: 'anket',               name: 'Anket',               accent: '#a3e635', desc: 'Çalışan memnuniyeti, iç iletişim ve geri bildirim süreçleri için kolayca anket oluşturun. Sonuçları anlık analiz edin.',                                  features: ['Kolay Anket Oluşturma', 'Anonim Katılım Seçeneği', 'Anlık Sonuç Analizi', 'Departman Bazlı Raporlama'] },
-  { Icon: FileClockIcon, slug: 'sureli-evraklar',     name: 'Süreli Evraklar',     accent: '#f472b6', desc: 'Son kullanma tarihi olan belgeleri (ehliyet, sertifika, sözleşme vb.) takip edin. Süresi dolmadan otomatik uyarı alın.',                                  features: ['Son Tarih Takibi', 'Otomatik Hatırlatma', 'Belge Arşivi', 'Yenileme Süreci'] },
-  { Icon: BookOpenIcon,  slug: 'egitim-planlama',     name: 'Eğitim Planlama',     accent: '#60a5fa', desc: 'Personel eğitim planlarını oluşturun, katılımları takip edin ve eğitim tamamlama raporları alın. Gelişim süreçlerini yönetin.',                            features: ['Eğitim Takvimi', 'Katılım Takibi', 'Sertifika Yönetimi', 'Eğitim Raporları'] },
-  { Icon: ScaleIcon,     slug: 'hukuki-evraklar',     name: 'Hukuki Evraklar',     accent: '#818cf8', desc: 'İş sözleşmeleri, gizlilik taahhütleri ve yasal belgelerinizi güvenli dijital arşivde saklayın. İmza süreçlerini online yönetin.',                         features: ['Dijital Sözleşme Arşivi', 'E-İmza Desteği', 'Versiyon Kontrolü', 'Güvenli Erişim'] },
-  { Icon: GiftIcon,      slug: 'yan-haklar',          name: 'Yan Haklar',          accent: '#2dd4bf', desc: 'Personele sunulan yan hakları (özel sağlık sigortası, araç, telefon vb.) tanımlayın ve kişi bazında takip edin.',                                          features: ['Yan Hak Tanımlama', 'Kişi Bazlı Atama', 'Maliyet Takibi', 'Dönemsel Raporlama'] },
-  { Icon: RefreshCwIcon, slug: 'periyodik-gorev',     name: 'Periyodik Görev',     accent: '#c084fc', desc: 'Düzenli aralıklarla tekrar eden görevleri otomatik olarak oluşturun. Tamamlanma durumlarını takip edin, gecikmelerde uyarı alın.',                         features: ['Otomatik Görev Oluşturma', 'Tekrar Planlaması', 'Durum Takibi', 'Gecikme Bildirimleri'] },
-  { Icon: BarChartIcon,  slug: 'is-zekasi',           name: 'İş Zekası',           accent: '#79ACDC', desc: "Tüm İK verilerinizi tek bir dashboard'da görselleştirin. Devam, izin, performans ve maliyet analizlerini anlık olarak izleyin.",                         features: ['Anlık Dashboard', 'Özelleştirilebilir Raporlar', 'Trend Analizi', 'Excel & PDF Export'] },
+const MODULE_KEYS = [
+  { Icon: ClockIcon,     slug: 'pdks',               key: 'pdks',               accent: '#38bdf8' },
+  { Icon: UserIcon,      slug: 'ozluk-dosyasi',      key: 'ozlukDosyasi',       accent: '#a78bfa' },
+  { Icon: CalCheckIcon,  slug: 'izin-yonetimi',      key: 'izinYonetimi',       accent: '#34d399' },
+  { Icon: TableIcon,     slug: 'puantaj',             key: 'puantaj',            accent: '#fbbf24' },
+  { Icon: KeyIcon,       slug: 'erisim-kontrolu',    key: 'erisimKontrolu',     accent: '#f87171' },
+  { Icon: UserCheckIcon, slug: 'ziyaretci-yonetimi', key: 'ziyaretciYonetimi',  accent: '#22d3ee' },
+  { Icon: UtensilsIcon,  slug: 'yemekhane',           key: 'yemekhane',          accent: '#fb923c' },
+  { Icon: ClipboardIcon, slug: 'anket',               key: 'anket',              accent: '#a3e635' },
+  { Icon: FileClockIcon, slug: 'sureli-evraklar',     key: 'sureligEvraklar',    accent: '#f472b6' },
+  { Icon: BookOpenIcon,  slug: 'egitim-planlama',     key: 'egitimPlanlama',     accent: '#60a5fa' },
+  { Icon: ScaleIcon,     slug: 'hukuki-evraklar',     key: 'hukukiEvraklar',     accent: '#818cf8' },
+  { Icon: GiftIcon,      slug: 'yan-haklar',          key: 'yanHaklar',          accent: '#2dd4bf' },
+  { Icon: RefreshCwIcon, slug: 'periyodik-gorev',     key: 'periyodikGorev',     accent: '#c084fc' },
+  { Icon: BarChartIcon,  slug: 'is-zekasi',           key: 'isZekasi',           accent: '#79ACDC' },
 ]
+const hexRgba = (hex, a) => {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16)
+  return `rgba(${r},${g},${b},${a})`
+}
 
 const CYCLE_DURATION   = 3500
 const USER_PAUSE_DURATION = 8000
 
 export default function Modules() {
+  const { t } = useTranslation()
+  const MODULES = MODULE_KEYS.map(m => ({
+    ...m,
+    name: t(`moduleDetail.${m.key}.name`),
+    desc: t(`moduleDetail.${m.key}.desc`),
+    features: [t(`moduleDetail.${m.key}.f1`), t(`moduleDetail.${m.key}.f2`), t(`moduleDetail.${m.key}.f3`), t(`moduleDetail.${m.key}.f4`)],
+  }))
   const [active, setActive]       = useState(0)
   const [direction, setDirection] = useState(1)
   const [progressKey, setProgressKey] = useState(0)
@@ -119,16 +131,6 @@ export default function Modules() {
           transition={{ duration: 0.5 }}
           style={{ textAlign: 'center', marginBottom: 56 }}
         >
-          <div style={{
-            fontFamily: "'Instrument Serif', Georgia, serif",
-            fontStyle: 'italic',
-            fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#79ACDC',
-            marginBottom: 14,
-            letterSpacing: '-0.01em',
-          }}>
-            14 Modül
-          </div>
           <h2 style={{
             fontSize: 'clamp(28px, 4vw, 42px)',
             fontWeight: 700,
@@ -136,30 +138,55 @@ export default function Modules() {
             margin: '0 0 14px',
             lineHeight: 1.15,
           }}>
-            Tek Platformda{' '}
-            <span style={{ color: '#79ACDC' }}>Her Şey</span>
+            {t('modulesSection.title')}{' '}
+            <span style={{ color: '#79ACDC' }}>{t('modulesSection.titleHighlight')}</span>
           </h2>
           <p style={{ fontSize: 17, color: '#64748b', maxWidth: 500, margin: '0 auto', lineHeight: 1.65 }}>
-            İnsan kaynakları yönetiminin her alanı için özel tasarlanmış modüller, tek çatı altında.
+            {t('modulesSection.subtitle')}
           </p>
         </motion.div>
 
-        {/* ── Explorer kutusu ── */}
+        {/* ── Explorer kutusu — Laptop Mockup ── */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{
-            display: 'flex',
-            borderRadius: 28,
-            border: '1px solid rgba(0,60,117,0.18)',
-            boxShadow: '0 32px 80px rgba(0,30,80,0.20), 0 1px 0 rgba(255,255,255,0.6) inset',
+            borderRadius: 18,
             overflow: 'hidden',
-            background: '#001f45',
+            boxShadow: '0 0 0 1px rgba(0,30,80,0.10), 0 8px 24px rgba(0,30,80,0.08), 0 32px 80px rgba(0,30,80,0.18)',
+            background: 'transparent',
           }}
-          className="modules-explorer"
         >
+          {/* Browser chrome */}
+          <div style={{
+            background: 'linear-gradient(180deg, #f5f7fa 0%, #edf0f5 100%)',
+            borderBottom: '1px solid rgba(0,30,80,0.10)',
+            padding: '8px 14px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}>
+            <div style={{ display: 'flex', gap: 5 }}>
+              {['#ff6058', '#ffbd2e', '#28c840'].map(c => (
+                <div key={c} style={{ width: 9, height: 9, borderRadius: '50%', background: c, boxShadow: `0 1px 2px ${c}66` }} />
+              ))}
+            </div>
+            <div style={{ flex: 1, maxWidth: 240, margin: '0 auto', background: 'rgba(0,30,80,0.07)', borderRadius: 6, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5, border: '1px solid rgba(0,30,80,0.07)' }}>
+              <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span style={{ fontSize: 9.5, color: '#94a3b8', letterSpacing: '0.01em' }}>panel.AiRX.com.tr</span>
+            </div>
+          </div>
+
+          {/* Modules Explorer */}
+          <div
+            style={{
+              display: 'flex',
+              background: '#001f45',
+            }}
+            className="modules-explorer"
+          >
 
           {/* ── Sol Panel — Lacivert ── */}
           <div
@@ -183,7 +210,7 @@ export default function Modules() {
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
             }}>
-              Modüller — {MODULES.length}
+              {t('modulesSection.panelHeader')} — {MODULES.length}
             </div>
 
             {MODULES.map((m, i) => (
@@ -195,9 +222,9 @@ export default function Modules() {
                   alignItems: 'center',
                   gap: 10,
                   padding: '9px 14px 9px 16px',
-                  background: active === i ? 'rgba(121,172,220,0.12)' : 'transparent',
+                  background: active === i ? hexRgba(m.accent, 0.12) : 'transparent',
                   border: 'none',
-                  borderLeft: `3px solid ${active === i ? '#79ACDC' : 'transparent'}`,
+                  borderLeft: `3px solid ${active === i ? m.accent : 'transparent'}`,
                   cursor: 'pointer',
                   width: '100%',
                   textAlign: 'left',
@@ -211,20 +238,20 @@ export default function Modules() {
                   width: 30,
                   height: 30,
                   borderRadius: 8,
-                  background: active === i ? 'rgba(121,172,220,0.18)' : 'rgba(255,255,255,0.05)',
+                  background: active === i ? hexRgba(m.accent, 0.18) : 'rgba(255,255,255,0.05)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
                   transition: 'background 0.2s',
-                  border: active === i ? '1px solid rgba(121,172,220,0.35)' : '1px solid transparent',
+                  border: active === i ? `1px solid ${hexRgba(m.accent, 0.35)}` : '1px solid transparent',
                 }}>
-                  <m.Icon size={15} color={active === i ? '#79ACDC' : 'rgba(255,255,255,0.35)'} />
+                  <m.Icon size={15} color={active === i ? m.accent : 'rgba(255,255,255,0.35)'} />
                 </span>
                 <span style={{
                   fontSize: 13,
                   fontWeight: active === i ? 600 : 400,
-                  color: active === i ? '#e8f3fc' : 'rgba(255,255,255,0.45)',
+                  color: active === i ? m.accent : 'rgba(255,255,255,0.45)',
                   transition: 'all 0.2s',
                   lineHeight: 1.3,
                 }}>
@@ -253,19 +280,22 @@ export default function Modules() {
               transition={{ duration: CYCLE_DURATION / 1000, ease: 'linear' }}
               style={{
                 position: 'absolute', top: 0, left: 0, height: 2, zIndex: 10,
-                background: 'linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.3))',
+                background: `linear-gradient(90deg, ${mod.accent}, ${hexRgba(mod.accent, 0.4)})`,
               }}
             />
 
             {/* Watermark numara */}
-            <div style={{
+            <div
+              className="modules-watermark"
+              style={{
               position: 'absolute', right: -10, bottom: -20,
               fontSize: 200, fontWeight: 900, lineHeight: 1,
               color: 'rgba(255,255,255,0.04)',
               userSelect: 'none', pointerEvents: 'none',
               fontVariantNumeric: 'tabular-nums',
               letterSpacing: '-0.04em',
-            }}>
+            }}
+            >
               {String(active + 1).padStart(2, '0')}
             </div>
 
@@ -289,29 +319,32 @@ export default function Modules() {
                     className="modules-right-content"
                   >
                     {/* Modül badge */}
-                    <div style={{
+                    <div
+                      className="modules-badge"
+                      style={{
                       display: 'inline-flex', alignItems: 'center', gap: 6,
                       background: 'rgba(255,255,255,0.12)',
                       border: '1px solid rgba(255,255,255,0.2)',
                       borderRadius: 100,
                       padding: '4px 12px',
                       marginBottom: 24,
-                    }}>
-                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#e8f3fc' }} />
+                    }}
+                    >
+                      <div style={{ width: 6, height: 6, borderRadius: '50%', background: mod.accent }} />
                       <span style={{ fontSize: 11, fontWeight: 700, color: '#e8f3fc', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                        Modül {String(active + 1).padStart(2, '0')} / {MODULES.length}
+                      {t('modulesSection.panelHeader')} {String(active + 1).padStart(2, '0')} / {MODULES.length}
                       </span>
                     </div>
 
                     {/* İkon + Başlık */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 20 }}>
+                    <div className="modules-title-row" style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 20 }}>
                       <div style={{
                         width: 64, height: 64, borderRadius: 20, flexShrink: 0,
-                        background: 'rgba(255,255,255,0.15)',
-                        border: '1px solid rgba(255,255,255,0.25)',
+                        background: hexRgba(mod.accent, 0.18),
+                        border: `1px solid ${hexRgba(mod.accent, 0.4)}`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         position: 'relative',
-                        boxShadow: '0 0 32px rgba(255,255,255,0.1)',
+                        boxShadow: `0 0 32px ${hexRgba(mod.accent, 0.25)}`,
                       }}>
                         <ActiveIcon size={28} color="#fff" />
                       </div>
@@ -328,7 +361,7 @@ export default function Modules() {
                     </div>
 
                     {/* Açıklama */}
-                    <p style={{
+                    <p className="modules-desc" style={{
                       fontSize: 15,
                       color: 'rgba(232,243,252,0.75)',
                       lineHeight: 1.75,
@@ -339,7 +372,7 @@ export default function Modules() {
                     </p>
 
                     {/* Özellik chips */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 36 }}>
+                    <div className="modules-features" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 36 }}>
                       {mod.features.map(f => (
                         <div key={f} style={{
                           display: 'inline-flex', alignItems: 'center', gap: 6,
@@ -349,7 +382,7 @@ export default function Modules() {
                           padding: '7px 14px',
                         }}>
                           <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6l3 3 5-5" stroke="#e8f3fc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M2 6l3 3 5-5" stroke={mod.accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                           <span style={{ fontSize: 13, color: 'rgba(232,243,252,0.9)', fontWeight: 500 }}>{f}</span>
                         </div>
@@ -360,6 +393,7 @@ export default function Modules() {
                     <div style={{ marginBottom: 24 }}>
                       <a
                         href={`/moduller/${mod.slug}`}
+                        className="modules-detail-link"
                         style={{
                           display: 'inline-flex', alignItems: 'center', gap: 8,
                           padding: '10px 22px',
@@ -376,7 +410,7 @@ export default function Modules() {
                         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)' }}
                         onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)' }}
                       >
-                        Detayları İncele
+                      {t('modulesSection.viewDetails')}
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
                         </svg>
@@ -384,7 +418,7 @@ export default function Modules() {
                     </div>
 
                     {/* Navigation dots */}
-                    <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+                    <div className="modules-dots" style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
                       {MODULES.map((m, i) => (
                         <button
                           key={i}
@@ -393,7 +427,7 @@ export default function Modules() {
                             width: active === i ? 22 : 6,
                             height: 6,
                             borderRadius: 100,
-                            background: active === i ? '#fff' : 'rgba(255,255,255,0.25)',
+                            background: active === i ? mod.accent : 'rgba(255,255,255,0.25)',
                             border: 'none',
                             cursor: 'pointer',
                             padding: 0,
@@ -408,6 +442,8 @@ export default function Modules() {
             })()}
           </div>
 
+          </div>{/* /modules-explorer */}
+
         </motion.div>
       </div>
 
@@ -416,7 +452,7 @@ export default function Modules() {
         .modules-left-panel::-webkit-scrollbar-track { background: transparent; }
         .modules-left-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .modules-explorer { flex-direction: column !important; }
           .modules-left-panel {
             width: 100% !important; min-width: unset !important;
@@ -438,7 +474,87 @@ export default function Modules() {
             border-radius: 10px !important;
             align-items: center;
           }
+          .modules-right-panel {
+            min-height: 0 !important;
+            aspect-ratio: 1.5 / 1 !important;
+          }
           .modules-right-content { padding: 28px 24px !important; }
+          .modules-right-content {
+            overflow: hidden !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .modules-left-panel {
+            gap: 8px !important;
+            padding: 10px 10px !important;
+          }
+          .modules-left-panel button {
+            padding: 8px 12px !important;
+          }
+          .modules-right-panel {
+            aspect-ratio: auto !important;
+            min-height: auto !important;
+          }
+          .modules-right-content {
+            padding: 24px 18px 24px !important;
+            overflow: visible !important;
+            height: auto !important;
+          }
+          .modules-watermark {
+            display: none !important;
+          }
+          .modules-badge {
+            margin-bottom: 18px !important;
+          }
+          .modules-title-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            margin-bottom: 16px !important;
+          }
+          .modules-desc {
+            font-size: 14px !important;
+            line-height: 1.65 !important;
+            margin-bottom: 20px !important;
+            max-width: none !important;
+          }
+          .modules-features {
+            gap: 6px !important;
+            margin-bottom: 22px !important;
+          }
+          .modules-features > div {
+            padding: 6px 10px !important;
+          }
+          .modules-features span {
+            font-size: 12px !important;
+          }
+          .modules-detail-link {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .modules-dots {
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .modules-right-panel {
+            min-height: auto !important;
+          }
+          .modules-right-content {
+            padding: 22px 16px 22px !important;
+          }
+          .modules-left-panel {
+            padding: 8px 8px !important;
+            gap: 6px !important;
+          }
+          .modules-left-panel button {
+            min-width: 88px !important;
+            padding: 8px 10px !important;
+          }
+          .modules-left-panel button span:last-child {
+            font-size: 12px !important;
+          }
         }
       `}</style>
     </section>

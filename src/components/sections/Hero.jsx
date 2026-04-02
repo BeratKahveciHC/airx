@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import logo from '../../assets/logo.png'
 
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
@@ -36,15 +37,30 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 
   return <span ref={ref}>{prefix}{count}{suffix}</span>
 }
 
-const STATS = [
-  { target: 150, suffix: '+',  label: 'Aktif Kurum'     },
-  { target: 15,  suffix: 'K+', label: 'Kullanıcı'       },
-  { target: 14,  suffix: '',   label: 'Modül'            },
-  { target: 99,  prefix: '%',  label: 'Uptime'          },
-]
-
-
 export default function Hero() {
+  const { t } = useTranslation()
+  const STATS = [
+    { target: 150, suffix: '+',  label: t('hero.stat1Label') },
+    { target: 15,  suffix: 'K+', label: t('hero.stat2Label') },
+    { target: 14,  suffix: '',   label: t('hero.stat3Label') },
+    { target: 99,  prefix: '%',  label: t('hero.stat4Label') },
+  ]
+  const MARQUEE_MODS = [
+    { key: 'pdks',      nameKey: 'nav.mod_pdks_label',      accent: '#38bdf8', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+    { key: 'ozluk',     nameKey: 'nav.mod_ozluk_label',     accent: '#a78bfa', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+    { key: 'izin',      nameKey: 'nav.mod_izin_label',      accent: '#34d399', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+    { key: 'puantaj',   nameKey: 'nav.mod_puantaj_label',   accent: '#fbbf24', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> },
+    { key: 'erisim',    nameKey: 'nav.mod_erisim_label',    accent: '#f87171', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> },
+    { key: 'ziyaretci', nameKey: 'nav.mod_ziyaretci_label', accent: '#22d3ee', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+    { key: 'yemekhane', nameKey: 'nav.mod_yemekhane_label', accent: '#fb923c', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> },
+    { key: 'anket',     nameKey: 'nav.mod_anket_label',     accent: '#a3e635', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> },
+    { key: 'sureli',    nameKey: 'nav.mod_sureli_label',    accent: '#f472b6', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><circle cx="11" cy="14" r="2"/><path d="M11 16v4"/></svg> },
+    { key: 'egitim',    nameKey: 'nav.mod_egitim_label',    accent: '#60a5fa', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> },
+    { key: 'hukuki',    nameKey: 'nav.mod_hukuki_label',    accent: '#818cf8', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 6-8 4-4-2V4l4 2 8-4 4 2v4l-4-2z"/><path d="M8 10v10"/><path d="M16 6v10"/><path d="M4 8v10l4 2 8-4 4 2V8"/></svg> },
+    { key: 'yanHaklar', nameKey: 'nav.mod_yanHaklar_label', accent: '#2dd4bf', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg> },
+    { key: 'periyodik', nameKey: 'nav.mod_periyodik_label', accent: '#c084fc', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg> },
+    { key: 'isZekasi',  nameKey: 'nav.mod_isZekasi_label',  accent: '#79ACDC', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+  ]
   return (
     <>
       {/* ── Ana Hero ── */}
@@ -63,29 +79,6 @@ export default function Hero() {
           {/* ── SOL: Metin ── */}
           <div style={{ flex: '1 1 0', minWidth: 0 }} className="hero-content-col">
 
-            {/* Üst etiket */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 10,
-                marginBottom: 28,
-              }}
-            >
-              <div style={{ width: 28, height: 1, background: '#003C75', opacity: 0.4 }} />
-              <span style={{
-                fontSize: 12,
-                fontWeight: 700,
-                color: '#003C75',
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                opacity: 0.75,
-              }}>
-                Türkiye'nin Mobil İK Platformu
-              </span>
-            </motion.div>
-
             {/* Başlık */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
@@ -100,10 +93,10 @@ export default function Hero() {
                 margin: '0 0 20px',
               }}
             >
-              İK Süreçlerinizi{' '}
-              <span style={{ color: '#003C75' }}>Dijitalleştirin,</span>
+              {t('hero.title')}{' '}
+              <span style={{ color: '#003C75' }}>{t('hero.titleHighlight')}</span>
               <br />
-              Verimliliğinizi Artırın.
+              {t('hero.titleLine2')}
             </motion.h1>
 
             {/* Alt metin */}
@@ -120,9 +113,7 @@ export default function Hero() {
                 fontWeight: 400,
               }}
             >
-              PDKS, izin yönetimi, puantaj, erişim kontrolü ve daha fazlası.
-              14 entegre modül ile tüm İK operasyonunuzu tek platformda yönetin.
-              Biyometrik cihaz gerektirmez — aynı gün kurulum.
+              {t('hero.subtitle')}
             </motion.p>
 
             {/* CTA */}
@@ -156,7 +147,7 @@ export default function Hero() {
                   e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,60,117,0.22)'
                 }}
               >
-                Ücretsiz Demo Talep Et
+                {t('hero.demoButton')}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
                 </svg>
@@ -186,7 +177,7 @@ export default function Hero() {
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.62 12 19.79 19.79 0 0 1 1.55 3.4 2 2 0 0 1 3.52 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.55a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
-                Bizi Arayın
+                {t('hero.contactButton')}
               </a>
             </motion.div>
 
@@ -214,7 +205,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 32 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            style={{ flex: '1.85 1 0', minWidth: 0, position: 'relative', marginRight: '-40px' }}
+            style={{ flex: '1.85 1 0', minWidth: 0, position: 'relative', marginRight: '-40px', paddingTop: 112 }}
             className="hero-mockup-col"
           >
             {/* ── Telefon Mockup (sol alt köşe, absolute) ── */}
@@ -357,6 +348,84 @@ export default function Hero() {
               </div>
             </motion.div>
 
+            {/* ── Giriş Yöntemi Floating Badges (3×2 grid, mockup üstü) ── */}
+            <div
+              className="hero-feature-badges"
+              style={{
+                position: 'absolute',
+                top: 0, left: 0, right: 0,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: 8,
+                zIndex: 20,
+              }}
+            >
+              {[
+                {
+                  label: t('hero.entryMobilePdks'),
+                  color: '#003C75', bg: '#e8f2fc',
+                  delay: 0.68,
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>,
+                },
+                {
+                  label: t('hero.entryQr'),
+                  color: '#7c3aed', bg: '#f3eeff',
+                  delay: 0.76,
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="5" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="currentColor" stroke="none"/><path d="M16 14h2v2h-2zM18 16h2v2h-2zM14 18h2v2h-2z"/></svg>,
+                },
+                {
+                  label: 'WiFi Giriş',
+                  color: '#0891b2', bg: '#e0f9ff',
+                  delay: 0.84,
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg>,
+                },
+                {
+                  label: 'GPS Giriş',
+                  color: '#059669', bg: '#ecfdf5',
+                  delay: 0.92,
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+                },
+                {
+                  label: 'Remote Giriş',
+                  color: '#d97706', bg: '#fffbeb',
+                  delay: 1.00,
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+                },
+                {
+                  label: 'Kontrol Noktası',
+                  color: '#dc2626', bg: '#fef2f2',
+                  delay: 1.08,
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>,
+                },
+              ].map((badge, i) => (
+                <motion.div
+                  key={badge.label}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: badge.delay, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '8px 12px 8px 8px',
+                    background: '#fff',
+                    borderRadius: 10,
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                  }}
+                >
+                  <div style={{
+                    width: 28, height: 28, borderRadius: 8, flexShrink: 0,
+                    background: badge.bg, color: badge.color,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    {badge.icon}
+                  </div>
+                  <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1e293b', whiteSpace: 'nowrap' }}>{badge.label}</span>
+                </motion.div>
+              ))}
+            </div>
+
             {/* Dashboard */}
             <div style={{
               borderRadius: 12,
@@ -375,13 +444,13 @@ export default function Hero() {
                 </div>
                 <div style={{ flex: 1, maxWidth: 200, margin: '0 auto', background: '#e8ecf2', borderRadius: 4, height: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
                   <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                  <span style={{ fontSize: 9, color: '#94a3b8' }}>panel.airx.com.tr</span>
+                  <span style={{ fontSize: 9, color: '#94a3b8' }}>panel.AiRX.com.tr</span>
                 </div>
               </div>
 
               {/* App top navbar */}
               <div style={{ background: '#fff', borderBottom: '1px solid #e8f0f9', padding: '0 14px', height: 38, display: 'flex', alignItems: 'center', gap: 10 }}>
-                <img src={logo} alt="AirX" style={{ height: 15, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                <img src={logo} alt="AiRX" style={{ height: 15, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
                 <div style={{ display: 'flex', gap: 1, flex: 1 }}>
                   {[
                     { label: 'Anasayfa', active: true, chevron: false },
@@ -406,7 +475,7 @@ export default function Hero() {
               </div>
 
               {/* Ana içerik */}
-              <div style={{ background: '#f5f8fc', padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div className="hero-dashboard-body" style={{ background: '#f5f8fc', padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
 
                 {/* 2×3 Stat kartları */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }} className="hero-dashboard-stats">
@@ -504,29 +573,101 @@ export default function Hero() {
 
               </div>
             </div>
+
+            {/* ── Modül Marquee ── */}
+            <div style={{ marginTop: 14, overflow: 'hidden', borderRadius: 10 }}>
+              <div className="hero-marquee-track">
+                {['a', 'b'].map(suffix => (
+                  <div key={suffix} className="hero-marquee-row" aria-hidden={suffix === 'b' ? true : undefined}>
+                    {MARQUEE_MODS.map(mod => (
+                      <div key={mod.key + suffix} style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 7,
+                        padding: '6px 14px 6px 10px',
+                        background: '#fff',
+                        border: '1px solid #e8f0f9',
+                        borderRadius: 8,
+                        boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
+                        flexShrink: 0,
+                      }}>
+                        <div style={{
+                          width: 24, height: 24, borderRadius: 6, flexShrink: 0,
+                          background: mod.accent + '20', color: mod.accent,
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        }}>
+                          {mod.icon}
+                        </div>
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap' }}>
+                          {t(mod.nameKey)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
 
       <style>{`
-        @media (max-width: 960px) {
-          .hero-split { flex-direction: column !important; gap: 48px !important; padding: 48px 24px 56px !important; }
-          .hero-mockup-col { width: 100% !important; max-width: 720px !important; margin-right: 0 !important; }
+        @media (max-width: 1180px) {
+          .hero-split {
+            flex-direction: column !important;
+            gap: 56px !important;
+            padding: 56px 28px 64px !important;
+          }
+          .hero-content-col { text-align: center !important; }
+          .hero-content-col p {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .hero-actions { justify-content: center !important; }
+          .hero-stats { justify-content: center !important; }
+          .hero-mockup-col {
+            width: 100% !important;
+            max-width: 760px !important;
+            margin-right: 0 !important;
+          }
           .hero-phone-mockup { display: none !important; }
+          .hero-feature-badges { display: none !important; }
         }
         @media (max-width: 640px) {
           .hero-split { padding: 36px 16px 44px !important; }
           .hero-stats { gap: 20px !important; }
-          .hero-content-col { text-align: center !important; }
-          .hero-content-col p { margin-left: auto !important; margin-right: auto !important; }
-          .hero-actions { justify-content: center !important; }
           .hero-alert-card, .hero-active-card { display: none !important; }
-          .hero-dashboard-stats { grid-template-columns: repeat(2, 1fr) !important; }
-          .hero-dashboard-tables { grid-template-columns: 1fr !important; }
+          .hero-dashboard-shell {
+            aspect-ratio: 1.58 / 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .hero-dashboard-body {
+            flex: 1 !important;
+            min-height: 0 !important;
+            overflow: hidden !important;
+          }
+          .hero-dashboard-stats { grid-template-columns: repeat(3, 1fr) !important; }
+          .hero-dashboard-tables { grid-template-columns: 1fr 1fr !important; }
         }
         @media (max-width: 480px) {
           .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+        }
+      `}</style>
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        .hero-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee 28s linear infinite;
+        }
+        .hero-marquee-track:hover { animation-play-state: paused; }
+        .hero-marquee-row {
+          display: flex;
+          gap: 8px;
+          padding-right: 8px;
         }
       `}</style>
     </>

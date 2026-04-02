@@ -3,9 +3,11 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import { parseMd } from '../lib/parseMd'
+import { useTranslation } from 'react-i18next'
 
 /* Vite ile tüm .md dosyalarını raw string olarak içe aktar */
 const modules = import.meta.glob('../content/blog/*.md', { query: '?raw', import: 'default' })
+const modulesEn = import.meta.glob('../content/blog/en/*.md', { query: '?raw', import: 'default' })
 
 function ArrowLeftIcon() {
   return (
@@ -26,21 +28,26 @@ function ArrowRightIcon() {
 export default function BlogPostPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const key = `../content/blog/${slug}.md`
-    if (!modules[key]) {
+    const lang = i18n.language
+    const keyEn = `../content/blog/en/${slug}.md`
+    const keyTr = `../content/blog/${slug}.md`
+    const useEnglish = lang === 'en' && modulesEn[keyEn]
+    const loader = useEnglish ? modulesEn[keyEn] : modules[keyTr]
+    if (!loader) {
       navigate('/blog', { replace: true })
       return
     }
-    modules[key]().then(raw => {
+    loader().then(raw => {
       const { data, content } = parseMd(raw)
       setPost({ ...data, content })
       setLoading(false)
     })
-  }, [slug, navigate])
+  }, [slug, navigate, i18n.language])
 
   if (loading) {
     return (
@@ -128,7 +135,7 @@ export default function BlogPostPage() {
           >
             <span style={{ fontSize: 13, color: 'rgba(219,238,255,0.45)', fontWeight: 500 }}>{post.date}</span>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'rgba(219,238,255,0.2)', display: 'inline-block' }} />
-            <span style={{ fontSize: 13, color: 'rgba(219,238,255,0.45)', fontWeight: 500 }}>{post.readTime} okuma</span>
+            <span style={{ fontSize: 13, color: 'rgba(219,238,255,0.45)', fontWeight: 500 }}>{post.readTime} {t('blogPost.readSuffix')}</span>
           </motion.div>
         </div>
 
@@ -182,19 +189,14 @@ export default function BlogPostPage() {
           >
             <div style={{ position: 'absolute', right: -40, top: -40, width: 200, height: 200, borderRadius: '50%', background: 'rgba(121,172,220,0.07)', pointerEvents: 'none' }} />
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <div style={{
-                fontFamily: "'Instrument Serif', Georgia, serif",
-                fontStyle: 'italic',
-                fontSize: 22, color: '#79ACDC', marginBottom: 10,
-              }}>AirX ile tanışın</div>
               <h3 style={{ fontSize: 24, fontWeight: 800, color: '#fff', margin: '0 0 12px', letterSpacing: '-0.02em' }}>
-                İK süreçlerinizi modernleştirin
+                {t('blogPost.ctaTitle')}
               </h3>
               <p style={{ fontSize: 15, color: 'rgba(219,238,255,0.6)', lineHeight: 1.65, margin: '0 0 28px', maxWidth: 400, marginLeft: 'auto', marginRight: 'auto' }}>
-                Demo talep edin, AirX'i kendi kurumunuza nasıl uyarladığını görün.
+                {t('blogPost.ctaSubtitle')}
               </p>
               <Link
-                to="/iletisim"
+                to="/iletisim#demo-form"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '13px 28px', borderRadius: 10,
@@ -206,7 +208,7 @@ export default function BlogPostPage() {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)' }}
                 onMouseLeave={e => { e.currentTarget.style.transform = '' }}
               >
-                Demo Talep Et <ArrowRightIcon />
+                {t('blogPost.ctaBtn')} <ArrowRightIcon />
               </Link>
             </div>
           </motion.div>
@@ -224,7 +226,7 @@ export default function BlogPostPage() {
               onMouseEnter={e => { e.currentTarget.style.color = '#003C75' }}
               onMouseLeave={e => { e.currentTarget.style.color = '#64748b' }}
             >
-              <ArrowLeftIcon /> Tüm yazılara dön
+              <ArrowLeftIcon /> {t('blogPost.backBtn')}
             </Link>
           </div>
         </div>
@@ -292,6 +294,13 @@ export default function BlogPostPage() {
           margin: 40px 0;
         }
         .blog-content em { color: #64748b; }
+        @media (max-width: 640px) {
+          .blog-content table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+          }
+        }
       `}</style>
     </div>
   )

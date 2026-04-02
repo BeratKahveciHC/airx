@@ -44,13 +44,14 @@ const ExcelIcon = () => (
   </svg>
 )
 
-export default function PuantajVisual({ accent = '#0ea5e9' }) {
+export default function PuantajVisual({ accent = '#0ea5e9', inline }) {
   return (
-    <VisualSection accent={accent}>
+    <VisualSection accent={accent} inline={inline}>
       <motion.div
         initial={{ opacity: 0, y: 20, scale: 0.97 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true }}
+        animate={inline ? { opacity: 1, y: 0, scale: 1 } : undefined}
+        whileInView={!inline ? { opacity: 1, y: 0, scale: 1 } : undefined}
+        viewport={!inline ? { once: true } : undefined}
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
@@ -189,7 +190,7 @@ export default function PuantajVisual({ accent = '#0ea5e9' }) {
 
             {/* footer */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 4px' }}>
-              <span style={{ fontSize: 9, color: '#94a3b8' }}>2026 © Airx</span>
+              <span style={{ fontSize: 9, color: '#94a3b8' }}>2026 © AiRX</span>
               <div style={{ display: 'flex', gap: 14 }}>
                 {['Yardım ve Destek', 'Gizlilik Bildirimi', 'Kullanıcı Sözleşmesi'].map(l => (
                   <span key={l} style={{ fontSize: 9, color: '#94a3b8' }}>{l}</span>

@@ -1,10 +1,11 @@
 ﻿import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
-const BULLETS = [
-  { text: 'Tek tusla giris-cikis', color: '#003C75', bg: 'rgba(0,60,117,0.07)' },
-  { text: 'Anlik push bildirimleri', color: '#0369a1', bg: 'rgba(3,105,161,0.07)' },
-  { text: 'Konum dogrulamali islemler', color: '#7c3aed', bg: 'rgba(124,58,237,0.07)' },
-  { text: 'Offline mod destegi', color: '#15803d', bg: 'rgba(34,197,94,0.07)' },
+const BULLET_ICONS = [
+  { color: '#003C75', bg: 'rgba(0,60,117,0.07)', icon: <><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></> },
+  { color: '#0369a1', bg: 'rgba(3,105,161,0.07)', icon: <><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></> },
+  { color: '#7c3aed', bg: 'rgba(124,58,237,0.07)', icon: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></> },
+  { color: '#15803d', bg: 'rgba(34,197,94,0.07)', icon: <><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></> },
 ]
 
 function PhoneMockup() {
@@ -78,8 +79,8 @@ function PhoneMockup() {
           </svg>
         </div>
         <div>
-          <div style={{ fontSize: 11, fontWeight: 700, color: '#0f172a', lineHeight: 1.3 }}>Izin Onaylandi</div>
-          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2 }}>Az once</div>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#0f172a', lineHeight: 1.3 }}>İzin Onaylandı</div>
+          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 2 }}>Az önce</div>
         </div>
       </motion.div>
 
@@ -279,6 +280,8 @@ function PhoneMockup() {
 }
 
 export default function MobileApp() {
+  const { t } = useTranslation()
+  const BULLETS = BULLET_ICONS.map((b, i) => ({ ...b, text: t(`mobileApp.feature${i + 1}`) }))
   return (
     <section id="mobil" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #f4f8fd 0%, #ffffff 100%)', overflow: 'hidden' }}>
       <div style={{
@@ -296,27 +299,16 @@ export default function MobileApp() {
           transition={{ duration: 0.6 }}
           style={{ flex: 1, minWidth: 280 }}
         >
-          <div style={{
-            fontFamily: "'Instrument Serif', Georgia, serif",
-            fontStyle: 'italic',
-            fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#79ACDC',
-            marginBottom: 14,
-            letterSpacing: '-0.01em',
-          }}>
-            Mobil Uygulama
-          </div>
-
           <h2 style={{
             fontSize: 'clamp(28px, 4vw, 42px)',
             fontWeight: 700, color: '#003C75',
             margin: '0 0 18px', lineHeight: 1.15,
           }}>
-            Her Sey Cebinizde
+            {t('mobileApp.sectionTitle')}
           </h2>
 
           <p style={{ fontSize: 16, color: '#64748b', lineHeight: 1.72, marginBottom: 32, maxWidth: 420 }}>
-            iOS ve Android uygulamasi ile personelleriniz giris-cikis yapabilir, izin talep edebilir, gorevlerini gorebilir. Yoneticiler tum onaylari mobilden verebilir.
+            {t('mobileApp.sectionSubtitle')}
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 36 }}>
@@ -334,8 +326,8 @@ export default function MobileApp() {
                   background: b.bg,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={b.color} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6 9 17l-5-5"/>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={b.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    {b.icon}
                   </svg>
                 </div>
                 <span style={{ fontSize: 15, color: '#374151', fontWeight: 500 }}>{b.text}</span>
@@ -345,10 +337,10 @@ export default function MobileApp() {
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }} className="mobile-actions">
             <button onClick={() => { window.location.href = '/iletisim' }} className="btn-glass" style={{ fontSize: 15, padding: '13px 28px', cursor: 'pointer', borderRadius: 9999 }}>
-              Uygulamayi Incele
+              {t('mobileApp.exploreButton')}
             </button>
             <button onClick={() => { window.location.href = '/iletisim#demo-form' }} className="btn-outline" style={{ fontSize: 15, padding: '13px 24px', cursor: 'pointer', borderRadius: 9999 }}>
-              Demo Talep Et
+              {t('mobileApp.demoButton')}
             </button>
           </div>
         </motion.div>
@@ -366,7 +358,7 @@ export default function MobileApp() {
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
           .mobile-split {
             flex-direction: column !important;
             gap: 60px !important;
@@ -379,12 +371,26 @@ export default function MobileApp() {
             padding-right: 0 !important;
             padding-left: 0 !important;
           }
+          .mobile-floating-note {
+            right: -32px !important;
+            top: 92px !important;
+            transform: scale(0.92) !important;
+            transform-origin: top right !important;
+          }
+          .mobile-floating-stat {
+            left: -28px !important;
+            bottom: 132px !important;
+            transform: scale(0.92) !important;
+            transform-origin: bottom left !important;
+          }
         }
-        @media (max-width: 640px) {
+        @media (max-width: 860px) {
           .mobile-floating-note,
           .mobile-floating-stat {
             display: none !important;
           }
+        }
+        @media (max-width: 640px) {
           .mobile-phone-shell {
             width: 232px !important;
             height: 476px !important;

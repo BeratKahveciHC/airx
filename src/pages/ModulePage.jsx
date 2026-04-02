@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { getModuleBySlug, MODULES_DATA } from '../data/modules'
 import { MODULE_OVERRIDES } from '../data/moduleOverrides'
 import { MODULE_VISUALS } from '../data/moduleVisuals'
@@ -25,23 +26,46 @@ const ArrowLeftIcon = () => (
   </svg>
 )
 
-const FEATURE_SUMMARIES = [
-  'Operasyon akisini standartlastirir ve gunluk kontrol yukunu azaltir.',
-  'Takibi gorunur hale getirir ve ekipler icin hizli aksiyon alani acar.',
-  'Surecleri olculebilir hale getirir ve yonetsel karar kalitesini destekler.',
-]
+function localizeModData(modData, t) {
+  if (!modData) return null
+  const key = modData.slug.replace(/-/g, '_')
+  return {
+    ...modData,
+    name: t(`mData.${key}.name`, { defaultValue: modData.name }),
+    tagline: t(`mData.${key}.tagline`, { defaultValue: modData.tagline }),
+    description: t(`mData.${key}.description`, { defaultValue: modData.description }),
+    hero_stats: modData.hero_stats?.map((s, i) => ({
+      ...s,
+      value: t(`mData.${key}.stat${i + 1}Value`, { defaultValue: s.value }),
+      label: t(`mData.${key}.stat${i + 1}Label`, { defaultValue: s.label }),
+    })),
+    features: modData.features?.map((f, i) => ({
+      ...f,
+      title: t(`mData.${key}.feat${i + 1}Title`, { defaultValue: f.title }),
+      desc: t(`mData.${key}.feat${i + 1}Desc`, { defaultValue: f.desc }),
+    })),
+    benefits: modData.benefits?.map((b, i) => t(`mData.${key}.benefit${i + 1}`, { defaultValue: b })),
+  }
+}
 
 export default function ModulePage() {
+  const { t } = useTranslation()
+  const FEATURE_SUMMARIES = [
+    t('modulePage.summary1'),
+    t('modulePage.summary2'),
+    t('modulePage.summary3'),
+  ]
   const { slug } = useParams()
   const baseMod = getModuleBySlug(slug)
-  const mod = baseMod ? { ...baseMod, ...(MODULE_OVERRIDES[slug] || {}) } : null
+  const rawMod = baseMod ? { ...baseMod, ...(MODULE_OVERRIDES[slug] || {}) } : null
+  const mod = localizeModData(rawMod, t)
   const VisualComponent = MODULE_VISUALS[slug] || null
 
   if (!mod) {
     return (
       <div style={{ padding: '120px 24px', textAlign: 'center' }}>
-        <h1 style={{ color: '#003C75' }}>Modul bulunamadi</h1>
-        <Link to="/" style={{ color: '#79ACDC' }}>Ana sayfaya don</Link>
+        <h1 style={{ color: '#003C75' }}>{t('modulePage.notFoundTitle')}</h1>
+        <Link to="/" style={{ color: '#79ACDC' }}>{t('modulePage.notFoundLink')}</Link>
       </div>
     )
   }
@@ -58,18 +82,21 @@ export default function ModulePage() {
     }
   })
 
-  const displayMods = otherMods.slice(0, 3)
+  const displayMods = otherMods.slice(0, 3).map(item => {
+    const rawItem = { ...item, ...(MODULE_OVERRIDES[item.slug] || {}) }
+    return localizeModData(rawItem, t)
+  })
 
   const moduleSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: `AirX ${mod.name}`,
+    name: `AiRX ${mod.name}`,
     description: mod.description,
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'iOS, Android, Web',
     provider: {
       '@type': 'Organization',
-      name: 'AirX',
+      name: 'AiRX',
       url: 'https://airx.com.tr',
     },
   }
@@ -77,8 +104,8 @@ export default function ModulePage() {
   return (
     <div style={{ background: '#fff' }}>
       <SEO
-        title={`${mod.name} - ${mod.tagline} | AirX`}
-        description={`${mod.description} AirX ${mod.name} modulu ile IK sureclerinizi dijitallestirin.`}
+        title={`${mod.name} - ${mod.tagline} | AiRX`}
+        description={`${mod.description} AiRX ${mod.name} modülü ile İK süreçlerinizi dijitalleştirin.`}
         canonical={`/moduller/${slug}`}
         jsonLd={moduleSchema}
       />
@@ -86,7 +113,7 @@ export default function ModulePage() {
       <section
         style={{
           background: 'linear-gradient(135deg, #001e45 0%, #003C75 60%, #004d99 100%)',
-          padding: '80px 24px 100px',
+          padding: '80px 24px 80px',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -133,7 +160,7 @@ export default function ModulePage() {
               }}
             >
               <ArrowLeftIcon />
-              Tum Moduller
+              {t('modulePage.backBtn')}
             </Link>
             <span style={{ color: 'rgba(219,238,255,0.25)', fontSize: 13 }}>/</span>
             <span style={{ fontSize: 13, color: 'rgba(219,238,255,0.55)' }}>{mod.name}</span>
@@ -199,7 +226,7 @@ export default function ModulePage() {
 
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link
-                  to="/#demo"
+                  to="/iletisim#demo-form"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -214,7 +241,7 @@ export default function ModulePage() {
                     boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                   }}
                 >
-                  Ucretsiz Demo Al <ArrowIcon />
+                  {t('modulePage.heroDemoBtn')} <ArrowIcon />
                 </Link>
                 <Link
                   to="/#moduller"
@@ -232,7 +259,7 @@ export default function ModulePage() {
                     textDecoration: 'none',
                   }}
                 >
-                  Tum Moduller
+                  {t('modulePage.heroAllModulesBtn')}
                 </Link>
               </div>
             </motion.div>
@@ -241,40 +268,37 @@ export default function ModulePage() {
               initial={{ opacity: 0, x: 32 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 12 }}
-              className="module-hero-stats"
+              style={{ flex: 1, minWidth: 0 }}
+              className="module-hero-visual"
             >
-              {mod.hero_stats.map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: 'rgba(255,255,255,0.07)',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    borderRadius: 20,
-                    padding: '24px 32px',
-                    backdropFilter: 'blur(12px)',
-                    minWidth: 200,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: 'clamp(28px, 3vw, 38px)',
-                      fontWeight: 900,
-                      color: '#fff',
-                      letterSpacing: '-0.03em',
-                      lineHeight: 1,
-                      marginBottom: 6,
-                    }}
-                  >
-                    {s.value}
-                  </div>
-                  <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.55)', fontWeight: 500 }}>{s.label}</div>
-                </div>
-              ))}
+              {VisualComponent && <VisualComponent accent={mod.accent} inline />}
             </motion.div>
           </div>
         </div>
       </section>
+
+      {mod.hero_stats && mod.hero_stats.length > 0 && (
+        <section style={{ background: '#fff', borderBottom: '1px solid rgba(0,60,117,0.07)' }}>
+          <div className="module-hero-stats" style={{ maxWidth: 1160, margin: '0 auto', padding: '0 24px', display: 'flex' }}>
+            {mod.hero_stats.map((s, i) => (
+              <div
+                key={i}
+                style={{
+                  flex: 1,
+                  padding: '32px 24px',
+                  borderRight: i < mod.hero_stats.length - 1 ? '1px solid rgba(0,60,117,0.07)' : 'none',
+                  textAlign: 'center',
+                }}
+              >
+                <div style={{ fontSize: 'clamp(28px, 3vw, 38px)', fontWeight: 900, color: '#003C75', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 6 }}>
+                  {s.value}
+                </div>
+                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 500 }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section style={{ padding: '96px 24px', background: '#fff' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
@@ -284,17 +308,6 @@ export default function ModulePage() {
             viewport={{ once: true }}
             style={{ textAlign: 'center', marginBottom: 80 }}
           >
-            <div
-              style={{
-                fontFamily: "'Instrument Serif', Georgia, serif",
-                fontStyle: 'italic',
-                fontSize: 'clamp(20px, 2.5vw, 28px)',
-                color: '#79ACDC',
-                marginBottom: 12,
-              }}
-            >
-              Ozellikler
-            </div>
             <h2
               style={{
                 fontSize: 'clamp(28px, 4vw, 42px)',
@@ -304,7 +317,7 @@ export default function ModulePage() {
                 lineHeight: 1.15,
               }}
             >
-              {mod.name} ile neler yapabilirsiniz?
+              {t('modulePage.featuresTitle', { name: mod.name })}
             </h2>
             <p
               style={{
@@ -315,7 +328,7 @@ export default function ModulePage() {
                 color: '#64748b',
               }}
             >
-              Her bir alan, ekibinizin is akisinda daha net kontrol, daha guclu gorunurluk ve daha hizli uygulama deneyimi sunmak icin tasarlandi.
+              {t('modulePage.featuresSubtitle')}
             </p>
           </motion.div>
 
@@ -329,7 +342,7 @@ export default function ModulePage() {
           >
             {mod.features.map((feature, i) => (
               <motion.div
-                key={feature.title}
+                key={i}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
@@ -397,7 +410,7 @@ export default function ModulePage() {
                           textTransform: 'uppercase',
                         }}
                       >
-                        Alan {String(i + 1).padStart(2, '0')}
+                        {t('modulePage.areaPrefix')} {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
 
@@ -458,7 +471,7 @@ export default function ModulePage() {
                         marginBottom: 8,
                       }}
                     >
-                      Ne Saglar
+                      {t('modulePage.featureProvides')}
                     </div>
                     <div style={{ fontSize: 14, lineHeight: 1.7, color: '#334155', fontWeight: 500 }}>
                       {FEATURE_SUMMARIES[i % FEATURE_SUMMARIES.length]}
@@ -471,8 +484,6 @@ export default function ModulePage() {
         </div>
       </section>
 
-      {VisualComponent && <VisualComponent accent={mod.accent} />}
-
       <section style={{ padding: '80px 24px', background: 'linear-gradient(180deg, #f4f8fd 0%, #fff 100%)' }}>
         <div style={{ maxWidth: 1160, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 80 }} className="benefits-split">
@@ -483,25 +494,14 @@ export default function ModulePage() {
               transition={{ duration: 0.6 }}
               style={{ flex: 1 }}
             >
-              <div
-                style={{
-                  fontFamily: "'Instrument Serif', Georgia, serif",
-                  fontStyle: 'italic',
-                  fontSize: 'clamp(20px, 2.5vw, 28px)',
-                  color: '#79ACDC',
-                  marginBottom: 12,
-                }}
-              >
-                Neden {mod.name}?
-              </div>
               <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 700, color: '#003C75', margin: '0 0 16px', lineHeight: 1.15 }}>
-                Somut farki hissedin
+                {t('modulePage.benefitsSectionTitle')}
               </h2>
               <p style={{ fontSize: 16, color: '#64748b', lineHeight: 1.72, marginBottom: 36 }}>
-                AirX {mod.name} modulu, gunluk operasyonel yuku azaltirken hata riskini minimuma indirir.
+                {t('modulePage.benefitsSectionSubtitle', { name: mod.name })}
               </p>
               <Link
-                to="/#demo"
+                to="/iletisim#demo-form"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -516,7 +516,7 @@ export default function ModulePage() {
                   boxShadow: '0 4px 16px rgba(0,60,117,0.3)',
                 }}
               >
-                Hemen Deneyin <ArrowIcon />
+                {t('modulePage.benefitsTryBtn')} <ArrowIcon />
               </Link>
             </motion.div>
 
@@ -594,27 +594,14 @@ export default function ModulePage() {
           viewport={{ once: true }}
           style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}
         >
-          <div
-            style={{
-              fontFamily: "'Instrument Serif', Georgia, serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(20px, 2.5vw, 28px)',
-              color: '#79ACDC',
-              marginBottom: 16,
-            }}
-          >
-            Hemen Baslayin
-          </div>
           <h2 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, color: '#fff', margin: '0 0 16px', lineHeight: 1.1 }}>
-            {mod.name} modulunu
-            <br />
-            ucretsiz deneyin.
+            {t('modulePage.ctaTitle', { name: mod.name })}
           </h2>
           <p style={{ fontSize: 16, color: 'rgba(219,238,255,0.65)', marginBottom: 36, lineHeight: 1.65 }}>
-            Kurulum gerektirmez. Ayni gun aktif. Kredi karti gerekmez.
+            {t('modulePage.ctaSubtitle')}
           </p>
           <Link
-            to="/#demo"
+            to="/iletisim#demo-form"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -629,7 +616,7 @@ export default function ModulePage() {
               boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
             }}
           >
-            Ucretsiz Demo Al <ArrowIcon />
+            {t('modulePage.ctaDemoBtn')} <ArrowIcon />
           </Link>
         </motion.div>
       </section>
@@ -647,10 +634,10 @@ export default function ModulePage() {
                 marginBottom: 8,
               }}
             >
-              Diger Moduller
+              {t('modulePage.otherModulesTitle')}
             </div>
             <h2 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, color: '#003C75', margin: 0 }}>
-              Kesfetmeye devam edin
+              {t('modulePage.otherModulesHeading')}
             </h2>
           </div>
 
@@ -720,7 +707,7 @@ export default function ModulePage() {
                     </p>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: item.accent, fontWeight: 600, fontSize: 13 }}>
-                      Incele <ArrowIcon />
+                      {t('modulePage.exploreBtn')} <ArrowIcon />
                     </div>
                   </div>
                 </Link>
@@ -731,8 +718,17 @@ export default function ModulePage() {
       </section>
 
       <style>{`
-        @media (max-width: 960px) {
+        @media (min-width: 1025px) {
+          .module-hero-visual { flex: 0 0 58% !important; }
+        }
+        @media (max-width: 1024px) {
           .module-hero-split { flex-direction: column !important; gap: 48px !important; }
+          .module-hero-visual {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            overflow: hidden !important;
+          }
           .module-hero-stats { flex-direction: row !important; flex-wrap: wrap; }
           .module-hero-stats > div { min-width: 140px !important; flex: 1; }
           .features-premium-grid { grid-template-columns: 1fr 1fr !important; }
@@ -740,7 +736,16 @@ export default function ModulePage() {
           .other-mods-grid { grid-template-columns: 1fr 1fr !important; }
         }
         @media (max-width: 600px) {
+          .module-hero-split { gap: 36px !important; }
+          .module-hero-visual { padding-inline: 2px !important; box-sizing: border-box !important; }
           .module-hero-stats { flex-direction: column !important; }
+          .module-hero-stats > div {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(0,60,117,0.07) !important;
+          }
+          .module-hero-stats > div:last-child {
+            border-bottom: none !important;
+          }
           .features-premium-grid { grid-template-columns: 1fr !important; }
           .other-mods-grid { grid-template-columns: 1fr !important; }
         }

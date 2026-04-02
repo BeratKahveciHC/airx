@@ -21,7 +21,7 @@ Pek çok işveren, çalışan yoklamasını parmak izi okuyucularıyla yaparken 
 
 ## Alternatif: Mobil QR Kod ile Yoklama
 
-AirX, biyometrik veri toplamadan çalışan takibini mümkün kılar. Çalışanlar, akıllı telefonlarındaki QR kodu okutarak işe giriş-çıkış yapar.
+AiRX, biyometrik veri toplamadan çalışan takibini mümkün kılar. Çalışanlar, akıllı telefonlarındaki QR kodu okutarak işe giriş-çıkış yapar.
 
 **Avantajları:**
 

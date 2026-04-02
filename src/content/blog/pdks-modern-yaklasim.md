@@ -23,7 +23,7 @@ Akıllı telefon penetrasyonunun %90'ı aştığı Türkiye'de çalışanların 
 **Nasıl çalışır?**
 
 1. Çalışan işyerine gelir
-2. AirX mobil uygulamasını açar
+2. AiRX mobil uygulamasını açar
 3. Kapıdaki QR kodu okutur (veya konum tabanlı giriş yapar)
 4. Sistem giriş saatini otomatik kaydeder
 

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 /* ── İkonlar ── */
 const NoFingerprintIcon = ({ size = 26, color = '#003C75' }) => (
@@ -38,52 +39,37 @@ const ServerIcon = ({ size = 26, color = '#003C75' }) => (
   </svg>
 )
 
-const PILLARS = [
-  {
-    Icon: NoFingerprintIcon,
-    title: 'Biyometrik Veri Toplanmaz',
-    desc: 'Parmak izi, yüz tanıma veya retina verisi hiçbir zaman işlenmez veya saklanmaz.',
-    accent: '#0369a1',
-    accentBg: 'rgba(3,105,161,0.07)',
-  },
-  {
-    Icon: ShieldCheckIcon,
-    title: 'KVKK Tam Uyumlu',
-    desc: 'Kişisel Verilerin Korunması Kanunu kapsamında tüm veri işleme süreçleri yasal gerekliliklerle uyumludur.',
-    accent: '#15803d',
-    accentBg: 'rgba(34,197,94,0.07)',
-  },
-  {
-    Icon: LockIcon,
-    title: '256-bit SSL Şifreleme',
-    desc: 'Tüm veri aktarımları uçtan uca SSL/TLS şifreleme ile korunur. Açık metin iletimi kesinlikle engellenir.',
-    accent: '#7c3aed',
-    accentBg: 'rgba(124,58,237,0.07)',
-  },
-  {
-    Icon: ServerIcon,
-    title: "Türkiye'de Veri Depolama",
-    desc: "Tüm veriler Türkiye'deki güvenli veri merkezlerinde saklanır. Yurt dışına aktarım gerçekleşmez.",
-    accent: '#b45309',
-    accentBg: 'rgba(180,83,9,0.07)',
-  },
-]
-
-const CERT_ITEMS = [
-  'Biyometrik veri toplanmaz',
-  'KVKK\'ya tam uyumluluk',
-  'Türkiye\'de veri depolama',
-  '256-bit SSL şifreleme',
-  '7/24 sistem izleme',
-]
-
-const TRUST_STATS = [
-  { value: '%99.9', label: 'Uptime' },
-  { value: '2',     label: 'Veri Merkezi' },
-  { value: '256',   label: 'bit Şifreleme' },
+const PILLAR_META = [
+  { Icon: NoFingerprintIcon, accent: '#0369a1', accentBg: 'rgba(3,105,161,0.07)', key: 'pillar1' },
+  { Icon: ShieldCheckIcon,   accent: '#15803d', accentBg: 'rgba(34,197,94,0.07)',  key: 'pillar2' },
+  { Icon: LockIcon,          accent: '#7c3aed', accentBg: 'rgba(124,58,237,0.07)', key: 'pillar3' },
+  { Icon: ServerIcon,        accent: '#b45309', accentBg: 'rgba(180,83,9,0.07)',   key: 'pillar4' },
 ]
 
 export default function Security() {
+  const { t } = useTranslation()
+
+  const CERT_ITEMS = [
+    t('security.cert1'), t('security.cert2'), t('security.cert3'),
+    t('security.cert4'), t('security.cert5'),
+  ]
+
+  const TRUST_STATS = [
+    { value: t('security.stat1Value'), label: t('security.stat1Label') },
+    { value: t('security.stat2Value'), label: t('security.stat2Label') },
+    { value: t('security.stat3Value'), label: t('security.stat3Label') },
+  ]
+
+  const TRUST_BAR = [
+    { labelKey: 'trust1', color: '#003C75',
+      svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg> },
+    { labelKey: 'trust2', color: '#15803d',
+      svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> },
+    { labelKey: 'trust3', color: '#0369a1',
+      svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0369a1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> },
+    { labelKey: 'trust4', color: '#7c3aed',
+      svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+  ]
   return (
     <section id="guvenlik" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #ffffff 0%, #f0f5fc 100%)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>
@@ -96,25 +82,15 @@ export default function Security() {
           transition={{ duration: 0.5 }}
           style={{ textAlign: 'center', marginBottom: 56 }}
         >
-          <div style={{
-            fontFamily: "'Instrument Serif', Georgia, serif",
-            fontStyle: 'italic',
-            fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#79ACDC',
-            marginBottom: 14,
-            letterSpacing: '-0.01em',
-          }}>
-            Güvenlik & Uyumluluk
-          </div>
           <h2 style={{
             fontSize: 'clamp(28px, 4vw, 42px)',
             fontWeight: 700, color: '#003C75',
             margin: '0 0 14px', lineHeight: 1.15,
           }}>
-            Verileriniz Her Zaman Güvende
+            {t('security.title')}
           </h2>
           <p style={{ fontSize: 17, color: '#64748b', maxWidth: 460, margin: '0 auto', lineHeight: 1.65 }}>
-            Kurumsal düzeyde güvenlik altyapısı, yasal uyumluluk ve şeffaf veri yönetimi.
+            {t('security.subtitle')}
           </p>
         </motion.div>
 
@@ -154,11 +130,8 @@ export default function Security() {
               <ShieldCheckIcon size={36} color="#fff" />
             </div>
 
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(219,238,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
-              AirX Güvenlik Standartları
-            </div>
             <div style={{ fontSize: 22, fontWeight: 800, color: '#fff', lineHeight: 1.2, marginBottom: 24 }}>
-              Gizliliğiniz Bizim Önceliğimiz
+              {t('security.cardTitle')}
             </div>
 
             {/* Checklist */}
@@ -213,9 +186,9 @@ export default function Security() {
             gridTemplateColumns: '1fr 1fr',
             gap: 14,
           }} className="security-grid">
-            {PILLARS.map((pillar, i) => (
+            {PILLAR_META.map((pillar, i) => (
               <motion.div
-                key={pillar.title}
+                key={pillar.key}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -249,10 +222,10 @@ export default function Security() {
                 </div>
 
                 <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0f172a', margin: '0 0 8px', lineHeight: 1.3 }}>
-                  {pillar.title}
+                  {t(`security.${pillar.key}Title`)}
                 </h3>
                 <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.65, margin: 0 }}>
-                  {pillar.desc}
+                  {t(`security.${pillar.key}Desc`)}
                 </p>
               </motion.div>
             ))}
@@ -279,20 +252,11 @@ export default function Security() {
             gap: '6px 0',
           }}
         >
-          {[
-            { label: 'Güvenilir Altyapı', color: '#003C75',
-              svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg> },
-            { label: 'KVKK Uyumlu', color: '#15803d',
-              svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> },
-            { label: "Türkiye'de Veri", color: '#0369a1',
-              svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0369a1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg> },
-            { label: '7/24 İzleme', color: '#7c3aed',
-              svg: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
-          ].map((item, i, arr) => (
-            <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          {TRUST_BAR.map((item, i, arr) => (
+            <div key={item.labelKey} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                 {item.svg}
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#475569' }}>{item.label}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#475569' }}>{t(`security.${item.labelKey}`)}</span>
               </div>
               {i < arr.length - 1 && (
                 <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(0,60,117,0.18)' }} />
@@ -300,11 +264,10 @@ export default function Security() {
             </div>
           ))}
         </motion.div>
-
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
           .security-split {
             flex-direction: column !important;
           }
@@ -312,12 +275,17 @@ export default function Security() {
             flex: none !important;
           }
         }
-        @media (max-width: 560px) {
+        @media (max-width: 720px) {
           .security-grid {
             grid-template-columns: 1fr !important;
           }
+        }
+        @media (max-width: 560px) {
           .security-card-primary {
             padding: 28px 22px !important;
+          }
+          .security-split {
+            gap: 16px !important;
           }
           .security-trust-stats {
             display: grid !important;
@@ -332,6 +300,11 @@ export default function Security() {
           .security-trust-stats > div:last-child {
             border-bottom: none !important;
             padding-bottom: 0 !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .security-trust-stats {
+            text-align: left !important;
           }
         }
       `}</style>

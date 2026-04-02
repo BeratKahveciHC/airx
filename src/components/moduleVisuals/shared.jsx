@@ -13,35 +13,40 @@ function useScaledMockup(maxWidth) {
   const outerRef = useRef(null)
   const innerRef = useRef(null)
   const [scale, setScale] = useState(1)
-  const [height, setHeight] = useState(undefined)
+  const [outerWidth, setOuterWidth] = useState(0)
 
   useEffect(() => {
     const outer = outerRef.current
-    const inner = innerRef.current
-    if (!outer || !inner) return
+    if (!outer) return
 
     const measure = () => {
       const ow = outer.offsetWidth
-      const s = Math.min(1, ow / maxWidth)
-      setScale(s)
-      setHeight(s < 1 ? inner.offsetHeight * s : undefined)
+      if (ow === 0) return
+      setOuterWidth(ow)
+      setScale(Math.min(1, ow / maxWidth))
     }
 
     const ro = new ResizeObserver(measure)
     ro.observe(outer)
-    // inner height may change after content renders
-    ro.observe(inner)
-    measure()
-    // re-measure after paint in case fonts/images shift layout
+    requestAnimationFrame(measure)
     const t = setTimeout(measure, 100)
     return () => { ro.disconnect(); clearTimeout(t) }
   }, [maxWidth])
 
-  return { outerRef, innerRef, scale, height }
+  return { outerRef, innerRef, scale, outerWidth }
 }
 
 export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
-  const { outerRef, innerRef, scale, height } = useScaledMockup(maxWidth)
+  const { outerRef, innerRef, scale, outerWidth } = useScaledMockup(maxWidth)
+
+  // inner height = chrome(36) + navbar(44) + content(408) = 488px
+  const INNER_H = 488
+  const shellWidth = Math.round(maxWidth * scale)
+  const scaledHeight = Math.round(INNER_H * scale)
+  const mobileHeightCap = outerWidth ? Math.round(outerWidth / 1.9) : scaledHeight
+  const shellHeight = outerWidth > 0 && outerWidth <= 640
+    ? Math.min(scaledHeight, mobileHeightCap)
+    : scaledHeight
 
   return (
     /* outer: measures available width, clips visual overflow */
@@ -49,26 +54,41 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
       ref={outerRef}
       style={{
         width: '100%',
+        maxWidth: '100%',
+        minWidth: 0,
         overflow: 'hidden',
+        height: shellHeight,
         display: 'flex',
         justifyContent: 'center',
-        height: height !== undefined ? height : undefined,
+        alignItems: 'flex-start',
       }}
     >
-      {/* inner: fixed mockup width, scales from top-center */}
       <div
-        ref={innerRef}
         style={{
-          flexShrink: 0,
-          width: maxWidth,
-          transform: scale < 1 ? `scale(${scale})` : undefined,
-          transformOrigin: 'top center',
-          borderRadius: 16,
           overflow: 'hidden',
-          boxShadow: '0 48px 100px rgba(0,30,80,0.28), 0 12px 36px rgba(0,60,117,0.18)',
-          border: '1px solid rgba(0,60,117,0.12)',
+          width: shellWidth,
+          maxWidth: '100%',
+          height: shellHeight,
+          flex: '0 0 auto',
+          position: 'relative',
         }}
       >
+      {/* inner: fixed mockup width, scaled inside a layout-sized shell */}
+        <div
+          ref={innerRef}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            width: maxWidth,
+            transform: scale < 1 ? `translateX(-50%) scale(${scale})` : 'translateX(-50%)',
+            transformOrigin: 'top center',
+            borderRadius: 16,
+            overflow: 'hidden',
+            boxShadow: '0 48px 100px rgba(0,30,80,0.28), 0 12px 36px rgba(0,60,117,0.18)',
+            border: '1px solid rgba(0,60,117,0.12)',
+          }}
+        >
         {/* browser chrome */}
         <div style={{
           height: 36,
@@ -104,7 +124,7 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
               <path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
             <span style={{ fontSize: 9, color: '#64748b', fontWeight: 500, whiteSpace: 'nowrap' }}>
-              panel.airx.com.tr{url ? `/${url}` : ''}
+              panel.AiRX.com.tr{url ? `/${url}` : ''}
             </span>
           </div>
         </div>
@@ -119,7 +139,7 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
           height: 44,
         }}>
           <div style={{ marginRight: 16, flexShrink: 0 }}>
-            <img src={logo} alt="AirX" style={{ height: 20, width: 'auto', objectFit: 'contain' }} />
+            <img src={logo} alt="AiRX" style={{ height: 20, width: 'auto', objectFit: 'contain' }} />
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
@@ -154,15 +174,25 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
           </div>
         </div>
 
-        {children}
+        <div style={{ height: 408, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          {children}
+        </div>
+        </div>
       </div>
     </div>
   )
 }
 
-export function VisualSection({ children, accent }) {
+export function VisualSection({ children, accent, inline }) {
+  if (inline) {
+    return (
+      <div style={{ width: '100%', maxWidth: '100%', minWidth: 0, borderRadius: 16, overflow: 'hidden' }}>
+        {children}
+      </div>
+    )
+  }
   return (
-    <section style={{ padding: '0 24px 96px', background: '#fff' }}>
+    <section className="visual-section" style={{ padding: '0 24px 96px', background: '#fff' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>
         <div style={{
           position: 'relative',
@@ -184,8 +214,7 @@ export function VisualSection({ children, accent }) {
       </div>
       <style>{`
         @media (max-width: 768px) {
-          /* VisualSection padding */
-          section.visual-section { padding: 0 16px 64px !important; }
+          .visual-section { padding: 0 16px 64px !important; }
         }
       `}</style>
     </section>

@@ -11,31 +11,53 @@ import missha from '../../assets/logos/Missha_logo.png'
 import unitedGroup from '../../assets/logos/united-group.png'
 
 const LOGOS = [
-  { src: biolustre,    alt: 'Biolustre',         invert: false, maxH: 80 },
-  { src: untdInsaat,   alt: 'UNTD İnşaat',       invert: true  },
-  { src: koyuncu,      alt: 'Koyuncu',           invert: false },
-  { src: suadiye,      alt: 'Suadiye Anaokulu',  invert: false },
-  { src: viromed,      alt: 'ViroMed',           invert: false },
-  { src: acacia,       alt: 'Acacia',            invert: false },
-  { src: tohumHolding, alt: 'Tohum Holding',     invert: true  },
-  { src: decofis,      alt: 'Decofis',           invert: false },
-  { src: akfen,        alt: 'Akfen',             invert: false },
-  { src: missha,       alt: 'Missha',            invert: false },
-  { src: unitedGroup,  alt: 'United Group',      invert: true  },
+  { src: biolustre, alt: 'Biolustre', invert: false, maxH: 80 },
+  { src: untdInsaat, alt: 'UNTD Insaat', invert: true },
+  { src: koyuncu, alt: 'Koyuncu', invert: false },
+  { src: suadiye, alt: 'Suadiye Anaokulu', invert: false },
+  { src: viromed, alt: 'ViroMed', invert: false },
+  { src: acacia, alt: 'Acacia', invert: false },
+  { src: tohumHolding, alt: 'Tohum Holding', invert: true },
+  { src: decofis, alt: 'Decofis', invert: false },
+  { src: akfen, alt: 'Akfen', invert: false },
+  { src: missha, alt: 'Missha', invert: false },
+  { src: unitedGroup, alt: 'United Group', invert: true },
 ]
 
 export default function References() {
   return (
-    <section style={{ padding: '48px 0 52px', background: 'linear-gradient(180deg, #f8fafd 0%, #eef4fb 100%)', overflow: 'hidden' }}>
-      <div style={{ textAlign: 'center', marginBottom: 32 }}>
-        <span style={{ fontSize: 12, fontWeight: 700, color: '#003C75', letterSpacing: '0.18em', textTransform: 'uppercase', opacity: 0.6 }}>
-          Güvendikleri Şirketler
-        </span>
-      </div>
-
+    <section
+      style={{
+        padding: '48px 0 52px',
+        background: 'linear-gradient(180deg, #f8fafd 0%, #eef4fb 100%)',
+        overflow: 'hidden',
+      }}
+    >
       <div style={{ position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 140, background: 'linear-gradient(to right, #f0f6fc, transparent)', zIndex: 2, pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 140, background: 'linear-gradient(to left, #f0f6fc, transparent)', zIndex: 2, pointerEvents: 'none' }} />
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 140,
+            background: 'linear-gradient(to right, #f0f6fc, transparent)',
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: 140,
+            background: 'linear-gradient(to left, #f0f6fc, transparent)',
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
 
         <div className="ref-track">
           {[...LOGOS, ...LOGOS].map((logo, i) => (
@@ -84,8 +106,12 @@ export default function References() {
           animation-play-state: paused;
         }
         @keyframes ref-scroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
         }
       `}</style>
     </section>

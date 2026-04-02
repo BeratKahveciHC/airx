@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 const CalendarCheckIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -84,37 +85,39 @@ const AnimatedConnector = ({ delay }) => (
   </div>
 )
 
-const STEPS = [
-  {
-    num: '01',
-    Icon: CalendarCheckIcon,
-    title: 'Demo & Analiz',
-    desc: 'Uzman ekibimizle ücretsiz demo planlayın. İhtiyaçlarınızı birlikte analiz edelim, size özel öneri sunalım.',
-    tag: 'Ücretsiz',
-    tagColor: '#15803d',
-    tagBg: 'rgba(34,197,94,0.09)',
-  },
-  {
-    num: '02',
-    Icon: SettingsIcon,
-    title: 'Kurulum & Tanımlama',
-    desc: 'Organizasyon yapınızı, lokasyonları ve personeli sisteme ekleyin. Modülleri iş akışınıza göre yapılandırın.',
-    tag: '~1 gün',
-    tagColor: '#0369a1',
-    tagBg: 'rgba(3,105,161,0.08)',
-  },
-  {
-    num: '03',
-    Icon: CheckCircleIcon,
-    title: 'Yönetmeye Başlayın',
-    desc: 'Tüm İK süreçlerinizi web paneli ve mobil uygulamadan yönetin. Gerçek zamanlı verilerle karar alın.',
-    tag: 'Hemen',
-    tagColor: '#7c3aed',
-    tagBg: 'rgba(124,58,237,0.08)',
-  },
-]
-
 export default function HowItWorks() {
+  const { t } = useTranslation()
+
+  const STEPS = [
+    {
+      num: t('howItWorks.step1Num'),
+      Icon: CalendarCheckIcon,
+      title: t('howItWorks.step1Title'),
+      desc: t('howItWorks.step1Desc'),
+      tag: t('howItWorks.step1Tag'),
+      tagColor: '#15803d',
+      tagBg: 'rgba(34,197,94,0.09)',
+    },
+    {
+      num: t('howItWorks.step2Num'),
+      Icon: SettingsIcon,
+      title: t('howItWorks.step2Title'),
+      desc: t('howItWorks.step2Desc'),
+      tag: t('howItWorks.step2Tag'),
+      tagColor: '#0369a1',
+      tagBg: 'rgba(3,105,161,0.08)',
+    },
+    {
+      num: t('howItWorks.step3Num'),
+      Icon: CheckCircleIcon,
+      title: t('howItWorks.step3Title'),
+      desc: t('howItWorks.step3Desc'),
+      tag: t('howItWorks.step3Tag'),
+      tagColor: '#7c3aed',
+      tagBg: 'rgba(124,58,237,0.08)',
+    },
+  ]
+
   return (
     <section id="nasil-calisir" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>
@@ -127,25 +130,15 @@ export default function HowItWorks() {
           transition={{ duration: 0.5 }}
           style={{ textAlign: 'center', marginBottom: 56 }}
         >
-          <div style={{
-            fontFamily: "'Instrument Serif', Georgia, serif",
-            fontStyle: 'italic',
-            fontSize: 'clamp(22px, 3vw, 32px)',
-            color: '#79ACDC',
-            marginBottom: 14,
-            letterSpacing: '-0.01em',
-          }}>
-            Nasıl Çalışır?
-          </div>
           <h2 style={{
             fontSize: 'clamp(28px, 4vw, 42px)',
             fontWeight: 700, color: '#003C75',
             margin: '0 0 14px', lineHeight: 1.15,
           }}>
-            3 Adımda İK Yönetimi
+            {t('howItWorks.sectionTitle')}
           </h2>
           <p style={{ fontSize: 17, color: '#64748b', maxWidth: 420, margin: '0 auto', lineHeight: 1.65 }}>
-            Teknik bilgi gerekmez. Hemen bugün başlayın.
+            {t('howItWorks.subtitle')}
           </p>
         </motion.div>
 
@@ -181,24 +174,13 @@ export default function HowItWorks() {
                   borderRadius: '22px 22px 0 0',
                 }} />
 
-                {/* Büyük watermark numara */}
-                <div style={{
-                  position: 'absolute', right: 20, top: 16,
-                  fontSize: 72, fontWeight: 900, lineHeight: 1,
-                  color: 'rgba(0,60,117,0.05)',
-                  userSelect: 'none', pointerEvents: 'none',
-                  fontVariantNumeric: 'tabular-nums',
-                }}>
-                  {step.num}
-                </div>
-
                 {/* Numara badge */}
                 <div style={{
+                  position: 'absolute', right: 24, top: 24,
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  width: 38, height: 38, borderRadius: 11,
+                  width: 48, height: 48, borderRadius: 14,
                   background: 'linear-gradient(135deg, #003C75, #1a6aaa)',
-                  color: '#fff', fontSize: 14, fontWeight: 800,
-                  marginBottom: 18,
+                  color: '#fff', fontSize: 17, fontWeight: 800,
                   boxShadow: '0 4px 14px rgba(0,60,117,0.28)',
                 }}>
                   {step.num}
@@ -244,7 +226,7 @@ export default function HowItWorks() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .how-steps-row {
             flex-direction: column !important;
             gap: 16px !important;

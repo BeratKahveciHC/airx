@@ -31,9 +31,9 @@ Otomatize bir izin sürecinde çalışan sadece talepte bulunur. Sistem geri kal
 
 Toplam süre: **5 dakika**.
 
-## AirX İzin Modülü
+## AiRX İzin Modülü
 
-AirX'in izin yönetimi modülü bu sürecin tamamını dijitalleştirir:
+AiRX'in izin yönetimi modülü bu sürecin tamamını dijitalleştirir:
 
 - **Mobil talep:** Çalışan telefonundan izin talebinde bulunur
 - **Hiyerarşik onay:** Belirlenen yönetici zincirinden geçer

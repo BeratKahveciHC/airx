@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE_NAME = 'AirX'
+const SITE_NAME = 'AiRX'
 const SITE_URL = 'https://airx.com.tr'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const TWITTER_HANDLE = '@airxhr'
@@ -15,7 +15,7 @@ export default function SEO({
   jsonLd = null,
 }) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Mobil İK Yönetim Platformu`
-  const metaDesc = description || 'AirX, mobil öncelikli İK yönetim platformudur. PDKS, izin yönetimi, puantaj, özlük dosyası ve daha fazlasını tek uygulamada yönetin.'
+  const metaDesc = description || 'AiRX, mobil öncelikli İK yönetim platformudur. PDKS, izin yönetimi, puantaj, özlük dosyası ve daha fazlasını tek uygulamada yönetin.'
   const canonicalUrl = canonical ? `${SITE_URL}${canonical}` : SITE_URL
 
   return (

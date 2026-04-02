@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 /* ── CountUp ── */
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
@@ -33,73 +34,63 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 
 }
 
 /* ── Data ── */
-const STATS = [
-  { target: 150, suffix: '+', label: 'Aktif Kurum' },
-  { target: 15000, suffix: '+', label: 'Günlük Kullanıcı Etkileşimi' },
-  { target: 14, suffix: '', label: 'Birbirine Entegre Modül' },
-  { target: 99, prefix: '%', suffix: '.9', label: 'Platform Sürekliliği Hedefi' },
-]
-
-const VALUES = [
-  {
-    title: 'Sadelik',
-    text: 'İK ekiplerinin gününü zorlaştıran değil, hızlandıran ekranlar tasarlıyoruz. Her adım daha az tıklama, daha net karar için kurgulanıyor.',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Güven',
-    text: 'KVKK uyumunu ürünün sonuna eklenen bir katman olarak değil, sistemin temel prensibi olarak ele alıyoruz. Biyometrik veri toplamadan güvenli operasyon.',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Süreklilik',
-    text: 'Kurulumdan sonraki dönem bizim için asıl başlangıç. Eğitim, destek ve ürün geliştirmeyi aynı yolculuğun parçası görüyoruz.',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-        <path d="M21 3v5h-5" />
-        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-        <path d="M3 21v-5h5" />
-      </svg>
-    ),
-  },
-]
-
-const PRINCIPLES = [
-  'Biyometrik veri toplamadan güvenli operasyon',
-  'Mobil öncelikli çalışan deneyimi',
-  'Hızlı kurulum, kısa adaptasyon süresi',
-  'Türkiye mevzuatına ve yerel ihtiyaçlara uyum',
-]
-
-const MILESTONES = [
-  {
-    tag: 'Başlangıç',
-    title: 'Sahadaki gerçek ihtiyacı dinledik',
-    text: 'AirX, masa başı varsayımlarla değil; vardiya, izin, puantaj ve erişim süreçlerinde yaşanan gerçek operasyonel sorunları çözmek için şekillendi.',
-  },
-  {
-    tag: 'Bugün',
-    title: 'Tek platformda bağlı bir deneyim',
-    text: 'İzin yönetiminden ziyaretçi süreçlerine kadar farklı İK operasyonlarını tek ekranda, tek veri akışında bir araya getiriyoruz.',
-  },
-  {
-    tag: 'Yarın',
-    title: 'Daha akıllı, daha öngörülü araçlar',
-    text: 'Yalnızca kayıt tutan değil, yöneticilere öneri üreten ve ekiplerin daha hızlı aksiyon almasını sağlayan bir platform inşa ediyoruz.',
-  },
-]
-
 export default function AboutPage() {
+  const { t } = useTranslation()
+
+  const STATS = [
+    { target: 150, suffix: '+', label: t('about.statsLabel1') },
+    { target: 15000, suffix: '+', label: t('about.statsLabel2') },
+    { target: 14, suffix: '', label: t('about.statsLabel3') },
+    { target: 99, prefix: '%', suffix: '.9', label: t('about.statsLabel4') },
+  ]
+
+  const VALUES = [
+    {
+      title: t('about.value1Title'),
+      text: t('about.value1Text'),
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+        </svg>
+      ),
+    },
+    {
+      title: t('about.value2Title'),
+      text: t('about.value2Text'),
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      ),
+    },
+    {
+      title: t('about.value3Title'),
+      text: t('about.value3Text'),
+      icon: (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+          <path d="M21 3v5h-5" />
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+          <path d="M3 21v-5h5" />
+        </svg>
+      ),
+    },
+  ]
+
+  const PRINCIPLES = [
+    t('about.principle1'),
+    t('about.principle2'),
+    t('about.principle3'),
+    t('about.principle4'),
+  ]
+
+  const MILESTONES = [
+    { tag: t('about.milestone1Tag'), title: t('about.milestone1Title'), text: t('about.milestone1Text') },
+    { tag: t('about.milestone2Tag'), title: t('about.milestone2Title'), text: t('about.milestone2Text') },
+    { tag: t('about.milestone3Tag'), title: t('about.milestone3Title'), text: t('about.milestone3Text') },
+  ]
+
   return (
     <main>
 
@@ -131,25 +122,15 @@ export default function AboutPage() {
               <motion.div animate={{ y: [0, -12, 0], x: [0, 8, 0] }} transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', right: 80, bottom: 90, width: 110, height: 110, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,60,117,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.06 }}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 28 }}
-                >
-                  <div style={{ width: 28, height: 1, background: '#003C75', opacity: 0.35 }} />
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#003C75', letterSpacing: '0.18em', textTransform: 'uppercase' }}>Hakkımızda</span>
-                </motion.div>
-
                 <motion.h1
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                   style={{ fontSize: 'clamp(36px, 4.8vw, 60px)', fontWeight: 800, lineHeight: 1.06, letterSpacing: '-0.03em', color: '#0f172a', margin: '0 0 22px', maxWidth: 580 }}
                 >
-                  İnsan kaynaklarında{' '}
-                  <span style={{ color: '#003C75' }}>daha net, daha hızlı</span>{' '}
-                  ve daha güvenli bir akış.
+                  {t('about.heroTitle1')}{' '}
+                  <span style={{ color: '#003C75' }}>{t('about.heroTitleHighlight')}</span>{' '}
+                  {t('about.heroTitle2')}
                 </motion.h1>
 
                 <motion.p
@@ -158,9 +139,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.55, delay: 0.17 }}
                   style={{ fontSize: 17, color: '#475569', lineHeight: 1.82, margin: '0 0 34px', maxWidth: 580 }}
                 >
-                  AirX, İK ekiplerinin operasyon yükünü azaltırken çalışan deneyimini de
-                  iyileştirmek için geliştirildi. Hedefimiz; dağınık süreçleri tek platformda
-                  birleştiren, mobil öncelikli ve mevzuata uyumlu bir yapı sunmak.
+                  {t('about.heroSubtitle')}
                 </motion.p>
 
                 <motion.div
@@ -175,7 +154,7 @@ export default function AboutPage() {
                     whileTap={{ scale: 0.98 }}
                     style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 8, background: '#003C75', color: '#fff', textDecoration: 'none', fontSize: 15, fontWeight: 700, boxShadow: '0 10px 26px rgba(0,60,117,0.18)' }}
                   >
-                    Değerlerimizi Keşfedin
+                    {t('about.heroBtn1')}
                   </motion.a>
                   <motion.a
                     href="/iletisim#demo-form"
@@ -183,7 +162,7 @@ export default function AboutPage() {
                     whileTap={{ scale: 0.98 }}
                     style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 24px', borderRadius: 8, background: '#fff', color: '#334155', textDecoration: 'none', fontSize: 15, fontWeight: 600, border: '1px solid #dbe3ee' }}
                   >
-                    Demo Talep Et
+                    {t('about.heroBtn2')}
                   </motion.a>
                 </motion.div>
               </div>
@@ -205,11 +184,8 @@ export default function AboutPage() {
               <motion.div animate={{ y: [0, 16, 0], rotate: [0, 8, 0] }} transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', top: 28, right: 28, width: 72, height: 72, borderRadius: 18, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }} />
 
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(219,238,255,0.5)', marginBottom: 18 }}>
-                  AirX Yaklaşımı
-                </div>
-                <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(22px, 2.5vw, 28px)', lineHeight: 1.28, color: '#dbeeff', marginBottom: 28 }}>
-                  "Tek bir modül değil, birlikte çalışan bir İK ekosistemi."
+                <div style={{ fontSize: 'clamp(22px, 2.5vw, 28px)', lineHeight: 1.28, color: '#dbeeff', marginBottom: 28 }}>
+                  "{t('about.cardQuote')}"
                 </div>
 
                 <div style={{ display: 'grid', gap: 10, marginBottom: 30 }}>
@@ -230,12 +206,12 @@ export default function AboutPage() {
 
                 <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 20, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   <div>
-                    <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1, marginBottom: 5 }}>1 gün</div>
-                    <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.58)' }}>Hedef kurulum süresi</div>
+                    <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1, marginBottom: 5 }}>{t('about.quickStat1Value')}</div>
+                    <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.58)' }}>{t('about.quickStat1Label')}</div>
                   </div>
                   <div>
-                    <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1, marginBottom: 5 }}>Tek ekran</div>
-                    <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.58)' }}>Dağınık süreçler yerine</div>
+                    <div style={{ fontSize: 30, fontWeight: 800, lineHeight: 1, marginBottom: 5 }}>{t('about.quickStat2Value')}</div>
+                    <div style={{ fontSize: 13, color: 'rgba(219,238,255,0.58)' }}>{t('about.quickStat2Label')}</div>
                   </div>
                 </div>
               </div>
@@ -289,15 +265,11 @@ export default function AboutPage() {
             transition={{ duration: 0.52 }}
             style={{ textAlign: 'center', marginBottom: 52, paddingTop: 80 }}
           >
-            <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(22px, 3vw, 32px)', color: '#79ACDC', marginBottom: 14 }}>
-              Bizi Tanımlayan Çerçeve
-            </div>
             <h2 style={{ fontSize: 'clamp(30px, 4.2vw, 46px)', color: '#003C75', margin: '0 0 16px', lineHeight: 1.12 }}>
-              Ürünü kadar yaklaşımı da net bir ekip
+              {t('about.valuesSectionTitle')}
             </h2>
             <p style={{ maxWidth: 640, margin: '0 auto', fontSize: 17, color: '#64748b', lineHeight: 1.78 }}>
-              AirX'i geliştirirken yalnızca özellik listesine değil, kurumların gerçekten
-              nasıl çalıştığına odaklanıyoruz. Her kararımızı birkaç temel ilke etrafında şekillendiriyoruz.
+              {t('about.valuesSectionSubtitle')}
             </p>
           </motion.div>
 
@@ -356,23 +328,18 @@ export default function AboutPage() {
               <motion.div animate={{ x: [0, -8, 0], y: [0, 12, 0] }} transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }} style={{ position: 'absolute', top: 24, right: 24, width: 80, height: 80, borderRadius: 22, border: '1px solid rgba(255,255,255,0.10)', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
 
               <div style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(219,238,255,0.5)', marginBottom: 18 }}>
-                  Hikayemiz
-                </div>
-                <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(22px, 2.5vw, 32px)', lineHeight: 1.24, marginBottom: 20, color: '#ffffff' }}>
-                  İK operasyonunu sadece dijitalleştirmek değil, sadeleştirmek istedik.
+                <div style={{ fontSize: 'clamp(22px, 2.5vw, 32px)', lineHeight: 1.24, marginBottom: 20, color: '#ffffff' }}>
+                  {t('about.storyQuote')}
                 </div>
                 <p style={{ fontSize: 15, lineHeight: 1.82, color: 'rgba(219,238,255,0.68)', margin: '0 0 30px' }}>
-                  AirX; insan kaynakları, yöneticiler ve çalışanlar için ayrı ayrı değil,
-                  ortak çalışan bir deneyim olarak tasarlandı. Karmaşık süreçleri azaltan
-                  her iyileştirme, bizim için ürün başarısının en net göstergesi.
+                  {t('about.storyBody')}
                 </p>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 22 }}>
                   {[
-                    { val: '2021', desc: 'Kuruluş yılı' },
-                    { val: '14 +', desc: 'Modül sayısı' },
-                    { val: '150 +', desc: 'Aktif kurum' },
-                    { val: '1 gün', desc: 'Kurulum hedefi' },
+                    { val: t('about.miniStat1Val'), desc: t('about.miniStat1Desc') },
+                    { val: t('about.miniStat2Val'), desc: t('about.miniStat2Desc') },
+                    { val: t('about.miniStat3Val'), desc: t('about.miniStat3Desc') },
+                    { val: t('about.miniStat4Val'), desc: t('about.miniStat4Desc') },
                   ].map((s) => (
                     <div key={s.desc}>
                       <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1, marginBottom: 5 }}>{s.val}</div>
@@ -425,23 +392,18 @@ export default function AboutPage() {
 
         <div style={{ maxWidth: 980, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center' }}>
           <motion.div initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
-            <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: 'italic', fontSize: 'clamp(22px, 3vw, 30px)', color: '#79ACDC', marginBottom: 16 }}>
-              Birlikte Büyüyelim
-            </div>
             <h2 style={{ fontSize: 'clamp(30px, 4.5vw, 52px)', color: '#fff', margin: '0 0 20px', lineHeight: 1.1 }}>
-              AirX'i merak ediyorsanız,<br />
-              ekibimiz size platformu memnuniyetle anlatsın.
+              {t('about.ctaTitle')}
             </h2>
             <p style={{ maxWidth: 580, margin: '0 auto 34px', fontSize: 17, lineHeight: 1.78, color: 'rgba(219,238,255,0.68)' }}>
-              Süreçlerinizi dinleyip sizin yapınıza uygun akışı birlikte kuralım.
-              Demo, kurulum yaklaşımı ve modül yapısı için ekibimizle iletişime geçin.
+              {t('about.ctaSubtitle')}
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
               <motion.a href="/iletisim#demo-form" whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '15px 34px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontWeight: 700, fontSize: 15 }}>
-                Demo Talep Et
+                {t('about.ctaBtn1')}
               </motion.a>
               <motion.a href="mailto:info@airx.com.tr" whileHover={{ y: -4, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '15px 28px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: 15, backdropFilter: 'blur(8px)' }}>
-                info@airx.com.tr
+                {t('about.ctaBtn2')}
               </motion.a>
             </div>
           </motion.div>
@@ -450,16 +412,19 @@ export default function AboutPage() {
 
       <style>{`
         /* ── Grid layouts ── */
-        @media (max-width: 960px) {
+        @media (max-width: 1024px) {
           .about-hero-grid, .about-story-grid { grid-template-columns: 1fr !important; }
           .about-stats-grid, .about-values-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 640px) {
           .about-stats-grid, .about-values-grid { grid-template-columns: 1fr !important; }
+          .about-story-grid > div:first-child {
+            padding: 30px 22px !important;
+          }
         }
 
         /* ── Hero section padding ── */
-        @media (max-width: 960px) {
+        @media (max-width: 1024px) {
           .about-hero-section { padding: 84px 24px 0 !important; }
         }
         @media (max-width: 640px) {
@@ -469,6 +434,10 @@ export default function AboutPage() {
         @media (max-width: 480px) {
           .about-hero-section { padding: 64px 16px 0 !important; }
           .about-hero-card { padding: 28px 20px !important; border-radius: 20px !important; }
+          .about-story-grid > div:first-child {
+            border-radius: 22px !important;
+            padding: 26px 18px !important;
+          }
         }
 
         /* ── CTA padding ── */
