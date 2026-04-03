@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import SEO from '../components/SEO'
 
 const PRICING_TIERS_BASE = [
   { id: '2-10', labelKey: 'pricing.tier1Label', min: 2, max: 10, monthly: 299, semiAnnual: 269, annual: 254 },
@@ -46,6 +47,11 @@ export default function PricingPage() {
 
   return (
     <main style={{ background: '#f6f9fc' }}>
+      <SEO
+        title="Fiyatlar — AiRX İK Yönetim Platformu"
+        description="AiRX fiyatlandırması: personel sayısına göre esnek planlar. Aylık, 6 aylık veya yıllık abonelik seçenekleri. 14 modül tek abonelikte, ek ücret yok."
+        canonical="/fiyatlar"
+      />
       <section
         className="pricing-hero"
         style={{

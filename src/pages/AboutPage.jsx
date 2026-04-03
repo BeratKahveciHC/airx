@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import SEO from '../components/SEO'
 
 /* ── CountUp ── */
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
@@ -93,6 +94,11 @@ export default function AboutPage() {
 
   return (
     <main>
+      <SEO
+        title="Hakkımızda — AiRX İK Yönetim Platformu"
+        description="AiRX, Türkiye'nin mobil öncelikli İK yönetim platformudur. 150+ aktif kurum, 15.000+ kullanıcı. Biyometrik veri gerektirmez, KVKK uyumlu, 1 günde kurulum."
+        canonical="/hakkimizda"
+      />
 
       {/* ── Hero ── */}
       <section className="about-hero-section" style={{

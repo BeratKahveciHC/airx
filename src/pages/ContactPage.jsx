@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import SEO from '../components/SEO'
 const inputStyle = {
   width: '100%',
   border: '1.5px solid #e2e8f0',
@@ -276,6 +277,11 @@ export default function ContactPage() {
 
   return (
     <main>
+      <SEO
+        title="İletişim — Demo Talep Et"
+        description="AiRX demo talebi ve iletişim. Ürün uzmanlarımız en kısa sürede sizinle iletişime geçer. E-posta: info@airx.com.tr"
+        canonical="/iletisim"
+      />
 
       {/* ── Hero ── */}
       <section className="contact-hero-section" style={{

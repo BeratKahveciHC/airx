@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import SEO from '../components/SEO'
 
 /* ══════════════════════════════════════════════════════
    PAGE
@@ -94,8 +95,11 @@ export default function BlogPage() {
   const rest = POSTS.filter(p => !p.featured && (active === 'Tümü' || p.categoryKey === active))
 
   return (
-    <div style={{ background: '#fff' }}>
-
+    <div style={{ background: '#fff' }}>      <SEO
+        title="Blog — İK Yönetimi, KVKK ve Dijital Dönüşüm"
+        description="AiRX blog: İK süreçleri, PDKS, KVKK uyumu, çalışan deneyimi ve dijital İK dönüşümü hakkında uzman içerikler."
+        canonical="/blog"
+      />
       {/* ══════════════════════
           HERO
       ══════════════════════ */}

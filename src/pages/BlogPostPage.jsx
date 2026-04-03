@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import { parseMd } from '../lib/parseMd'
 import { useTranslation } from 'react-i18next'
+import SEO from '../components/SEO'
 
 /* Vite ile tüm .md dosyalarını raw string olarak içe aktar */
 const modules = import.meta.glob('../content/blog/*.md', { query: '?raw', import: 'default' })
@@ -60,8 +61,29 @@ export default function BlogPostPage() {
 
   const accentColor = post.categoryColor || '#003C75'
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || post.title,
+    datePublished: post.date,
+    inLanguage: i18n.language === 'en' ? 'en-US' : 'tr-TR',
+    url: `https://airx.com.tr/blog/${slug}`,
+    author: { '@type': 'Organization', name: 'AiRX', url: 'https://airx.com.tr' },
+    publisher: { '@type': 'Organization', name: 'AiRX', url: 'https://airx.com.tr', logo: { '@type': 'ImageObject', url: 'https://airx.com.tr/og-image.jpg' } },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://airx.com.tr/blog/${slug}` },
+  }
+
   return (
     <div style={{ background: '#fff' }}>
+      <SEO
+        title={post.title}
+        description={post.excerpt || post.title}
+        canonical={`/blog/${slug}`}
+        ogType="article"
+        lang={i18n.language === 'en' ? 'en' : 'tr'}
+        jsonLd={articleSchema}
+      />
 
       {/* ── Hero ── */}
       <section style={{

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import SEO from '../components/SEO'
 
 /* ── CountUp ── */
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
@@ -136,6 +137,11 @@ export default function WhyAiRXPage() {
 
   return (
     <div style={{ background: '#fff' }}>
+      <SEO
+        title="Neden AiRX — Diğerleri Vaad Eder, AiRX Teslim Eder"
+        description="Biyometrik veri riski yok, donanım maliyeti yok. AiRX ile KVKK uyumlu, mobil öncelikli İK yönetimi. 150+ kurumun tercih ettii platform."
+        canonical="/neden-airx"
+      />
 
       {/* ══════════════════════════════════════════
           HERO — Premium, split, grid çizgili
