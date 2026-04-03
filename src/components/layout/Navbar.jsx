@@ -217,7 +217,7 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            <img className="navbar-logo" src={logo} alt="AiRX" style={{ height: 32, width: 'auto', objectFit: 'contain' }} />
+            <img className="navbar-logo" src={logo} alt="AiRX" style={{ height: 44, width: 'auto', objectFit: 'contain' }} />
           </a>
 
           <nav
@@ -326,57 +326,27 @@ export default function Navbar() {
             }}
           >
             {/* Language Switcher */}
-            <div
+            <button
+              onClick={() => handleLanguageChange(i18n.language === 'tr' ? 'en' : 'tr')}
+              title={i18n.language === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
               style={{
+                padding: 0,
+                borderRadius: 4,
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 4,
-                padding: '4px 4px',
-                backgroundColor: '#f3f4f6',
-                borderRadius: 6,
               }}
             >
-              <button
-                onClick={() => handleLanguageChange('tr')}
-                title="Türkçe"
-                style={{
-                  padding: '4px 6px',
-                  borderRadius: 4,
-                  border: 'none',
-                  background: i18n.language === 'tr' ? '#fff' : 'transparent',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  boxShadow: i18n.language === 'tr' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
-                  opacity: i18n.language === 'tr' ? 1 : 0.45,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                {/* Türk Bayrağı */}
+              {i18n.language === 'tr' ? (
                 <svg viewBox="0 0 300 200" width="26" height="17" style={{ display: 'block', borderRadius: 2 }}>
                   <rect width="300" height="200" fill="#E30A17"/>
                   <circle cx="110" cy="100" r="75" fill="white"/>
                   <circle cx="140" cy="100" r="59" fill="#E30A17"/>
                   <polygon fill="white" points="190,70 197.1,90.3 218.5,90.7 201.4,103.7 207.6,124.3 190,112 172.4,124.3 178.6,103.7 161.5,90.7 182.9,90.3"/>
                 </svg>
-              </button>
-              <button
-                onClick={() => handleLanguageChange('en')}
-                title="English"
-                style={{
-                  padding: '4px 6px',
-                  borderRadius: 4,
-                  border: 'none',
-                  background: i18n.language === 'en' ? '#fff' : 'transparent',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  boxShadow: i18n.language === 'en' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
-                  opacity: i18n.language === 'en' ? 1 : 0.45,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                {/* UK Bayrağı */}
+              ) : (
                 <svg viewBox="0 0 60 30" width="26" height="13" style={{ display: 'block', borderRadius: 2 }}>
                   <rect width="60" height="30" fill="#012169"/>
                   <line x1="0" y1="0" x2="60" y2="30" stroke="white" strokeWidth="6"/>
@@ -388,8 +358,8 @@ export default function Navbar() {
                   <line x1="30" y1="0" x2="30" y2="30" stroke="#C8102E" strokeWidth="6"/>
                   <line x1="0" y1="15" x2="60" y2="15" stroke="#C8102E" strokeWidth="6"/>
                 </svg>
-              </button>
-            </div>
+              )}
+            </button>
 
             <a
               href="https://panel.airx.com.tr/login"
@@ -461,68 +431,40 @@ export default function Navbar() {
             style={{ display: 'none', alignItems: 'center', gap: 6 }}
           >
             {/* Flag switcher */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 3,
-                padding: '3px 3px',
-                backgroundColor: '#f3f4f6',
-                borderRadius: 6,
-              }}
-            >
               <button
-                onClick={() => handleLanguageChange('tr')}
-                title="Türkçe"
+                onClick={() => handleLanguageChange(i18n.language === 'tr' ? 'en' : 'tr')}
+                title={i18n.language === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
                 style={{
-                  padding: '3px 5px',
+                  padding: 0,
                   borderRadius: 4,
                   border: 'none',
-                  background: i18n.language === 'tr' ? '#fff' : 'transparent',
+                  background: 'transparent',
                   cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  boxShadow: i18n.language === 'tr' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
-                  opacity: i18n.language === 'tr' ? 1 : 0.45,
                   display: 'flex',
                   alignItems: 'center',
                 }}
               >
-                <svg viewBox="0 0 300 200" width="24" height="16" style={{ display: 'block', borderRadius: 2 }}>
-                  <rect width="300" height="200" fill="#E30A17"/>
-                  <circle cx="110" cy="100" r="75" fill="white"/>
-                  <circle cx="140" cy="100" r="59" fill="#E30A17"/>
-                  <polygon fill="white" points="190,70 197.1,90.3 218.5,90.7 201.4,103.7 207.6,124.3 190,112 172.4,124.3 178.6,103.7 161.5,90.7 182.9,90.3"/>
-                </svg>
+                {i18n.language === 'tr' ? (
+                  <svg viewBox="0 0 300 200" width="24" height="16" style={{ display: 'block', borderRadius: 2 }}>
+                    <rect width="300" height="200" fill="#E30A17"/>
+                    <circle cx="110" cy="100" r="75" fill="white"/>
+                    <circle cx="140" cy="100" r="59" fill="#E30A17"/>
+                    <polygon fill="white" points="190,70 197.1,90.3 218.5,90.7 201.4,103.7 207.6,124.3 190,112 172.4,124.3 178.6,103.7 161.5,90.7 182.9,90.3"/>
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 60 30" width="24" height="12" style={{ display: 'block', borderRadius: 2 }}>
+                    <rect width="60" height="30" fill="#012169"/>
+                    <line x1="0" y1="0" x2="60" y2="30" stroke="white" strokeWidth="6"/>
+                    <line x1="60" y1="0" x2="0" y2="30" stroke="white" strokeWidth="6"/>
+                    <line x1="0" y1="0" x2="60" y2="30" stroke="#C8102E" strokeWidth="2"/>
+                    <line x1="60" y1="0" x2="0" y2="30" stroke="#C8102E" strokeWidth="2"/>
+                    <line x1="30" y1="0" x2="30" y2="30" stroke="white" strokeWidth="10"/>
+                    <line x1="0" y1="15" x2="60" y2="15" stroke="white" strokeWidth="10"/>
+                    <line x1="30" y1="0" x2="30" y2="30" stroke="#C8102E" strokeWidth="6"/>
+                    <line x1="0" y1="15" x2="60" y2="15" stroke="#C8102E" strokeWidth="6"/>
+                  </svg>
+                )}
               </button>
-              <button
-                onClick={() => handleLanguageChange('en')}
-                title="English"
-                style={{
-                  padding: '3px 5px',
-                  borderRadius: 4,
-                  border: 'none',
-                  background: i18n.language === 'en' ? '#fff' : 'transparent',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  boxShadow: i18n.language === 'en' ? '0 1px 3px rgba(0,0,0,0.12)' : 'none',
-                  opacity: i18n.language === 'en' ? 1 : 0.45,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <svg viewBox="0 0 60 30" width="24" height="12" style={{ display: 'block', borderRadius: 2 }}>
-                  <rect width="60" height="30" fill="#012169"/>
-                  <line x1="0" y1="0" x2="60" y2="30" stroke="white" strokeWidth="6"/>
-                  <line x1="60" y1="0" x2="0" y2="30" stroke="white" strokeWidth="6"/>
-                  <line x1="0" y1="0" x2="60" y2="30" stroke="#C8102E" strokeWidth="2"/>
-                  <line x1="60" y1="0" x2="0" y2="30" stroke="#C8102E" strokeWidth="2"/>
-                  <line x1="30" y1="0" x2="30" y2="30" stroke="white" strokeWidth="10"/>
-                  <line x1="0" y1="15" x2="60" y2="15" stroke="white" strokeWidth="10"/>
-                  <line x1="30" y1="0" x2="30" y2="30" stroke="#C8102E" strokeWidth="6"/>
-                  <line x1="0" y1="15" x2="60" y2="15" stroke="#C8102E" strokeWidth="6"/>
-                </svg>
-              </button>
-            </div>
 
             {/* Hamburger */}
             <button
@@ -963,7 +905,7 @@ export default function Navbar() {
 
       <style>{`
         @media (min-width: ${MOBILE_NAV_BREAKPOINT + 1}px) {
-          .navbar-logo { height: 38px !important; }
+          .navbar-logo { height: 52px !important; }
           .navbar-brand { margin-left: 75px !important; }
           .nav-desktop-center {
             position: absolute !important;

@@ -194,7 +194,7 @@ export default function AboutPage() {
                       key={item}
                       initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.45, delay: 0.3 + i * 0.06 }}
+                      transition={{ default: { duration: 0.45, delay: 0.3 + i * 0.06 }, x: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }}
                       whileHover={{ x: 5, background: 'rgba(255,255,255,0.13)' }}
                       style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 14px', borderRadius: 14, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.11)', backdropFilter: 'blur(8px)' }}
                     >
@@ -230,7 +230,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.07 }}
+                transition={{ default: { duration: 0.45, delay: i * 0.07 }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                 whileHover={{ y: -8, boxShadow: '0 20px 44px rgba(0,60,117,0.10)' }}
                 style={{
                   background: '#fff',
@@ -238,7 +238,6 @@ export default function AboutPage() {
                   boxShadow: '0 8px 28px rgba(15,23,42,0.04)',
                   borderRadius: 22, padding: '28px 24px',
                   position: 'relative', overflow: 'hidden',
-                  transition: 'box-shadow 0.25s, transform 0.25s',
                 }}
               >
                 <div style={{ position: 'absolute', right: -18, top: -18, width: 72, height: 72, borderRadius: '50%', background: 'radial-gradient(circle, rgba(121,172,220,0.10) 0%, transparent 70%)' }} />
@@ -280,14 +279,13 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.09 }}
+                transition={{ default: { duration: 0.5, delay: i * 0.09 }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                 whileHover={{ y: -10, boxShadow: '0 26px 50px rgba(0,60,117,0.11)' }}
                 style={{
                   background: '#fff', borderRadius: 26,
                   border: '1px solid rgba(0,60,117,0.08)',
                   padding: '36px 32px',
                   boxShadow: '0 10px 28px rgba(0,60,117,0.06)',
-                  transition: 'box-shadow 0.25s, transform 0.25s',
                 }}
               >
                 <div style={{
@@ -358,14 +356,13 @@ export default function AboutPage() {
                   initial={{ opacity: 0, y: 24, x: 12 }}
                   whileInView={{ opacity: 1, y: 0, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.48, delay: i * 0.09 }}
+                  transition={{ default: { duration: 0.48, delay: i * 0.09 }, x: { duration: 0.2, ease: 'easeOut' }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                   whileHover={{ x: 6, y: -4, boxShadow: '0 20px 42px rgba(15,23,42,0.09)' }}
                   style={{
                     background: '#fff',
                     border: '1px solid rgba(0,60,117,0.08)',
                     borderRadius: 22, padding: '26px 26px 24px',
                     boxShadow: '0 8px 28px rgba(15,23,42,0.05)',
-                    transition: 'box-shadow 0.25s, transform 0.25s',
                   }}
                 >
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '5px 12px', borderRadius: 9999, background: 'rgba(0,60,117,0.06)', color: '#003C75', fontSize: 12, fontWeight: 700, marginBottom: 14 }}>

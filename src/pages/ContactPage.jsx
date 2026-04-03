@@ -303,10 +303,10 @@ export default function ContactPage() {
                 {t('contact.heroSubtitle')}
               </p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <motion.a href="#demo-form" whileHover={{ y: -3, boxShadow: '0 18px 36px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontSize: 15, fontWeight: 700 }}>
+                <motion.a href="#demo-form" whileHover={{ y: -3, boxShadow: '0 18px 36px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontSize: 15, fontWeight: 700 }}>
                   {t('contact.heroDemoBtn')}
                 </motion.a>
-                <motion.a href="tel:+902162343737" whileHover={{ y: -3, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 24px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontSize: 15, fontWeight: 600 }}>
+                <motion.a href="tel:+902162343737" whileHover={{ y: -3, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 24px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontSize: 15, fontWeight: 600 }}>
                   {t('contact.heroCallBtn')}
                 </motion.a>
               </div>
@@ -360,7 +360,7 @@ export default function ContactPage() {
                 href={ch.href}
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ default: { duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                 whileHover={{ y: -8, boxShadow: '0 22px 48px rgba(0,60,117,0.12)' }}
                 style={{
                   display: 'block', background: '#fff',
@@ -368,7 +368,6 @@ export default function ContactPage() {
                   borderRadius: 24, padding: '30px 26px',
                   boxShadow: '0 10px 32px rgba(15,23,42,0.06)',
                   textDecoration: 'none',
-                  transition: 'box-shadow 0.25s, transform 0.25s',
                 }}
               >
                 <div style={{ width: 48, height: 48, borderRadius: 16, background: 'linear-gradient(135deg, rgba(0,60,117,0.07), rgba(121,172,220,0.14))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#003C75', marginBottom: 18 }}>
@@ -528,6 +527,7 @@ export default function ContactPage() {
                   disabled={submitState === 'loading' || submitState === 'success'}
                   whileHover={submitState === 'idle' ? { y: -3, boxShadow: '0 16px 34px rgba(0,60,117,0.24)' } : {}}
                   whileTap={submitState === 'idle' ? { scale: 0.98 } : {}}
+                  transition={{ y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                   className="form-submit-btn"
                   style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: submitState === 'success' ? '#16a34a' : '#003C75', color: '#fff', border: 'none', borderRadius: 9999, fontWeight: 700, fontSize: 15, padding: '14px 28px', cursor: submitState === 'loading' ? 'wait' : 'pointer', fontFamily: 'inherit', boxShadow: '0 10px 26px rgba(0,60,117,0.18)', opacity: submitState === 'loading' ? 0.75 : 1, transition: 'background 0.2s, opacity 0.2s' }}
                 >
@@ -626,10 +626,10 @@ export default function ContactPage() {
               {t('contact.ctaSubtitle')}
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' }}>
-              <motion.a href="#demo-form" whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 34px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontWeight: 700, fontSize: 15 }}>
+              <motion.a href="#demo-form" whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 34px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontWeight: 700, fontSize: 15 }}>
                   {t('contact.ctaBtn1')}
               </motion.a>
-              <motion.a href="tel:+902162343737" whileHover={{ y: -4, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 28px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: 15, backdropFilter: 'blur(8px)' }}>
+              <motion.a href="tel:+902162343737" whileHover={{ y: -4, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 28px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: 15, backdropFilter: 'blur(8px)' }}>
                 {t('contact.ctaBtn2')}
               </motion.a>
             </div>

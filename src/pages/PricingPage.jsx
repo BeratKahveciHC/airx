@@ -11,7 +11,7 @@ const PRICING_TIERS_BASE = [
   { id: '500+', labelKey: 'pricing.tier6Label', min: 501, max: Infinity, monthly: null, semiAnnual: null, annual: null, custom: true },
 ]
 
-const QUICK_COUNTS = [10, 25, 50, 100, 250, 500]
+
 
 const PLAN_CARDS_BASE = [
   { id: 'monthly', titleKey: 'pricing.plan1Title', descKey: 'pricing.plan1Desc', accent: '#0F5D91', background: 'linear-gradient(180deg, #ffffff 0%, #f3f9fc 100%)', duration: 1, rateKey: 'monthly', badge: null },
@@ -34,6 +34,7 @@ function formatEmployeeCount(value) {
 export default function PricingPage() {
   const { t } = useTranslation()
   const [employeeCount, setEmployeeCount] = useState(30)
+  const [inputRaw, setInputRaw] = useState('30')
 
   const PRICING_TIERS = PRICING_TIERS_BASE.map(tier => ({ ...tier, label: t(tier.labelKey) }))
   const PLAN_CARDS = PLAN_CARDS_BASE.map(card => ({ ...card, title: t(card.titleKey), description: t(card.descKey) }))
@@ -160,13 +161,21 @@ export default function PricingPage() {
                   }}
                 >
                   <input
-                    type="number"
-                    min="2"
-                    max="9999"
-                    value={safeEmployeeCount}
+                    type="text"
+                    inputMode="numeric"
+                    value={inputRaw}
                     onChange={(event) => {
-                      const nextValue = Number(event.target.value)
-                      setEmployeeCount(Number.isNaN(nextValue) ? 2 : nextValue)
+                      const raw = event.target.value.replace(/[^0-9]/g, '')
+                      setInputRaw(raw)
+                      const nextValue = Number(raw)
+                      if (!Number.isNaN(nextValue) && raw !== '') {
+                        setEmployeeCount(nextValue)
+                      }
+                    }}
+                    onBlur={() => {
+                      const clamped = Math.min(Math.max(safeEmployeeCount, 2), 9999)
+                      setEmployeeCount(clamped)
+                      setInputRaw(String(clamped))
                     }}
                     style={{
                       width: '100%',
@@ -195,25 +204,27 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  {QUICK_COUNTS.map((count) => (
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'nowrap', overflowX: 'auto' }}>
+                  {PRICING_TIERS_BASE.map((tier) => (
                     <button
-                      key={count}
-                      onClick={() => setEmployeeCount(count)}
+                      key={tier.id}
+                      onClick={() => { setEmployeeCount(tier.min); setInputRaw(String(tier.min)) }}
                       style={{
                         border: '1px solid rgba(8,41,77,0.10)',
-                        background: safeEmployeeCount === count ? '#08294d' : '#fff',
-                        color: safeEmployeeCount === count ? '#fff' : '#31506f',
+                        background: activeTier.id === tier.id ? '#08294d' : '#fff',
+                        color: activeTier.id === tier.id ? '#fff' : '#31506f',
                         borderRadius: 9999,
-                        padding: '10px 14px',
-                        fontSize: 13,
+                        padding: '8px 12px',
+                        fontSize: 12,
                         fontWeight: 700,
                         cursor: 'pointer',
                         fontFamily: 'inherit',
                         transition: 'all 0.18s',
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0,
                       }}
                     >
-                      {formatEmployeeCount(count)}
+                      {tier.id}
                     </button>
                   ))}
                 </div>
@@ -239,21 +250,23 @@ export default function PricingPage() {
                     ? t('pricing.customTierDesc')
                     : t('pricing.tierRangeDesc', { count: safeEmployeeCount })}
                 </div>
-                <div
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '9px 12px',
-                    borderRadius: 9999,
-                    background: 'rgba(255,255,255,0.12)',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: '#fff',
-                  }}
-                >
-                  {isCustomTier ? t('pricing.customTierBadge') : t('pricing.perPersonBadge')}
-                </div>
+                {isCustomTier && (
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      padding: '9px 12px',
+                      borderRadius: 9999,
+                      background: 'rgba(255,255,255,0.12)',
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: '#fff',
+                    }}
+                  >
+                    {t('pricing.customTierBadge')}
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

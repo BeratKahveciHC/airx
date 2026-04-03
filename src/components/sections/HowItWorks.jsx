@@ -152,7 +152,7 @@ export default function HowItWorks() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ duration: 0.65, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ default: { duration: 0.65, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                 whileHover={{ y: -6, boxShadow: '0 20px 48px rgba(0,60,117,0.13)' }}
                 style={{
                   flex: 1,

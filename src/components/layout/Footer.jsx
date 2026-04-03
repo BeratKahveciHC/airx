@@ -66,7 +66,7 @@ function SocialButton({ Icon }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         width: 36,
-        height: 36,
+        height: 52,
         borderRadius: 10,
         background: hovered ? 'rgba(121,172,220,0.18)' : 'rgba(255,255,255,0.07)',
         border: `1px solid ${hovered ? 'rgba(121,172,220,0.35)' : 'rgba(255,255,255,0.1)'}`,
@@ -231,7 +231,7 @@ export default function Footer() {
                   src={logo}
                   alt="AiRX"
                   style={{
-                    height: 36,
+                    height: 52,
                     width: 'auto',
                     filter: 'brightness(0) invert(1)',
                     objectFit: 'contain',
@@ -380,7 +380,7 @@ export default function Footer() {
 
       <style>{`
         @media (min-width: 901px) {
-          .footer-logo { height: 42px !important; }
+          .footer-logo { height: 60px !important; }
         }
         @media (max-width: 1024px) {
           .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
@@ -398,3 +398,4 @@ export default function Footer() {
     </footer>
   )
 }
+

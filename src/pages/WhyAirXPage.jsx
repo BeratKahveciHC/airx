@@ -554,7 +554,7 @@ export default function WhyAiRXPage() {
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.07 }}
+                transition={{ default: { duration: 0.45, delay: i * 0.07 }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                 style={{
                   borderRadius: 24,
                   border: `1px solid ${pillar.accent}22`,

@@ -192,7 +192,7 @@ export default function Security() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.09 }}
+                transition={{ default: { duration: 0.5, delay: 0.1 + i * 0.09 }, y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }}
                 whileHover={{ y: -4, boxShadow: '0 14px 40px rgba(0,60,117,0.11)' }}
                 style={{
                   background: '#fff',
