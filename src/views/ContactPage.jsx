@@ -171,7 +171,7 @@ export default function ContactPage() {
     }
     setSubmitState('loading')
     try {
-      const res = await fetch('/mail.php', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, size: sizeValue, topic: topicValue }),

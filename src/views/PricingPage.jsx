@@ -212,7 +212,7 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'nowrap', overflowX: 'auto' }}>
+                <div className="pricing-tier-buttons" style={{ display: 'flex', gap: 8, flexWrap: 'nowrap', overflowX: 'auto' }}>
                   {PRICING_TIERS_BASE.map((tier) => (
                     <button
                       key={tier.id}
@@ -598,6 +598,10 @@ export default function PricingPage() {
           }
           .pricing-cta {
             padding: 72px 20px !important;
+          }
+          .pricing-tier-buttons {
+            flex-wrap: wrap !important;
+            overflow-x: visible !important;
           }
         }
 
