@@ -1,5 +1,8 @@
+'use client'
+
+import React from 'react'
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 const CalendarCheckIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -86,7 +89,7 @@ const AnimatedConnector = ({ delay }) => (
 )
 
 export default function HowItWorks() {
-  const { t } = useTranslation()
+  const t = useTranslations()
 
   const STEPS = [
     {
@@ -145,7 +148,7 @@ export default function HowItWorks() {
         {/* ── Adımlar ── */}
         <div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }} className="how-steps-row">
           {STEPS.map((step, i) => (
-            <>
+            <React.Fragment key={step.num}>
               <motion.div
                 key={step.num}
                 variants={CARD_VARIANTS[i]}
@@ -220,7 +223,7 @@ export default function HowItWorks() {
               {i < STEPS.length - 1 && (
                 <AnimatedConnector key={`c-${i}`} delay={i * 0.15} />
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </div>

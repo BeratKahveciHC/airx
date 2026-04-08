@@ -1,5 +1,7 @@
+'use client'
+
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 /* ── İkonlar ── */
 const NoFingerprintIcon = ({ size = 26, color = '#003C75' }) => (
@@ -47,7 +49,7 @@ const PILLAR_META = [
 ]
 
 export default function Security() {
-  const { t } = useTranslation()
+  const t = useTranslations()
 
   const CERT_ITEMS = [
     t('security.cert1'), t('security.cert2'), t('security.cert3'),

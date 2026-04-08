@@ -1,5 +1,7 @@
+'use client'
+
 ﻿import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 const BULLET_ICONS = [
   { color: '#003C75', bg: 'rgba(0,60,117,0.07)', icon: <><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></> },
@@ -280,7 +282,7 @@ function PhoneMockup() {
 }
 
 export default function MobileApp() {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const BULLETS = BULLET_ICONS.map((b, i) => ({ ...b, text: t(`mobileApp.feature${i + 1}`) }))
   return (
     <section id="mobil" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #f4f8fd 0%, #ffffff 100%)', overflow: 'hidden' }}>

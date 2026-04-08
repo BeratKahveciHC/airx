@@ -139,7 +139,7 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
           height: 44,
         }}>
           <div style={{ marginRight: 16, flexShrink: 0 }}>
-            <img src={logo} alt="AiRX" style={{ height: 20, width: 'auto', objectFit: 'contain' }} />
+            <img src={logo.src} alt="AiRX" style={{ height: 20, width: 'auto', objectFit: 'contain' }} />
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>

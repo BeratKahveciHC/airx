@@ -1,6 +1,9 @@
+'use client'
+
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
+import { Link, useRouter } from '../../i18n/navigation'
 import logo from '../../assets/logo.png'
 import hcLogo from '../../assets/logos/hc-logo.webp'
 
@@ -38,7 +41,7 @@ function FooterLink({ label, href }) {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <a
+    <Link
       href={href || '#'}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -53,7 +56,7 @@ function FooterLink({ label, href }) {
       }}
     >
       {label}
-    </a>
+    </Link>
   )
 }
 
@@ -84,7 +87,8 @@ function SocialButton({ Icon }) {
 }
 
 export default function Footer() {
-  const { t } = useTranslation()
+  const t = useTranslations()
+  const router = useRouter()
 
   const MODULES = [
     { key: 'pdks', href: '/moduller/pdks' },
@@ -186,9 +190,7 @@ export default function Footer() {
             whileHover={{ y: -2, boxShadow: '0 10px 32px rgba(121,172,220,0.25)' }}
             whileTap={{ scale: 0.97 }}
             className="footer-cta-action"
-            onClick={() => {
-              window.location.href = '/iletisim#demo-form'
-            }}
+            onClick={() => router.push('/iletisim#demo-form')}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -228,7 +230,7 @@ export default function Footer() {
               <div style={{ marginBottom: 16 }}>
                 <img
                   className="footer-logo"
-                  src={logo}
+                  src={logo.src}
                   alt="AiRX"
                   style={{
                     height: 52,
@@ -268,7 +270,7 @@ export default function Footer() {
               </div>
 
               <img
-                src={hcLogo}
+                src={hcLogo.src}
                 alt="HC Dijital"
                 style={{
                   marginTop: 22,

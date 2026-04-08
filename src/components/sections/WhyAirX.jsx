@@ -1,5 +1,7 @@
+'use client'
+
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 /* ── SVG İkonlar ── */
 const FingerprintOffIcon = ({ size = 28, color = '#fff' }) => (
@@ -65,7 +67,7 @@ const CheckIcon = () => (
 const MODULE_CHIPS = ['PDKS', 'İzin', 'Puantaj', 'Erişim Kontrolü', 'Ziyaretçi', 'Yemekhane', 'Anket', 'Eğitim', 'Yan Haklar', 'İş Zekası', '+4 daha']
 
 export default function WhyAirX() {
-  const { t } = useTranslation()
+  const t = useTranslations()
   return (
     <section id="neden" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #f4f8fd 0%, #ffffff 100%)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>

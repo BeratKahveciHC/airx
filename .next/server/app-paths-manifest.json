@@ -1,0 +1,7 @@
+{
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/hakkimizda/page": "app/[locale]/hakkimizda/page.js",
+  "/[locale]/moduller/[slug]/page": "app/[locale]/moduller/[slug]/page.js",
+  "/[locale]/fiyatlar/page": "app/[locale]/fiyatlar/page.js",
+  "/[locale]/neden-airx/page": "app/[locale]/neden-airx/page.js"
+}

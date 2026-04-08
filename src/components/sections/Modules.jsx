@@ -1,6 +1,8 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 /* ── İkon sistemi ── */
 const Ic = ({ d, d2, d3, d4, size, color, circle, poly, rect, line, line2, line3 }) => (
@@ -58,7 +60,7 @@ const CYCLE_DURATION   = 3500
 const USER_PAUSE_DURATION = 8000
 
 export default function Modules() {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const MODULES = MODULE_KEYS.map(m => ({
     ...m,
     name: t(`moduleDetail.${m.key}.name`),

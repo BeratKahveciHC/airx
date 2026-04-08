@@ -1,166 +1,585 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Ana Sayfalar -->
+  <!-- Ana Sayfa -->
   <url>
-    <loc>https://airx.com.tr/</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/tr</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/neden-airx</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Neden AiRX -->
+  <url>
+    <loc>https://airx.com.tr/tr/neden-airx</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/neden-airx"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/neden-airx"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/neden-airx"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/fiyatlar</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/neden-airx</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/neden-airx"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/neden-airx"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/neden-airx"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Fiyatlar -->
+  <url>
+    <loc>https://airx.com.tr/tr/fiyatlar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/fiyatlar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/fiyatlar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/fiyatlar"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/hakkimizda</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/fiyatlar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/fiyatlar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/fiyatlar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/fiyatlar"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Hakkımızda -->
+  <url>
+    <loc>https://airx.com.tr/tr/hakkimizda</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/hakkimizda"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/hakkimizda"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/hakkimizda"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/iletisim</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/hakkimizda</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/hakkimizda"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/hakkimizda"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/hakkimizda"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- İletişim -->
+  <url>
+    <loc>https://airx.com.tr/tr/iletisim</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/iletisim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/iletisim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/iletisim"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/iletisim</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/iletisim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/iletisim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/iletisim"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Blog -->
+  <!-- Gizlilik -->
   <url>
-    <loc>https://airx.com.tr/blog</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/tr/gizlilik</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/gizlilik"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/gizlilik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/gizlilik"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/gizlilik</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/gizlilik"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/gizlilik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/gizlilik"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- KVKK -->
+  <url>
+    <loc>https://airx.com.tr/tr/kvkk</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/kvkk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/kvkk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/kvkk"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/kvkk</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/kvkk"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/kvkk"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/kvkk"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Kullanım Koşulları -->
+  <url>
+    <loc>https://airx.com.tr/tr/kullanim-kosullari</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/kullanim-kosullari"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/kullanim-kosullari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/kullanim-kosullari"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/kullanim-kosullari</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/kullanim-kosullari"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/kullanim-kosullari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/kullanim-kosullari"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Blog Listesi -->
+  <url>
+    <loc>https://airx.com.tr/tr/blog</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/blog/kvkk-ve-ik-yazilimlari</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog: KVKK ve İK Yazılımları -->
+  <url>
+    <loc>https://airx.com.tr/tr/blog/kvkk-ve-ik-yazilimlari</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/kvkk-ve-ik-yazilimlari"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/kvkk-ve-ik-yazilimlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/kvkk-ve-ik-yazilimlari"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/blog/ik-yazilimi-secerken-dikkat</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airx.com.tr/blog/pdks-modern-yaklasim</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airx.com.tr/blog/ik-surecleri-otomasyonu</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airx.com.tr/blog/yemekhane-entegrasyonu</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://airx.com.tr/blog/is-zekasi-ik-kararlari</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/blog/kvkk-ve-ik-yazilimlari</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/kvkk-ve-ik-yazilimlari"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/kvkk-ve-ik-yazilimlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/kvkk-ve-ik-yazilimlari"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Modüller -->
+  <!-- Blog: İK Yazılımı Seçerken Dikkat -->
   <url>
-    <loc>https://airx.com.tr/moduller/pdks</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/tr/blog/ik-yazilimi-secerken-dikkat</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/ik-yazilimi-secerken-dikkat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/ik-yazilimi-secerken-dikkat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/ik-yazilimi-secerken-dikkat"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/blog/ik-yazilimi-secerken-dikkat</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/ik-yazilimi-secerken-dikkat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/ik-yazilimi-secerken-dikkat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/ik-yazilimi-secerken-dikkat"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: PDKS Modern Yaklaşım -->
+  <url>
+    <loc>https://airx.com.tr/tr/blog/pdks-modern-yaklasim</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/pdks-modern-yaklasim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/pdks-modern-yaklasim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/pdks-modern-yaklasim"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/blog/pdks-modern-yaklasim</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/pdks-modern-yaklasim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/pdks-modern-yaklasim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/pdks-modern-yaklasim"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: İK Süreçleri Otomasyonu -->
+  <url>
+    <loc>https://airx.com.tr/tr/blog/ik-surecleri-otomasyonu</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/ik-surecleri-otomasyonu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/ik-surecleri-otomasyonu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/ik-surecleri-otomasyonu"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/blog/ik-surecleri-otomasyonu</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/ik-surecleri-otomasyonu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/ik-surecleri-otomasyonu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/ik-surecleri-otomasyonu"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Yemekhane Entegrasyonu -->
+  <url>
+    <loc>https://airx.com.tr/tr/blog/yemekhane-entegrasyonu</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/yemekhane-entegrasyonu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/yemekhane-entegrasyonu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/yemekhane-entegrasyonu"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/blog/yemekhane-entegrasyonu</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/yemekhane-entegrasyonu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/yemekhane-entegrasyonu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/yemekhane-entegrasyonu"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: İş Zekası ve İK Kararları -->
+  <url>
+    <loc>https://airx.com.tr/tr/blog/is-zekasi-ik-kararlari</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/is-zekasi-ik-kararlari"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/is-zekasi-ik-kararlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/is-zekasi-ik-kararlari"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/blog/is-zekasi-ik-kararlari</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/blog/is-zekasi-ik-kararlari"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/blog/is-zekasi-ik-kararlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/blog/is-zekasi-ik-kararlari"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Modül: PDKS -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/pdks</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/pdks"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/pdks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/pdks"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/ozluk-dosyasi</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/pdks</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/pdks"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/pdks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/pdks"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Özlük Dosyası -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/ozluk-dosyasi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/ozluk-dosyasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/ozluk-dosyasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/ozluk-dosyasi"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/izin-yonetimi</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/ozluk-dosyasi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/ozluk-dosyasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/ozluk-dosyasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/ozluk-dosyasi"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: İzin Yönetimi -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/izin-yonetimi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/izin-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/izin-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/izin-yonetimi"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/puantaj</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/izin-yonetimi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/izin-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/izin-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/izin-yonetimi"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Puantaj -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/puantaj</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/puantaj"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/puantaj"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/puantaj"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/erisim-kontrolu</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/puantaj</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/puantaj"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/puantaj"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/puantaj"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Erişim Kontrolü -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/erisim-kontrolu</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/erisim-kontrolu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/erisim-kontrolu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/erisim-kontrolu"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/ziyaretci-yonetimi</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/erisim-kontrolu</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/erisim-kontrolu"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/erisim-kontrolu"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/erisim-kontrolu"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Ziyaretçi Yönetimi -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/ziyaretci-yonetimi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/ziyaretci-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/ziyaretci-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/ziyaretci-yonetimi"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/yemekhane</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/ziyaretci-yonetimi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/ziyaretci-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/ziyaretci-yonetimi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/ziyaretci-yonetimi"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Yemekhane -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/yemekhane</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/yemekhane"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/yemekhane"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/yemekhane"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/anket</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/yemekhane</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/yemekhane"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/yemekhane"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/yemekhane"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Anket -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/anket</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/anket"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/anket"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/anket"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/sureli-evraklar</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/anket</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/anket"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/anket"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/anket"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Süreli Evraklar -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/sureli-evraklar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/sureli-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/sureli-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/sureli-evraklar"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/egitim-planlama</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/sureli-evraklar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/sureli-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/sureli-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/sureli-evraklar"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Eğitim Planlama -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/egitim-planlama</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/egitim-planlama"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/egitim-planlama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/egitim-planlama"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/hukuki-evraklar</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/egitim-planlama</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/egitim-planlama"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/egitim-planlama"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/egitim-planlama"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Hukuki Evraklar -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/hukuki-evraklar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/hukuki-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/hukuki-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/hukuki-evraklar"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/yan-haklar</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/hukuki-evraklar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/hukuki-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/hukuki-evraklar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/hukuki-evraklar"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Yan Haklar -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/yan-haklar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/yan-haklar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/yan-haklar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/yan-haklar"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/periyodik-gorev</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/yan-haklar</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/yan-haklar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/yan-haklar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/yan-haklar"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: Periyodik Görev -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/periyodik-gorev</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/periyodik-gorev"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/periyodik-gorev"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/periyodik-gorev"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://airx.com.tr/moduller/is-zekasi</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://airx.com.tr/en/moduller/periyodik-gorev</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/periyodik-gorev"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/periyodik-gorev"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/periyodik-gorev"/>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Modül: İş Zekası -->
+  <url>
+    <loc>https://airx.com.tr/tr/moduller/is-zekasi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/is-zekasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/is-zekasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/is-zekasi"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://airx.com.tr/en/moduller/is-zekasi</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://airx.com.tr/tr/moduller/is-zekasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://airx.com.tr/en/moduller/is-zekasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://airx.com.tr/tr/moduller/is-zekasi"/>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

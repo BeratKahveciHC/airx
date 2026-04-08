@@ -1,6 +1,9 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link, useRouter, usePathname } from '../../i18n/navigation'
 import logo from '../../assets/logo.png'
 
 const MOBILE_NAV_BREAKPOINT = 1180
@@ -117,7 +120,10 @@ const MODULE_DROPDOWN = [
 const SECTION_IDS = ['urun', 'moduller', 'guvenlik', 'fiyatlar']
 
 export default function Navbar() {
-  const { t, i18n } = useTranslation()
+  const t = useTranslations()
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeId, setActiveId] = useState('')
   const [scrolled, setScrolled] = useState(false)
@@ -125,8 +131,7 @@ export default function Navbar() {
   const [mobileModulesOpen, setMobileModulesOpen] = useState(false)
 
   const handleLanguageChange = (lang) => {
-    i18n.changeLanguage(lang)
-    localStorage.setItem('language', lang)
+    router.replace(pathname, { locale: lang })
   }
 
   useEffect(() => {
@@ -207,7 +212,7 @@ export default function Navbar() {
             position: 'relative',
           }}
         >
-          <a
+          <Link
             className="navbar-brand"
             href="/"
             style={{
@@ -217,8 +222,8 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            <img className="navbar-logo" src={logo} alt="AiRX" style={{ height: 44, width: 'auto', objectFit: 'contain' }} />
-          </a>
+            <img className="navbar-logo" src={logo.src} alt="AiRX" style={{ height: 44, width: 'auto', objectFit: 'contain' }} />
+          </Link>
 
           <nav
             className="nav-desktop nav-desktop-center"
@@ -275,7 +280,7 @@ export default function Navbar() {
               const isActive = activeId === id
 
               return (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   style={{
@@ -310,7 +315,7 @@ export default function Navbar() {
                       }}
                     />
                   )}
-                </a>
+                </Link>
               )
             })}
           </nav>
@@ -327,8 +332,8 @@ export default function Navbar() {
           >
             {/* Language Switcher */}
             <button
-              onClick={() => handleLanguageChange(i18n.language === 'tr' ? 'en' : 'tr')}
-              title={i18n.language === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
+              onClick={() => handleLanguageChange(locale === 'tr' ? 'en' : 'tr')}
+              title={locale === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
               style={{
                 padding: 0,
                 borderRadius: 4,
@@ -339,7 +344,7 @@ export default function Navbar() {
                 alignItems: 'center',
               }}
             >
-              {i18n.language === 'tr' ? (
+              {locale === 'tr' ? (
                 <svg viewBox="0 0 300 200" width="26" height="17" style={{ display: 'block', borderRadius: 2 }}>
                   <rect width="300" height="200" fill="#E30A17"/>
                   <circle cx="110" cy="100" r="75" fill="white"/>
@@ -385,7 +390,7 @@ export default function Navbar() {
             >
               {t('nav.signIn')}
             </a>
-            <a
+            <Link
               href="/iletisim#demo-form"
               style={{
                 display: 'inline-flex',
@@ -422,7 +427,7 @@ export default function Navbar() {
                 <path d="M5 12h14" />
                 <path d="m13 5 7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile: flags + hamburger grouped */}
@@ -432,8 +437,8 @@ export default function Navbar() {
           >
             {/* Flag switcher */}
               <button
-                onClick={() => handleLanguageChange(i18n.language === 'tr' ? 'en' : 'tr')}
-                title={i18n.language === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
+                onClick={() => handleLanguageChange(locale === 'tr' ? 'en' : 'tr')}
+                title={locale === 'tr' ? 'Switch to English' : 'Türkçeye geç'}
                 style={{
                   padding: 0,
                   borderRadius: 4,
@@ -444,7 +449,7 @@ export default function Navbar() {
                   alignItems: 'center',
                 }}
               >
-                {i18n.language === 'tr' ? (
+                {locale === 'tr' ? (
                   <svg viewBox="0 0 300 200" width="24" height="16" style={{ display: 'block', borderRadius: 2 }}>
                     <rect width="300" height="200" fill="#E30A17"/>
                     <circle cx="110" cy="100" r="75" fill="white"/>
@@ -565,7 +570,7 @@ export default function Navbar() {
                   }}
                 >
                   {MODULE_DROPDOWN.map(module => (
-                    <a
+                    <Link
                       key={module.labelKey}
                       href={module.href}
                       style={{
@@ -633,7 +638,7 @@ export default function Navbar() {
                           {t(module.descKey)}
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
 
@@ -650,7 +655,7 @@ export default function Navbar() {
                   <span style={{ fontSize: 12.5, color: '#94a3b8' }}>
                     {t('nav.dropdownFooter')}
                   </span>
-                  <a
+                  <Link
                     href="/fiyatlar"
                     style={{ fontSize: 12.5, fontWeight: 600, color: '#003C75', textDecoration: 'none' }}
                     onMouseEnter={event => {
@@ -661,8 +666,8 @@ export default function Navbar() {
                     }}
                   >
                     {t('nav.dropdownPricing')} →
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/iletisim#demo-form"
                     style={{ fontSize: 12.5, fontWeight: 600, color: '#003C75', textDecoration: 'none' }}
                     onMouseEnter={event => {
@@ -673,7 +678,7 @@ export default function Navbar() {
                     }}
                   >
                     {t('nav.dropdownDemo')} →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>
@@ -758,7 +763,7 @@ export default function Navbar() {
                           }}
                         >
                           {MODULE_DROPDOWN.map(module => (
-                            <a
+                            <Link
                               key={module.labelKey}
                               href={module.href}
                               onClick={() => {
@@ -827,7 +832,7 @@ export default function Navbar() {
                                   {t(module.descKey)}
                                 </div>
                               </div>
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </motion.div>
@@ -836,7 +841,7 @@ export default function Navbar() {
                 </div>
 
                 {NAV_LINKS_CONFIG.map((link, index) => (
-                  <a
+                  <Link
                     key={link.labelKey}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
@@ -851,7 +856,7 @@ export default function Navbar() {
                     }}
                   >
                     {t(link.labelKey)}
-                  </a>
+                  </Link>
                 ))}
 
                 <div
@@ -878,7 +883,7 @@ export default function Navbar() {
                   >
                     {t('nav.signIn')}
                   </a>
-                  <a
+                  <Link
                     href="/iletisim#demo-form"
                     onClick={() => setMenuOpen(false)}
                     style={{
@@ -893,7 +898,7 @@ export default function Navbar() {
                     }}
                   >
                     {t('nav.requestDemo')}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.div>

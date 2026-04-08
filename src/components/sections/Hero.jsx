@@ -1,6 +1,8 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 import logo from '../../assets/logo.png'
 
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
@@ -38,7 +40,7 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 
 }
 
 export default function Hero() {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const STATS = [
     { target: 150, suffix: '+',  label: t('hero.stat1Label') },
     { target: 15,  suffix: 'K+', label: t('hero.stat2Label') },
@@ -450,7 +452,7 @@ export default function Hero() {
 
               {/* App top navbar */}
               <div style={{ background: '#fff', borderBottom: '1px solid #e8f0f9', padding: '0 14px', height: 38, display: 'flex', alignItems: 'center', gap: 10 }}>
-                <img src={logo} alt="AiRX" style={{ height: 15, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                <img src={logo.src} alt="AiRX" style={{ height: 15, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
                 <div style={{ display: 'flex', gap: 1, flex: 1 }}>
                   {[
                     { label: 'Anasayfa', active: true, chevron: false },

@@ -1,5 +1,7 @@
+'use client'
+
 import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 const ArrowIcon = () => (
   <svg
@@ -33,7 +35,7 @@ const CheckIcon = () => (
 )
 
 export default function CTASection() {
-  const { t } = useTranslation()
+  const t = useTranslations()
 
   const STATS = [
     { value: t('cta.stat1Value'), label: t('cta.stat1Label') },

@@ -11,17 +11,17 @@ import missha from '../../assets/logos/Missha_logo.png'
 import unitedGroup from '../../assets/logos/united-group.png'
 
 const LOGOS = [
-  { src: biolustre, alt: 'Biolustre', invert: false, maxH: 80 },
-  { src: untdInsaat, alt: 'UNTD Insaat', invert: true },
-  { src: koyuncu, alt: 'Koyuncu', invert: false },
-  { src: suadiye, alt: 'Suadiye Anaokulu', invert: false },
-  { src: viromed, alt: 'ViroMed', invert: false },
-  { src: acacia, alt: 'Acacia', invert: false },
-  { src: tohumHolding, alt: 'Tohum Holding', invert: true },
-  { src: decofis, alt: 'Decofis', invert: false },
-  { src: akfen, alt: 'Akfen', invert: false },
-  { src: missha, alt: 'Missha', invert: false },
-  { src: unitedGroup, alt: 'United Group', invert: true },
+  { src: biolustre.src, alt: 'Biolustre', invert: false, maxH: 80 },
+  { src: untdInsaat.src, alt: 'UNTD Insaat', invert: true },
+  { src: koyuncu.src, alt: 'Koyuncu', invert: false },
+  { src: suadiye.src, alt: 'Suadiye Anaokulu', invert: false },
+  { src: viromed.src, alt: 'ViroMed', invert: false },
+  { src: acacia.src, alt: 'Acacia', invert: false },
+  { src: tohumHolding.src, alt: 'Tohum Holding', invert: true },
+  { src: decofis.src, alt: 'Decofis', invert: false },
+  { src: akfen.src, alt: 'Akfen', invert: false },
+  { src: missha.src, alt: 'Missha', invert: false },
+  { src: unitedGroup.src, alt: 'United Group', invert: true },
 ]
 
 export default function References() {

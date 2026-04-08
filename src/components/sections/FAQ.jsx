@@ -1,6 +1,8 @@
+'use client'
+
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 
 
@@ -107,7 +109,7 @@ const ArrowIcon = () => (
 )
 
 export default function FAQ() {
-  const { t } = useTranslation()
+  const t = useTranslations()
   const [openIndex, setOpenIndex] = useState(0)
 
   const FAQS = [
