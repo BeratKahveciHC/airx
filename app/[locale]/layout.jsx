@@ -7,6 +7,12 @@ import Footer from '../../src/components/layout/Footer'
 import { Plus_Jakarta_Sans, Instrument_Serif } from 'next/font/google'
 import '../../src/styles/globals.css'
 
+export const metadata = {
+  icons: {
+    icon: '/favicon.svg',
+  },
+}
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
