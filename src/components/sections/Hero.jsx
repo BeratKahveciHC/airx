@@ -1,9 +1,138 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import logo from '../../assets/logo.png'
+
+function TypewriterBadges({ items }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [displayText, setDisplayText] = useState('')
+  const [phase, setPhase] = useState('typing') // 'typing' | 'pause' | 'deleting'
+  const timeoutRef = useRef(null)
+
+  useEffect(() => {
+    const item = items[currentIndex]
+    const fullText = item.label
+
+    if (phase === 'typing') {
+      if (displayText.length < fullText.length) {
+        timeoutRef.current = setTimeout(() => {
+          setDisplayText(fullText.slice(0, displayText.length + 1))
+        }, 60)
+      } else {
+        timeoutRef.current = setTimeout(() => setPhase('pause'), 1600)
+      }
+    } else if (phase === 'pause') {
+      timeoutRef.current = setTimeout(() => setPhase('deleting'), 400)
+    } else if (phase === 'deleting') {
+      if (displayText.length > 0) {
+        timeoutRef.current = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1))
+        }, 35)
+      } else {
+        const nextIndex = (currentIndex + 1) % items.length
+        setCurrentIndex(nextIndex)
+        setPhase('typing')
+      }
+    }
+
+    return () => clearTimeout(timeoutRef.current)
+  }, [displayText, phase, currentIndex, items])
+
+  const item = items[currentIndex]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.68 }}
+      style={{
+        position: 'absolute',
+        top: 0, left: 0, right: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 20,
+      }}
+    >
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 14,
+        padding: '14px 28px',
+        background: '#fff',
+        borderRadius: 14,
+        boxShadow: '0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
+        border: '1.5px solid rgba(0,0,0,0.07)',
+        minWidth: 260,
+      }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              width: 44, height: 44, borderRadius: 12, flexShrink: 0,
+              background: item.bg, color: item.color,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            {item.icon}
+          </motion.div>
+        </AnimatePresence>
+
+        <div style={{ display: 'flex', alignItems: 'center', minWidth: 160 }}>
+          <span style={{
+            fontSize: 20,
+            fontWeight: 800,
+            color: '#1e293b',
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+          }}>
+            {displayText}
+          </span>
+          <span style={{
+            display: 'inline-block',
+            width: 2,
+            height: 24,
+            background: item.color,
+            marginLeft: 2,
+            borderRadius: 2,
+            animation: 'typewriterBlink 0.9s step-end infinite',
+          }} />
+        </div>
+
+        <style>{`
+          @keyframes typewriterBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+          }
+        `}</style>
+      </div>
+
+      {/* Dots indicator */}
+      <div style={{
+        position: 'absolute',
+        bottom: -20,
+        display: 'flex',
+        gap: 5,
+      }}>
+        {items.map((_, i) => (
+          <div key={i} style={{
+            width: i === currentIndex ? 16 : 5,
+            height: 5,
+            borderRadius: 3,
+            background: i === currentIndex ? item.color : '#d1d5db',
+            transition: 'all 0.3s ease',
+          }} />
+        ))}
+      </div>
+    </motion.div>
+  )
+}
 
 function CountUp({ target, prefix = '', suffix = '', duration = 1800, delay = 0 }) {
   const [count, setCount] = useState(0)
@@ -207,7 +336,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 32 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            style={{ flex: '1.85 1 0', minWidth: 0, position: 'relative', marginRight: '-40px', paddingTop: 112 }}
+            style={{ flex: '1.85 1 0', minWidth: 0, position: 'relative', marginRight: '-40px', paddingTop: 100 }}
             className="hero-mockup-col"
           >
             {/* ── Telefon Mockup (sol alt köşe, absolute) ── */}
@@ -350,83 +479,39 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* ── Giriş Yöntemi Floating Badges (3×2 grid, mockup üstü) ── */}
-            <div
-              className="hero-feature-badges"
-              style={{
-                position: 'absolute',
-                top: 0, left: 0, right: 0,
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 8,
-                zIndex: 20,
-              }}
-            >
-              {[
-                {
-                  label: t('hero.entryMobilePdks'),
-                  color: '#003C75', bg: '#e8f2fc',
-                  delay: 0.68,
-                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>,
-                },
-                {
-                  label: t('hero.entryQr'),
-                  color: '#7c3aed', bg: '#f3eeff',
-                  delay: 0.76,
-                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="5" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="currentColor" stroke="none"/><path d="M16 14h2v2h-2zM18 16h2v2h-2zM14 18h2v2h-2z"/></svg>,
-                },
-                {
-                  label: 'WiFi Giriş',
-                  color: '#0891b2', bg: '#e0f9ff',
-                  delay: 0.84,
-                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg>,
-                },
-                {
-                  label: 'GPS Giriş',
-                  color: '#059669', bg: '#ecfdf5',
-                  delay: 0.92,
-                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>,
-                },
-                {
-                  label: 'Remote Giriş',
-                  color: '#d97706', bg: '#fffbeb',
-                  delay: 1.00,
-                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-                },
-                {
-                  label: 'Kontrol Noktası',
-                  color: '#dc2626', bg: '#fef2f2',
-                  delay: 1.08,
-                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>,
-                },
-              ].map((badge, i) => (
-                <motion.div
-                  key={badge.label}
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: badge.delay, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '8px 12px 8px 8px',
-                    background: '#fff',
-                    borderRadius: 10,
-                    boxShadow: '0 4px 16px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)',
-                    border: '1px solid rgba(0,0,0,0.06)',
-                  }}
-                >
-                  <div style={{
-                    width: 28, height: 28, borderRadius: 8, flexShrink: 0,
-                    background: badge.bg, color: badge.color,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    {badge.icon}
-                  </div>
-                  <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1e293b', whiteSpace: 'nowrap' }}>{badge.label}</span>
-                </motion.div>
-              ))}
-            </div>
+            {/* ── Giriş Yöntemi Typewriter (mockup üstü) ── */}
+            <TypewriterBadges items={[
+              {
+                label: t('hero.entryMobilePdks'),
+                color: '#003C75', bg: '#e8f2fc',
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>,
+              },
+              {
+                label: t('hero.entryQr'),
+                color: '#7c3aed', bg: '#f3eeff',
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="5" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="16" y="5" width="3" height="3" fill="currentColor" stroke="none"/><rect x="5" y="16" width="3" height="3" fill="currentColor" stroke="none"/><path d="M16 14h2v2h-2zM18 16h2v2h-2zM14 18h2v2h-2z"/></svg>,
+              },
+              {
+                label: 'WiFi Giriş',
+                color: '#0891b2', bg: '#e0f9ff',
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg>,
+              },
+              {
+                label: 'GPS Giriş',
+                color: '#059669', bg: '#ecfdf5',
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+              },
+              {
+                label: 'Remote Giriş',
+                color: '#d97706', bg: '#fffbeb',
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+              },
+              {
+                label: 'Kontrol Noktası',
+                color: '#dc2626', bg: '#fef2f2',
+                icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>,
+              },
+            ]} />
 
             {/* Dashboard */}
             <div style={{
