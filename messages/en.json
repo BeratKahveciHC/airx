@@ -43,22 +43,11 @@
     "mod_isZekasi_desc": "Data visualization"
   },
   "hero": {
-    "title": "Digitize Your HR Processes,",
-    "titleHighlight": "Boost Efficiency.",
-    "titleLine2": "",
-    "subtitle": "Attendance, leave management, payroll, access control and more. Manage all your HR operations on a single platform with 14 integrated modules. No biometric hardware required — same-day setup.",
+    "title": "Mobile Attendance & HR Management,",
+    "titleHighlight": "One Platform.",
+    "subtitle": "14 modules, one subscription. No biometric hardware — same-day setup.",
     "demoButton": "Request Free Demo",
-    "contactButton": "Call Us",
-    "stat1Label": "Active Organizations",
-    "stat2Label": "Users",
-    "stat3Label": "Modules",
-    "stat4Label": "Uptime",
-    "entryMobilePdks": "Mobile PDKS",
-    "entryQr": "QR Check-In",
-    "entryWifi": "WiFi Entry",
-    "entryGps": "GPS Entry",
-    "entryRemote": "Remote Entry",
-    "entryCheckpoint": "Checkpoint"
+    "contactButton": "Call Us"
   },
   "modulesSection": {
     "title": "Everything in",

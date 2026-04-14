@@ -43,22 +43,11 @@
     "mod_isZekasi_desc": "Veri görselleştirme"
   },
   "hero": {
-    "title": "İK Süreçlerinizi",
-    "titleHighlight": "Dijitalleştirin,",
-    "titleLine2": "Verimliliğinizi Artırın.",
-    "subtitle": "PDKS, izin yönetimi, puantaj, erişim kontrolü ve daha fazlası. 14 entegre modül ile tüm İK operasyonunuzu tek platformda yönetin. Biyometrik cihaz gerektirmez — aynı gün kurulum.",
+    "title": "Mobil PDKS ve İK Yönetimi,",
+    "titleHighlight": "Tek Platformda.",
+    "subtitle": "14 modül, tek abonelik. Biyometrik cihaz gerektirmez — aynı gün kurulum.",
     "demoButton": "Ücretsiz Demo Talep Et",
-    "contactButton": "Bizi Arayın",
-    "stat1Label": "Aktif Kurum",
-    "stat2Label": "Kullanıcı",
-    "stat3Label": "Modül",
-    "stat4Label": "Uptime",
-    "entryMobilePdks": "Mobil PDKS",
-    "entryQr": "QR Kontrol",
-    "entryWifi": "WiFi Giriş",
-    "entryGps": "GPS Giriş",
-    "entryRemote": "Remote Giriş",
-    "entryCheckpoint": "Kontrol Noktası"
+    "contactButton": "Bizi Arayın"
   },
   "modulesSection": {
     "title": "Tek Platformda",
