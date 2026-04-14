@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { getAllBlogSlugs, getBlogPost } from '../../../../src/lib/blog.server'
 import BlogPostPage from '../../../../src/views/BlogPostPage'
 
@@ -46,6 +47,7 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPost({ params }) {
   const { locale, slug } = await params
+  setRequestLocale(locale)
   const parsed = getBlogPost(slug, locale)
 
   if (!parsed) notFound()

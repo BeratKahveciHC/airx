@@ -3,23 +3,24 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { Link } from '../../i18n/navigation'
 import logo from '../../assets/logo.png'
 
 const MODULES_DATA = [
-  { name: 'PDKS', desc: 'Giriş-çıkış takibi', color: '#0ea5e9', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
-  { name: 'Özlük Dosyası', desc: 'Dijital personel arşivi', color: '#a78bfa', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
-  { name: 'İzin Yönetimi', desc: 'Onay akışlı izin takibi', color: '#34d399', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
-  { name: 'Puantaj', desc: 'Otomatik puantaj cetveli', color: '#fbbf24', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> },
-  { name: 'Erişim Kontrolü', desc: 'Bölge bazlı yetkilendirme', color: '#f87171', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> },
-  { name: 'Ziyaretçi Yönetimi', desc: 'QR ile ziyaretçi kaydı', color: '#22d3ee', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
-  { name: 'Yemekhane', desc: 'Yemek hakkı kontrolü', color: '#fb923c', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> },
-  { name: 'Anket', desc: 'Personel geri bildirimi', color: '#a3e635', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> },
-  { name: 'Süreli Evraklar', desc: 'Son kullanma tarihi takibi', color: '#f472b6', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> },
-  { name: 'Eğitim Planlama', desc: 'Eğitim katılım takibi', color: '#60a5fa', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> },
-  { name: 'Hukuki Evraklar', desc: 'İhtar ve savunma yönetimi', color: '#818cf8', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 6-8 4-4-2V4l4 2 8-4 4 2v4l-4-2z"/><path d="M8 10v10"/><path d="M16 6v10"/></svg> },
-  { name: 'Yan Haklar', desc: 'Görev bazlı yan hak takibi', color: '#2dd4bf', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/></svg> },
-  { name: 'Periyodik Görev', desc: 'Lokasyon doğrulamalı görev', color: '#c084fc', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg> },
-  { name: 'İş Zekası', desc: 'Veri görselleştirme', color: '#79ACDC', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
+  { slug: 'pdks', name: 'PDKS', desc: 'Giriş-çıkış takibi', color: '#0ea5e9', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+  { slug: 'ozluk-dosyasi', name: 'Özlük Dosyası', desc: 'Dijital personel arşivi', color: '#a78bfa', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+  { slug: 'izin-yonetimi', name: 'İzin Yönetimi', desc: 'Onay akışlı izin takibi', color: '#34d399', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+  { slug: 'puantaj', name: 'Puantaj', desc: 'Otomatik puantaj cetveli', color: '#fbbf24', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> },
+  { slug: 'erisim-kontrolu', name: 'Erişim Kontrolü', desc: 'Bölge bazlı yetkilendirme', color: '#f87171', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> },
+  { slug: 'ziyaretci-yonetimi', name: 'Ziyaretçi Yönetimi', desc: 'QR ile ziyaretçi kaydı', color: '#22d3ee', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+  { slug: 'yemekhane', name: 'Yemekhane', desc: 'Yemek hakkı kontrolü', color: '#fb923c', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> },
+  { slug: 'anket', name: 'Anket', desc: 'Personel geri bildirimi', color: '#a3e635', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> },
+  { slug: 'sureli-evraklar', name: 'Süreli Evraklar', desc: 'Son kullanma tarihi takibi', color: '#f472b6', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> },
+  { slug: 'egitim-planlama', name: 'Eğitim Planlama', desc: 'Eğitim katılım takibi', color: '#60a5fa', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> },
+  { slug: 'hukuki-evraklar', name: 'Hukuki Evraklar', desc: 'İhtar ve savunma yönetimi', color: '#818cf8', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m16 6-8 4-4-2V4l4 2 8-4 4 2v4l-4-2z"/><path d="M8 10v10"/><path d="M16 6v10"/></svg> },
+  { slug: 'yan-haklar', name: 'Yan Haklar', desc: 'Görev bazlı yan hak takibi', color: '#2dd4bf', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/></svg> },
+  { slug: 'periyodik-gorev', name: 'Periyodik Görev', desc: 'Lokasyon doğrulamalı görev', color: '#c084fc', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg> },
+  { slug: 'is-zekasi', name: 'İş Zekası', desc: 'Veri görselleştirme', color: '#79ACDC', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> },
 ]
 
 /* ── Dashboard Ekran 1: Anasayfa ── */
@@ -73,23 +74,35 @@ function DashboardModules() {
       {/* Modül kartları 7x2 */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 8 }} className="hero-modules-grid">
         {MODULES_DATA.map(mod => (
-          <div key={mod.name} style={{
-            background: '#fff', borderRadius: 10, border: '1px solid #e8f0f9',
-            padding: '12px 10px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6,
-            boxShadow: '0 1px 3px rgba(0,30,80,0.04)',
-          }}>
+          <Link key={mod.name} href={`/moduller/${mod.slug}`} style={{ textDecoration: 'none' }}>
             <div style={{
-              width: 28, height: 28, borderRadius: 8,
-              background: mod.color + '15', color: mod.color,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              {mod.icon}
+              background: '#fff', borderRadius: 10, border: '1px solid #e8f0f9',
+              padding: '12px 10px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6,
+              boxShadow: '0 1px 3px rgba(0,30,80,0.04)',
+              cursor: 'pointer', transition: 'border-color 0.15s, box-shadow 0.15s',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = mod.color + '55'
+              e.currentTarget.style.boxShadow = `0 3px 10px ${mod.color}20`
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = '#e8f0f9'
+              e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,30,80,0.04)'
+            }}
+            >
+              <div style={{
+                width: 28, height: 28, borderRadius: 8,
+                background: mod.color + '15', color: mod.color,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {mod.icon}
+              </div>
+              <div>
+                <div style={{ fontSize: 9.5, fontWeight: 700, color: '#0f172a', lineHeight: 1.2, marginBottom: 2 }}>{mod.name}</div>
+                <div style={{ fontSize: 7.5, color: '#64748b', lineHeight: 1.3 }}>{mod.desc}</div>
+              </div>
             </div>
-            <div>
-              <div style={{ fontSize: 9.5, fontWeight: 700, color: '#0f172a', lineHeight: 1.2, marginBottom: 2 }}>{mod.name}</div>
-              <div style={{ fontSize: 7.5, color: '#64748b', lineHeight: 1.3 }}>{mod.desc}</div>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
 
@@ -179,12 +192,26 @@ function DashboardTables() {
             </tr>
           </thead>
           <tbody>
-            <tr style={{ borderTop: '1px solid #f1f5f9' }}>
-              <td style={{ padding: '4px 8px', color: '#334155', fontWeight: 500 }}>K İ</td>
-              <td style={{ padding: '4px 8px', color: '#64748b', fontSize: 9 }}>24-01-2025 15:21</td>
-              <td style={{ padding: '4px 8px', color: '#64748b' }}></td>
-              <td style={{ padding: '4px 8px', color: '#64748b' }}>İhtiyaç Molası</td>
-            </tr>
+            {[
+              { name: 'Ayşe Kara', baslangic: '09:15', bitis: '09:30', tip: 'Çay Molası', tipColor: '#f59e0b' },
+              { name: 'Murat Demir', baslangic: '10:42', bitis: '11:00', tip: 'Öğle Arası', tipColor: '#0ea5e9' },
+              { name: 'Fatma Yıldız', baslangic: '12:00', bitis: '13:00', tip: 'Öğle Arası', tipColor: '#0ea5e9' },
+              { name: 'Kerem Arslan', baslangic: '14:30', bitis: '', tip: 'İhtiyaç Molası', tipColor: '#8b5cf6' },
+              { name: 'Selin Çelik', baslangic: '15:10', bitis: '15:25', tip: 'Çay Molası', tipColor: '#f59e0b' },
+            ].map((r, i) => (
+              <tr key={i} style={{ borderTop: '1px solid #f1f5f9' }}>
+                <td style={{ padding: '4px 8px', color: '#334155', fontWeight: 500 }}>{r.name}</td>
+                <td style={{ padding: '4px 8px', color: '#64748b', fontSize: 9 }}>{r.baslangic}</td>
+                <td style={{ padding: '4px 8px', color: '#64748b', fontSize: 9 }}>{r.bitis || <span style={{ color: '#cbd5e1' }}>—</span>}</td>
+                <td style={{ padding: '4px 8px' }}>
+                  <span style={{
+                    fontSize: 8, fontWeight: 600, color: r.tipColor,
+                    background: r.tipColor + '15', borderRadius: 4,
+                    padding: '2px 6px', whiteSpace: 'nowrap',
+                  }}>{r.tip}</span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div style={{ padding: '5px 10px', display: 'flex', justifyContent: 'center', gap: 3 }}>
@@ -231,6 +258,204 @@ function DashboardTables() {
           {['›','»'].map(c => <span key={c} style={{ width: 16, height: 16, borderRadius: 4, border: '1px solid #e2e8f0', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, color: '#94a3b8' }}>{c}</span>)}
         </div>
       </div>
+    </div>
+  )
+}
+
+/* ── Telefon Ekran 3: Giriş Menüsü ── */
+function PhoneGirisMenusuScreen() {
+  const methods = [
+    {
+      label: 'Beacon',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a7 7 0 0 1 7 7c0 4-7 13-7 13S5 13 5 9a7 7 0 0 1 7-7z"/>
+          <circle cx="12" cy="9" r="2.5" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'NFC',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <path d="M8.5 8.5h3a4 4 0 0 1 0 8H8.5V8.5z"/>
+          <path d="M8.5 12.5h3"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'Wi - Fi',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="20" r="1" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'Remote',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'QR Kod',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="5" y="5" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="16" y="5" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="5" y="16" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="14" y="14" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="18" y="14" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="14" y="18" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="18" y="18" width="3" height="3" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#f5f7fa' }}>
+      <div style={{ background: '#fff', padding: '6px 10px', display: 'flex', alignItems: 'center', borderBottom: '1px solid #e8f0f9' }}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <img src={logo.src} alt="AiRX" style={{ height: 14, width: 'auto', objectFit: 'contain' }} />
+        </div>
+      </div>
+      <div style={{ margin: '8px 8px 0', background: 'linear-gradient(135deg, #003C75, #00508f)', borderRadius: 10, padding: '7px 10px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,60,117,0.3)' }}>
+        <div style={{ fontSize: 10, fontWeight: 800, color: '#fff', marginBottom: 2 }}>Giriş Menüsü</div>
+        <div style={{ fontSize: 6, color: 'rgba(255,255,255,0.8)', lineHeight: 1.4 }}>Lütfen size uygun olan giriş yapma seçeneğine tıklayınız</div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, padding: '8px 8px 0', flex: 1 }}>
+        {methods.map((m) => (
+          <div key={m.label} style={{
+            background: 'linear-gradient(145deg, #1a5296, #003C75)',
+            borderRadius: 12,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            gap: 6, padding: '14px 8px',
+            boxShadow: '0 3px 10px rgba(0,60,117,0.35), inset 0 1px 0 rgba(255,255,255,0.12)',
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}>
+            {m.icon}
+            <span style={{ fontSize: 9, fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>{m.label}</span>
+          </div>
+        ))}
+        <div style={{ background: 'linear-gradient(145deg, #1a5296, #003C75)', borderRadius: 12, opacity: 0.25 }} />
+      </div>
+      <div style={{ height: 8 }} />
+    </div>
+  )
+}
+
+/* ── Telefon Ekran 4: Çıkış Menüsü ── */
+function PhoneCikisMenusuScreen() {
+  const methods = [
+    {
+      label: 'Beacon',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a7 7 0 0 1 7 7c0 4-7 13-7 13S5 13 5 9a7 7 0 0 1 7-7z"/>
+          <circle cx="12" cy="9" r="2.5" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'NFC',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="3"/>
+          <path d="M8.5 8.5h3a4 4 0 0 1 0 8H8.5V8.5z"/>
+          <path d="M8.5 12.5h3"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'Wi - Fi',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="20" r="1" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'Remote',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+    {
+      label: 'QR Kod',
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="5" y="5" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="16" y="5" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="5" y="16" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="14" y="14" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="18" y="14" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="14" y="18" width="3" height="3" fill="#fff" stroke="none"/>
+          <rect x="18" y="18" width="3" height="3" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#f5f7fa' }}>
+      {/* header */}
+      <div style={{ background: '#fff', padding: '6px 10px', display: 'flex', alignItems: 'center', borderBottom: '1px solid #e8f0f9' }}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#003C75" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <img src={logo.src} alt="AiRX" style={{ height: 14, width: 'auto', objectFit: 'contain' }} />
+        </div>
+      </div>
+
+      {/* banner */}
+      <div style={{ margin: '8px 8px 0', background: 'linear-gradient(135deg, #b91c1c, #991b1b)', borderRadius: 10, padding: '7px 10px', textAlign: 'center', boxShadow: '0 2px 8px rgba(185,28,28,0.3)' }}>
+        <div style={{ fontSize: 10, fontWeight: 800, color: '#fff', marginBottom: 2 }}>Çıkış Menüsü</div>
+        <div style={{ fontSize: 6, color: 'rgba(255,255,255,0.8)', lineHeight: 1.4 }}>Lütfen size uygun olan çıkış yapma seçeneğine tıklayınız</div>
+      </div>
+
+      {/* grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, padding: '8px 8px 0', flex: 1 }}>
+        {methods.map((m) => (
+          <div key={m.label} style={{
+            background: 'linear-gradient(145deg, #c41e1e, #991b1b)',
+            borderRadius: 12,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            gap: 6, padding: '14px 8px',
+            boxShadow: '0 3px 10px rgba(153,27,27,0.35), inset 0 1px 0 rgba(255,255,255,0.12)',
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}>
+            {m.icon}
+            <span style={{ fontSize: 9, fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>{m.label}</span>
+          </div>
+        ))}
+        {/* boş slot */}
+        <div style={{
+          background: 'linear-gradient(145deg, #c41e1e, #991b1b)',
+          borderRadius: 12, opacity: 0.25,
+          boxShadow: '0 3px 10px rgba(153,27,27,0.2)',
+        }} />
+      </div>
+      <div style={{ height: 8 }} />
     </div>
   )
 }
@@ -334,7 +559,7 @@ function PhoneMolaScreen() {
       <div style={{ background: '#0ea5e9', padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 6 }}>
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         <div style={{ flex: 1, textAlign: 'center' }}>
-          <span style={{ fontSize: 10, fontWeight: 800, color: '#fff', letterSpacing: '0.05em' }}>AiRX</span>
+          <img src={logo.src} alt="AiRX" style={{ height: 13, width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
         </div>
       </div>
 
@@ -429,23 +654,17 @@ function PhoneMolaScreen() {
 }
 
 const SCREEN_COUNT = 2
-const SCREEN_INTERVAL = 6000
 
 export default function Hero() {
   const t = useTranslations()
   const [activeScreen, setActiveScreen] = useState(0)
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveScreen(prev => (prev + 1) % SCREEN_COUNT)
-    }, SCREEN_INTERVAL)
-    return () => clearInterval(timer)
-  }, [])
 
   return (
     <>
       <section id="urun" style={{
         background: 'linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%)',
+        overflowX: 'clip',
       }}>
         <div style={{
           maxWidth: 1280,
@@ -493,67 +712,106 @@ export default function Hero() {
             {t('hero.subtitle')}
           </motion.p>
 
-          {/* ── CTA ── */}
+          {/* ── Giriş Yöntemleri ── */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.22 }}
-            style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}
+            style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}
           >
-            <a
-              href="/iletisim#demo-form"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '13px 26px',
-                background: '#003C75',
-                color: '#fff',
-                borderRadius: 8,
-                fontSize: 15, fontWeight: 700,
-                textDecoration: 'none',
-                boxShadow: '0 2px 8px rgba(0,60,117,0.22)',
-                transition: 'background 0.15s, box-shadow 0.15s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = '#002e5c'
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,60,117,0.32)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = '#003C75'
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,60,117,0.22)'
-              }}
-            >
-              {t('hero.demoButton')}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
-              </svg>
-            </a>
-            <a
-              href="/iletisim"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '13px 22px',
-                background: '#fff',
-                color: '#374151',
-                border: '1px solid #d1d5db',
-                borderRadius: 8,
-                fontSize: 15, fontWeight: 500,
-                textDecoration: 'none',
-                transition: 'border-color 0.15s, background 0.15s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = '#9ca3af'
-                e.currentTarget.style.background = '#f9fafb'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = '#d1d5db'
-                e.currentTarget.style.background = '#fff'
-              }}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.62 12 19.79 19.79 0 0 1 1.55 3.4 2 2 0 0 1 3.52 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.55a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              {t('hero.contactButton')}
-            </a>
+            {[
+              {
+                label: t('hero.entryWifi'),
+                color: '#0ea5e9',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/>
+                  </svg>
+                ),
+              },
+              {
+                label: t('hero.entryNfc'),
+                color: '#8b5cf6',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 15a6 6 0 1 0 12 0 6 6 0 0 0-12 0"/><path d="M9.5 15a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0"/><path d="M3 15a9 9 0 0 1 9-9"/><path d="M21 15a9 9 0 0 0-9-9"/>
+                  </svg>
+                ),
+              },
+              {
+                label: t('hero.entryRemote'),
+                color: '#003C75',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/>
+                  </svg>
+                ),
+              },
+              {
+                label: t('hero.entryQr'),
+                color: '#10b981',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3" rx="0.5"/><rect x="18" y="14" width="3" height="3" rx="0.5"/><rect x="14" y="18" width="3" height="3" rx="0.5"/><rect x="18" y="18" width="3" height="3" rx="0.5"/>
+                  </svg>
+                ),
+              },
+              {
+                label: t('hero.entryBeacon'),
+                color: '#f59e0b',
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2a7 7 0 0 1 7 7c0 4-7 13-7 13S5 13 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
+                  </svg>
+                ),
+              },
+            ].map((method) => (
+              <div
+                key={method.label}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 10,
+                  padding: '18px 22px',
+                  background: '#fff',
+                  border: `1.5px solid ${method.color}22`,
+                  borderRadius: 16,
+                  boxShadow: '0 2px 12px rgba(0,40,100,0.06)',
+                  minWidth: 110,
+                  transition: 'box-shadow 0.18s, border-color 0.18s, transform 0.18s',
+                  cursor: 'default',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.boxShadow = `0 6px 24px ${method.color}28`
+                  e.currentTarget.style.borderColor = `${method.color}55`
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,40,100,0.06)'
+                  e.currentTarget.style.borderColor = `${method.color}22`
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
+              >
+                <div style={{
+                  width: 48, height: 48, borderRadius: 14,
+                  background: `${method.color}12`,
+                  color: method.color,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  {method.icon}
+                </div>
+                <span style={{
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  color: '#1e293b',
+                  textAlign: 'center',
+                  lineHeight: 1.3,
+                }}>
+                  {method.label}
+                </span>
+              </div>
+            ))}
           </motion.div>
 
           {/* ── Dashboard + Phone Mockup ── */}
@@ -561,9 +819,77 @@ export default function Hero() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            style={{ width: '100%', position: 'relative' }}
+            style={{ width: '100%', position: 'relative', padding: '0 80px' }}
+            className="hero-mockup-wrapper"
           >
-            {/* ── Telefon Mockup (sol alt köşe) ── */}
+            {/* ── Telefon Mockup 2 (sol) ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="hero-phone-mockup"
+              style={{
+                position: 'absolute',
+                top: -28,
+                left: -90,
+                zIndex: 10,
+              }}
+            >
+              <div style={{
+                width: 170,
+                height: 360,
+                borderRadius: 32,
+                background: 'linear-gradient(160deg, #e8f2fc 0%, #c2d9f0 100%)',
+                border: '5px solid #8fb8dc',
+                boxShadow: '0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 1px rgba(255,255,255,0.4), 0 32px 64px rgba(0,30,80,0.30), 0 8px 20px rgba(0,60,117,0.18)',
+                position: 'relative',
+                overflow: 'hidden',
+              }}>
+                <div style={{ position: 'absolute', left: -6, top: 54, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                <div style={{ position: 'absolute', left: -6, top: 76, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                <div style={{ position: 'absolute', right: -6, top: 68, width: 3, height: 28, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
+
+                <div style={{ borderRadius: 27, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc', height: '100%' }}>
+                  <div style={{ height: 24, background: '#b8d3ec', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
+                    <span style={{ fontSize: 7.5, fontWeight: 700, color: '#002850' }}>09:41</span>
+                    <div style={{ width: 40, height: 11, borderRadius: 6, background: '#003C75' }} />
+                    <div style={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
+                      {[3,5,7,9].map((h,i) => <div key={i} style={{ width: 1.5, height: h, borderRadius: 1, background: i < 3 ? '#002850' : 'rgba(0,40,80,0.3)' }} />)}
+                    </div>
+                  </div>
+                  <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeScreen}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+                      >
+                        {activeScreen === 0 && <PhoneGirisMenusuScreen />}
+                        {activeScreen === 1 && <PhoneCikisMenusuScreen />}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                  <div style={{ background: '#fff', borderTop: '1px solid #e8f0f9', display: 'flex', justifyContent: 'space-around', padding: '5px 0 7px', flexShrink: 0 }}>
+                    {[
+                      { label: 'Anasayfa', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+                      { label: 'Talepler', active: true, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
+                      { label: 'Gelen Kutusu', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+                      { label: 'Profil', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+                    ].map(item => (
+                      <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, color: item.active ? '#003C75' : 'rgba(0,60,117,0.3)' }}>
+                        {item.icon}
+                        <span style={{ fontSize: 5.5, fontWeight: item.active ? 700 : 500 }}>{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* ── Telefon Mockup (sağ) ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -572,7 +898,7 @@ export default function Hero() {
               style={{
                 position: 'absolute',
                 top: -28,
-                right: -40,
+                right: -90,
                 zIndex: 10,
               }}
             >
@@ -702,6 +1028,35 @@ export default function Hero() {
                 </AnimatePresence>
               </div>
             </div>
+
+            {/* ── Ekran Kontrol Noktaları ── */}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginTop: 20 }}>
+              {[
+                { index: 0, label: 'Genel Bakış' },
+                { index: 1, label: 'Modüller' },
+              ].map(({ index, label }) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveScreen(index)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    padding: '6px 14px', borderRadius: 20,
+                    border: 'none', cursor: 'pointer',
+                    background: activeScreen === index ? '#003C75' : 'rgba(0,60,117,0.08)',
+                    color: activeScreen === index ? '#fff' : '#64748b',
+                    fontSize: 12, fontWeight: activeScreen === index ? 700 : 500,
+                    transition: 'background 0.2s, color 0.2s',
+                  }}
+                >
+                  <div style={{
+                    width: 6, height: 6, borderRadius: '50%',
+                    background: activeScreen === index ? '#79ACDC' : '#cbd5e1',
+                    flexShrink: 0,
+                  }} />
+                  {label}
+                </button>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -712,7 +1067,9 @@ export default function Hero() {
           .hero-dashboard-stats { grid-template-columns: repeat(3, 1fr) !important; }
           .hero-dashboard-tables { grid-template-columns: 1fr 1fr !important; }
           .hero-phone-mockup { display: none !important; }
+          .hero-phone-mockup-left { display: none !important; }
           .hero-modules-grid { grid-template-columns: repeat(4, 1fr) !important; }
+          .hero-mockup-wrapper { padding: 0 !important; }
         }
         @media (max-width: 480px) {
           .hero-wrapper { padding: 32px 16px 40px !important; }

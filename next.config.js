@@ -4,7 +4,8 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.js')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export' // IHS shared hosting için açabilirsiniz
+  output: 'export',
+  trailingSlash: true,
 }
 
 export default withNextIntl(nextConfig)

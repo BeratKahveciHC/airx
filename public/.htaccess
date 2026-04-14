@@ -2,12 +2,17 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
-# Mevcut dosya veya klasörse dokunma
+# Root'u /tr'ye yönlendir
+RewriteRule ^$ /tr [R=301,L]
+
+# .html uzantısı olmadan temiz URL'ler
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
 
-# Her şeyi index.html'e yönlendir (React Router için)
-RewriteRule ^ index.html [QSA,L]
+# 404 sayfası
+ErrorDocument 404 /404.html
 
 # Gzip sıkıştırma
 <IfModule mod_deflate.c>

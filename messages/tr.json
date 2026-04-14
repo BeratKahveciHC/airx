@@ -47,7 +47,12 @@
     "titleHighlight": "Tek Platformda.",
     "subtitle": "14 modül, tek abonelik. Biyometrik cihaz gerektirmez — aynı gün kurulum.",
     "demoButton": "Ücretsiz Demo Talep Et",
-    "contactButton": "Bizi Arayın"
+    "contactButton": "Bizi Arayın",
+    "entryWifi": "WiFi ile Giriş",
+    "entryNfc": "NFC ile Giriş",
+    "entryRemote": "Remote Giriş",
+    "entryQr": "QR ile Giriş",
+    "entryBeacon": "Beacon ile Giriş"
   },
   "modulesSection": {
     "title": "Tek Platformda",

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 import { MODULES_DATA, getModuleBySlug } from '../../../../src/data/modules'
 import ModulePage from '../../../../src/views/ModulePage'
 
@@ -44,7 +45,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ModulePageRoute({ params }) {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const mod = getModuleBySlug(slug)
   if (!mod) notFound()
 

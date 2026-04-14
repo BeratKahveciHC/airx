@@ -1,5 +1,9 @@
 import ContactPage from '../../../src/views/ContactPage'
 
+export function generateStaticParams() {
+  return [{ locale: 'tr' }, { locale: 'en' }]
+}
+
 const SITE_URL = 'https://airx.com.tr'
 
 export async function generateMetadata({ params }) {

@@ -47,7 +47,12 @@
     "titleHighlight": "One Platform.",
     "subtitle": "14 modules, one subscription. No biometric hardware — same-day setup.",
     "demoButton": "Request Free Demo",
-    "contactButton": "Call Us"
+    "contactButton": "Call Us",
+    "entryWifi": "WiFi Entry",
+    "entryNfc": "NFC Entry",
+    "entryRemote": "Remote Entry",
+    "entryQr": "QR Entry",
+    "entryBeacon": "Beacon Entry"
   },
   "modulesSection": {
     "title": "Everything in",

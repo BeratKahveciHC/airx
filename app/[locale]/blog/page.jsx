@@ -1,5 +1,9 @@
 import BlogPage from '../../../src/views/BlogPage'
 
+export function generateStaticParams() {
+  return [{ locale: 'tr' }, { locale: 'en' }]
+}
+
 const SITE_URL = 'https://airx.com.tr'
 
 export async function generateMetadata({ params }) {
