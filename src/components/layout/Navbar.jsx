@@ -187,7 +187,7 @@ export default function Navbar() {
       {/* ── Top Bar ── */}
       <div className="topbar-root" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 101,
-        background: '#1a5fa8',
+        background: '#1a5ff8',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
         height: 36,
       }}>
@@ -241,34 +241,44 @@ export default function Navbar() {
           </div>
           <div className="topbar-buttons" style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
             <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer" className="topbar-btn" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 5,
-              padding: '4px 10px', borderRadius: 6,
-              background: 'rgba(255,255,255,0.08)', color: '#fff',
-              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)',
-              transition: 'background 0.15s', whiteSpace: 'nowrap',
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              padding: '4px 10px', borderRadius: 7,
+              background: '#000', color: '#fff',
+              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.18)',
+              transition: 'opacity 0.15s', whiteSpace: 'nowrap',
             }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.14)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)' }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.8' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
             >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              <svg width="14" height="14" viewBox="0 0 814 1000" fill="white">
+                <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.6 0 130 45.4 173.8 45.4 41.8 0 108.6-48.3 186.4-48.3zM552 152.6c34.6-41.2 58.6-98.8 58.6-156.4 0-7.7-.6-15.4-1.9-21.8C557.4 8 487 43.2 445.5 93.7c-31.4 36.8-60.7 93.7-60.7 152.6 0 8.9 1.3 17.9 1.9 20.8 3.2.6 8.4 1.3 13.6 1.3 50.5 0 113.4-33.4 152.7-115.8z"/>
               </svg>
-              <span style={{ fontSize: 11, fontWeight: 600 }}>App Store</span>
+              <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                <span style={{ fontSize: 8, fontWeight: 400, letterSpacing: 0.3 }}>Download on the</span>
+                <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: 0.2 }}>App Store</span>
+              </span>
             </a>
             <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" className="topbar-btn" style={{
-              display: 'inline-flex', alignItems: 'center', gap: 5,
-              padding: '4px 10px', borderRadius: 6,
-              background: 'rgba(255,255,255,0.08)', color: '#fff',
-              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.12)',
-              transition: 'background 0.15s', whiteSpace: 'nowrap',
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              padding: '4px 10px', borderRadius: 7,
+              background: '#000', color: '#fff',
+              textDecoration: 'none', border: '1px solid rgba(255,255,255,0.18)',
+              transition: 'opacity 0.15s', whiteSpace: 'nowrap',
             }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.14)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)' }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.8' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
             >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.18 23.76c.3.17.64.22.99.14l12.47-7.19-2.79-2.79-10.67 9.84zM.48 1.1C.18 1.42 0 1.9 0 2.53v18.94c0 .63.18 1.11.48 1.43l.08.07 10.61-10.61v-.25L.56 1.03l-.08.07zM19.85 10.3l-2.8-1.61-3.12 3.12 3.12 3.12 2.82-1.63c.8-.46.8-1.54-.02-2zM3.18.24L15.65 7.43l-2.79 2.79L2.19.38c.32-.21.7-.24.99-.14z"/>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path fill="#EA4335" d="M3.18 23.76c.3.17.64.22.99.14l12.47-7.19-2.79-2.79-10.67 9.84z"/>
+                <path fill="#FBBC04" d="M.48 22.9c.3.32.73.5 1.27.5.37 0 .75-.1 1.1-.3l.08-.05-.01-.01L3.18 23l-2.7-2.7v2.6z"/>
+                <path fill="#4285F4" d="M.48 1.1C.18 1.42 0 1.9 0 2.53v18.94c0 .63.18 1.11.48 1.43l.08.07 10.61-10.61v-.25L.56 1.03l-.08.07z"/>
+                <path fill="#34A853" d="M19.85 10.3l-2.8-1.61-3.12 3.12 3.12 3.12 2.82-1.63c.8-.46.8-1.54-.02-2z"/>
+                <path fill="#EA4335" d="M3.18.24L15.65 7.43l-2.79 2.79L2.19.38c.32-.21.7-.24.99-.14z"/>
               </svg>
-              <span style={{ fontSize: 11, fontWeight: 600 }}>Google Play</span>
+              <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
+                <span style={{ fontSize: 8, fontWeight: 400, letterSpacing: 0.3 }}>Get it on</span>
+                <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: 0.2 }}>Google Play</span>
+              </span>
             </a>
           </div>
         </div>

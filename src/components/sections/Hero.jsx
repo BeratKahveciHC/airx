@@ -851,6 +851,88 @@ function BeaconVisual({ color }) {
   )
 }
 
+function MultiLangVisual({ color }) {
+  const nodes = [
+    { angle: -70, r: 80, size: 10, opacity: 1,   ring: true  },
+    { angle: -30, r: 90, size: 8,  opacity: 0.85, ring: false },
+    { angle:  10, r: 85, size: 10, opacity: 0.9,  ring: true  },
+    { angle:  50, r: 88, size: 7,  opacity: 0.7,  ring: false },
+    { angle:  85, r: 78, size: 9,  opacity: 0.8,  ring: true  },
+  ]
+  const cx = 110, cy = 90
+  return (
+    <svg width="220" height="180" viewBox="0 0 220 180" fill="none">
+      {/* Halkalar */}
+      <circle cx={cx} cy={cy} r="38" stroke={color} strokeWidth="0.5" strokeDasharray="3 4" opacity="0.2"/>
+      <circle cx={cx} cy={cy} r="58" stroke={color} strokeWidth="0.5" strokeDasharray="2 5" opacity="0.12"/>
+
+      {/* Bağlantı çizgileri */}
+      {nodes.map((n, i) => {
+        const rad = (n.angle * Math.PI) / 180
+        const nx = cx + n.r * Math.cos(rad)
+        const ny = cy + n.r * Math.sin(rad)
+        const ex = cx + 30 * Math.cos(rad)
+        const ey = cy + 30 * Math.sin(rad)
+        return (
+          <line key={i} x1={ex} y1={ey} x2={nx} y2={ny}
+            stroke={color} strokeWidth="1" opacity={n.opacity * 0.35}
+            strokeDasharray="3 3"
+          />
+        )
+      })}
+
+      {/* Node'lar */}
+      {nodes.map((n, i) => {
+        const rad = (n.angle * Math.PI) / 180
+        const nx = cx + n.r * Math.cos(rad)
+        const ny = cy + n.r * Math.sin(rad)
+        return (
+          <g key={i} opacity={n.opacity}>
+            {n.ring && <circle cx={nx} cy={ny} r={n.size + 5} stroke={color} strokeWidth="1" fill="none" opacity="0.25"/>}
+            <circle cx={nx} cy={ny} r={n.size} fill={color} opacity="0.85"/>
+            <circle cx={nx} cy={ny} r={n.size * 0.4} fill="#fff" opacity="0.7"/>
+          </g>
+        )
+      })}
+
+      {/* Merkez globe */}
+      <circle cx={cx} cy={cy} r="30" fill={`${color}12`} stroke={color} strokeWidth="1.5" opacity="0.9"/>
+      <ellipse cx={cx} cy={cy} rx="14" ry="30" stroke={color} strokeWidth="1" opacity="0.5"/>
+      <line x1={cx - 30} y1={cy} x2={cx + 30} y2={cy} stroke={color} strokeWidth="1" opacity="0.5"/>
+      <line x1={cx} y1={cy - 30} x2={cx} y2={cy + 30} stroke={color} strokeWidth="1" opacity="0.3"/>
+      <circle cx={cx} cy={cy} r="4" fill={color}/>
+    </svg>
+  )
+}
+
+function AiVisual({ color }) {
+  const metrics = [
+    { value: 87, alert: true },
+    { value: 62, alert: false },
+    { value: 91, alert: false },
+  ]
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%', maxWidth: 260, margin: '0 auto' }}>
+      {metrics.map((m, i) => (
+        <div key={i} style={{ background: '#fff', border: `1px solid ${color}20`, borderRadius: 10, padding: '8px 12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 4, marginBottom: 5 }}>
+            {m.alert && <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#f59e0b' }} />}
+            <span style={{ fontSize: 11, fontWeight: 700, color: m.alert ? '#f59e0b' : color }}>{m.value}%</span>
+          </div>
+          <div style={{ height: 4, borderRadius: 4, background: `${color}12`, overflow: 'hidden' }}>
+            <div style={{ height: '100%', width: `${m.value}%`, borderRadius: 4, background: m.alert ? '#f59e0b' : color }} />
+          </div>
+        </div>
+      ))}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, padding: '6px 12px', borderRadius: 10, background: `${color}08`, border: `1px solid ${color}20` }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+        </svg>
+      </div>
+    </div>
+  )
+}
+
 export default function Hero() {
   const locale = useLocale()
   const t = useTranslations()
@@ -859,57 +941,78 @@ export default function Hero() {
 
   const entryMethods = [
     {
-      key: 'wifi',
-      label: t('hero.entryWifi'),
-      description: t('hero.entryWifiInfo'),
+      key: 'ai',
+      label: t('hero.entryAi'),
+      description: t('hero.entryAiInfo'),
+      color: '#a855f7',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+        </svg>
+      ),
+    },
+    {
+      key: 'wifi-beacon',
+      label: `${t('hero.entryWifi')} & ${t('hero.entryBeacon')}`,
+      description: t('hero.entryWifiBeaconInfo'),
       color: '#0ea5e9',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/>
-        </svg>
-      ),
+      items: [
+        {
+          label: t('hero.entryWifi'),
+          color: '#0ea5e9',
+          icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>,
+        },
+        {
+          label: t('hero.entryBeacon'),
+          color: '#f59e0b',
+          icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 4-7 13-7 13S5 13 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/></svg>,
+        },
+      ],
     },
     {
-      key: 'nfc',
-      label: t('hero.entryNfc'),
-      description: t('hero.entryNfcInfo'),
-      color: '#8b5cf6',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 15a6 6 0 1 0 12 0 6 6 0 0 0-12 0"/><path d="M9.5 15a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0"/><path d="M3 15a9 9 0 0 1 9-9"/><path d="M21 15a9 9 0 0 0-9-9"/>
-        </svg>
-      ),
-    },
-    {
-      key: 'remote',
-      label: t('hero.entryRemote'),
-      description: t('hero.entryRemoteInfo'),
-      color: '#003C75',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/>
-        </svg>
-      ),
-    },
-    {
-      key: 'qr',
-      label: t('hero.entryQr'),
-      description: t('hero.entryQrInfo'),
+      key: 'qr-nfc',
+      label: `${t('hero.entryQr')} & ${t('hero.entryNfc')}`,
+      description: t('hero.entryQrNfcInfo'),
       color: '#10b981',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3" rx="0.5"/><rect x="18" y="14" width="3" height="3" rx="0.5"/><rect x="14" y="18" width="3" height="3" rx="0.5"/><rect x="18" y="18" width="3" height="3" rx="0.5"/>
-        </svg>
-      ),
+      items: [
+        {
+          label: t('hero.entryQr'),
+          color: '#10b981',
+          icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3" rx="0.5"/><rect x="18" y="14" width="3" height="3" rx="0.5"/><rect x="14" y="18" width="3" height="3" rx="0.5"/><rect x="18" y="18" width="3" height="3" rx="0.5"/></svg>,
+        },
+        {
+          label: t('hero.entryNfc'),
+          color: '#8b5cf6',
+          icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 15a6 6 0 1 0 12 0 6 6 0 0 0-12 0"/><path d="M9.5 15a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0"/><path d="M3 15a9 9 0 0 1 9-9"/><path d="M21 15a9 9 0 0 0-9-9"/></svg>,
+        },
+      ],
     },
     {
-      key: 'beacon',
-      label: t('hero.entryBeacon'),
-      description: t('hero.entryBeaconInfo'),
-      color: '#f59e0b',
+      key: 'gps-remote',
+      label: `${t('hero.entryGps')} & ${t('hero.entryRemote')}`,
+      description: t('hero.entryGpsRemoteInfo'),
+      color: '#003C75',
+      items: [
+        {
+          label: t('hero.entryGps'),
+          color: '#003C75',
+          icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/></svg>,
+        },
+        {
+          label: t('hero.entryRemote'),
+          color: '#79ACDC',
+          icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>,
+        },
+      ],
+    },
+    {
+      key: 'multilang',
+      label: t('hero.entryMultiLang'),
+      description: t('hero.entryMultiLangInfo'),
+      color: '#22c55e',
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2a7 7 0 0 1 7 7c0 4-7 13-7 13S5 13 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
       ),
     },
@@ -978,7 +1081,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.22 }}
             className="hero-entry-methods"
-            style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}
+            style={{ display: 'flex', flexDirection: 'row', gap: 10, justifyContent: 'center', flexWrap: 'nowrap', marginBottom: 48 }}
           >
             {entryMethods.map((method) => (
               <button
@@ -990,13 +1093,15 @@ export default function Hero() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: 10,
-                  padding: '18px 22px',
+                  padding: '16px 20px',
                   background: '#fff',
                   border: `1.5px solid ${method.color}22`,
                   borderRadius: 16,
                   boxShadow: '0 2px 12px rgba(0,40,100,0.06)',
-                  minWidth: 110,
+                  minWidth: 120,
+                  minHeight: 108,
                   transition: 'box-shadow 0.18s, border-color 0.18s, transform 0.18s',
                   cursor: 'pointer',
                   appearance: 'none',
@@ -1014,23 +1119,52 @@ export default function Hero() {
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                <div style={{
-                  width: 48, height: 48, borderRadius: 14,
-                  background: `${method.color}12`,
-                  color: method.color,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  {method.icon}
-                </div>
-                <span style={{
-                  fontSize: 12.5,
-                  fontWeight: 700,
-                  color: '#1e293b',
-                  textAlign: 'center',
-                  lineHeight: 1.3,
-                }}>
-                  {method.label}
-                </span>
+                {method.items ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                    <span style={{
+                      fontSize: 9.5, fontWeight: 700, letterSpacing: '0.07em', textTransform: 'uppercase',
+                      color: method.color, opacity: 0.85, marginBottom: 9, textAlign: 'left',
+                    }}>
+                      {method.label}
+                    </span>
+                    {method.items.map((item, idx) => (
+                      <div key={idx}>
+                        {idx > 0 && (
+                          <div style={{ height: 1, background: `${method.color}18`, borderRadius: 1, margin: '7px 0' }} />
+                        )}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+                          <div style={{
+                            width: 32, height: 32, borderRadius: 10, flexShrink: 0,
+                            background: `linear-gradient(135deg, ${item.color}18, ${item.color}0a)`,
+                            color: item.color,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            boxShadow: `0 1px 4px ${item.color}22`,
+                          }}>
+                            {item.icon}
+                          </div>
+                          <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b', lineHeight: 1.25 }}>
+                            {item.label}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: 13,
+                      background: `linear-gradient(135deg, ${method.color}18, ${method.color}0a)`,
+                      color: method.color,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: `0 2px 8px ${method.color}28`,
+                    }}>
+                      {method.icon}
+                    </div>
+                    <span style={{ fontSize: 12.5, fontWeight: 700, color: '#1e293b', textAlign: 'center', lineHeight: 1.3 }}>
+                      {method.label}
+                    </span>
+                  </>
+                )}
               </button>
             ))}
           </motion.div>
@@ -1438,11 +1572,11 @@ export default function Hero() {
                 overflow: 'hidden',
                 position: 'relative',
               }}>
-                {selectedEntryMethod.key === 'wifi' && <WifiVisual color={selectedEntryMethod.color} />}
-                {selectedEntryMethod.key === 'nfc' && <NfcVisual color={selectedEntryMethod.color} />}
-                {selectedEntryMethod.key === 'remote' && <RemoteVisual color={selectedEntryMethod.color} />}
-                {selectedEntryMethod.key === 'qr' && <QrVisual color={selectedEntryMethod.color} />}
-                {selectedEntryMethod.key === 'beacon' && <BeaconVisual color={selectedEntryMethod.color} />}
+                {selectedEntryMethod.key === 'wifi-beacon' && <WifiVisual color={selectedEntryMethod.color} />}
+                {selectedEntryMethod.key === 'qr-nfc' && <QrVisual color={selectedEntryMethod.color} />}
+                {selectedEntryMethod.key === 'gps-remote' && <RemoteVisual color={selectedEntryMethod.color} />}
+                {selectedEntryMethod.key === 'multilang' && <MultiLangVisual color={selectedEntryMethod.color} />}
+                {selectedEntryMethod.key === 'ai' && <AiVisual color={selectedEntryMethod.color} />}
               </div>
             </motion.div>
           </motion.div>
@@ -1458,11 +1592,18 @@ export default function Hero() {
           .hero-phone-mockup-left { display: none !important; }
           .hero-modules-grid { grid-template-columns: repeat(4, 1fr) !important; }
           .hero-mockup-wrapper { padding: 0 !important; }
+          .hero-entry-btn { min-width: 100px !important; padding: 14px 16px !important; }
+        }
+        @media (max-width: 600px) {
+          .hero-entry-methods { flex-direction: row !important; flex-wrap: wrap !important; justify-content: center !important; }
+          .hero-entry-row { flex-wrap: wrap !important; justify-content: center !important; }
+          .hero-entry-btn { min-width: calc(50% - 5px) !important; flex: 1 1 calc(50% - 5px) !important; max-width: calc(50% - 5px) !important; padding: 14px 12px !important; min-height: 96px !important; }
         }
         @media (max-width: 480px) {
           .hero-wrapper { padding: 32px 16px 40px !important; }
           .hero-dashboard-stats { grid-template-columns: repeat(2, 1fr) !important; }
           .hero-modules-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .hero-entry-btn { min-width: calc(50% - 5px) !important; flex: 1 1 calc(50% - 5px) !important; max-width: calc(50% - 5px) !important; }
         }
       `}</style>
     </>

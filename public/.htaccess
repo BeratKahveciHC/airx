@@ -2,6 +2,25 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# Next.js RSC payload: client-side navigation index.txt'e yönlendir
+# RSC header ile (direct navigation)
+RewriteCond %{HTTP:RSC} =1
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}index.txt -f
+RewriteRule ^(.*)/$ $1/index.txt [L,T=text/plain]
+
+RewriteCond %{HTTP:RSC} =1
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.txt -f
+RewriteRule ^(.+[^/])$ $1/index.txt [L,T=text/plain]
+
+# _rsc query parametresi ile (prefetch + Next.js 14/15)
+RewriteCond %{QUERY_STRING} (^|&)_rsc=
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}index.txt -f
+RewriteRule ^(.*)/$ $1/index.txt? [L,T=text/plain]
+
+RewriteCond %{QUERY_STRING} (^|&)_rsc=
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.txt -f
+RewriteRule ^(.+[^/])$ $1/index.txt? [L,T=text/plain]
+
 # Root'u /tr'ye yönlendir
 RewriteRule ^$ /tr [R=301,L]
 
