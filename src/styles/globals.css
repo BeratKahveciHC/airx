@@ -98,7 +98,7 @@ h3 {
 /* Tablet küçük (≤ 768px): wrapper padding, başlık ve grid düzeltmeleri */
 @media (max-width: 768px) {
   .hero-wrapper {
-    padding: 36px 16px 48px !important;
+    padding: 20px 16px 48px !important;
   }
 
   .hero-title {

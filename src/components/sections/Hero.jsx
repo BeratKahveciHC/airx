@@ -944,7 +944,7 @@ export default function Hero() {
         <div style={{
           maxWidth: 1280,
           margin: '0 auto',
-          padding: '56px 40px 72px',
+          padding: '28px 40px 72px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -1042,15 +1042,15 @@ export default function Hero() {
             transition={{ duration: 0.4, delay: 0.26 }}
             style={{
             margin: '-28px 0 40px',
-            fontSize: 12,
+            fontSize: 15,
             lineHeight: 1.4,
-            fontWeight: 400,
-            letterSpacing: '0.08em',
+            fontWeight: 700,
+            letterSpacing: '0.06em',
             textTransform: 'uppercase',
-            color: '#94a3b8',
+            color: '#64748b',
             textAlign: 'center',
           }}>
-            {locale === 'en' ? 'Our Entry Methods' : 'Giriş Yöntemlerimiz'}
+            {locale === 'en' ? 'Our Check-In & Check-Out Methods' : 'Giriş Çıkış Yöntemlerimiz'}
           </motion.p>
 
           <motion.div

@@ -204,9 +204,9 @@ export default function Navbar() {
               }
               .topbar-marquee-inner {
                 display: inline-flex;
-                gap: 64px;
+                gap: 0;
                 white-space: nowrap;
-                animation: topbar-marquee 22s linear infinite;
+                animation: topbar-marquee 28s linear infinite;
               }
               .topbar-marquee-inner:hover { animation-play-state: paused; }
             `}</style>
@@ -226,10 +226,10 @@ export default function Navbar() {
                   { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, text: 'İK süreçlerini her yerden yönetin' },
                 ]
                 return (
-                  <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 28 }}>
+                  <span key={i} style={{ display: 'inline-flex', alignItems: 'center' }}>
                     {items.map((item, j) => (
-                      <span key={j} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: '#fff' }}>
-                        {j > 0 && <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 14, lineHeight: 1 }}>·</span>}
+                      <span key={j} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: '#fff', padding: '0 20px' }}>
+                        <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 16, lineHeight: 1, marginRight: 13 }}>·</span>
                         <span style={{ color: '#79ACDC', display: 'flex', alignItems: 'center' }}>{item.icon}</span>
                         <span style={{ fontSize: 11.5, fontWeight: 500 }}>{item.text}</span>
                       </span>
