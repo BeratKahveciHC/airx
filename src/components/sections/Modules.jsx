@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { Link } from '../../i18n/navigation'
 
 /* ── İkon sistemi ── */
 const Ic = ({ d, d2, d3, d4, size, color, circle, poly, rect, line, line2, line3 }) => (
@@ -393,7 +394,7 @@ export default function Modules() {
 
                     {/* Detay butonu */}
                     <div style={{ marginBottom: 24 }}>
-                      <a
+                      <Link
                         href={`/moduller/${mod.slug}`}
                         className="modules-detail-link"
                         style={{
@@ -412,11 +413,11 @@ export default function Modules() {
                         onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)' }}
                         onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.15)' }}
                       >
-                      {t('modulesSection.viewDetails')}
+                        {t('modulesSection.viewDetails')}
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>
                         </svg>
-                      </a>
+                      </Link>
                     </div>
 
                     {/* Navigation dots */}
@@ -472,9 +473,12 @@ export default function Modules() {
             border-left: none !important;
             border-bottom: 2px solid transparent;
             white-space: nowrap;
-            min-width: fit-content;
+            min-width: max-content;
             border-radius: 10px !important;
             align-items: center;
+          }
+          .modules-left-panel button span:last-child {
+            white-space: nowrap !important;
           }
           .modules-right-panel {
             min-height: 0 !important;
@@ -551,11 +555,12 @@ export default function Modules() {
             gap: 6px !important;
           }
           .modules-left-panel button {
-            min-width: 88px !important;
+            min-width: max-content !important;
             padding: 8px 10px !important;
           }
           .modules-left-panel button span:last-child {
             font-size: 12px !important;
+            white-space: nowrap !important;
           }
         }
       `}</style>

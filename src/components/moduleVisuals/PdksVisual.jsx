@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-const ENTRY_METHODS = [
+const ENTRY_METHODS_TR = [
   {
     label: 'Beacon',
     svg: (
@@ -60,7 +60,9 @@ const ENTRY_METHODS = [
   },
 ]
 
-const PHONE_NAV_ITEMS = [
+const ENTRY_METHODS_EN = ENTRY_METHODS_TR.map(m => m.label === 'QR Kod' ? { ...m, label: 'QR Code' } : m)
+
+const PHONE_NAV_ITEMS_TR = [
   {
     label: 'Anasayfa',
     active: true,
@@ -78,6 +80,29 @@ const PHONE_NAV_ITEMS = [
   },
   {
     label: 'Profil',
+    active: false,
+    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>,
+  },
+]
+
+const PHONE_NAV_ITEMS_EN = [
+  {
+    label: 'Home',
+    active: true,
+    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>,
+  },
+  {
+    label: 'Requests',
+    active: false,
+    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="9" x2="9" y2="21" /></svg>,
+  },
+  {
+    label: 'Inbox',
+    active: false,
+    svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>,
+  },
+  {
+    label: 'Profile',
     active: false,
     svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>,
   },
@@ -124,7 +149,8 @@ function PhoneHeader() {
   )
 }
 
-function PhoneBottomNav() {
+function PhoneBottomNav({ isTr = true }) {
+  const PHONE_NAV_ITEMS = isTr ? PHONE_NAV_ITEMS_TR : PHONE_NAV_ITEMS_EN
   return (
     <div style={{ background: '#7fb1df', display: 'flex', alignItems: 'center', justifyContent: 'space-around', padding: '8px 0 10px', flexShrink: 0, borderTop: '1px solid rgba(0,60,117,0.12)' }}>
       {PHONE_NAV_ITEMS.map((item) => (
@@ -179,7 +205,7 @@ function MenuGrid({ items, variant }) {
   )
 }
 
-function StatusRow() {
+function StatusRow({ isTr = true }) {
   return (
     <div style={{ margin: '0 12px', background: '#fff', borderRadius: 18, padding: '8px 12px 10px', boxShadow: '0 3px 12px rgba(15,23,42,0.12)', border: '1px solid rgba(15,23,42,0.06)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 4 }}>
@@ -187,16 +213,16 @@ function StatusRow() {
           <circle cx="12" cy="12" r="9" />
           <path d="M12 7v5l3 2" />
         </svg>
-        <span style={{ fontSize: 13, fontWeight: 800, color: '#202020' }}>Durum</span>
+        <span style={{ fontSize: 13, fontWeight: 800, color: '#202020' }}>{isTr ? 'Durum' : 'Status'}</span>
       </div>
       <div style={{ height: 16, borderRadius: 999, background: '#d9d9d9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8.5, color: '#505050' }}>
-        Şu an yemek molasındasın.
+        {isTr ? 'Şu an yemek molasındasın.' : 'You are currently on a meal break.'}
       </div>
     </div>
   )
 }
 
-function BreakCard({ icon, label, subtitle }) {
+function BreakCard({ icon, label, subtitle, isTr = true }) {
   return (
     <div style={{ margin: '0 12px', background: '#fff', borderRadius: 18, padding: '12px 14px', boxShadow: '0 3px 12px rgba(15,23,42,0.12)', border: '1px solid rgba(15,23,42,0.06)', display: 'flex', alignItems: 'center', gap: 10 }}>
       <div style={{ width: 24, display: 'flex', justifyContent: 'center', color: '#f59e0b', flexShrink: 0 }}>
@@ -213,13 +239,13 @@ function BreakCard({ icon, label, subtitle }) {
           <path d="M6 4v16" />
           <path d="m18 8-8 4 8 4V8Z" />
         </svg>
-        Başlat
+        {isTr ? 'Başlat' : 'Start'}
       </div>
     </div>
   )
 }
 
-function TimerCard({ title, values, buttonText, segmented }) {
+function TimerCard({ title, values, buttonText, segmented, isTr = true }) {
   return (
     <div style={{ margin: '0 12px', background: '#fff', borderRadius: 18, padding: '12px 14px', boxShadow: '0 3px 12px rgba(15,23,42,0.12)', border: '1px solid rgba(15,23,42,0.06)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
@@ -235,19 +261,19 @@ function TimerCard({ title, values, buttonText, segmented }) {
         </div>
         {segmented && (
           <div style={{ display: 'flex', gap: 4 }}>
-            <span style={{ fontSize: 8, padding: '3px 7px', borderRadius: 5, background: '#fff', border: '1px solid #bdbdbd', color: '#404040' }}>Günlük</span>
-            <span style={{ fontSize: 8, padding: '3px 7px', borderRadius: 5, background: '#8b8b8b', color: '#fff' }}>Haftalık</span>
+            <span style={{ fontSize: 8, padding: '3px 7px', borderRadius: 5, background: '#fff', border: '1px solid #bdbdbd', color: '#404040' }}>{isTr ? 'Günlük' : 'Daily'}</span>
+            <span style={{ fontSize: 8, padding: '3px 7px', borderRadius: 5, background: '#8b8b8b', color: '#fff' }}>{isTr ? 'Haftalık' : 'Weekly'}</span>
           </div>
         )}
       </div>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: 8, marginBottom: buttonText ? 10 : 0 }}>
         {values.map((item, index) => (
-          <div key={item.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+          <div key={item.labelTr} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
             <div style={{ textAlign: 'center' }}>
               <div style={{ width: 50, height: 44, borderRadius: 9, background: '#d9d9d9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 900, color: '#111827', boxShadow: 'inset 0 2px 0 rgba(255,255,255,0.75)' }}>
                 {item.value}
               </div>
-              <div style={{ fontSize: 8, color: '#646464', marginTop: 4 }}>{item.label}</div>
+              <div style={{ fontSize: 8, color: '#646464', marginTop: 4 }}>{isTr ? item.labelTr : item.labelEn}</div>
             </div>
             {index < values.length - 1 && <div style={{ fontSize: 20, fontWeight: 900, color: '#202020', marginTop: 8 }}>:</div>}
           </div>
@@ -262,7 +288,7 @@ function TimerCard({ title, values, buttonText, segmented }) {
   )
 }
 
-function PhoneShell({ children }) {
+function PhoneShell({ children, isTr = true }) {
   return (
     <div
       className="pdks-phone-shell"
@@ -286,18 +312,19 @@ function PhoneShell({ children }) {
         <PhoneStatusBar />
         <PhoneHeader />
         {children}
-        <PhoneBottomNav />
+        <PhoneBottomNav isTr={isTr} />
       </div>
     </div>
   )
 }
 
-function EntryMenuScreen() {
+function EntryMenuScreen({ isTr = true }) {
+  const ENTRY_METHODS = isTr ? ENTRY_METHODS_TR : ENTRY_METHODS_EN
   return (
     <>
       <ScreenBanner
-        title="Giriş Menüsü"
-        subtitle="Lütfen size uygun olan giriş yapma seçeneğine tıklayınız"
+        title={isTr ? 'Giriş Menüsü' : 'Entry Menu'}
+        subtitle={isTr ? 'Lütfen size uygun olan giriş yapma seçeneğine tıklayınız' : 'Please tap the entry option that suits you'}
         gradient="linear-gradient(135deg, #0f4f8f 0%, #003C75 100%)"
       />
       <MenuGrid items={[...ENTRY_METHODS, null]} variant="blue" />
@@ -305,12 +332,13 @@ function EntryMenuScreen() {
   )
 }
 
-function ExitMenuScreen() {
+function ExitMenuScreen({ isTr = true }) {
+  const ENTRY_METHODS = isTr ? ENTRY_METHODS_TR : ENTRY_METHODS_EN
   return (
     <>
       <ScreenBanner
-        title="Çıkış Menüsü"
-        subtitle="Lütfen size uygun olan çıkış yapma seçeneğine tıklayınız"
+        title={isTr ? 'Çıkış Menüsü' : 'Exit Menu'}
+        subtitle={isTr ? 'Lütfen size uygun olan çıkış yapma seçeneğine tıklayınız' : 'Please tap the exit option that suits you'}
         gradient="linear-gradient(135deg, #d33a34 0%, #b91c1c 100%)"
       />
       <MenuGrid items={[...ENTRY_METHODS, null]} variant="red" />
@@ -318,19 +346,20 @@ function ExitMenuScreen() {
   )
 }
 
-function BreakMenuScreen() {
+function BreakMenuScreen({ isTr = true }) {
   return (
     <>
       <ScreenBanner
-        title="Mola Menüsü"
-        subtitle="Lütfen size uygun olan mola seçeneğine tıklayınız"
+        title={isTr ? 'Mola Menüsü' : 'Break Menu'}
+        subtitle={isTr ? 'Lütfen size uygun olan mola seçeneğine tıklayınız' : 'Please tap the break option that suits you'}
         gradient="linear-gradient(135deg, #ffa22c 0%, #ff9800 100%)"
       />
       <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', background: '#ececec', display: 'flex', flexDirection: 'column', gap: 12, padding: '12px 0 14px' }}>
-        <StatusRow />
+        <StatusRow isTr={isTr} />
         <BreakCard
-          label="Yemek Molası"
-          subtitle="Önerilen: 1 Saat"
+          isTr={isTr}
+          label={isTr ? 'Yemek Molası' : 'Meal Break'}
+          subtitle={isTr ? 'Önerilen: 1 Saat' : 'Recommended: 1 Hour'}
           icon={
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 3v9" />
@@ -343,8 +372,9 @@ function BreakMenuScreen() {
           }
         />
         <BreakCard
-          label="İhtiyaç Molası"
-          subtitle="Önerilen: 15 Dakika"
+          isTr={isTr}
+          label={isTr ? 'İhtiyaç Molası' : 'Personal Break'}
+          subtitle={isTr ? 'Önerilen: 15 Dakika' : 'Recommended: 15 Min'}
           icon={
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 12a9 9 0 1 0 3-6.7" />
@@ -354,20 +384,22 @@ function BreakMenuScreen() {
           }
         />
         <TimerCard
-          title="Molanın Bitmesine Kalan Süre"
+          isTr={isTr}
+          title={isTr ? 'Molanın Bitmesine Kalan Süre' : 'Remaining Break Time'}
           values={[
-            { value: '00', label: 'Saat' },
-            { value: '12', label: 'Dakika' },
-            { value: '30', label: 'Saniye' },
+            { value: '00', labelTr: 'Saat', labelEn: 'Hour' },
+            { value: '12', labelTr: 'Dakika', labelEn: 'Min' },
+            { value: '30', labelTr: 'Saniye', labelEn: 'Sec' },
           ]}
-          buttonText="MOLA BİTİR"
+          buttonText={isTr ? 'MOLA BİTİR' : 'END BREAK'}
         />
         <TimerCard
-          title="Mola Raporu"
+          isTr={isTr}
+          title={isTr ? 'Mola Raporu' : 'Break Report'}
           values={[
-            { value: '02', label: 'Saat' },
-            { value: '42', label: 'Dakika' },
-            { value: '12', label: 'Saniye' },
+            { value: '02', labelTr: 'Saat', labelEn: 'Hour' },
+            { value: '42', labelTr: 'Dakika', labelEn: 'Min' },
+            { value: '12', labelTr: 'Saniye', labelEn: 'Sec' },
           ]}
           segmented
         />
@@ -391,7 +423,7 @@ function PhoneVariant({ children, style, delay }) {
   )
 }
 
-function PhoneShowcase() {
+function PhoneShowcase({ isTr = true }) {
   return (
     <div className="pdks-phone-showcase" style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', padding: '24px 0 8px' }}>
       <div className="pdks-phone-group" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 24, width: '100%', maxWidth: 820 }}>
@@ -404,8 +436,8 @@ function PhoneShowcase() {
             transformOrigin: 'bottom center',
           }}
         >
-          <PhoneShell>
-            <EntryMenuScreen />
+          <PhoneShell isTr={isTr}>
+            <EntryMenuScreen isTr={isTr} />
           </PhoneShell>
         </PhoneVariant>
 
@@ -416,8 +448,8 @@ function PhoneShowcase() {
             zIndex: 2,
           }}
         >
-          <PhoneShell>
-            <BreakMenuScreen />
+          <PhoneShell isTr={isTr}>
+            <BreakMenuScreen isTr={isTr} />
           </PhoneShell>
         </PhoneVariant>
 
@@ -430,8 +462,8 @@ function PhoneShowcase() {
             transformOrigin: 'bottom center',
           }}
         >
-          <PhoneShell>
-            <ExitMenuScreen />
+          <PhoneShell isTr={isTr}>
+            <ExitMenuScreen isTr={isTr} />
           </PhoneShell>
         </PhoneVariant>
       </div>
@@ -484,11 +516,11 @@ const responsiveStyles = `
   }
 `
 
-export default function PdksVisual({ accent = '#38bdf8', inline }) {
+export default function PdksVisual({ accent = '#38bdf8', inline, isTr = true }) {
   if (inline) {
     return (
       <>
-        <PhoneShowcase />
+        <PhoneShowcase isTr={isTr} />
         <style>{responsiveStyles}</style>
       </>
     )
@@ -521,7 +553,7 @@ export default function PdksVisual({ accent = '#38bdf8', inline }) {
           <div style={{ position: 'absolute', bottom: -80, right: -80, width: 360, height: 360, borderRadius: '50%', background: `radial-gradient(circle, ${accent}18 0%, transparent 70%)`, pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', top: -60, left: -60, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,60,117,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
-          <PhoneShowcase />
+          <PhoneShowcase isTr={isTr} />
         </motion.div>
       </div>
       <style>{responsiveStyles}</style>

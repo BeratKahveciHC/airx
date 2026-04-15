@@ -62,7 +62,7 @@ function PdfThumb() {
   )
 }
 
-export default function EgitimPlanlamaVisual({ accent = '#0ea5e9', inline }) {
+export default function EgitimPlanlamaVisual({ accent = '#0ea5e9', inline, isTr = true }) {
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -73,33 +73,33 @@ export default function EgitimPlanlamaVisual({ accent = '#0ea5e9', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="egitim-planlama" activeNav="Modüller" maxWidth={900}>
+        <BrowserMockup url="egitim-planlama" activeNav="Modüller" maxWidth={900} isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '14px', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
             {/* filtre */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', padding: '14px 16px', boxShadow: '0 2px 8px rgba(0,30,80,0.04)' }}>
               <div style={{ display: 'flex', gap: 14, alignItems: 'flex-end' }}>
                 {[
-                  { label: 'Başlangıç Tarihi', color: accent },
-                  { label: 'Bitiş Tarihi', color: accent },
+                  { label: isTr ? 'Başlangıç Tarihi' : 'Start Date', color: accent },
+                  { label: isTr ? 'Bitiş Tarihi' : 'End Date', color: accent },
                 ].map(f => (
                   <div key={f.label} style={{ flex: 1 }}>
                     <div style={{ fontSize: 9, fontWeight: 600, color: f.color, marginBottom: 4 }}>{f.label}</div>
                     <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 28, padding: '0 8px', display: 'flex', alignItems: 'center', gap: 6 }}>
                       <CalendarIcon />
-                      <span style={{ fontSize: 9.5, color: '#94a3b8' }}>Tarih Seçilmedi</span>
+                      <span style={{ fontSize: 9.5, color: '#94a3b8' }}>{isTr ? 'Tarih Seçilmedi' : 'No Date Selected'}</span>
                     </div>
                   </div>
                 ))}
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: accent, marginBottom: 4 }}>Tamamlandı mı?</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: accent, marginBottom: 4 }}>{isTr ? 'Tamamlandı mı?' : 'Completed?'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 28, padding: '0 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 9.5, color: '#94a3b8' }}>Seçiniz...</span>
+                    <span style={{ fontSize: 9.5, color: '#94a3b8' }}>{isTr ? 'Seçiniz...' : 'Select...'}</span>
                     <ChevronIcon />
                   </div>
                 </div>
                 <div style={{ height: 28, padding: '0 16px', background: '#475569', borderRadius: 5, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
-                  Filtrele
+                  {isTr ? 'Filtrele' : 'Filter'}
                 </div>
               </div>
             </div>
@@ -107,10 +107,10 @@ export default function EgitimPlanlamaVisual({ accent = '#0ea5e9', inline }) {
             {/* tablo */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
               <div style={{ padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>Eğitim</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Eğitim' : 'Training'}</span>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <div style={{ height: 28, padding: '0 14px', background: accent, borderRadius: 6, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                    Yeni Oluştur
+                    {isTr ? 'Yeni Oluştur' : 'Create New'}
                   </div>
                   <div style={{ width: 26, height: 26, background: '#16a34a', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <ExcelIcon />
@@ -121,8 +121,11 @@ export default function EgitimPlanlamaVisual({ accent = '#0ea5e9', inline }) {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 9.5 }}>
                 <thead>
                   <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                    {['Evrak', 'Eğitim Tarihi', 'Eğitim Adı', 'Açıklama', 'Eğitimci', 'Eğitim Yeri', 'Tamamlandı mı?', 'İşlemler'].map(col => (
-                      <th key={col} style={{ padding: '7px 10px', fontWeight: 700, color: '#475569', textAlign: ['Tamamlandı mı?', 'İşlemler', 'Eğitim Tarihi'].includes(col) ? 'center' : 'left', whiteSpace: 'nowrap', fontSize: 9.5 }}>{col}</th>
+                    {(isTr
+                      ? ['Evrak', 'Eğitim Tarihi', 'Eğitim Adı', 'Açıklama', 'Eğitimci', 'Eğitim Yeri', 'Tamamlandı mı?', 'İşlemler']
+                      : ['Document', 'Training Date', 'Training Name', 'Description', 'Trainer', 'Training Location', 'Completed?', 'Actions']
+                    ).map(col => (
+                      <th key={col} style={{ padding: '7px 10px', fontWeight: 700, color: '#475569', textAlign: (isTr ? ['Tamamlandı mı?', 'İşlemler', 'Eğitim Tarihi'] : ['Completed?', 'Actions', 'Training Date']).includes(col) ? 'center' : 'left', whiteSpace: 'nowrap', fontSize: 9.5 }}>{col}</th>
                     ))}
                   </tr>
                 </thead>

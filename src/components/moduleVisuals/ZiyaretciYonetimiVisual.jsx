@@ -41,9 +41,14 @@ const ChevronIcon = () => (
   </svg>
 )
 
-const COL_HEADERS = ['Tarih', 'Adı Soyadı', 'Telefon', 'Şirket Adı', 'Ziyaret Edilen', 'Giriş', 'Çıkış', 'Aktif/Pasif']
-
-export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline }) {
+export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline, isTr = true }) {
+  const COL_HEADERS = isTr
+    ? ['Tarih', 'Adı Soyadı', 'Telefon', 'Şirket Adı', 'Ziyaret Edilen', 'Giriş', 'Çıkış', 'Aktif/Pasif']
+    : ['Date', 'Full Name', 'Phone', 'Company Name', 'Visited Person', 'Check-in', 'Check-out', 'Active/Passive']
+  const centerCols = isTr ? ['Giriş', 'Çıkış', 'Aktif/Pasif'] : ['Check-in', 'Check-out', 'Active/Passive']
+  const dateLabels = isTr
+    ? ['Başlangıç tarihini seçiniz', 'Bitiş tarihini seçiniz']
+    : ['Select start date', 'Select end date']
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -54,43 +59,43 @@ export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline }) 
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="ziyaretci-yonetimi" activeNav="Modüller" maxWidth={860}>
+        <BrowserMockup url="ziyaretci-yonetimi" activeNav="Modüller" maxWidth={860} isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '14px', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
             {/* filtre */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', padding: '14px 16px', boxShadow: '0 2px 8px rgba(0,30,80,0.04)' }}>
               <div className="ziyaretci-filtre-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 16px', marginBottom: 8 }}>
-                {['Başlangıç tarihini seçiniz', 'Bitiş tarihini seçiniz'].map(label => (
+                {dateLabels.map(label => (
                   <div key={label}>
                     <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>{label}</div>
                     <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 26, padding: '0 8px', display: 'flex', alignItems: 'center', gap: 6 }}>
                       <CalendarIcon />
-                      <span style={{ fontSize: 9, color: '#94a3b8' }}>Tarih Seçilmedi</span>
+                      <span style={{ fontSize: 9, color: '#94a3b8' }}>{isTr ? 'Tarih Seçilmedi' : 'No Date Selected'}</span>
                     </div>
                   </div>
                 ))}
                 <div>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Ad Soyad</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>{isTr ? 'Ad Soyad' : 'Full Name'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 26 }} />
                 </div>
                 <div>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Çıkış Durumu</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>{isTr ? 'Çıkış Durumu' : 'Check-out Status'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 26, padding: '0 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 9, color: '#94a3b8' }}>Seçiniz...</span>
+                    <span style={{ fontSize: 9, color: '#94a3b8' }}>{isTr ? 'Seçiniz...' : 'Select...'}</span>
                     <ChevronIcon />
                   </div>
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
                 <div style={{ flex: 1, maxWidth: '48%' }}>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Şube</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>{isTr ? 'Şube' : 'Branch'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 26, padding: '0 8px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 9, color: '#94a3b8' }}>Seçiniz...</span>
+                    <span style={{ fontSize: 9, color: '#94a3b8' }}>{isTr ? 'Seçiniz...' : 'Select...'}</span>
                     <ChevronIcon />
                   </div>
                 </div>
                 <div style={{ height: 26, padding: '0 16px', background: '#475569', borderRadius: 5, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                  Filtrele
+                  {isTr ? 'Filtrele' : 'Filter'}
                 </div>
               </div>
             </div>
@@ -98,13 +103,13 @@ export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline }) 
             {/* ziyaretçiler */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
               <div style={{ padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>Ziyaretçiler</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Ziyaretçiler' : 'Visitors'}</span>
                 <div style={{ display: 'flex', gap: 7, alignItems: 'center' }}>
                   <div style={{ display: 'flex', border: '1.5px solid #cbd5e1', borderRadius: 5, overflow: 'hidden', height: 26 }}>
                     <input readOnly style={{ width: 140, padding: '0 8px', fontSize: 9, border: 'none', outline: 'none', background: '#fff' }} />
                     <div style={{ width: 26, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><SearchIcon /></div>
                   </div>
-                  <div style={{ height: 26, padding: '0 10px', background: accent, borderRadius: 5, display: 'flex', alignItems: 'center', fontSize: 9.5, fontWeight: 700, color: '#fff' }}>İşlemler</div>
+                  <div style={{ height: 26, padding: '0 10px', background: accent, borderRadius: 5, display: 'flex', alignItems: 'center', fontSize: 9.5, fontWeight: 700, color: '#fff' }}>{isTr ? 'İşlemler' : 'Actions'}</div>
                 </div>
               </div>
 
@@ -122,7 +127,7 @@ export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline }) 
                       <thead>
                         <tr style={{ background: '#f8fafc' }}>
                           {COL_HEADERS.map(h => (
-                            <th key={h} style={{ padding: '5px 8px', fontWeight: 700, color: '#475569', textAlign: ['Giriş', 'Çıkış', 'Aktif/Pasif'].includes(h) ? 'center' : 'left', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>{h}</th>
+                            <th key={h} style={{ padding: '5px 8px', fontWeight: 700, color: '#475569', textAlign: centerCols.includes(h) ? 'center' : 'left', borderBottom: '1px solid #f1f5f9', whiteSpace: 'nowrap' }}>{h}</th>
                           ))}
                         </tr>
                       </thead>
@@ -143,7 +148,7 @@ export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline }) 
                         </tr>
                         <tr>
                           <td colSpan={8} style={{ padding: '4px 8px 6px', fontSize: 8.5, color: '#94a3b8', fontStyle: 'italic' }}>
-                            Geçilmiş bir kapının cihazı bulunamadı
+                            {isTr ? 'Geçilmiş bir kapının cihazı bulunamadı' : 'No device found for the passed door'}
                           </td>
                         </tr>
                       </tbody>
@@ -166,7 +171,7 @@ export default function ZiyaretciYonetimiVisual({ accent = '#0ea5e9', inline }) 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px' }}>
               <span style={{ fontSize: 9, color: '#94a3b8' }}>2026 © AiRX</span>
               <div style={{ display: 'flex', gap: 12 }}>
-                {['Yardım ve Destek', 'Gizlilik Bildirimi', 'Kullanıcı Sözleşmesi'].map(l => (
+                {(isTr ? ['Yardım ve Destek', 'Gizlilik Bildirimi', 'Kullanıcı Sözleşmesi'] : ['Help & Support', 'Privacy Notice', 'User Agreement']).map(l => (
                   <span key={l} style={{ fontSize: 9, color: '#94a3b8' }}>{l}</span>
                 ))}
               </div>

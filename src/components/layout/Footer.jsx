@@ -15,6 +15,20 @@ const LinkedInIcon = () => (
   </svg>
 )
 
+const FacebookIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+)
+
+const InstagramIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+)
+
 const MailIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -60,11 +74,14 @@ function FooterLink({ label, href }) {
   )
 }
 
-function SocialButton({ Icon }) {
+function SocialButton({ Icon, href = '#' }) {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <button
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -79,10 +96,11 @@ function SocialButton({ Icon }) {
         cursor: 'pointer',
         transition: 'background 0.2s, border-color 0.2s',
         color: hovered ? '#79ACDC' : 'rgba(255,255,255,0.55)',
+        textDecoration: 'none',
       }}
     >
       <Icon />
-    </button>
+    </a>
   )
 }
 
@@ -266,21 +284,24 @@ export default function Footer() {
               </div>
 
               <div style={{ display: 'flex', gap: 8 }}>
-                <SocialButton Icon={LinkedInIcon} />
+                <SocialButton Icon={LinkedInIcon} href="#" />
+                <SocialButton Icon={FacebookIcon} href="#" />
+                <SocialButton Icon={InstagramIcon} href="#" />
               </div>
 
-              <img
-                src={hcLogo.src}
-                alt="HC Dijital"
-                style={{
-                  marginTop: 22,
-                  height: 44,
-                  width: 'auto',
-                  display: 'block',
-                  filter: 'brightness(0) invert(1)',
-                  opacity: 0.9,
-                }}
-              />
+              <a href="https://www.hcdijital.com.tr" target="_blank" rel="noopener noreferrer" style={{ display: 'block', marginTop: 22 }}>
+                <img
+                  src={hcLogo.src}
+                  alt="HC Dijital"
+                  style={{
+                    height: 44,
+                    width: 'auto',
+                    display: 'block',
+                    filter: 'brightness(0) invert(1)',
+                    opacity: 0.9,
+                  }}
+                />
+              </a>
 
               <div
                 style={{
@@ -363,7 +384,7 @@ export default function Footer() {
             className="footer-bottom"
           >
             <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>
-              © 2025 {t('footer.copyright')}
+              © 2026 {t('footer.copyright')}
             </span>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>

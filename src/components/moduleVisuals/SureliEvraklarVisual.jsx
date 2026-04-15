@@ -1,12 +1,20 @@
 import { motion } from 'framer-motion'
 import { BrowserMockup, VisualSection } from './shared'
 
-const TABLE_DATA = [
+const TABLE_DATA_TR = [
   { type: 'img', name: 'Ahmet Kaya', evrak: 'Sağlık Raporu', gecerlilik: '2024-03-15', tamamlandi: false },
   { type: 'img', name: 'Zeynep Arslan', evrak: 'İş Sözleşmesi', gecerlilik: '2024-06-30', tamamlandi: false },
   { type: 'pdf', name: 'Mustafa Demir', evrak: 'SGK Bildirimi', gecerlilik: '2024-08-01', tamamlandi: false },
   { type: 'img', name: 'Elif Yıldız', evrak: 'Kimlik Fotokopisi', gecerlilik: '2025-01-20', tamamlandi: false },
   { type: 'pdf', name: 'Serkan Çelik', evrak: 'Diploma Sureti', gecerlilik: '2025-04-10', tamamlandi: false },
+]
+
+const TABLE_DATA_EN = [
+  { type: 'img', name: 'Ahmet Kaya', evrak: 'Health Report', gecerlilik: '2024-03-15', tamamlandi: false },
+  { type: 'img', name: 'Zeynep Arslan', evrak: 'Employment Contract', gecerlilik: '2024-06-30', tamamlandi: false },
+  { type: 'pdf', name: 'Mustafa Demir', evrak: 'SGK Notification', gecerlilik: '2024-08-01', tamamlandi: false },
+  { type: 'img', name: 'Elif Yıldız', evrak: 'ID Photocopy', gecerlilik: '2025-01-20', tamamlandi: false },
+  { type: 'pdf', name: 'Serkan Çelik', evrak: 'Diploma Copy', gecerlilik: '2025-04-10', tamamlandi: false },
 ]
 
 const EditIcon = () => (
@@ -59,7 +67,13 @@ function FileThumb({ type }) {
   )
 }
 
-export default function SureliEvraklarVisual({ accent = '#0ea5e9', inline }) {
+export default function SureliEvraklarVisual({ accent = '#0ea5e9', inline, isTr = true }) {
+  const TABLE_DATA = isTr ? TABLE_DATA_TR : TABLE_DATA_EN
+  const tableCols = isTr
+    ? ['Evrak', 'Adı', 'Evrak Adı', 'Geçerlilik Süresi', 'Tamamlandı mı?', 'İşlemler']
+    : ['Document', 'Name', 'Document Name', 'Validity Period', 'Completed?', 'Actions']
+  const centerTableCols = isTr ? ['Tamamlandı mı?', 'İşlemler'] : ['Completed?', 'Actions']
+  const centerAlsoTableCols = isTr ? ['Adı', 'Evrak Adı'] : ['Name', 'Document Name']
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -70,36 +84,36 @@ export default function SureliEvraklarVisual({ accent = '#0ea5e9', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="sureli-evraklar" activeNav="Personel">
+        <BrowserMockup url="sureli-evraklar" activeNav="Personel" isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '14px', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
             {/* filtre */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', padding: '14px 16px', boxShadow: '0 2px 8px rgba(0,30,80,0.04)' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 16px', marginBottom: 10 }}>
                 <div>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: '#0ea5e9', marginBottom: 4 }}>Durum</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: '#0ea5e9', marginBottom: 4 }}>{isTr ? 'Durum' : 'Status'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 28, padding: '0 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 9.5, color: '#94a3b8' }}>Seçiniz...</span>
+                    <span style={{ fontSize: 9.5, color: '#94a3b8' }}>{isTr ? 'Seçiniz...' : 'Select...'}</span>
                     <ChevronIcon />
                   </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: '#0ea5e9', marginBottom: 4 }}>Çalışma Durumu</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: '#0ea5e9', marginBottom: 4 }}>{isTr ? 'Çalışma Durumu' : 'Work Status'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 28, padding: '0 10px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ fontSize: 9.5, color: '#334155' }}>Aktif Personeller</span>
+                    <span style={{ fontSize: 9.5, color: '#334155' }}>{isTr ? 'Aktif Personeller' : 'Active Personnel'}</span>
                   </div>
                 </div>
               </div>
               <div style={{ marginBottom: 10 }}>
-                <div style={{ fontSize: 9, fontWeight: 600, color: '#475569', marginBottom: 4 }}>Personel</div>
+                <div style={{ fontSize: 9, fontWeight: 600, color: '#475569', marginBottom: 4 }}>{isTr ? 'Personel' : 'Personnel'}</div>
                 <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 28, padding: '0 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: 9.5, color: '#94a3b8' }}>Seçiniz...</span>
+                  <span style={{ fontSize: 9.5, color: '#94a3b8' }}>{isTr ? 'Seçiniz...' : 'Select...'}</span>
                   <ChevronIcon />
                 </div>
               </div>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div style={{ height: 28, padding: '0 16px', background: '#475569', borderRadius: 5, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                  Filtrele
+                  {isTr ? 'Filtrele' : 'Filter'}
                 </div>
               </div>
             </div>
@@ -107,14 +121,14 @@ export default function SureliEvraklarVisual({ accent = '#0ea5e9', inline }) {
             {/* tablo */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
               <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>Süreli Evrak</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Süreli Evrak' : 'Periodic Documents'}</span>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <div style={{ display: 'flex', border: '1.5px solid #cbd5e1', borderRadius: 6, overflow: 'hidden', height: 28 }}>
                     <input readOnly style={{ width: 160, padding: '0 8px', fontSize: 10, border: 'none', outline: 'none', background: '#fff' }} />
                     <div style={{ width: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><SearchIcon /></div>
                   </div>
                   <div style={{ height: 28, padding: '0 12px', background: accent, borderRadius: 6, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                    İşlemler
+                    {isTr ? 'İşlemler' : 'Actions'}
                   </div>
                 </div>
               </div>
@@ -122,8 +136,8 @@ export default function SureliEvraklarVisual({ accent = '#0ea5e9', inline }) {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10 }}>
                 <thead>
                   <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                    {['Evrak', 'Adı', 'Evrak Adı', 'Geçerlilik Süresi', 'Tamamlandı mı?', 'İşlemler'].map(col => (
-                      <th key={col} style={{ padding: '7px 12px', fontWeight: 700, color: '#475569', textAlign: ['Tamamlandı mı?', 'İşlemler'].includes(col) ? 'center' : col === 'Adı' || col === 'Evrak Adı' ? 'center' : 'left', fontSize: 10 }}>{col}</th>
+                    {tableCols.map(col => (
+                      <th key={col} style={{ padding: '7px 12px', fontWeight: 700, color: '#475569', textAlign: centerTableCols.includes(col) ? 'center' : centerAlsoTableCols.includes(col) ? 'center' : 'left', fontSize: 10 }}>{col}</th>
                     ))}
                   </tr>
                 </thead>

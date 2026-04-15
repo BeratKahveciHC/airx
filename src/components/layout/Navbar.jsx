@@ -11,6 +11,7 @@ const MOBILE_NAV_BREAKPOINT = 1180
 const NAV_LINKS_CONFIG = [
   { labelKey: 'nav.why', href: '/neden-airx' },
   { labelKey: 'nav.pricing', href: '/fiyatlar' },
+  { labelKey: 'nav.references', href: '/referanslar' },
   { labelKey: 'nav.blog', href: '/blog' },
   { labelKey: 'nav.about', href: '/hakkimizda' },
   { labelKey: 'nav.contact', href: '/iletisim' },
@@ -186,7 +187,7 @@ export default function Navbar() {
       {/* ── Top Bar ── */}
       <div className="topbar-root" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 101,
-        background: '#001e45',
+        background: '#1a5fa8',
         borderBottom: '1px solid rgba(255,255,255,0.06)',
         height: 36,
       }}>
@@ -195,11 +196,51 @@ export default function Navbar() {
           height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           gap: 12,
         }}>
-          <span className="topbar-text" style={{ fontSize: 11.5, color: '#fff', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
-            📱 Mobil uygulamayı indirin, İK süreçlerinizi her yerden yönetin
-          </span>
+          <div style={{ overflow: 'hidden', minWidth: 0, flex: 1, maskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)' }}>
+            <style>{`
+              @keyframes topbar-marquee {
+                0%   { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+              }
+              .topbar-marquee-inner {
+                display: inline-flex;
+                gap: 64px;
+                white-space: nowrap;
+                animation: topbar-marquee 22s linear infinite;
+              }
+              .topbar-marquee-inner:hover { animation-play-state: paused; }
+            `}</style>
+            <div className="topbar-marquee-inner">
+              {[0, 1].map(i => {
+                const items = locale === 'en' ? [
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3"/></svg>, text: 'Download the mobile app' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>, text: 'Real-time attendance tracking' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, text: 'Secure access control' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>, text: 'Instant reports' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, text: 'Manage HR processes from anywhere' },
+                ] : [
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="3"/></svg>, text: 'Mobil uygulamayı indirin' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>, text: 'Anlık personel takibi' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>, text: 'Güvenli erişim kontrolü' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>, text: 'Anlık raporlar' },
+                  { icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, text: 'İK süreçlerini her yerden yönetin' },
+                ]
+                return (
+                  <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 28 }}>
+                    {items.map((item, j) => (
+                      <span key={j} style={{ display: 'inline-flex', alignItems: 'center', gap: 7, color: '#fff' }}>
+                        {j > 0 && <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 14, lineHeight: 1 }}>·</span>}
+                        <span style={{ color: '#79ACDC', display: 'flex', alignItems: 'center' }}>{item.icon}</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 500 }}>{item.text}</span>
+                      </span>
+                    ))}
+                  </span>
+                )
+              })}
+            </div>
+          </div>
           <div className="topbar-buttons" style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
-            <a href="#" className="topbar-btn" style={{
+            <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer" className="topbar-btn" style={{
               display: 'inline-flex', alignItems: 'center', gap: 5,
               padding: '4px 10px', borderRadius: 6,
               background: 'rgba(255,255,255,0.08)', color: '#fff',
@@ -214,7 +255,7 @@ export default function Navbar() {
               </svg>
               <span style={{ fontSize: 11, fontWeight: 600 }}>App Store</span>
             </a>
-            <a href="#" className="topbar-btn" style={{
+            <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" className="topbar-btn" style={{
               display: 'inline-flex', alignItems: 'center', gap: 5,
               padding: '4px 10px', borderRadius: 6,
               background: 'rgba(255,255,255,0.08)', color: '#fff',
@@ -360,7 +401,7 @@ export default function Navbar() {
                         left: 14,
                         right: 14,
                         height: 2,
-                        background: '#003C75',
+                        background: '#1a5fa8',
                         borderRadius: 2,
                       }}
                     />
@@ -452,15 +493,15 @@ export default function Navbar() {
                 fontWeight: 600,
                 textDecoration: 'none',
                 color: '#fff',
-                background: '#003C75',
+                background: '#1a5fa8',
                 transition: 'background 0.15s',
                 letterSpacing: '0.01em',
               }}
               onMouseEnter={event => {
-                event.currentTarget.style.background = '#002e5c'
+                event.currentTarget.style.background = '#1650a0'
               }}
               onMouseLeave={event => {
-                event.currentTarget.style.background = '#003C75'
+                event.currentTarget.style.background = '#1a5fa8'
               }}
             >
               {t('nav.requestDemo')}
@@ -944,7 +985,7 @@ export default function Navbar() {
                       textDecoration: 'none',
                       textAlign: 'center',
                       color: '#fff',
-                      background: '#003C75',
+                      background: '#1a5fa8',
                     }}
                   >
                     {t('nav.requestDemo')}

@@ -2,6 +2,7 @@
   "nav": {
     "why": "Neden AiRX",
     "pricing": "Fiyatlar",
+    "references": "Referanslar",
     "blog": "Blog",
     "about": "Hakkımızda",
     "contact": "İletişim",
@@ -43,7 +44,7 @@
     "mod_isZekasi_desc": "Veri görselleştirme"
   },
   "hero": {
-    "title": "Mobil PDKS ve İK Yönetimi,",
+    "title": "Mobil PDKS ve İnsan Kaynakları Yönetimi,",
     "titleHighlight": "Tek Platformda.",
     "subtitle": "14 modül, tek abonelik. Biyometrik cihaz gerektirmez — aynı gün kurulum.",
     "demoButton": "Ücretsiz Demo Talep Et",
@@ -52,7 +53,14 @@
     "entryNfc": "NFC ile Giriş",
     "entryRemote": "Remote Giriş",
     "entryQr": "QR ile Giriş",
-    "entryBeacon": "Beacon ile Giriş"
+    "entryBeacon": "Beacon ile Giriş",
+    "entryWifiInfo": "Personelleriniz kurum ağına bağlandığında konum doğrulamasıyla giriş işlemi hızlı ve temassız şekilde tamamlanır.",
+    "entryNfcInfo": "Telefonun NFC özelliğiyle fiziksel temas gerekmeden, saniyeler içinde güvenli giriş-çıkış kaydı oluşturabilirsiniz.",
+    "entryRemoteInfo": "Saha ekipleri veya uzaktan çalışan personel, mobil cihazları üzerinden onaylı şekilde giriş bildirimi yapabilir.",
+    "entryQrInfo": "Şube, kapı veya turnike noktasındaki QR kod okutularak giriş işlemi pratik ve düşük donanım maliyetiyle yönetilir.",
+    "entryBeaconInfo": "Beacon desteğiyle belirli alanlara yaklaşan personelin varlığı algılanır ve giriş deneyimi otomatikleştirilir.",
+    "entryModalLabel": "Giriş Yöntemi",
+    "entryModalClose": "Pencereyi kapat"
   },
   "modulesSection": {
     "title": "Tek Platformda",

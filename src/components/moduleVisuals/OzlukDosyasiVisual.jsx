@@ -34,7 +34,7 @@ const ChevronIcon = () => (
   </svg>
 )
 
-export default function OzlukDosyasiVisual({ accent = '#10b981', inline }) {
+export default function OzlukDosyasiVisual({ accent = '#10b981', inline, isTr = true }) {
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -45,19 +45,19 @@ export default function OzlukDosyasiVisual({ accent = '#10b981', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="ozluk-dosyalari" activeNav="Personel">
+        <BrowserMockup url="ozluk-dosyalari" activeNav="Personel" isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
             {/* filtre kartı */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', padding: '14px 16px', boxShadow: '0 2px 8px rgba(0,30,80,0.04)' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 8 }}>Çalışma Durumu</div>
+              <div style={{ fontSize: 11, fontWeight: 600, color: '#475569', marginBottom: 8 }}>{isTr ? 'Çalışma Durumu' : 'Work Status'}</div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
                 <div style={{ flex: 1, border: '1px solid #cbd5e1', borderRadius: 6, height: 30, display: 'flex', alignItems: 'center', padding: '0 10px', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: 10, color: '#64748b' }}>Tüm Personeller</span>
+                  <span style={{ fontSize: 10, color: '#64748b' }}>{isTr ? 'Tüm Personeller' : 'All Personnel'}</span>
                   <span style={{ color: '#94a3b8' }}><ChevronIcon /></span>
                 </div>
                 <div style={{ height: 30, padding: '0 16px', background: '#475569', borderRadius: 6, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 600, color: '#fff', flexShrink: 0 }}>
-                  Filtrele
+                  {isTr ? 'Filtrele' : 'Filter'}
                 </div>
               </div>
             </div>
@@ -65,9 +65,9 @@ export default function OzlukDosyasiVisual({ accent = '#10b981', inline }) {
             {/* tablo kartı */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
               <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>Özlük Dosyaları</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Özlük Dosyaları' : 'Personnel Files'}</span>
                 <div style={{ display: 'flex', border: '1.5px solid #cbd5e1', borderRadius: 6, overflow: 'hidden', height: 28 }}>
-                  <input readOnly placeholder="Ara" style={{ width: 160, padding: '0 10px', fontSize: 10, border: 'none', outline: 'none', color: '#64748b', background: '#fff' }} />
+                  <input readOnly placeholder={isTr ? 'Ara' : 'Search'} style={{ width: 160, padding: '0 10px', fontSize: 10, border: 'none', outline: 'none', color: '#64748b', background: '#fff' }} />
                   <div style={{ width: 30, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><SearchIcon /></div>
                 </div>
               </div>
@@ -75,8 +75,11 @@ export default function OzlukDosyasiVisual({ accent = '#10b981', inline }) {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10 }}>
                 <thead>
                   <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                    {['Adı', 'Crm Kodu', 'TC Kimlik Numarası', 'İşlemler'].map((col) => (
-                      <th key={col} style={{ padding: '7px 14px', fontWeight: 700, color: '#475569', textAlign: col === 'İşlemler' ? 'right' : col === 'TC Kimlik Numarası' || col === 'Crm Kodu' ? 'center' : 'left', fontSize: 10 }}>{col}</th>
+                    {(isTr
+                      ? ['Adı', 'Crm Kodu', 'TC Kimlik Numarası', 'İşlemler']
+                      : ['Name', 'CRM Code', 'National ID Number', 'Actions']
+                    ).map((col) => (
+                      <th key={col} style={{ padding: '7px 14px', fontWeight: 700, color: '#475569', textAlign: (isTr ? col === 'İşlemler' : col === 'Actions') ? 'right' : (col === 'TC Kimlik Numarası' || col === 'National ID Number' || col === 'Crm Kodu' || col === 'CRM Code') ? 'center' : 'left', fontSize: 10 }}>{col}</th>
                     ))}
                   </tr>
                 </thead>

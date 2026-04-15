@@ -38,7 +38,7 @@ const SearchIcon = () => (
   </svg>
 )
 
-export default function IzinYonetimiVisual({ accent = '#0ea5e9', inline }) {
+export default function IzinYonetimiVisual({ accent = '#0ea5e9', inline, isTr = true }) {
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -49,20 +49,20 @@ export default function IzinYonetimiVisual({ accent = '#0ea5e9', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="izin-talepleri" activeNav="Modüller" maxWidth={920}>
+        <BrowserMockup url="izin-talepleri" activeNav="Modüller" maxWidth={920} isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '16px' }}>
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
 
               {/* header */}
               <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>İzin Talepleri</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'İzin Talepleri' : 'Leave Requests'}</span>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <div style={{ display: 'flex', border: '1.5px solid #cbd5e1', borderRadius: 6, overflow: 'hidden', height: 27 }}>
                     <input readOnly style={{ width: 160, padding: '0 8px', fontSize: 10, border: 'none', outline: 'none', color: '#64748b', background: '#fff' }} />
                     <div style={{ width: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><SearchIcon /></div>
                   </div>
                   <div style={{ height: 27, padding: '0 12px', background: accent, borderRadius: 6, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                    İşlemler
+                    {isTr ? 'İşlemler' : 'Actions'}
                   </div>
                 </div>
               </div>
@@ -72,8 +72,11 @@ export default function IzinYonetimiVisual({ accent = '#0ea5e9', inline }) {
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 9.5 }}>
                   <thead>
                     <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                      {['Adı Soyadı', 'Departman', 'İzin Tipi', 'Adres', 'Başlangıç Tarihi', 'Bitiş Tarihi', 'Onayla', 'İşlemler'].map((col) => (
-                        <th key={col} style={{ padding: '7px 10px', fontWeight: 700, color: '#475569', textAlign: ['Onayla', 'İşlemler'].includes(col) ? 'center' : 'left', whiteSpace: 'nowrap', fontSize: 9.5 }}>{col}</th>
+                      {(isTr
+                        ? ['Adı Soyadı', 'Departman', 'İzin Tipi', 'Adres', 'Başlangıç Tarihi', 'Bitiş Tarihi', 'Onayla', 'İşlemler']
+                        : ['Full Name', 'Department', 'Leave Type', 'Address', 'Start Date', 'End Date', 'Approve', 'Actions']
+                      ).map((col) => (
+                        <th key={col} style={{ padding: '7px 10px', fontWeight: 700, color: '#475569', textAlign: (isTr ? ['Onayla', 'İşlemler'] : ['Approve', 'Actions']).includes(col) ? 'center' : 'left', whiteSpace: 'nowrap', fontSize: 9.5 }}>{col}</th>
                       ))}
                     </tr>
                   </thead>

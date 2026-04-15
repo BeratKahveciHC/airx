@@ -82,3 +82,84 @@ h3 {
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
 }
+
+/* ─── Hero Section – Responsive ─── */
+
+/* Tablet (≤ 1024px): 80px yan boşluğu azalt, telefon mockuplarını gizle */
+@media (max-width: 1024px) {
+  .hero-mockup-wrapper {
+    padding: 0 !important;
+  }
+  .hero-phone-mockup {
+    display: none !important;
+  }
+}
+
+/* Tablet küçük (≤ 768px): wrapper padding, başlık ve grid düzeltmeleri */
+@media (max-width: 768px) {
+  .hero-wrapper {
+    padding: 36px 16px 48px !important;
+  }
+
+  .hero-title {
+    white-space: normal !important;
+    font-size: clamp(22px, 6.5vw, 34px) !important;
+  }
+
+  /* Giriş yöntemi butonları */
+  .hero-entry-methods {
+    gap: 8px !important;
+  }
+  .hero-entry-btn {
+    min-width: 88px !important;
+    padding: 14px 14px !important;
+  }
+
+  /* Dashboard kabuğu – aspect-ratio kaldır, sabit yükseklik ver */
+  .hero-dashboard-shell {
+    aspect-ratio: unset !important;
+    min-height: 400px;
+    /* overflow: hidden korunuyor (köşe kırpması için) */
+  }
+
+  .hero-dashboard-body {
+    overflow: auto !important;
+    max-height: 340px;
+  }
+
+  /* Stat kartları: 3 → 2 sütun */
+  .hero-dashboard-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Modül grid: 7 → 4 sütun */
+  .hero-modules-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  /* Alt tablolar: 3 sütun → dikey yığın */
+  .hero-dashboard-tables {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Mobil (≤ 480px) */
+@media (max-width: 480px) {
+  .hero-wrapper {
+    padding: 24px 12px 36px !important;
+  }
+
+  /* Stat kartları: 2 sütun kalır */
+  .hero-dashboard-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Modül grid: 3 sütun */
+  .hero-modules-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .hero-dashboard-body {
+    max-height: 440px;
+  }
+}

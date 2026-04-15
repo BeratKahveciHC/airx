@@ -1,13 +1,22 @@
 import { motion } from 'framer-motion'
 import { BrowserMockup, VisualSection } from './shared'
 
-const TABLE_DATA = [
+const TABLE_DATA_TR = [
   { ad: 'Bilgisayar', aciklama: 'HP Laptop 14" i7', geriAlinacak: true },
   { ad: 'Telefon', aciklama: 'iPhone 14 Pro', geriAlinacak: true },
   { ad: 'Araç Tahsisi', aciklama: 'Şirket aracı kullanım hakkı', geriAlinacak: true },
   { ad: 'Yemek Kartı', aciklama: 'Aylık 2.000 ₺ yemek yardımı', geriAlinacak: false },
   { ad: 'Sağlık Sigortası', aciklama: 'Özel sağlık sigortası poliçesi', geriAlinacak: false },
   { ad: 'Servis Hakkı', aciklama: 'Personel servis güzergahı', geriAlinacak: false },
+]
+
+const TABLE_DATA_EN = [
+  { ad: 'Computer', aciklama: 'HP Laptop 14" i7', geriAlinacak: true },
+  { ad: 'Phone', aciklama: 'iPhone 14 Pro', geriAlinacak: true },
+  { ad: 'Vehicle Allowance', aciklama: 'Company vehicle usage right', geriAlinacak: true },
+  { ad: 'Meal Card', aciklama: 'Monthly 2,000 ₺ meal allowance', geriAlinacak: false },
+  { ad: 'Health Insurance', aciklama: 'Private health insurance policy', geriAlinacak: false },
+  { ad: 'Shuttle Benefit', aciklama: 'Personnel shuttle route', geriAlinacak: false },
 ]
 
 const SearchIcon = () => (
@@ -39,7 +48,8 @@ const XCircleIcon = () => (
   </svg>
 )
 
-export default function YanHaklarVisual({ accent = '#0ea5e9', inline }) {
+export default function YanHaklarVisual({ accent = '#0ea5e9', inline, isTr = true }) {
+  const TABLE_DATA = isTr ? TABLE_DATA_TR : TABLE_DATA_EN
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -50,19 +60,19 @@ export default function YanHaklarVisual({ accent = '#0ea5e9', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="yan-haklar" activeNav="Tanımlamalar">
+        <BrowserMockup url="yan-haklar" activeNav="Tanımlamalar" isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '14px' }}>
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
 
               <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>Yan Haklar - Zimmet</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Yan Haklar - Zimmet' : 'Fringe Benefits - Assignment'}</span>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <div style={{ display: 'flex', border: '1.5px solid #cbd5e1', borderRadius: 6, overflow: 'hidden', height: 28 }}>
                     <input readOnly style={{ width: 160, padding: '0 8px', fontSize: 10, border: 'none', outline: 'none', background: '#fff' }} />
                     <div style={{ width: 28, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><SearchIcon /></div>
                   </div>
                   <div style={{ height: 28, padding: '0 12px', background: accent, borderRadius: 6, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                    İşlemler
+                    {isTr ? 'İşlemler' : 'Actions'}
                   </div>
                 </div>
               </div>
@@ -70,10 +80,10 @@ export default function YanHaklarVisual({ accent = '#0ea5e9', inline }) {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 10 }}>
                 <thead>
                   <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center' }}>Yan Hak - Zimmet Adı</th>
-                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center' }}>Açıklama</th>
-                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center', lineHeight: 1.3 }}>Geri Alınacak<br />mı?</th>
-                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center' }}>İşlemler</th>
+                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center' }}>{isTr ? 'Yan Hak - Zimmet Adı' : 'Benefit - Assignment Name'}</th>
+                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center' }}>{isTr ? 'Açıklama' : 'Description'}</th>
+                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center', lineHeight: 1.3 }}>{isTr ? <><span>Geri Alınacak</span><br /><span>mı?</span></> : <><span>Returnable?</span></>}</th>
+                    <th style={{ padding: '8px 14px', fontWeight: 700, color: '#475569', textAlign: 'center' }}>{isTr ? 'İşlemler' : 'Actions'}</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -2,6 +2,7 @@
   "nav": {
     "why": "Why AiRX",
     "pricing": "Pricing",
+    "references": "References",
     "blog": "Blog",
     "about": "About Us",
     "contact": "Contact",
@@ -52,7 +53,14 @@
     "entryNfc": "NFC Entry",
     "entryRemote": "Remote Entry",
     "entryQr": "QR Entry",
-    "entryBeacon": "Beacon Entry"
+    "entryBeacon": "Beacon Entry",
+    "entryWifiInfo": "When employees connect to the corporate network, attendance can be completed quickly and contactlessly with network-based validation.",
+    "entryNfcInfo": "Using the phone's NFC capability, you can create secure clock-in and clock-out records in seconds without physical contact.",
+    "entryRemoteInfo": "Field teams or remote staff can submit verified attendance from their mobile devices wherever they are working.",
+    "entryQrInfo": "By scanning a QR code placed at the branch, gate or turnstile, attendance is managed practically with low hardware cost.",
+    "entryBeaconInfo": "With beacon support, employee presence near specific areas can be detected and the entry experience can be automated.",
+    "entryModalLabel": "Entry Method",
+    "entryModalClose": "Close window"
   },
   "modulesSection": {
     "title": "Everything in",

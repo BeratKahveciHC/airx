@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 
 /* ── SVG İkonlar ── */
 const FingerprintOffIcon = ({ size = 28, color = '#fff' }) => (
@@ -68,6 +68,8 @@ const MODULE_CHIPS = ['PDKS', 'İzin', 'Puantaj', 'Erişim Kontrolü', 'Ziyaret�
 
 export default function WhyAirX() {
   const t = useTranslations()
+  const locale = useLocale()
+  const isTr = locale === 'tr'
   return (
     <section id="neden" style={{ padding: '96px 24px', background: 'linear-gradient(180deg, #f4f8fd 0%, #ffffff 100%)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto' }}>
@@ -208,39 +210,39 @@ export default function WhyAirX() {
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.12 }}
             style={{
-              background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+              background: '#fff',
               borderRadius: 24,
               padding: '32px 30px',
-              border: '1px solid rgba(34,197,94,0.15)',
-              boxShadow: '0 4px 32px rgba(34,197,94,0.08)',
+              border: '1px solid rgba(0,60,117,0.08)',
+              boxShadow: '0 4px 32px rgba(0,60,117,0.07)',
               position: 'relative', overflow: 'hidden',
             }}
           >
-            <div style={{ position: 'absolute', right: -30, bottom: -30, width: 140, height: 140, borderRadius: '50%', background: 'radial-gradient(circle, rgba(34,197,94,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', right: -30, bottom: -30, width: 140, height: 140, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,60,117,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
             <div style={{
               width: 48, height: 48, borderRadius: 14,
-              background: 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)',
+              background: 'linear-gradient(135deg, #003C75 0%, #1a6aaa 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               marginBottom: 20,
-              boxShadow: '0 6px 16px rgba(34,197,94,0.3)',
+              boxShadow: '0 6px 16px rgba(0,60,117,0.25)',
             }}>
               <ZapIcon color="#fff" />
             </div>
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#14532d', margin: '0 0 8px', letterSpacing: '-0.01em' }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0f172a', margin: '0 0 8px', letterSpacing: '-0.01em' }}>
               {t('whyAirx.card3Title')}
             </h3>
-            <p style={{ fontSize: 13, color: '#166534', lineHeight: 1.68, margin: '0 0 20px', opacity: 0.8 }}>
+            <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.68, margin: '0 0 20px' }}>
               {t('whyAirx.card3Desc')}
             </p>
             <div style={{
               display: 'flex', alignItems: 'center', gap: 8,
-              background: 'rgba(255,255,255,0.7)',
-              border: '1px solid rgba(34,197,94,0.2)',
+              background: 'rgba(0,60,117,0.05)',
+              border: '1px solid rgba(0,60,117,0.1)',
               padding: '8px 14px', borderRadius: 10,
               position: 'relative', zIndex: 1,
             }}>
-              <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', flexShrink: 0, boxShadow: '0 0 6px rgba(34,197,94,0.6)' }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#15803d' }}>{t('whyAirx.card3Note')}</span>
+              <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#79ACDC', flexShrink: 0, boxShadow: '0 0 6px rgba(121,172,220,0.6)' }} />
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#003C75' }}>{t('whyAirx.card3Note')}</span>
             </div>
           </motion.div>
 
@@ -298,39 +300,39 @@ export default function WhyAirX() {
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.22 }}
             style={{
-              background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)',
+              background: 'linear-gradient(135deg, #eef4fb 0%, #dbeeff 100%)',
               borderRadius: 24,
               padding: '32px 30px',
-              border: '1px solid rgba(124,58,237,0.12)',
-              boxShadow: '0 4px 32px rgba(124,58,237,0.07)',
+              border: '1px solid rgba(0,60,117,0.1)',
+              boxShadow: '0 4px 32px rgba(0,60,117,0.07)',
               position: 'relative', overflow: 'hidden',
             }}
           >
-            <div style={{ position: 'absolute', right: -40, top: -40, width: 160, height: 160, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', right: -40, top: -40, width: 160, height: 160, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,60,117,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
             <div style={{
               width: 48, height: 48, borderRadius: 14,
-              background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
+              background: 'linear-gradient(135deg, #003C75 0%, #1a6aaa 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               marginBottom: 20,
-              boxShadow: '0 6px 16px rgba(124,58,237,0.28)',
+              boxShadow: '0 6px 16px rgba(0,60,117,0.25)',
             }}>
               <BuildingIcon color="#fff" />
             </div>
-            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#3b0764', margin: '0 0 8px', letterSpacing: '-0.01em' }}>
+            <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0f172a', margin: '0 0 8px', letterSpacing: '-0.01em' }}>
               {t('whyAirx.card5Title')}
             </h3>
-            <p style={{ fontSize: 13, color: '#6b21a8', lineHeight: 1.68, margin: '0 0 20px', opacity: 0.8 }}>
+            <p style={{ fontSize: 13, color: '#4a6080', lineHeight: 1.68, margin: '0 0 20px' }}>
               {t('whyAirx.card5Desc')}
             </p>
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8 }}>
               {[
-                { label: 'SMB', h: 24, color: 'rgba(124,58,237,0.25)' },
-                { label: 'Mid', h: 36, color: 'rgba(124,58,237,0.5)' },
-                { label: 'Enterprise', h: 48, color: '#7c3aed' },
+                { label: isTr ? 'Kobi' : 'SME', h: 24, color: 'rgba(0,60,117,0.18)' },
+                { label: isTr ? 'Orta' : 'Mid', h: 36, color: 'rgba(0,60,117,0.45)' },
+                { label: isTr ? 'Kurumsal' : 'Enterprise', h: 48, color: '#003C75' },
               ].map(({ label, h, color }) => (
                 <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'center', flex: 1 }}>
                   <div style={{ width: '100%', height: h, borderRadius: 6, background: color }} />
-                  <span style={{ fontSize: 10, color: '#7c3aed', fontWeight: 600, opacity: 0.7 }}>{label}</span>
+                  <span style={{ fontSize: 10, color: '#003C75', fontWeight: 600, opacity: 0.7 }}>{label}</span>
                 </div>
               ))}
             </div>

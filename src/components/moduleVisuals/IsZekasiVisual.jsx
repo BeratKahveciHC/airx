@@ -1,36 +1,12 @@
 import { motion } from 'framer-motion'
 import { BrowserMockup, VisualSection } from './shared'
 
-const STATS = [
-  { icon: '👤', value: 48, label: 'Aktif Personeller', sub: 'Puantaja Dahil Değil: 2', color: '#3b82f6' },
-  { icon: '→', value: 31, label: 'Gelenler', color: '#22c55e' },
-  { icon: '⊞', value: 5, label: 'Müsaitlikler', color: '#8b5cf6' },
-  { icon: '✕', value: 8, label: 'Gelmeyenler', color: '#ef4444' },
-  { icon: '⏰', value: 3, label: 'Geç Gelenler', color: '#f59e0b' },
-  { icon: '✈', value: 2, label: 'İzinde', color: '#0ea5e9' },
-]
-
-const IZIN_TALEPLERI = [
-  { name: 'Ahmet Kaya', tip: 'Yıllık İzin', dept: 'Yazılım Ekibi' },
-  { name: 'Zeynep Arslan', tip: 'Ücretsiz İzin', dept: 'Pazarlama' },
-  { name: 'Mustafa Demir', tip: 'Yıllık İzin', dept: 'İkitelli Merkez' },
-  { name: 'Elif Yıldız', tip: 'Yıllık İzin', dept: 'Satış' },
-]
-
 const GELMEYENLER = [
   { name: 'Serkan Çelik', dept: 'Yazılım Ekibi' },
   { name: 'Fatma Öztürk', dept: 'Yazılım Ekibi' },
   { name: 'Hüseyin Şahin', dept: 'Yazılım Ekibi' },
   { name: 'Merve Aydın', dept: 'Yazılım Ekibi' },
   { name: 'Burak Koç', dept: 'Yazılım Ekibi' },
-]
-
-const SON_EYLEMLER = [
-  { name: 'Ahmet Kaya', tip: 'Giriş', zaman: '26-03-2025 08:54:12', renk: '#22c55e' },
-  { name: 'Zeynep Arslan', tip: 'Çıkış', zaman: '25-03-2025 18:02:38', renk: '#ef4444' },
-  { name: 'Mustafa Demir', tip: 'Giriş', zaman: '25-03-2025 09:11:47', renk: '#22c55e' },
-  { name: 'Elif Yıldız', tip: 'Çıkış', zaman: '24-03-2025 17:57:23', renk: '#ef4444' },
-  { name: 'Serkan Çelik', tip: 'Giriş', zaman: '24-03-2025 08:44:09', renk: '#22c55e' },
 ]
 
 const ArrowIcon = () => (
@@ -72,7 +48,31 @@ function StatCard({ stat, delay }) {
   )
 }
 
-export default function IsZekasiVisual({ accent = '#0ea5e9', inline }) {
+export default function IsZekasiVisual({ accent = '#0ea5e9', inline, isTr = true }) {
+  const STATS = [
+    { icon: '👤', value: 48, label: isTr ? 'Aktif Personeller' : 'Active Staff', sub: isTr ? 'Puantaja Dahil Değil: 2' : 'Not in Timesheet: 2', color: '#3b82f6' },
+    { icon: '→', value: 31, label: isTr ? 'Gelenler' : 'Present', color: '#22c55e' },
+    { icon: '⊞', value: 5, label: isTr ? 'Müsaitlikler' : 'Available', color: '#8b5cf6' },
+    { icon: '✕', value: 8, label: isTr ? 'Gelmeyenler' : 'Absent', color: '#ef4444' },
+    { icon: '⏰', value: 3, label: isTr ? 'Geç Gelenler' : 'Late Arrivals', color: '#f59e0b' },
+    { icon: '✈', value: 2, label: isTr ? 'İzinde' : 'On Leave', color: '#0ea5e9' },
+  ]
+
+  const IZIN_TALEPLERI = [
+    { name: 'Ahmet Kaya', tip: isTr ? 'Yıllık İzin' : 'Annual Leave', dept: isTr ? 'Yazılım Ekibi' : 'Software Team' },
+    { name: 'Zeynep Arslan', tip: isTr ? 'Ücretsiz İzin' : 'Unpaid Leave', dept: isTr ? 'Pazarlama' : 'Marketing' },
+    { name: 'Mustafa Demir', tip: isTr ? 'Yıllık İzin' : 'Annual Leave', dept: isTr ? 'İkitelli Merkez' : 'İkitelli Branch' },
+    { name: 'Elif Yıldız', tip: isTr ? 'Yıllık İzin' : 'Annual Leave', dept: isTr ? 'Satış' : 'Sales' },
+  ]
+
+  const SON_EYLEMLER = [
+    { name: 'Ahmet Kaya', tip: isTr ? 'Giriş' : 'Entry', zaman: '26-03-2025 08:54:12', renk: '#22c55e' },
+    { name: 'Zeynep Arslan', tip: isTr ? 'Çıkış' : 'Exit', zaman: '25-03-2025 18:02:38', renk: '#ef4444' },
+    { name: 'Mustafa Demir', tip: isTr ? 'Giriş' : 'Entry', zaman: '25-03-2025 09:11:47', renk: '#22c55e' },
+    { name: 'Elif Yıldız', tip: isTr ? 'Çıkış' : 'Exit', zaman: '24-03-2025 17:57:23', renk: '#ef4444' },
+    { name: 'Serkan Çelik', tip: isTr ? 'Giriş' : 'Entry', zaman: '24-03-2025 08:44:09', renk: '#22c55e' },
+  ]
+
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -83,7 +83,7 @@ export default function IsZekasiVisual({ accent = '#0ea5e9', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="anasayfa" activeNav="Anasayfa" maxWidth={920}>
+        <BrowserMockup url="anasayfa" activeNav="Anasayfa" maxWidth={920} isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '12px', display: 'flex', flexDirection: 'column', gap: 10 }}>
 
             {/* stat kartlar */}
@@ -103,13 +103,13 @@ export default function IsZekasiVisual({ accent = '#0ea5e9', inline }) {
                 style={{ background: '#fff', borderRadius: 8, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,30,80,0.05)' }}
               >
                 <div style={{ padding: '8px 12px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: '#1e293b' }}>Onay Bekleyen İzin Talepleri</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Onay Bekleyen İzin Talepleri' : 'Pending Leave Requests'}</span>
                   <span style={{ color: accent }}><ArrowIcon /></span>
                 </div>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 8.5 }}>
                   <thead>
                     <tr style={{ background: '#f8fafc' }}>
-                      {['Ad Soyad', 'İzin Tipi', 'Departman'].map(h => (
+                      {(isTr ? ['Ad Soyad', 'İzin Tipi', 'Departman'] : ['Full Name', 'Leave Type', 'Department']).map(h => (
                         <th key={h} style={{ padding: '5px 10px', fontWeight: 600, color: '#475569', textAlign: 'left', fontSize: 8.5 }}>{h}</th>
                       ))}
                     </tr>
@@ -145,13 +145,13 @@ export default function IsZekasiVisual({ accent = '#0ea5e9', inline }) {
                 style={{ background: '#fff', borderRadius: 8, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,30,80,0.05)' }}
               >
                 <div style={{ padding: '8px 12px', borderBottom: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: '#1e293b' }}>Gelmeyenler</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Gelmeyenler' : 'Absent'}</span>
                   <span style={{ color: accent }}><ArrowIcon /></span>
                 </div>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 8.5 }}>
                   <thead>
                     <tr style={{ background: '#f8fafc' }}>
-                      {['Ad Soyad', 'Departman'].map(h => (
+                      {(isTr ? ['Ad Soyad', 'Departman'] : ['Full Name', 'Department']).map(h => (
                         <th key={h} style={{ padding: '5px 10px', fontWeight: 600, color: '#475569', textAlign: 'left', fontSize: 8.5 }}>{h}</th>
                       ))}
                     </tr>
@@ -182,12 +182,12 @@ export default function IsZekasiVisual({ accent = '#0ea5e9', inline }) {
               style={{ background: '#fff', borderRadius: 8, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,30,80,0.05)' }}
             >
               <div style={{ padding: '8px 12px', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: '#1e293b' }}>Son Eylemler</span>
+                <span style={{ fontSize: 10, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Son Eylemler' : 'Recent Actions'}</span>
               </div>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 8.5 }}>
                 <thead>
                   <tr style={{ background: '#f8fafc' }}>
-                    {['Personel', 'Etkinlik Tipi', 'Zaman'].map(h => (
+                    {(isTr ? ['Personel', 'Etkinlik Tipi', 'Zaman'] : ['Personnel', 'Activity Type', 'Time']).map(h => (
                       <th key={h} style={{ padding: '5px 12px', fontWeight: 600, color: '#475569', textAlign: 'left', fontSize: 8.5 }}>{h}</th>
                     ))}
                   </tr>

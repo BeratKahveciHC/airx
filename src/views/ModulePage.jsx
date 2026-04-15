@@ -2,7 +2,7 @@
 import SEO from '../components/SEO'
 
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '../i18n/navigation'
 import { getModuleBySlug, MODULES_DATA } from '../data/modules'
 import { MODULE_OVERRIDES } from '../data/moduleOverrides'
@@ -52,6 +52,8 @@ function localizeModData(modData, t) {
 
 export default function ModulePage({ slug }) {
   const t = useTranslations()
+  const locale = useLocale()
+  const isTr = locale === 'tr'
   const FEATURE_SUMMARIES = [
     t('modulePage.summary1'),
     t('modulePage.summary2'),
@@ -272,7 +274,7 @@ export default function ModulePage({ slug }) {
               style={{ flex: 1, minWidth: 0 }}
               className="module-hero-visual"
             >
-              {VisualComponent && <VisualComponent accent={mod.accent} inline />}
+              {VisualComponent && <VisualComponent accent={mod.accent} inline isTr={isTr} />}
             </motion.div>
           </div>
         </div>

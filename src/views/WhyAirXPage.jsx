@@ -632,6 +632,7 @@ export default function WhyAiRXPage() {
               fontSize: 'clamp(28px, 5vw, 56px)',
               color: '#fff',
               lineHeight: 1.25,
+              fontWeight: 600,
               marginBottom: 32,
               letterSpacing: '-0.01em',
             }}>

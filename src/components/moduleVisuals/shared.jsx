@@ -7,7 +7,8 @@ const ChevronIcon = () => (
   </svg>
 )
 
-const NAV_ITEMS = ['Anasayfa', 'Tanımlamalar', 'Personel', 'Modüller', 'Raporlar']
+const NAV_ITEMS_TR = ['Anasayfa', 'Tanımlamalar', 'Personel', 'Modüller', 'Raporlar']
+const NAV_ITEMS_EN = ['Home', 'Definitions', 'Personnel', 'Modules', 'Reports']
 
 function useScaledMockup(maxWidth) {
   const outerRef = useRef(null)
@@ -36,8 +37,12 @@ function useScaledMockup(maxWidth) {
   return { outerRef, innerRef, scale, outerWidth }
 }
 
-export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
+export function BrowserMockup({ children, url, activeNav, maxWidth = 780, isTr = true }) {
   const { outerRef, innerRef, scale, outerWidth } = useScaledMockup(maxWidth)
+  const NAV_ITEMS = isTr ? NAV_ITEMS_TR : NAV_ITEMS_EN
+  const activeNavTranslated = isTr
+    ? activeNav
+    : NAV_ITEMS_EN[NAV_ITEMS_TR.indexOf(activeNav)] ?? activeNav
 
   // inner height = chrome(36) + navbar(44) + content(408) = 488px
   const INNER_H = 488
@@ -153,14 +158,17 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
                   padding: '5px 7px',
                   borderRadius: 6,
                   fontSize: 9.5,
-                  fontWeight: item === activeNav ? 700 : 500,
-                  color: item === activeNav ? '#003C75' : '#64748b',
-                  background: item === activeNav ? 'rgba(0,60,117,0.06)' : 'transparent',
+                  fontWeight: item === activeNavTranslated ? 700 : 500,
+                  color: item === activeNavTranslated ? '#003C75' : '#64748b',
+                  background: item === activeNavTranslated ? 'rgba(0,60,117,0.06)' : 'transparent',
                   whiteSpace: 'nowrap',
                 }}
               >
                 {item}
-                {['Tanımlamalar', 'Personel', 'Modüller', 'Raporlar'].includes(item) && (
+                {(isTr
+                  ? ['Tanımlamalar', 'Personel', 'Modüller', 'Raporlar']
+                  : ['Definitions', 'Personnel', 'Modules', 'Reports']
+                ).includes(item) && (
                   <span style={{ color: '#94a3b8', marginLeft: 1 }}><ChevronIcon /></span>
                 )}
               </div>
@@ -168,8 +176,8 @@ export function BrowserMockup({ children, url, activeNav, maxWidth = 780 }) {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0, marginLeft: 8 }}>
-            <span style={{ fontSize: 10 }}>🇹🇷</span>
-            <span style={{ fontSize: 9, color: '#64748b', fontWeight: 500 }}>Türkçe</span>
+            <span style={{ fontSize: 10 }}>{isTr ? '🇹🇷' : '🇬🇧'}</span>
+            <span style={{ fontSize: 9, color: '#64748b', fontWeight: 500 }}>{isTr ? 'Türkçe' : 'English'}</span>
             <span style={{ color: '#94a3b8' }}><ChevronIcon /></span>
           </div>
         </div>

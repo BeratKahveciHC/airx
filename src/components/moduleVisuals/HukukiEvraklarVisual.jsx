@@ -44,7 +44,7 @@ function PdfThumb() {
   )
 }
 
-export default function HukukiEvraklarVisual({ accent = '#0ea5e9', inline }) {
+export default function HukukiEvraklarVisual({ accent = '#0ea5e9', inline, isTr = true }) {
   return (
     <VisualSection accent={accent} inline={inline}>
       <motion.div
@@ -55,15 +55,15 @@ export default function HukukiEvraklarVisual({ accent = '#0ea5e9', inline }) {
         transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}
       >
-        <BrowserMockup url="hukuki-evraklar" activeNav="Personel" maxWidth={880}>
+        <BrowserMockup url="hukuki-evraklar" activeNav="Personel" maxWidth={880} isTr={isTr}>
           <div style={{ background: '#f1f5f9', padding: '14px', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
             {/* filtre */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', padding: '14px 16px', boxShadow: '0 2px 8px rgba(0,30,80,0.04)' }}>
               <div style={{ display: 'flex', gap: 14, alignItems: 'flex-end' }}>
                 {[
-                  { label: 'Başlangıç Tarihi', value: '1 Ocak 2024 Pazartesi' },
-                  { label: 'Bitiş Tarihi', value: '1 Nisan 2025 Salı' },
+                  { label: isTr ? 'Başlangıç Tarihi' : 'Start Date', value: isTr ? '1 Ocak 2024 Pazartesi' : 'January 1, 2024 Monday' },
+                  { label: isTr ? 'Bitiş Tarihi' : 'End Date', value: isTr ? '1 Nisan 2025 Salı' : 'April 1, 2025 Tuesday' },
                 ].map(f => (
                   <div key={f.label} style={{ flex: 1 }}>
                     <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>{f.label}</div>
@@ -74,13 +74,13 @@ export default function HukukiEvraklarVisual({ accent = '#0ea5e9', inline }) {
                   </div>
                 ))}
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>Personel</div>
+                  <div style={{ fontSize: 9, fontWeight: 600, color: '#64748b', marginBottom: 4 }}>{isTr ? 'Personel' : 'Personnel'}</div>
                   <div style={{ border: '1px solid #cbd5e1', borderRadius: 5, height: 28, padding: '0 8px', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ fontSize: 9.5, color: '#334155' }}>Tüm Personel</span>
+                    <span style={{ fontSize: 9.5, color: '#334155' }}>{isTr ? 'Tüm Personel' : 'All Personnel'}</span>
                   </div>
                 </div>
                 <div style={{ height: 28, padding: '0 16px', background: '#475569', borderRadius: 5, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
-                  Filtrele
+                  {isTr ? 'Filtrele' : 'Filter'}
                 </div>
               </div>
             </div>
@@ -88,14 +88,14 @@ export default function HukukiEvraklarVisual({ accent = '#0ea5e9', inline }) {
             {/* tablo */}
             <div style={{ background: '#fff', borderRadius: 10, border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,30,80,0.06)' }}>
               <div style={{ padding: '10px 14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f1f5f9' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>Hukuki Evraklar</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: '#1e293b' }}>{isTr ? 'Hukuki Evraklar' : 'Legal Documents'}</span>
                 <div style={{ display: 'flex', gap: 8 }}>
                   <div style={{ display: 'flex', border: '1.5px solid #cbd5e1', borderRadius: 6, overflow: 'hidden', height: 27 }}>
                     <input readOnly style={{ width: 150, padding: '0 8px', fontSize: 10, border: 'none', outline: 'none', background: '#fff' }} />
                     <div style={{ width: 27, background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}><SearchIcon /></div>
                   </div>
                   <div style={{ height: 27, padding: '0 12px', background: accent, borderRadius: 6, display: 'flex', alignItems: 'center', fontSize: 10, fontWeight: 700, color: '#fff' }}>
-                    İşlemler
+                    {isTr ? 'İşlemler' : 'Actions'}
                   </div>
                 </div>
               </div>
@@ -103,8 +103,11 @@ export default function HukukiEvraklarVisual({ accent = '#0ea5e9', inline }) {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 9.5 }}>
                 <thead>
                   <tr style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-                    {['Evrak', 'Ad Soyad', 'Evrak Adı', 'Hukuki Evrak Tipi', 'Başlangıç Tarihi', 'Bitiş Tarihi', 'İşlemler'].map(col => (
-                      <th key={col} style={{ padding: '7px 10px', fontWeight: 700, color: '#475569', textAlign: col === 'İşlemler' ? 'center' : 'left', whiteSpace: 'nowrap' }}>{col}</th>
+                    {(isTr
+                      ? ['Evrak', 'Ad Soyad', 'Evrak Adı', 'Hukuki Evrak Tipi', 'Başlangıç Tarihi', 'Bitiş Tarihi', 'İşlemler']
+                      : ['Document', 'Full Name', 'Document Name', 'Legal Document Type', 'Start Date', 'End Date', 'Actions']
+                    ).map(col => (
+                      <th key={col} style={{ padding: '7px 10px', fontWeight: 700, color: '#475569', textAlign: (isTr ? col === 'İşlemler' : col === 'Actions') ? 'center' : 'left', whiteSpace: 'nowrap' }}>{col}</th>
                     ))}
                   </tr>
                 </thead>
