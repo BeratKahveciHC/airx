@@ -10,8 +10,8 @@ const PRICING_TIERS_BASE = [
   { id: '11-30', labelKey: 'pricing.tier2Label', min: 11, max: 30, monthly: 269, semiAnnual: 242, annual: 228 },
   { id: '31-50', labelKey: 'pricing.tier3Label', min: 31, max: 50, monthly: 249, semiAnnual: 224, annual: 211 },
   { id: '51-100', labelKey: 'pricing.tier4Label', min: 51, max: 100, monthly: 219, semiAnnual: 198, annual: 168 },
-  { id: '101-500', labelKey: 'pricing.tier5Label', min: 101, max: 500, monthly: 189, semiAnnual: 170, annual: 160 },
-  { id: '500+', labelKey: 'pricing.tier6Label', min: 501, max: Infinity, monthly: null, semiAnnual: null, annual: null, custom: true },
+  { id: '101-200', labelKey: 'pricing.tier5Label', min: 101, max: 200, monthly: 189, semiAnnual: 170, annual: 160 },
+  { id: '200+', labelKey: 'pricing.tier6Label', min: 201, max: Infinity, monthly: null, semiAnnual: null, annual: null, custom: true },
 ]
 
 

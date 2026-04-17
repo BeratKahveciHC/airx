@@ -85,12 +85,28 @@ h3 {
 
 /* ─── Hero Section – Responsive ─── */
 
-/* Tablet (≤ 1024px): 80px yan boşluğu azalt, telefon mockuplarını gizle */
+/* Küçük laptop (1025px – 1389px): telefonlar dashboard altında yan yana */
+@media (max-width: 1389px) {
+  .hero-phone-mockup {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+  .hero-phones-row {
+    display: flex !important;
+    justify-content: center;
+    gap: 32px;
+    padding-top: 28px;
+  }
+}
+
+/* Tablet (≤ 1024px): yan boşluğu sıfırla, telefonları gizle */
 @media (max-width: 1024px) {
   .hero-mockup-wrapper {
     padding: 0 !important;
   }
-  .hero-phone-mockup {
+  .hero-phones-row {
     display: none !important;
   }
 }

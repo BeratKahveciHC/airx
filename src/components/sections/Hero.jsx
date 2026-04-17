@@ -1047,7 +1047,7 @@ export default function Hero() {
         <div style={{
           maxWidth: 1280,
           margin: '0 auto',
-          padding: '28px 40px 72px',
+          padding: '56px 40px 72px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -1066,7 +1066,7 @@ export default function Hero() {
               letterSpacing: '-0.025em',
               color: '#0f172a',
               textAlign: 'center',
-              margin: '0 0 8px',
+              margin: '0 0 28px',
               whiteSpace: locale === 'tr' ? 'nowrap' : 'normal',
             }}
           >
@@ -1170,22 +1170,6 @@ export default function Hero() {
           </motion.div>
 
           {/* ── Dashboard + Phone Mockup ── */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.26 }}
-            style={{
-            margin: '-28px 0 40px',
-            fontSize: 15,
-            lineHeight: 1.4,
-            fontWeight: 700,
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            color: '#64748b',
-            textAlign: 'center',
-          }}>
-            {locale === 'en' ? 'Our Check-In & Check-Out Methods' : 'Giriş Çıkış Yöntemlerimiz'}
-          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -1194,145 +1178,6 @@ export default function Hero() {
             style={{ width: '100%', position: 'relative', padding: '0 80px' }}
             className="hero-mockup-wrapper"
           >
-            {/* ── Telefon Mockup 2 (sağ) ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-phone-mockup"
-              style={{
-                position: 'absolute',
-                top: -28,
-                right: -90,
-                zIndex: 10,
-              }}
-            >
-              <div style={{
-                width: 170,
-                height: 360,
-                borderRadius: 32,
-                background: 'linear-gradient(160deg, #e8f2fc 0%, #c2d9f0 100%)',
-                border: '5px solid #8fb8dc',
-                boxShadow: '0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 1px rgba(255,255,255,0.4), 0 32px 64px rgba(0,30,80,0.30), 0 8px 20px rgba(0,60,117,0.18)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}>
-                <div style={{ position: 'absolute', left: -6, top: 54, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
-                <div style={{ position: 'absolute', left: -6, top: 76, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
-                <div style={{ position: 'absolute', right: -6, top: 68, width: 3, height: 28, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
-
-                <div style={{ borderRadius: 27, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc', height: '100%' }}>
-                  <div style={{ height: 24, background: '#b8d3ec', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
-                    <span style={{ fontSize: 7.5, fontWeight: 700, color: '#002850' }}>09:41</span>
-                    <div style={{ width: 40, height: 11, borderRadius: 6, background: '#003C75' }} />
-                    <div style={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
-                      {[3,5,7,9].map((h,i) => <div key={i} style={{ width: 1.5, height: h, borderRadius: 1, background: i < 3 ? '#002850' : 'rgba(0,40,80,0.3)' }} />)}
-                    </div>
-                  </div>
-                  <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeScreen}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
-                      >
-                        {activeScreen === 0 && <PhoneCikisMenusuScreen locale={locale} />}
-                        {activeScreen === 1 && <PhoneGirisMenusuScreen locale={locale} />}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                  <div style={{ background: '#fff', borderTop: '1px solid #e8f0f9', display: 'flex', justifyContent: 'space-around', padding: '5px 0 7px', flexShrink: 0 }}>
-                    {[
-                      { label: locale === 'en' ? 'Home' : 'Anasayfa', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
-                      { label: locale === 'en' ? 'Requests' : 'Talepler', active: true, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
-                      { label: locale === 'en' ? 'Inbox' : 'Gelen Kutusu', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
-                      { label: locale === 'en' ? 'Profile' : 'Profil', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
-                    ].map(item => (
-                      <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, color: item.active ? '#003C75' : 'rgba(0,60,117,0.3)' }}>
-                        {item.icon}
-                        <span style={{ fontSize: 5.5, fontWeight: item.active ? 700 : 500 }}>{item.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* ── Telefon Mockup (sol) ── */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="hero-phone-mockup"
-              style={{
-                position: 'absolute',
-                top: -28,
-                left: -90,
-                zIndex: 10,
-              }}
-            >
-              <div style={{
-                width: 170,
-                height: 360,
-                borderRadius: 32,
-                background: 'linear-gradient(160deg, #e8f2fc 0%, #c2d9f0 100%)',
-                border: '5px solid #8fb8dc',
-                boxShadow: '0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 1px rgba(255,255,255,0.4), 0 32px 64px rgba(0,30,80,0.30), 0 8px 20px rgba(0,60,117,0.18)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}>
-                {/* yan butonlar */}
-                <div style={{ position: 'absolute', left: -6, top: 54, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
-                <div style={{ position: 'absolute', left: -6, top: 76, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
-                <div style={{ position: 'absolute', right: -6, top: 68, width: 3, height: 28, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
-
-                <div style={{ borderRadius: 27, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc', height: '100%' }}>
-                  {/* status bar */}
-                  <div style={{ height: 24, background: '#b8d3ec', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
-                    <span style={{ fontSize: 7.5, fontWeight: 700, color: '#002850' }}>09:41</span>
-                    <div style={{ width: 40, height: 11, borderRadius: 6, background: '#003C75' }} />
-                    <div style={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
-                      {[3,5,7,9].map((h,i) => <div key={i} style={{ width: 1.5, height: h, borderRadius: 1, background: i < 3 ? '#002850' : 'rgba(0,40,80,0.3)' }} />)}
-                    </div>
-                  </div>
-
-                  <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={activeScreen}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
-                      >
-                        {activeScreen === 0 && <PhoneMolaScreen locale={locale} />}
-                        {activeScreen === 1 && <PhoneHomeScreen locale={locale} />}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-
-                  {/* bottom nav */}
-                  <div style={{ background: '#fff', borderTop: '1px solid #e8f0f9', display: 'flex', justifyContent: 'space-around', padding: '5px 0 7px', flexShrink: 0 }}>
-                    {[
-                      { label: locale === 'en' ? 'Home' : 'Anasayfa', active: activeScreen === 0, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
-                      { label: locale === 'en' ? 'Requests' : 'Talepler', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
-                      { label: locale === 'en' ? 'Inbox' : 'Gelen Kutusu', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
-                      { label: locale === 'en' ? 'Profile' : 'Profil', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
-                    ].map(item => (
-                      <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, color: item.active ? '#003C75' : 'rgba(0,60,117,0.3)' }}>
-                        {item.icon}
-                        <span style={{ fontSize: 5.5, fontWeight: item.active ? 700 : 500 }}>{item.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               {[
                 { index: 1, label: locale === 'en' ? 'Modules' : 'Modüller' },
@@ -1436,6 +1281,99 @@ export default function Hero() {
                   </motion.div>
                 </AnimatePresence>
               </div>
+            </div>
+
+            {/* ── Telefon Mockupları ── */}
+            <div className="hero-phones-row">
+              {/* Sol telefon */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="hero-phone-mockup hero-phone-left"
+                style={{ position: 'absolute', top: -28, left: -90, zIndex: 10 }}
+              >
+                <div style={{ width: 170, height: 360, borderRadius: 32, background: 'linear-gradient(160deg, #e8f2fc 0%, #c2d9f0 100%)', border: '5px solid #8fb8dc', boxShadow: '0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 1px rgba(255,255,255,0.4), 0 32px 64px rgba(0,30,80,0.30), 0 8px 20px rgba(0,60,117,0.18)', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', left: -6, top: 54, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                  <div style={{ position: 'absolute', left: -6, top: 76, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                  <div style={{ position: 'absolute', right: -6, top: 68, width: 3, height: 28, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
+                  <div style={{ borderRadius: 27, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc', height: '100%' }}>
+                    <div style={{ height: 24, background: '#b8d3ec', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
+                      <span style={{ fontSize: 7.5, fontWeight: 700, color: '#002850' }}>09:41</span>
+                      <div style={{ width: 40, height: 11, borderRadius: 6, background: '#003C75' }} />
+                      <div style={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
+                        {[3,5,7,9].map((h,i) => <div key={i} style={{ width: 1.5, height: h, borderRadius: 1, background: i < 3 ? '#002850' : 'rgba(0,40,80,0.3)' }} />)}
+                      </div>
+                    </div>
+                    <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+                      <AnimatePresence mode="wait">
+                        <motion.div key={activeScreen} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          {activeScreen === 0 && <PhoneMolaScreen locale={locale} />}
+                          {activeScreen === 1 && <PhoneHomeScreen locale={locale} />}
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
+                    <div style={{ background: '#fff', borderTop: '1px solid #e8f0f9', display: 'flex', justifyContent: 'space-around', padding: '5px 0 7px', flexShrink: 0 }}>
+                      {[
+                        { label: locale === 'en' ? 'Home' : 'Anasayfa', active: activeScreen === 0, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+                        { label: locale === 'en' ? 'Requests' : 'Talepler', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
+                        { label: locale === 'en' ? 'Inbox' : 'Gelen Kutusu', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+                        { label: locale === 'en' ? 'Profile' : 'Profil', active: false, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+                      ].map(item => (
+                        <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, color: item.active ? '#003C75' : 'rgba(0,60,117,0.3)' }}>
+                          {item.icon}
+                          <span style={{ fontSize: 5.5, fontWeight: item.active ? 700 : 500 }}>{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Sağ telefon */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="hero-phone-mockup hero-phone-right"
+                style={{ position: 'absolute', top: -28, right: -90, zIndex: 10 }}
+              >
+                <div style={{ width: 170, height: 360, borderRadius: 32, background: 'linear-gradient(160deg, #e8f2fc 0%, #c2d9f0 100%)', border: '5px solid #8fb8dc', boxShadow: '0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 1px rgba(255,255,255,0.4), 0 32px 64px rgba(0,30,80,0.30), 0 8px 20px rgba(0,60,117,0.18)', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', left: -6, top: 54, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                  <div style={{ position: 'absolute', left: -6, top: 76, width: 3, height: 16, background: '#003C75', borderRadius: '2px 0 0 2px' }} />
+                  <div style={{ position: 'absolute', right: -6, top: 68, width: 3, height: 28, background: '#003C75', borderRadius: '0 2px 2px 0' }} />
+                  <div style={{ borderRadius: 27, overflow: 'hidden', display: 'flex', flexDirection: 'column', background: '#f8fafc', height: '100%' }}>
+                    <div style={{ height: 24, background: '#b8d3ec', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
+                      <span style={{ fontSize: 7.5, fontWeight: 700, color: '#002850' }}>09:41</span>
+                      <div style={{ width: 40, height: 11, borderRadius: 6, background: '#003C75' }} />
+                      <div style={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
+                        {[3,5,7,9].map((h,i) => <div key={i} style={{ width: 1.5, height: h, borderRadius: 1, background: i < 3 ? '#002850' : 'rgba(0,40,80,0.3)' }} />)}
+                      </div>
+                    </div>
+                    <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+                      <AnimatePresence mode="wait">
+                        <motion.div key={activeScreen} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          {activeScreen === 0 && <PhoneCikisMenusuScreen locale={locale} />}
+                          {activeScreen === 1 && <PhoneGirisMenusuScreen locale={locale} />}
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
+                    <div style={{ background: '#fff', borderTop: '1px solid #e8f0f9', display: 'flex', justifyContent: 'space-around', padding: '5px 0 7px', flexShrink: 0 }}>
+                      {[
+                        { label: locale === 'en' ? 'Home' : 'Anasayfa', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+                        { label: locale === 'en' ? 'Requests' : 'Talepler', active: true, icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="21"/></svg> },
+                        { label: locale === 'en' ? 'Inbox' : 'Gelen Kutusu', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> },
+                        { label: locale === 'en' ? 'Profile' : 'Profil', icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
+                      ].map(item => (
+                        <div key={item.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, color: item.active ? '#003C75' : 'rgba(0,60,117,0.3)' }}>
+                          {item.icon}
+                          <span style={{ fontSize: 5.5, fontWeight: item.active ? 700 : 500 }}>{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
 
           </motion.div>

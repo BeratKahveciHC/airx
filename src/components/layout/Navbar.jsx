@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
-import { Link, useRouter, usePathname } from '../../i18n/navigation'
+import { Link } from '../../i18n/navigation'
 import logo from '../../assets/logo.png'
 
 const MOBILE_NAV_BREAKPOINT = 1180
@@ -123,8 +123,6 @@ const SECTION_IDS = ['urun', 'moduller', 'guvenlik', 'fiyatlar']
 export default function Navbar() {
   const t = useTranslations()
   const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeId, setActiveId] = useState('')
   const [scrolled, setScrolled] = useState(false)
@@ -132,7 +130,10 @@ export default function Navbar() {
   const [mobileModulesOpen, setMobileModulesOpen] = useState(false)
 
   const handleLanguageChange = (lang) => {
-    router.replace(pathname, { locale: lang })
+    if (typeof window === 'undefined') return
+    const currentPath = window.location.pathname.replace(/^\/(tr|en)(?=\/|$)/, '')
+    const target = `/${lang}${currentPath || '/'}${window.location.search}${window.location.hash}`
+    window.location.href = target
   }
 
   useEffect(() => {

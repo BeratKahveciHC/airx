@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslations } from 'next-intl'
-import { Link } from '../i18n/navigation'
+import { useTranslations, useLocale } from 'next-intl'
 import SEO from '../components/SEO'
 
 /* ══════════════════════════════════════════════════════
@@ -11,6 +10,7 @@ import SEO from '../components/SEO'
 ══════════════════════════════════════════════════════ */
 export default function BlogPage() {
   const t = useTranslations()
+  const locale = useLocale()
 
   const POSTS = [
     {
@@ -157,7 +157,7 @@ export default function BlogPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link href={`/blog/${featured.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+              <a href={`/${locale}/blog/${featured.slug}/`} style={{ textDecoration: 'none', display: 'block' }}>
                 <div
                   className="featured-card"
                   style={{
@@ -257,7 +257,7 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </a>
             </motion.div>
           </div>
         </section>
@@ -332,7 +332,7 @@ export default function BlogPage() {
                     transition={{ duration: 0.5 }}
                     style={{ marginBottom: 24 }}
                   >
-                    <Link href={`/blog/${rest[0].slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                    <a href={`/${locale}/blog/${rest[0].slug}/`} style={{ textDecoration: 'none', display: 'block' }}>
                       <div
                         className="wide-card"
                         style={{
@@ -392,7 +392,7 @@ export default function BlogPage() {
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </a>
                   </motion.div>
                 )}
 
@@ -407,7 +407,7 @@ export default function BlogPage() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.45, delay: i * 0.06 }}
                       >
-                        <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
+                        <a href={`/${locale}/blog/${post.slug}/`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
                           <div
                             style={{
                               border: '1px solid #e8f0f9',
@@ -462,7 +462,7 @@ export default function BlogPage() {
                               </div>
                             </div>
                           </div>
-                        </Link>
+                        </a>
                       </motion.div>
                     ))}
                   </div>
