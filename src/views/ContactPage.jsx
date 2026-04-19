@@ -210,7 +210,7 @@ export default function ContactPage() {
       eyebrow: t('contact.channel2Eyebrow'),
       title: t('contact.channel2Title'),
       text: t('contact.channel2Text'),
-      href: 'tel:+902162343737',
+      href: 'tel:+905552589602',
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.62 12 19.79 19.79 0 0 1 1.55 3.4 2 2 0 0 1 3.52 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.55a16 16 0 0 0 6 6l.76-.76a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -313,7 +313,7 @@ export default function ContactPage() {
                 <motion.a href="#demo-form" whileHover={{ y: -3, boxShadow: '0 18px 36px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 28px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontSize: 15, fontWeight: 700 }}>
                   {t('contact.heroDemoBtn')}
                 </motion.a>
-                <motion.a href="tel:+902162343737" whileHover={{ y: -3, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 24px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontSize: 15, fontWeight: 600 }}>
+                <motion.a href="tel:+905552589602" whileHover={{ y: -3, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 24px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontSize: 15, fontWeight: 600 }}>
                   {t('contact.heroCallBtn')}
                 </motion.a>
               </div>
@@ -636,7 +636,7 @@ export default function ContactPage() {
               <motion.a href="#demo-form" whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.24)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, boxShadow: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 34px', borderRadius: 9999, background: '#fff', color: '#003C75', textDecoration: 'none', fontWeight: 700, fontSize: 15 }}>
                   {t('contact.ctaBtn1')}
               </motion.a>
-              <motion.a href="tel:+902162343737" whileHover={{ y: -4, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 28px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: 15, backdropFilter: 'blur(8px)' }}>
+              <motion.a href="tel:+905552589602" whileHover={{ y: -4, background: 'rgba(255,255,255,0.16)' }} whileTap={{ scale: 0.98 }} transition={{ y: { duration: 0.2, ease: 'easeOut' }, background: { duration: 0.2, ease: 'easeOut' } }} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 28px', borderRadius: 9999, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)', color: '#fff', textDecoration: 'none', fontWeight: 600, fontSize: 15, backdropFilter: 'blur(8px)' }}>
                 {t('contact.ctaBtn2')}
               </motion.a>
             </div>

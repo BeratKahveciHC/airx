@@ -279,7 +279,7 @@ export default function Footer() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <PhoneIcon />
-                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>+90 (212) 000 00 00</span>
+                  <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>+90 555 258 96 02</span>
                 </div>
               </div>
 
