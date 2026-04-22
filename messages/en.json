@@ -41,7 +41,8 @@
     "mod_periyodik_label": "Periodic Tasks",
     "mod_periyodik_desc": "Location-verified task",
     "mod_isZekasi_label": "Business Intelligence",
-    "mod_isZekasi_desc": "Data visualization"
+    "mod_isZekasi_desc": "Data visualization",
+    "calculations": "Calculations"
   },
   "hero": {
     "title": "Mobile Attendance & HR Management,",

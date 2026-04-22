@@ -11,6 +11,7 @@ const MOBILE_NAV_BREAKPOINT = 1180
 const NAV_LINKS_CONFIG = [
   { labelKey: 'nav.why', href: '/neden-airx' },
   { labelKey: 'nav.pricing', href: '/fiyatlar' },
+  { labelKey: 'nav.calculations', href: '/hesaplamalar' },
   { labelKey: 'nav.references', href: '/referanslar' },
   { labelKey: 'nav.blog', href: '/blog' },
   { labelKey: 'nav.about', href: '/hakkimizda' },
@@ -345,7 +346,7 @@ export default function Navbar() {
                   fontSize: 14,
                   fontWeight: modulesOpen ? 600 : 500,
                   color: modulesOpen ? '#003C75' : '#374151',
-                  background: 'none',
+                  background: modulesOpen ? '#f1f5f9' : 'none',
                   border: 'none',
                   cursor: 'pointer',
                   padding: '8px 14px',
@@ -354,7 +355,13 @@ export default function Navbar() {
                   alignItems: 'center',
                   gap: 5,
                   whiteSpace: 'nowrap',
-                  transition: 'color 0.15s',
+                  transition: 'color 0.15s, background 0.15s',
+                }}
+                onMouseEnter={event => {
+                  event.currentTarget.style.background = '#f1f5f9'
+                }}
+                onMouseLeave={event => {
+                  event.currentTarget.style.background = modulesOpen ? '#f1f5f9' : 'transparent'
                 }}
               >
                 {t('nav.modules')}
@@ -398,9 +405,11 @@ export default function Navbar() {
                   }}
                   onMouseEnter={event => {
                     event.currentTarget.style.color = '#003C75'
+                    event.currentTarget.style.background = '#f1f5f9'
                   }}
                   onMouseLeave={event => {
                     event.currentTarget.style.color = isActive ? '#003C75' : '#374151'
+                    event.currentTarget.style.background = 'transparent'
                   }}
                 >
                   {t(link.labelKey)}

@@ -41,7 +41,8 @@
     "mod_periyodik_label": "Periyodik Görev",
     "mod_periyodik_desc": "Lokasyon doğrulamalı görev",
     "mod_isZekasi_label": "İş Zekası",
-    "mod_isZekasi_desc": "Veri görselleştirme"
+    "mod_isZekasi_desc": "Veri görselleştirme",
+    "calculations": "Hesaplamalar"
   },
   "hero": {
     "title": "Mobil PDKS ve İnsan Kaynakları Yönetimi,",
